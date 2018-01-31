@@ -34,7 +34,7 @@ namespace EVEStandard
         private string secretKey = null;
 
         /// <summary>
-        /// Contructor for SSO class.
+        /// Constructor for SSO class.
         /// </summary>
         /// <param name="callbackUri">The Callback URL that you provided in your ESI application. If this doesn't match with what ESI has then SSO auth will fail.</param>
         /// <param name="clientId">The Client Id you were assigned in your ESI application.</param>
@@ -96,51 +96,98 @@ namespace EVEStandard
             return model;
         }
 
+        /// <summary>
+        /// Once your application receives the callback from SSO, you call this to verify the state is the expected one to be returned and to request an access code with the authenication code you were given.
+        /// </summary>
+        /// <param name="model">The <c>Authorization</c> POCO with at least, ExpectedState, ReturnedState, and AuthorizationCode properties set.</param>
+        /// <returns><c>AccessTokenDetails</c></returns>
+        /// <exception cref="EVEStandardException" ></exception>
         public async Task<AccessTokenDetails> VerifyAuthorizationAsync(Authorization model)
         {
-            if(model.ReturnedState == null)
+            if (model.ReturnedState == null)
             {
                 model.ReturnedState = "";
             }
 
-            if(model.ExpectedState != model.ReturnedState)
+            if (model.ExpectedState == null)
             {
-                throw new EVEStandardException("model parameter expected the ExpectedState to match the ReturnedState");
+                model.ExpectedState = "";
             }
 
-            var byteArray = Encoding.ASCII.GetBytes(this.clientId + ":" + this.secretKey);
-            http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
-            var stringContent = new FormUrlEncodedContent(new[]
+            if(model.ExpectedState != model.ReturnedState)
             {
-                new KeyValuePair<string, string>("grant_type", "authorization_code"),
-                new KeyValuePair<string, string>("code", model.AuthorizationCode),
-            });
+                throw new EVEStandardException("model parameter expected the ExpectedState to match the ReturnedState, they are actually set as: ExpectedState: " + model.ExpectedState + " ReturnedState: " + model.ReturnedState);
+            }
 
-            var response = await http.PostAsync(SINGULARITY_SSO_BASE_URL + SSO_TOKEN, stringContent);
-            return JsonConvert.DeserializeObject<AccessTokenDetails>(response.Content.ReadAsStringAsync().Result);
+            try
+            {
+                var byteArray = Encoding.ASCII.GetBytes(this.clientId + ":" + this.secretKey);
+                http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+                var stringContent = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("grant_type", "authorization_code"),
+                    new KeyValuePair<string, string>("code", model.AuthorizationCode)
+                });
+
+                var response = await http.PostAsync(SINGULARITY_SSO_BASE_URL + SSO_TOKEN, stringContent);
+                return JsonConvert.DeserializeObject<AccessTokenDetails>(response.Content.ReadAsStringAsync().Result);
+            }
+            catch (Exception inner)
+            {
+
+                throw new EVEStandardException("An error occured with some part of the http request/response", inner);
+            }
         }
 
-        public async Task<AccessTokenDetails> GetRefreshTokenAsync(AccessTokenDetails model)
+        /// <summary>
+        /// If your access token has expired and you need a new one you can pass the <c>AccessTokenDetails</c> POCO here, with a valid refresh token, to retrieve a new access token.
+        /// </summary>
+        /// <param name="refreshToken">The refresh token you want to use to get a new access token.</param>
+        /// <returns><c>AccessTokenDetails</c></returns>
+        /// <exception cref="EVEStandardException" ></exception>
+        public async Task<AccessTokenDetails> GetRefreshTokenAsync(string refreshToken)
         {
-            var byteArray = Encoding.ASCII.GetBytes(this.clientId + ":" + this.secretKey);
-            http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
-            var stringContent = new FormUrlEncodedContent(new[]
+            try
             {
-                new KeyValuePair<string, string>("grant_type", "refresh_token"),
-                new KeyValuePair<string, string>("refresh_token", model.RefreshToken),
-            });
+                var byteArray = Encoding.ASCII.GetBytes(this.clientId + ":" + this.secretKey);
+                http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+                var stringContent = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("grant_type", "refresh_token"),
+                    new KeyValuePair<string, string>("refresh_token", refreshToken)
+                });
 
-            var response = await http.PostAsync(SINGULARITY_SSO_BASE_URL + SSO_TOKEN, stringContent);
-            return JsonConvert.DeserializeObject<AccessTokenDetails>(response.Content.ReadAsStringAsync().Result);
+                var response = await http.PostAsync(SINGULARITY_SSO_BASE_URL + SSO_TOKEN, stringContent);
+                return JsonConvert.DeserializeObject<AccessTokenDetails>(response.Content.ReadAsStringAsync().Result);
+            }
+            catch (Exception inner)
+            {
+
+                throw new EVEStandardException("An error occured with some part of the http request/response", inner);
+            }
         }
 
-        public async Task<CharacterDetails> GetCharacterDetailsAsync(AccessTokenDetails model)
+        /// <summary>
+        /// Retrieve basic details about the Character you were given access to during the SSO process.
+        /// </summary>
+        /// <param name="accessToken">The access token used to retrieve character details.</param>
+        /// <returns><c>CharacterDetails</c></returns>
+        /// <exception cref="EVEStandardException" ></exception>
+        public async Task<CharacterDetails> GetCharacterDetailsAsync(string accessToken)
         {
-            http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", model.AccessToken);
-            var verifyResponse = await http.GetAsync(SINGULARITY_SSO_BASE_URL + SSO_VERIFY);
-            var s = verifyResponse.Content.ReadAsStringAsync().Result;
+            try
+            {
+                http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+                var verifyResponse = await http.GetAsync(SINGULARITY_SSO_BASE_URL + SSO_VERIFY);
+                var s = verifyResponse.Content.ReadAsStringAsync().Result;
 
-            return JsonConvert.DeserializeObject<CharacterDetails>(verifyResponse.Content.ReadAsStringAsync().Result);
+                return JsonConvert.DeserializeObject<CharacterDetails>(verifyResponse.Content.ReadAsStringAsync().Result);
+            }
+            catch (Exception inner)
+            {
+
+                throw new EVEStandardException("An error occured with some part of the http request/response", inner);
+            }
         }
 
         /// <summary>
@@ -151,16 +198,24 @@ namespace EVEStandard
         /// <returns>True if the token was revoked.</returns>
         public async Task<bool> RevokeTokenAsync(RevokeType type, string token)
         {
-            var byteArray = Encoding.ASCII.GetBytes(this.clientId + ":" + this.secretKey);
-            http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
-            var stringContent = new FormUrlEncodedContent(new[]
+            try
             {
-                new KeyValuePair<string, string>("token_type_hint", type == RevokeType.ACCESS_TOKEN ? "access_token" : "refresh_token"),
-                new KeyValuePair<string, string>("token", token),
-            });
+                var byteArray = Encoding.ASCII.GetBytes(this.clientId + ":" + this.secretKey);
+                http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+                var stringContent = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("token_type_hint", type == RevokeType.ACCESS_TOKEN ? "access_token" : "refresh_token"),
+                    new KeyValuePair<string, string>("token", token)
+                });
 
-            var response = await http.PostAsync(SINGULARITY_SSO_BASE_URL + SSO_TOKEN, stringContent);
-            return response.IsSuccessStatusCode;
+                var response = await http.PostAsync(SINGULARITY_SSO_BASE_URL + SSO_TOKEN, stringContent);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception inner)
+            {
+
+                throw new EVEStandardException("An error occured with some part of the http request/response", inner);
+            }
         }
     }
 }
