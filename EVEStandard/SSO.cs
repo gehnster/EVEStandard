@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -29,6 +30,8 @@ namespace EVEStandard
         private static readonly string SSO_VERIFY = "/oauth/verify";
         private static readonly string SSO_REVOKE = "/oauth/revoke";
 
+        private DataSource dataSource;
+
         private string callbackUri = null;
         private string clientId = null;
         private string secretKey = null;
@@ -44,19 +47,31 @@ namespace EVEStandard
         /// Except for public data within ESI, you need an application to gain access behind SSO. You can create an application at <see cref="https://developers.eveonline.com/"/>
         /// You will probably want to create at least two applications, one for local development and one for production since the <paramref name="callbackUri"/> requires to match in the callback.
         /// </remarks>
-        public SSO(string callbackUri, string clientId, string secretKey)
+        internal SSO(string callbackUri, string clientId, string secretKey, string userAgent, DataSource dataSource)
         {
             if(string.IsNullOrEmpty(callbackUri) || string.IsNullOrEmpty(clientId) || string.IsNullOrEmpty(secretKey))
             {
                 throw new EVEStandardException("SSO should be initialized with non-null and non-empty strings. callbackUri: " + callbackUri + " clientId: " + clientId + " secretKey: " + secretKey);
             }
 
-            http = new HttpClient();
+            http.DefaultRequestHeaders.Add("User-Agent", userAgent);
+            http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            http.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
+            http.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
 
             this.callbackUri = callbackUri;
             this.clientId = clientId;
             this.secretKey = secretKey;
+            this.dataSource = dataSource;
         }
+
+        internal static HttpClient HTTP {
+            set => http = value;
+        }
+
+        internal string CallbackURI => this.callbackUri;
+        internal string ClientId => this.clientId;
+        internal string SecretKey => this.secretKey;
 
         /// <summary>
         /// Generates the URL you should have users click on with one of the EVE Online provided button images.
@@ -90,7 +105,7 @@ namespace EVEStandard
                 ExpectedState = state ?? ""
             };
 
-            model.SignInURI = SINGULARITY_SSO_BASE_URL + SSO_AUTHORIZE + "response_type=code&redirect_uri=" + HttpUtility.UrlEncode(this.callbackUri) +
+            model.SignInURI = GetBaseURL() + SSO_AUTHORIZE + "response_type=code&redirect_uri=" + HttpUtility.UrlEncode(this.callbackUri) +
                 "&client_id=" + this.clientId + "&scope=" + HttpUtility.UrlEncode(String.Join(" ", scopes)) + "&state=" + model.ExpectedState;
 
             return model;
@@ -129,7 +144,7 @@ namespace EVEStandard
                     new KeyValuePair<string, string>("code", model.AuthorizationCode)
                 });
 
-                var response = await http.PostAsync(SINGULARITY_SSO_BASE_URL + SSO_TOKEN, stringContent);
+                var response = await http.PostAsync(GetBaseURL() + SSO_TOKEN, stringContent);
                 return JsonConvert.DeserializeObject<AccessTokenDetails>(response.Content.ReadAsStringAsync().Result);
             }
             catch (Exception inner)
@@ -157,7 +172,7 @@ namespace EVEStandard
                     new KeyValuePair<string, string>("refresh_token", refreshToken)
                 });
 
-                var response = await http.PostAsync(SINGULARITY_SSO_BASE_URL + SSO_TOKEN, stringContent);
+                var response = await http.PostAsync(GetBaseURL() + SSO_TOKEN, stringContent);
                 return JsonConvert.DeserializeObject<AccessTokenDetails>(response.Content.ReadAsStringAsync().Result);
             }
             catch (Exception inner)
@@ -178,7 +193,7 @@ namespace EVEStandard
             try
             {
                 http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
-                var verifyResponse = await http.GetAsync(SINGULARITY_SSO_BASE_URL + SSO_VERIFY);
+                var verifyResponse = await http.GetAsync(GetBaseURL() + SSO_VERIFY);
                 var s = verifyResponse.Content.ReadAsStringAsync().Result;
 
                 return JsonConvert.DeserializeObject<CharacterDetails>(verifyResponse.Content.ReadAsStringAsync().Result);
@@ -208,7 +223,7 @@ namespace EVEStandard
                     new KeyValuePair<string, string>("token", token)
                 });
 
-                var response = await http.PostAsync(SINGULARITY_SSO_BASE_URL + SSO_TOKEN, stringContent);
+                var response = await http.PostAsync(GetBaseURL() + SSO_TOKEN, stringContent);
                 return response.IsSuccessStatusCode;
             }
             catch (Exception inner)
@@ -216,6 +231,11 @@ namespace EVEStandard
 
                 throw new EVEStandardException("An error occured with some part of the http request/response", inner);
             }
+        }
+
+        private string GetBaseURL()
+        {
+            return this.dataSource == DataSource.Singularity ? SINGULARITY_SSO_BASE_URL : TRANQUILITY_SSO_BASE_URL;
         }
     }
 }

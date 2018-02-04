@@ -1,4 +1,5 @@
-﻿using EVEStandard.Enumerations;
+﻿using EVEStandard.API;
+using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using Newtonsoft.Json;
 using System;
@@ -10,29 +11,85 @@ namespace EVEStandard
 {
     public class EVEStandardAPI
     {
-        public static readonly string ESI_BASE = "https://esi.tech.ccp.is";
+        
         private static HttpClient http;
-        internal string UserAgent = "EVEStandard default";
-        internal string dataSource = "tranquility";
+        private string userAgent = "EVEStandard-non-given";
+        private string dataSource = "tranquility";
+        private SSO sso;
 
-        public EVEStandardAPI(string UserAgent, DataSource dataSource, TimeSpan timeOut)
+        // API
+        private Alliances alliances;
+
+        /// <summary>
+        /// Initialize the EVEStandard Library
+        /// </summary>
+        /// <param name="userAgent"></param>
+        /// <param name="dataSource"></param>
+        /// <param name="timeOut"></param>
+        public EVEStandardAPI(string userAgent, DataSource dataSource, TimeSpan timeOut)
         {
             http = new HttpClient();
-            http.DefaultRequestHeaders.Add("User-Agent", UserAgent);
+            http.DefaultRequestHeaders.Add("User-Agent", userAgent);
             http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             http.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
             http.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
             http.Timeout = timeOut;
 
-            this.UserAgent = UserAgent;
+            this.userAgent = userAgent ?? "EVEStandard default";
             this.dataSource = dataSource == DataSource.Tranquility ? "tranquility" : "singularity";
+
+            initializeAPI();
         }
 
-        public async Task<Status> GetStatus()
+        /// <summary>
+        /// Initialize the EVE Standard Library with Single Sign On support.
+        /// </summary>
+        /// <param name="userAgent"></param>
+        /// <param name="dataSource"></param>
+        /// <param name="timeOut"></param>
+        /// <param name="callbackUri"></param>
+        /// <param name="clientId"></param>
+        /// <param name="secretKey"></param>
+        public EVEStandardAPI(string userAgent, DataSource dataSource, TimeSpan timeOut, string callbackUri, string clientId, string secretKey) : this(userAgent, dataSource, timeOut)
         {
-            var noAuthResponse = await http.GetAsync(ESI_BASE + "/latest/status/?datasource=" + this.dataSource + "&user_agent=" + this.UserAgent);
+            this.sso = new SSO(callbackUri, clientId, secretKey, userAgent, dataSource);
+            SSO.HTTP = http;
+        }
 
-            return JsonConvert.DeserializeObject<Status>(noAuthResponse.Content.ReadAsStringAsync().Result);
+        /// <summary>
+        /// Test a route that is still in development.
+        /// </summary>
+        /// <param name="route">The entire VERSIONED route you want to test, including query parameters like datasource and user agent. (Example: /v3/alliances/{alliance_id}/?datasource=tranquility&user_agent=EVEStandard)</param>
+        /// <returns></returns>
+        public string TestDevRoute(string route)
+        {
+            return "";
+        }
+
+        /// <summary>
+        /// Test a route that is still in development and requires authentication via SSO
+        /// </summary>
+        /// <param name="route">The entire VERSIONED route you want to test, including query parameters like datasource and useragent. (Example: /v3/alliances/{alliance_id}/?datasource=tranquility&user_agent=EVEStandard)</param>
+        /// <returns></returns>
+        public string TestAuthDevRoute(string route)
+        {
+            return "";
+        }
+
+        /// <summary>
+        /// Perform SSO Authentication operations
+        /// </summary>
+        public SSO SSO => this.sso;
+
+        /// <summary>
+        /// Get data from the Alliances operations in ESI
+        /// </summary>
+        public Alliances Alliances => this.alliances;
+
+        private void initializeAPI()
+        {
+            this.alliances = new Alliances(this.userAgent, this.dataSource);
+            this.Alliances.HTTP = http;
         }
     }
 }
