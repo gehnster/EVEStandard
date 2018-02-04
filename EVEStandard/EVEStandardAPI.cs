@@ -19,6 +19,7 @@ namespace EVEStandard
 
         // API
         private Alliances alliances;
+        private API.Status status;
 
         /// <summary>
         /// Initialize the EVEStandard Library
@@ -88,8 +89,14 @@ namespace EVEStandard
 
         private void initializeAPI()
         {
-            this.alliances = new Alliances(this.userAgent, this.dataSource);
-            this.Alliances.HTTP = http;
+            this.alliances = new Alliances(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.status = new API.Status(this.dataSource)
+            {
+                HTTP = http
+            };
         }
     }
 }

@@ -2,9 +2,11 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace EVEStandard.API
 {
@@ -14,39 +16,84 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<AllianceIds> ListAllAlliancesAsync()
+        public async Task<List<int>> ListAllAlliancesV1Async()
         {
-            var noAuthResponse = await this.GetNoAuthAsync(ESI_BASE + "/v1/alliances/");
+            var responseModel = await this.GetNoAuthAsync(ESI_BASE + "/v1/alliances/");
 
-            return JsonConvert.DeserializeObject<AllianceIds>(noAuthResponse);
+            if(responseModel.Error)
+            {
+                throw new EVEStandardException("ListAllAlliancesV1Async failed");
+            }
+            if(responseModel.LegacyWarning)
+            {
+                // log it? unsure how best to handle this. Maybe throw a legacy exception?
+            }
+
+            return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
         }
 
-        public async Task<Alliance> GetAllianceInfoAsync(int allianceId)
+        public async Task<Alliance> GetAllianceInfoV3Async(int allianceId)
         {
-            var noAuthResponse = await this.GetNoAuthAsync(ESI_BASE + "/v1/alliances/" + "/?datasource=");
+            var responseModel = await this.GetNoAuthAsync(ESI_BASE + "/v3/alliances/" + allianceId + "/");
 
-            return JsonConvert.DeserializeObject<AllianceIds>(noAuthResponse);
+            if (responseModel.Error)
+            {
+                throw new EVEStandardException("GetAllianceInfoV3Async failed");
+            }
+            if (responseModel.LegacyWarning)
+            {
+                // log it? unsure how best to handle this. Maybe throw a legacy exception?
+            }
+
+            return JsonConvert.DeserializeObject<Alliance>(responseModel.JSONString);
         }
 
-        public async Task<Alliance> ListAllianceCorporationsAsync(int allianceId)
+        public async Task<List<int>> ListAllianceCorporationsV1Async(int allianceId)
         {
-            var noAuthResponse = await this.GetNoAuthAsync(ESI_BASE + "/v1/alliances/" + "/?datasource=");
+            var responseModel = await this.GetNoAuthAsync(ESI_BASE + "/v1/alliances/" + allianceId + "/corporations/");
 
-            return JsonConvert.DeserializeObject<AllianceIds>(noAuthResponse);
+            if (responseModel.Error)
+            {
+                throw new EVEStandardException("ListAllianceCorporationsV1Async failed");
+            }
+            if (responseModel.LegacyWarning)
+            {
+                // log it? unsure how best to handle this. Maybe throw a legacy exception?
+            }
+
+            return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
         }
 
-        public async Task<Alliance> GetAllianceIconAsync(int allianceId)
+        public async Task<AllianceIcons> GetAllianceIconV1Async(int allianceId)
         {
-            var noAuthResponse = await this.GetNoAuthAsync(ESI_BASE + "/v1/alliances/" + "/?datasource=");
+            var responseModel = await this.GetNoAuthAsync(ESI_BASE + "/v1/alliances/" + allianceId + "/icons/");
 
-            return JsonConvert.DeserializeObject<AllianceIds>(noAuthResponse);
+            if (responseModel.Error)
+            {
+                throw new EVEStandardException("GetAllianceIconV1Async failed");
+            }
+            if (responseModel.LegacyWarning)
+            {
+                // log it? unsure how best to handle this. Maybe throw a legacy exception?
+            }
+
+            return JsonConvert.DeserializeObject<AllianceIcons>(responseModel.JSONString);
         }
 
-        public async Task<Alliance> GetAllianceNamesAsync(int allianceId)
+        public async Task<List<AllianceName>> GetAllianceNamesV2Async(List<int> allianceIds)
         {
-            var noAuthResponse = await this.GetNoAuthAsync(ESI_BASE + "/v1/alliances/" + "/?datasource=");
+            var responseModel = await this.GetNoAuthAsync(ESI_BASE + "/v2/alliances/names/?alliance_ids=" + allianceIds == null || allianceIds.Count == 0 ? "" : HttpUtility.UrlEncode(string.Join(",", allianceIds)));
 
-            return JsonConvert.DeserializeObject<AllianceIds>(noAuthResponse);
+            if (responseModel.Error)
+            {
+                throw new EVEStandardException("GetAllianceNamesV2Async failed");
+            }
+            if (responseModel.LegacyWarning)
+            {
+                // log it? unsure how best to handle this. Maybe throw a legacy exception?
+            }
+
+            return JsonConvert.DeserializeObject<List<AllianceName>>(responseModel.JSONString);
         }
     }
 }

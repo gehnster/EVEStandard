@@ -1,4 +1,6 @@
-﻿using System.Net.Http;
+﻿using EVEStandard.Models.API;
+using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace EVEStandard.API
@@ -17,21 +19,60 @@ namespace EVEStandard.API
             this.dataSource = dataSource;
         }
 
-        internal async Task<string> GetNoAuthAsync(string uri)
+        internal async Task<APIResponse> GetNoAuthAsync(string uri)
         {
             var noAuthResponse = await this.HTTP.GetAsync(uri + "/?datasource=" + this.dataSource);
 
-            if(noAuthResponse.StatusCode == System.Net.HttpStatusCode.OK)
+            return await processResponse(noAuthResponse);
+        }
+
+        private async Task<APIResponse> processResponse(HttpResponseMessage response)
+        {
+            var model = new APIResponse();
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                return await noAuthResponse.Content.ReadAsStringAsync();
+                if (response.Headers.Contains("warning"))
+                {
+                    model.LegacyWarning = true;
+                    model.Message = response.Headers.Warning.ToString();
+                }
+                if (response.Headers.Contains("expires"))
+                {
+                    model.Expires = DateTime.Parse(response.Headers.GetValues("expires").ToString());
+                }
+                if (response.Headers.Contains("last-modified"))
+                {
+                    model.LastModified = DateTime.Parse(response.Headers.GetValues("last-modified").ToString());
+                }
+                model.JSONString = await response.Content.ReadAsStringAsync();
+
+                return model;
             }
-            else if(noAuthResponse.IsSuccessStatusCode)
+            else if (response.IsSuccessStatusCode)
             {
-                throw new EVEStandardException("Success Status Code not handled in GetNoAuthAsync, StatusCode: " + noAuthResponse.StatusCode);
+                throw new EVEStandardException("Success Status Code not handled in GetNoAuthAsync, StatusCode: " + response.StatusCode);
             }
-            else if(noAuthResponse.StatusCode == System.Net.HttpStatusCode.InternalServerError)
+            else if (response.StatusCode == System.Net.HttpStatusCode.InternalServerError)
             {
-                // change returned for a model that supports the expected string or an error with a string response with the error.
+                model.Error = true;
+                model.Message = await response.Content.ReadAsStringAsync();
+
+                return model;
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                model.Error = true;
+                model.Message = await response.Content.ReadAsStringAsync();
+
+                return model;
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.Conflict)
+            {
+                model.Error = true;
+                model.Message = "Too many requests made to ESI in a short period of time";
+
+                return model;
             }
             else
             {
