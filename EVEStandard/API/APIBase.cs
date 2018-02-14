@@ -23,11 +23,32 @@ namespace EVEStandard.API
         {
             try
             {
-                var noAuthResponse = await this.HTTP.GetAsync(uri + "/?datasource=" + this.dataSource).ConfigureAwait(false);
+                var noAuthResponse = await this.HTTP.GetAsync(uri + "?datasource=" + this.dataSource).ConfigureAwait(false);
 
                 return await processResponse(noAuthResponse);
             }
             catch(Exception)
+            {
+                throw;
+            }
+        }
+
+        internal async Task<APIResponse> GetAuthAsync(string uri, AuthDTO dto)
+        {
+            try
+            {
+                var request = new HttpRequestMessage()
+                {
+                    RequestUri = new Uri(uri + "?datasource=" + this.dataSource + "&page=1"),
+                    Method = HttpMethod.Get
+                };
+                request.Headers.Add("token", dto.AccessToken.AccessToken);
+
+                var authResponse = await this.HTTP.SendAsync(request).ConfigureAwait(false);
+
+                return await processResponse(authResponse);
+            }
+            catch (Exception)
             {
                 throw;
             }
@@ -46,16 +67,16 @@ namespace EVEStandard.API
                 }
                 try
                 {
-                    if (response.Headers.Contains("expires"))
+                    if (response.Headers.TryGetValues("expires", out var expiresEnumerable))
                     {
-                        foreach(var value in response.Headers.GetValues("expires"))
+                        foreach(var value in expiresEnumerable)
                         {
                             model.Expires = DateTime.TryParse(value, out var expires) ? expires : DateTime.UtcNow;
                         }
                     }
-                    if (response.Headers.Contains("last-modified"))
+                    if (response.Headers.TryGetValues("last-modified", out var lastModifiedEnumerable))
                     {
-                        foreach (var value in response.Headers.GetValues("last-modified"))
+                        foreach (var value in lastModifiedEnumerable)
                         {
                             model.LastModified = DateTime.TryParse(value, out var lastModified) ? lastModified : DateTime.UtcNow;
                         }
@@ -64,9 +85,9 @@ namespace EVEStandard.API
 
                     return model;
                 }
-                catch(Exception)
+                catch(Exception e)
                 {
-                    throw;
+                    throw e;
                 }
             }
             else if (response.IsSuccessStatusCode)

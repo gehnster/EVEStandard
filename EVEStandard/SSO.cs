@@ -23,8 +23,8 @@ namespace EVEStandard
     {
         private static HttpClient http;
 
-        private static readonly string SINGULARITY_SSO_BASE_URL = "https://login.eveonline.com";
-        private static readonly string TRANQUILITY_SSO_BASE_URL = "https://sisilogin.testeveonline.com";
+        private static readonly string TRANQUILITY_SSO_BASE_URL = "https://login.eveonline.com";
+        private static readonly string SINGULARITY_SSO_BASE_URL = "https://sisilogin.testeveonline.com";
         private static readonly string SSO_AUTHORIZE = "/oauth/authorize/?";
         private static readonly string SSO_TOKEN = "/oauth/token";
         private static readonly string SSO_VERIFY = "/oauth/verify";
@@ -47,17 +47,12 @@ namespace EVEStandard
         /// Except for public data within ESI, you need an application to gain access behind SSO. You can create an application at <see cref="https://developers.eveonline.com/"/>
         /// You will probably want to create at least two applications, one for local development and one for production since the <paramref name="callbackUri"/> requires to match in the callback.
         /// </remarks>
-        internal SSO(string callbackUri, string clientId, string secretKey, string userAgent, DataSource dataSource)
+        internal SSO(string callbackUri, string clientId, string secretKey, DataSource dataSource)
         {
             if(string.IsNullOrEmpty(callbackUri) || string.IsNullOrEmpty(clientId) || string.IsNullOrEmpty(secretKey))
             {
                 throw new EVEStandardException("SSO should be initialized with non-null and non-empty strings. callbackUri: " + callbackUri + " clientId: " + clientId + " secretKey: " + secretKey);
             }
-
-            http.DefaultRequestHeaders.Add("User-Agent", userAgent);
-            http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            http.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
-            http.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
 
             this.callbackUri = callbackUri;
             this.clientId = clientId;
@@ -194,9 +189,8 @@ namespace EVEStandard
             {
                 http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
                 var verifyResponse = await http.GetAsync(GetBaseURL() + SSO_VERIFY);
-                var s = verifyResponse.Content.ReadAsStringAsync().Result;
 
-                return JsonConvert.DeserializeObject<CharacterDetails>(verifyResponse.Content.ReadAsStringAsync().Result);
+                return JsonConvert.DeserializeObject<CharacterDetails>(await verifyResponse.Content.ReadAsStringAsync());
             }
             catch (Exception inner)
             {

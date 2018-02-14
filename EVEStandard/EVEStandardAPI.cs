@@ -6,6 +6,7 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace EVEStandard
 {
@@ -20,6 +21,7 @@ namespace EVEStandard
         // API
         private Alliances alliances;
         private API.Status status;
+        private Assets assets;
 
         /// <summary>
         /// Initialize the EVEStandard Library
@@ -30,13 +32,13 @@ namespace EVEStandard
         public EVEStandardAPI(string userAgent, DataSource dataSource, TimeSpan timeOut)
         {
             http = new HttpClient();
-            http.DefaultRequestHeaders.Add("User-Agent", userAgent);
+            http.DefaultRequestHeaders.Add("User-Agent", HttpUtility.UrlEncode(userAgent));
             http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             http.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
             http.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
             http.Timeout = timeOut;
 
-            this.userAgent = userAgent ?? "EVEStandard default";
+            this.userAgent = userAgent ?? "EVEStandard-default";
             this.dataSource = dataSource == DataSource.Tranquility ? "tranquility" : "singularity";
 
             initializeAPI();
@@ -53,8 +55,8 @@ namespace EVEStandard
         /// <param name="secretKey"></param>
         public EVEStandardAPI(string userAgent, DataSource dataSource, TimeSpan timeOut, string callbackUri, string clientId, string secretKey) : this(userAgent, dataSource, timeOut)
         {
-            this.sso = new SSO(callbackUri, clientId, secretKey, userAgent, dataSource);
             SSO.HTTP = http;
+            this.sso = new SSO(callbackUri, clientId, secretKey, dataSource);
         }
 
         /// <summary>
@@ -86,6 +88,8 @@ namespace EVEStandard
         /// Get data from the Alliances operations in ESI
         /// </summary>
         public Alliances Alliances => this.alliances;
+        public API.Status Status => this.status;
+        public Assets Assets => this.assets;
 
         private void initializeAPI()
         {
@@ -94,6 +98,10 @@ namespace EVEStandard
                 HTTP = http
             };
             this.status = new API.Status(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.assets = new Assets(this.dataSource)
             {
                 HTTP = http
             };
