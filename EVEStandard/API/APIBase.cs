@@ -16,14 +16,21 @@ namespace EVEStandard.API
 
         internal APIBase(string dataSource)
         {
-            this.dataSource = dataSource;
+            this.dataSource = dataSource ?? "tranquility";
         }
 
         internal async Task<APIResponse> GetNoAuthAsync(string uri)
         {
-            var noAuthResponse = await this.HTTP.GetAsync(uri + "/?datasource=" + this.dataSource);
+            try
+            {
+                var noAuthResponse = await this.HTTP.GetAsync(uri + "/?datasource=" + this.dataSource).ConfigureAwait(false);
 
-            return await processResponse(noAuthResponse);
+                return await processResponse(noAuthResponse);
+            }
+            catch(Exception)
+            {
+                throw;
+            }
         }
 
         private async Task<APIResponse> processResponse(HttpResponseMessage response)
@@ -35,19 +42,32 @@ namespace EVEStandard.API
                 if (response.Headers.Contains("warning"))
                 {
                     model.LegacyWarning = true;
-                    model.Message = response.Headers.Warning.ToString();
+                    model.Message = response.Headers.Warning.Count == 1 ? response.Headers.Warning.ToString() : throw new EVEStandardException("Expected one warning header, but got " + response.Headers.Warning.Count + " instead");
                 }
-                if (response.Headers.Contains("expires"))
+                try
                 {
-                    model.Expires = DateTime.Parse(response.Headers.GetValues("expires").ToString());
-                }
-                if (response.Headers.Contains("last-modified"))
-                {
-                    model.LastModified = DateTime.Parse(response.Headers.GetValues("last-modified").ToString());
-                }
-                model.JSONString = await response.Content.ReadAsStringAsync();
+                    if (response.Headers.Contains("expires"))
+                    {
+                        foreach(var value in response.Headers.GetValues("expires"))
+                        {
+                            model.Expires = DateTime.TryParse(value, out var expires) ? expires : DateTime.UtcNow;
+                        }
+                    }
+                    if (response.Headers.Contains("last-modified"))
+                    {
+                        foreach (var value in response.Headers.GetValues("last-modified"))
+                        {
+                            model.LastModified = DateTime.TryParse(value, out var lastModified) ? lastModified : DateTime.UtcNow;
+                        }
+                    }
+                    model.JSONString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-                return model;
+                    return model;
+                }
+                catch(Exception)
+                {
+                    throw;
+                }
             }
             else if (response.IsSuccessStatusCode)
             {
@@ -76,7 +96,7 @@ namespace EVEStandard.API
             }
             else
             {
-                throw new EVEStandardException("API Get Failed");
+                throw new EVEStandardException("API Response Issue");
             }
         }
     }
