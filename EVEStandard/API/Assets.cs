@@ -14,19 +14,11 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<List<Asset>> GetCharacterAssetsV3Async(AuthDTO dto)
+        public async Task<List<Asset>> GetCharacterAssetsV3Async(AuthDTO auth)
         {
-            if(dto == null || dto.Character == null || dto.AccessToken == null)
-            {
-                throw new ArgumentNullException();
-            }
+            checkAuth(auth, "esi-assets.read_assets.v1");
 
-            if(!dto.Character.Scopes.Contains("esi-assets.read_assets.v1"))
-            {
-                // throw same standard exception or a new no scope exception?
-            }
-
-            var responseModel = await this.GetAuthAsync(ESI_BASE + "/v3/characters/" + dto.Character.CharacterID + "/assets/", dto);
+            var responseModel = await this.GetAsync("/v3/characters/" + auth.Character.CharacterID + "/assets/", auth);
 
             if (responseModel.Error)
             {

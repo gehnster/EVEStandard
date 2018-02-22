@@ -14,7 +14,7 @@ namespace EVEStandard.API
 
         public async Task<Models.Status> GetStatusV1Async()
         {
-            var responseModel = await this.GetNoAuthAsync(ESI_BASE + "/v1/status/");
+            var responseModel = await this.GetAsync("/v1/status/");
 
             if (responseModel.Error)
             {

@@ -12,8 +12,19 @@ namespace EVEStandard.Models.SSO
         [JsonProperty("token_type")]
         public string TokenType { get; set; }
         [JsonProperty("expires_in")]
-        public int ExpiresIn { get; set; }
+        public int ExpiresIn
+        {
+            get => this._expiresIn;
+            set
+            {
+                this.Expires = DateTime.UtcNow.AddSeconds(value);
+                this._expiresIn = value;
+            }
+        }
         [JsonProperty("refresh_token")]
         public string RefreshToken { get; set; }
+        public DateTime Expires { get; set; }
+
+        private int _expiresIn;
     }
 }

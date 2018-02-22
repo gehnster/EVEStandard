@@ -18,7 +18,7 @@ namespace EVEStandard.API
 
         public async Task<List<int>> ListAllAlliancesV1Async()
         {
-            var responseModel = await this.GetNoAuthAsync(ESI_BASE + "/v1/alliances/");
+            var responseModel = await this.GetAsync("/v1/alliances/");
 
             if(responseModel.Error)
             {
@@ -34,7 +34,7 @@ namespace EVEStandard.API
 
         public async Task<Alliance> GetAllianceInfoV3Async(int allianceId)
         {
-            var responseModel = await this.GetNoAuthAsync(ESI_BASE + "/v3/alliances/" + allianceId + "/");
+            var responseModel = await this.GetAsync("/v3/alliances/" + allianceId + "/");
 
             if (responseModel.Error)
             {
@@ -50,7 +50,7 @@ namespace EVEStandard.API
 
         public async Task<List<int>> ListAllianceCorporationsV1Async(int allianceId)
         {
-            var responseModel = await this.GetNoAuthAsync(ESI_BASE + "/v1/alliances/" + allianceId + "/corporations/");
+            var responseModel = await this.GetAsync("/v1/alliances/" + allianceId + "/corporations/");
 
             if (responseModel.Error)
             {
@@ -66,7 +66,7 @@ namespace EVEStandard.API
 
         public async Task<AllianceIcons> GetAllianceIconV1Async(int allianceId)
         {
-            var responseModel = await this.GetNoAuthAsync(ESI_BASE + "/v1/alliances/" + allianceId + "/icons/");
+            var responseModel = await this.GetAsync("/v1/alliances/" + allianceId + "/icons/");
 
             if (responseModel.Error)
             {
@@ -82,7 +82,7 @@ namespace EVEStandard.API
 
         public async Task<List<AllianceName>> GetAllianceNamesV2Async(List<int> allianceIds)
         {
-            var responseModel = await this.GetNoAuthAsync(ESI_BASE + "/v2/alliances/names/?alliance_ids=" + allianceIds == null || allianceIds.Count == 0 ? "" : HttpUtility.UrlEncode(string.Join(",", allianceIds)));
+            var responseModel = await this.GetAsync("/v2/alliances/names/?alliance_ids=" + allianceIds == null || allianceIds.Count == 0 ? "" : HttpUtility.UrlEncode(string.Join(",", allianceIds)));
 
             if (responseModel.Error)
             {

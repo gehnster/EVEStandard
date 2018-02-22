@@ -20,4 +20,9 @@ namespace EVEStandard
         {
         }
     }
+
+    public class EVEStandardAuthExpiredException : EVEStandardException
+    {
+
+    }
 }

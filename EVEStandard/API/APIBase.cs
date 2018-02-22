@@ -1,7 +1,9 @@
 ﻿using EVEStandard.Models.API;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace EVEStandard.API
 {
@@ -19,30 +21,48 @@ namespace EVEStandard.API
             this.dataSource = dataSource ?? "tranquility";
         }
 
-        internal async Task<APIResponse> GetNoAuthAsync(string uri)
+        internal async Task<APIResponse> GetAsync(string uri, Dictionary<string, string> queryParameters = null)
         {
-            try
-            {
-                var noAuthResponse = await this.HTTP.GetAsync(uri + "?datasource=" + this.dataSource).ConfigureAwait(false);
-
-                return await processResponse(noAuthResponse);
-            }
-            catch(Exception)
-            {
-                throw;
-            }
+            return await GetAsync(uri, null, queryParameters);
         }
 
-        internal async Task<APIResponse> GetAuthAsync(string uri, AuthDTO dto)
+        internal async Task<APIResponse> GetAsync(string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null)
         {
+            var queryParams = "?datasource=" + this.dataSource;
+
+            if (queryParameters != null && queryParameters.Count > 0)
+            {
+                foreach (var query in queryParameters)
+                {
+                    if (query.Key == "page")
+                    {
+                        queryParams += "&page=" + HttpUtility.UrlEncode(query.Value);
+                    }
+                    else
+                    {
+                        throw new EVEStandardException("Query parameter not handled: " + query.Key + " value: " + query.Value);
+                    }
+                }
+            }
+
             try
             {
                 var request = new HttpRequestMessage()
                 {
-                    RequestUri = new Uri(uri + "?datasource=" + this.dataSource + "&page=1"),
+                    RequestUri = new Uri(ESI_BASE + uri + "?datasource=" + this.dataSource + "&page=1"),
                     Method = HttpMethod.Get
                 };
-                request.Headers.Add("token", dto.AccessToken.AccessToken);
+                if (auth != null && auth.AccessToken != null)
+                {
+                    if (auth.AccessToken.Expires < DateTime.UtcNow)
+                    {
+                        request.Headers.Add("token", auth.AccessToken.AccessToken);
+                    }
+                    else
+                    {
+                        throw new EVEStandardAuthExpiredException();
+                    }
+                }
 
                 var authResponse = await this.HTTP.SendAsync(request).ConfigureAwait(false);
 
@@ -54,41 +74,26 @@ namespace EVEStandard.API
             }
         }
 
+        protected void checkAuth(AuthDTO auth, string scope)
+        {
+            if (auth == null || auth.Character == null || auth.AccessToken == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            if (!auth.Character.Scopes.Contains(scope))
+            {
+                // throw same standard exception or a new no scope exception?
+            }
+        }
+
         private async Task<APIResponse> processResponse(HttpResponseMessage response)
         {
             var model = new APIResponse();
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                if (response.Headers.Contains("warning"))
-                {
-                    model.LegacyWarning = true;
-                    model.Message = response.Headers.Warning.Count == 1 ? response.Headers.Warning.ToString() : throw new EVEStandardException("Expected one warning header, but got " + response.Headers.Warning.Count + " instead");
-                }
-                try
-                {
-                    if (response.Headers.TryGetValues("expires", out var expiresEnumerable))
-                    {
-                        foreach(var value in expiresEnumerable)
-                        {
-                            model.Expires = DateTime.TryParse(value, out var expires) ? expires : DateTime.UtcNow;
-                        }
-                    }
-                    if (response.Headers.TryGetValues("last-modified", out var lastModifiedEnumerable))
-                    {
-                        foreach (var value in lastModifiedEnumerable)
-                        {
-                            model.LastModified = DateTime.TryParse(value, out var lastModified) ? lastModified : DateTime.UtcNow;
-                        }
-                    }
-                    model.JSONString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-                    return model;
-                }
-                catch(Exception e)
-                {
-                    throw e;
-                }
+                return await processSuccess(response, model);
             }
             else if (response.IsSuccessStatusCode)
             {
@@ -118,6 +123,39 @@ namespace EVEStandard.API
             else
             {
                 throw new EVEStandardException("API Response Issue");
+            }
+        }
+
+        private async Task<APIResponse> processSuccess(HttpResponseMessage response, APIResponse model)
+        {
+            if (response.Headers.Contains("warning"))
+            {
+                model.LegacyWarning = true;
+                model.Message = response.Headers.Warning.Count == 1 ? response.Headers.Warning.ToString() : throw new EVEStandardException("Expected one warning header, but got " + response.Headers.Warning.Count + " instead");
+            }
+            try
+            {
+                if (response.Headers.TryGetValues("expires", out var expiresEnumerable))
+                {
+                    foreach (var value in expiresEnumerable)
+                    {
+                        model.Expires = DateTime.TryParse(value, out var expires) ? expires : DateTime.UtcNow;
+                    }
+                }
+                if (response.Headers.TryGetValues("last-modified", out var lastModifiedEnumerable))
+                {
+                    foreach (var value in lastModifiedEnumerable)
+                    {
+                        model.LastModified = DateTime.TryParse(value, out var lastModified) ? lastModified : DateTime.UtcNow;
+                    }
+                }
+                model.JSONString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                return model;
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
     }
