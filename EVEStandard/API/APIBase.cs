@@ -54,7 +54,7 @@ namespace EVEStandard.API
                 };
                 if (auth != null && auth.AccessToken != null)
                 {
-                    if (auth.AccessToken.Expires < DateTime.UtcNow)
+                    if (auth.AccessToken.Expires > DateTime.UtcNow)
                     {
                         request.Headers.Add("token", auth.AccessToken.AccessToken);
                     }

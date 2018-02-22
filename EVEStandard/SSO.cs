@@ -217,7 +217,7 @@ namespace EVEStandard
                     new KeyValuePair<string, string>("token", token)
                 });
 
-                var response = await http.PostAsync(GetBaseURL() + SSO_TOKEN, stringContent);
+                var response = await http.PostAsync(GetBaseURL() + SSO_REVOKE, stringContent);
                 return response.IsSuccessStatusCode;
             }
             catch (Exception inner)
