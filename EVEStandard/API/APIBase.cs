@@ -28,6 +28,26 @@ namespace EVEStandard.API
 
         internal async Task<APIResponse> GetAsync(string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null)
         {
+            return await RequestAsync(HttpMethod.Get, uri, auth, queryParameters);
+        }
+
+        internal async Task<APIResponse> PostAsync(string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null)
+        {
+            return await RequestAsync(HttpMethod.Post, uri, auth, queryParameters);
+        }
+
+        internal async Task<APIResponse> PutAsync(string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null)
+        {
+            return await RequestAsync(HttpMethod.Put, uri, auth, queryParameters);
+        }
+
+        internal async Task<APIResponse> DeleteAsync(string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null)
+        {
+            return await RequestAsync(HttpMethod.Delete, uri, auth, queryParameters);
+        }
+
+        internal async Task<APIResponse> RequestAsync(HttpMethod method, string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null)
+        {
             var queryParams = "?datasource=" + this.dataSource;
 
             if (queryParameters != null && queryParameters.Count > 0)
@@ -49,8 +69,8 @@ namespace EVEStandard.API
             {
                 var request = new HttpRequestMessage()
                 {
-                    RequestUri = new Uri(ESI_BASE + uri + "?datasource=" + this.dataSource + "&page=1"),
-                    Method = HttpMethod.Get
+                    RequestUri = new Uri(ESI_BASE + uri + queryParams),
+                    Method = method
                 };
                 if (auth != null && auth.AccessToken != null)
                 {
@@ -74,7 +94,7 @@ namespace EVEStandard.API
             }
         }
 
-        protected void checkAuth(AuthDTO auth, string scope)
+            protected void checkAuth(AuthDTO auth, string scope)
         {
             if (auth == null || auth.Character == null || auth.AccessToken == null)
             {

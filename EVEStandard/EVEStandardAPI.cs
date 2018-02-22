@@ -1,8 +1,10 @@
 ﻿using EVEStandard.API;
 using EVEStandard.Enumerations;
 using EVEStandard.Models;
+using EVEStandard.Models.API;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -64,9 +66,9 @@ namespace EVEStandard
         /// </summary>
         /// <param name="route">The entire VERSIONED route you want to test, including query parameters like datasource and user agent. (Example: /v3/alliances/{alliance_id}/?datasource=tranquility&user_agent=EVEStandard)</param>
         /// <returns></returns>
-        public string TestDevRoute(string route)
+        public async Task<string> TestDevRoute(string httpMethod, string dataSource, string route, Dictionary<string, string> queryParameters)
         {
-            return "";
+            return await TestDevRoute(httpMethod, dataSource, route, queryParameters, null);
         }
 
         /// <summary>
@@ -74,9 +76,39 @@ namespace EVEStandard
         /// </summary>
         /// <param name="route">The entire VERSIONED route you want to test, including query parameters like datasource and useragent. (Example: /v3/alliances/{alliance_id}/?datasource=tranquility&user_agent=EVEStandard)</param>
         /// <returns></returns>
-        public string TestAuthDevRoute(string route)
+        public async Task<string> TestDevRoute(string httpMethod, string dataSource, string route, Dictionary<string, string> queryParameters, AuthDTO auth)
         {
-            return "";
+            var api = new APIBase(dataSource);
+
+            APIResponse responseModel;
+
+            if(httpMethod == "GET")
+            {
+                responseModel = await api.GetAsync("/v3/characters/" + auth.Character.CharacterID + "/assets/", auth, queryParameters);
+            }
+            else if(httpMethod == "POST")
+            {
+                responseModel = await api.PostAsync("/v3/characters/" + auth.Character.CharacterID + "/assets/", auth, queryParameters);
+            }
+            else if (httpMethod == "PUT")
+            {
+                responseModel = await api.PutAsync("/v3/characters/" + auth.Character.CharacterID + "/assets/", auth, queryParameters);
+            }
+            else
+            {
+                responseModel = await api.DeleteAsync("/v3/characters/" + auth.Character.CharacterID + "/assets/", auth, queryParameters);
+            }
+
+            if (responseModel.Error)
+            {
+                throw new EVEStandardException("GetCharacterAssetsV3Async failed");
+            }
+            if (responseModel.LegacyWarning)
+            {
+                // log it? unsure how best to handle this. Maybe throw a legacy exception?
+            }
+
+            return responseModel.JSONString;
         }
 
         /// <summary>
