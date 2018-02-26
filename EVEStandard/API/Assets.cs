@@ -18,7 +18,12 @@ namespace EVEStandard.API
         {
             checkAuth(auth, "esi-assets.read_assets.v1");
 
-            var responseModel = await this.GetAsync("/v3/characters/" + auth.Character.CharacterID + "/assets/", auth);
+            var queryParameters = new Dictionary<string, string>
+            {
+                { "page", "1" }
+            };
+
+            var responseModel = await this.GetAsync("/v3/characters/" + auth.Character.CharacterID + "/assets/", auth, queryParameters);
 
             if (responseModel.Error)
             {

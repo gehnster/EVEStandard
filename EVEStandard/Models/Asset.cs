@@ -10,7 +10,7 @@ namespace EVEStandard.Models
         [JsonProperty("location_flag")]
         public string LocationFlag { get; set; }
         [JsonProperty("location_id")]
-        public int LocationId { get; set; }
+        public Int64 LocationId { get; set; }
         [JsonProperty("is_singleton")]
         public bool IsSingleton { get; set; }
         [JsonProperty("type_id")]
@@ -20,6 +20,6 @@ namespace EVEStandard.Models
         [JsonProperty("location_type")]
         public string LocationType { get; set; }
         [JsonProperty("quantity")]
-        public int Quantity { get; set; }
+        public Int64 Quantity { get; set; }
     }
 }

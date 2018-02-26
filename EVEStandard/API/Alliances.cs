@@ -82,7 +82,12 @@ namespace EVEStandard.API
 
         public async Task<List<AllianceName>> GetAllianceNamesV2Async(List<int> allianceIds)
         {
-            var responseModel = await this.GetAsync("/v2/alliances/names/?alliance_ids=" + allianceIds == null || allianceIds.Count == 0 ? "" : HttpUtility.UrlEncode(string.Join(",", allianceIds)));
+            var queryParameters = new Dictionary<string, string>
+            {
+                { "alliance_ids", allianceIds == null || allianceIds.Count == 0 ? "" : string.Join(",", allianceIds) }
+            };
+
+            var responseModel = await this.GetAsync("/v2/alliances/names/", queryParameters);
 
             if (responseModel.Error)
             {

@@ -1,6 +1,9 @@
 ﻿using EVEStandard.Models.API;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
@@ -169,7 +172,26 @@ namespace EVEStandard.API
                         model.LastModified = DateTime.TryParse(value, out var lastModified) ? lastModified : DateTime.UtcNow;
                     }
                 }
-                model.JSONString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                // Check whether response is compressed
+                if (response.Content.Headers.ContentEncoding.Any(x => x == "gzip"))
+                {
+                    // Decompress manually
+                    using (var s = await response.Content.ReadAsStreamAsync())
+                    {
+                        using (var decompressed = new GZipStream(s, CompressionMode.Decompress))
+                        {
+                            using (var rdr = new StreamReader(decompressed))
+                            {
+                                model.JSONString = await rdr.ReadToEndAsync();
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    model.JSONString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
 
                 return model;
             }
