@@ -12,11 +12,11 @@ namespace EVEStandard.Models
         [JsonProperty("ticker")]
         public string Ticker { get; set; }
         [JsonProperty("creator_id")]
-        public int CreatorId { get; set; }
+        public long CreatorId { get; set; }
         [JsonProperty("creator_corporation_id")]
-        public int CreatorCorporationId { get; set; }
+        public long CreatorCorporationId { get; set; }
         [JsonProperty("executor_corporation_id")]
-        public int ExecutorCorporationId { get; set; }
+        public long ExecutorCorporationId { get; set; }
         [JsonProperty("date_founded")]
         public DateTime DateFounded { get; set; }
     }

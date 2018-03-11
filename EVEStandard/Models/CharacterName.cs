@@ -8,7 +8,7 @@ namespace EVEStandard.Models
     public class CharacterName
     {
         [JsonProperty("character_id")]
-        public int ID { get; set; }
+        public long ID { get; set; }
         [JsonProperty("character_name")]
         public string Name { get; set; }
     }

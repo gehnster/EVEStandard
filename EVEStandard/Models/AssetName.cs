@@ -5,11 +5,11 @@ using System.Text;
 
 namespace EVEStandard.Models
 {
-    public class AllianceName
+    public class AssetName
     {
-        [JsonProperty("alliance_id")]
-        public long Id { get; set; }
-        [JsonProperty("alliance_name")]
+        [JsonProperty("item_id")]
+        public long ItemId { get; set; }
+        [JsonProperty("name")]
         public string Name { get; set; }
     }
 }

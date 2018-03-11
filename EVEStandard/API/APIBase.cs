@@ -1,10 +1,12 @@
 ﻿using EVEStandard.Models.API;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -34,9 +36,9 @@ namespace EVEStandard.API
             return await RequestAsync(HttpMethod.Get, uri, auth, queryParameters);
         }
 
-        internal async Task<APIResponse> PostAsync(string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null)
+        internal async Task<APIResponse> PostAsync(string uri, AuthDTO auth, object body, Dictionary<string, string> queryParameters = null)
         {
-            return await RequestAsync(HttpMethod.Post, uri, auth, queryParameters);
+            return await RequestAsync(HttpMethod.Post, uri, auth, queryParameters, body);
         }
 
         internal async Task<APIResponse> PutAsync(string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null)
@@ -49,7 +51,7 @@ namespace EVEStandard.API
             return await RequestAsync(HttpMethod.Delete, uri, auth, queryParameters);
         }
 
-        internal async Task<APIResponse> RequestAsync(HttpMethod method, string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null)
+        internal async Task<APIResponse> RequestAsync(HttpMethod method, string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null, object body = null)
         {
             var queryParams = "?datasource=" + this.dataSource;
 
@@ -67,7 +69,7 @@ namespace EVEStandard.API
                     }
                 }
             }
-
+            
             try
             {
                 var request = new HttpRequestMessage()
@@ -75,6 +77,10 @@ namespace EVEStandard.API
                     RequestUri = new Uri(ESI_BASE + uri + queryParams),
                     Method = method
                 };
+                if(method == HttpMethod.Post)
+                {
+                    request.Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
+                }
                 if (auth != null && auth.AccessToken != null)
                 {
                     if (auth.AccessToken.Expires > DateTime.UtcNow)
@@ -143,6 +149,13 @@ namespace EVEStandard.API
 
                 return model;
             }
+            else if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+            {
+                model.Error = true;
+                model.Message = "You don't have the required SSO scope most likely.";
+
+                return model;
+            }
             else
             {
                 throw new EVEStandardException("API Response Issue");
@@ -160,17 +173,15 @@ namespace EVEStandard.API
             {
                 if (response.Headers.TryGetValues("expires", out var expiresEnumerable))
                 {
-                    foreach (var value in expiresEnumerable)
-                    {
-                        model.Expires = DateTime.TryParse(value, out var expires) ? expires : DateTime.UtcNow;
-                    }
+                    model.Expires = DateTime.TryParse(expiresEnumerable.FirstOrDefault(), out var expires) ? expires : DateTime.UtcNow;
                 }
                 if (response.Headers.TryGetValues("last-modified", out var lastModifiedEnumerable))
                 {
-                    foreach (var value in lastModifiedEnumerable)
-                    {
-                        model.LastModified = DateTime.TryParse(value, out var lastModified) ? lastModified : DateTime.UtcNow;
-                    }
+                    model.LastModified = DateTime.TryParse(lastModifiedEnumerable.FirstOrDefault(), out var lastModified) ? lastModified : DateTime.UtcNow;
+                }
+                if (response.Headers.TryGetValues("X-Pages", out var xPagesEnumerable))
+                {
+                    model.MaxPages = long.TryParse(xPagesEnumerable.FirstOrDefault(), out var xPages) ? xPages : 1;
                 }
 
                 // Check whether response is compressed
