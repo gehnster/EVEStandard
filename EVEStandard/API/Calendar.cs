@@ -51,7 +51,7 @@ namespace EVEStandard.API
 
             if (responseModel.Error)
             {
-                throw new EVEStandardException("ListCalendarEventSummariesV1Async failed");
+                throw new EVEStandardException("GetAnEventV3Async failed");
             }
             if (responseModel.LegacyWarning)
             {
@@ -72,7 +72,7 @@ namespace EVEStandard.API
 
             if (responseModel.Error)
             {
-                throw new EVEStandardException("ListCalendarEventSummariesV1Async failed");
+                throw new EVEStandardException("RespondToAnEventV3Async failed");
             }
             if (responseModel.LegacyWarning)
             {
