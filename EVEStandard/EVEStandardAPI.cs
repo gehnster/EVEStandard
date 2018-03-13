@@ -24,6 +24,8 @@ namespace EVEStandard
         private Alliances alliances;
         private API.Status status;
         private Assets assets;
+        private Bookmarks bookmarks;
+        private Calendar calendar;
 
         /// <summary>
         /// Initialize the EVEStandard Library
@@ -122,6 +124,8 @@ namespace EVEStandard
         public Alliances Alliances => this.alliances;
         public API.Status Status => this.status;
         public Assets Assets => this.assets;
+        public Bookmarks Bookmarks => this.bookmarks;
+        public Calendar Calendar => this.calendar;
 
         private void initializeAPI()
         {
@@ -134,6 +138,14 @@ namespace EVEStandard
                 HTTP = http
             };
             this.assets = new Assets(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.bookmarks = new Bookmarks(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.calendar = new Calendar(this.dataSource)
             {
                 HTTP = http
             };

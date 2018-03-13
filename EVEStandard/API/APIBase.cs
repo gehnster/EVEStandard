@@ -41,9 +41,9 @@ namespace EVEStandard.API
             return await RequestAsync(HttpMethod.Post, uri, auth, queryParameters, body);
         }
 
-        internal async Task<APIResponse> PutAsync(string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null)
+        internal async Task<APIResponse> PutAsync(string uri, AuthDTO auth, object body, Dictionary<string, string> queryParameters = null)
         {
-            return await RequestAsync(HttpMethod.Put, uri, auth, queryParameters);
+            return await RequestAsync(HttpMethod.Put, uri, auth, queryParameters, body);
         }
 
         internal async Task<APIResponse> DeleteAsync(string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null)
@@ -77,7 +77,7 @@ namespace EVEStandard.API
                     RequestUri = new Uri(ESI_BASE + uri + queryParams),
                     Method = method
                 };
-                if(method == HttpMethod.Post)
+                if((method == HttpMethod.Post || method == HttpMethod.Put) && body != null)
                 {
                     request.Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
                 }
@@ -103,7 +103,7 @@ namespace EVEStandard.API
             }
         }
 
-            protected void checkAuth(AuthDTO auth, string scope)
+        protected void checkAuth(AuthDTO auth, string scope)
         {
             if (auth == null || auth.Character == null || auth.AccessToken == null)
             {
@@ -120,7 +120,7 @@ namespace EVEStandard.API
         {
             var model = new APIResponse();
 
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            if (response.StatusCode == System.Net.HttpStatusCode.OK || response.StatusCode == System.Net.HttpStatusCode.NoContent)
             {
                 return await processSuccess(response, model);
             }
@@ -185,23 +185,26 @@ namespace EVEStandard.API
                 }
 
                 // Check whether response is compressed
-                if (response.Content.Headers.ContentEncoding.Any(x => x == "gzip"))
+                if(response.StatusCode != System.Net.HttpStatusCode.NoContent)
                 {
-                    // Decompress manually
-                    using (var s = await response.Content.ReadAsStreamAsync())
+                    if (response.Content.Headers.ContentEncoding.Any(x => x == "gzip"))
                     {
-                        using (var decompressed = new GZipStream(s, CompressionMode.Decompress))
+                        // Decompress manually
+                        using (var s = await response.Content.ReadAsStreamAsync())
                         {
-                            using (var rdr = new StreamReader(decompressed))
+                            using (var decompressed = new GZipStream(s, CompressionMode.Decompress))
                             {
-                                model.JSONString = await rdr.ReadToEndAsync();
+                                using (var rdr = new StreamReader(decompressed))
+                                {
+                                    model.JSONString = await rdr.ReadToEndAsync();
+                                }
                             }
                         }
                     }
-                }
-                else
-                {
-                    model.JSONString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    else
+                    {
+                        model.JSONString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    }
                 }
 
                 return model;
