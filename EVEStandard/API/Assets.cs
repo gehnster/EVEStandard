@@ -6,11 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace EVEStandard.API
 {
     public class Assets : APIBase
     {
+        ILogger Logger { get; } = LibraryLogging.CreateLogger<Assets>();
         internal Assets(string dataSource) : base(dataSource)
         {
         }
@@ -26,14 +28,7 @@ namespace EVEStandard.API
 
             var responseModel = await this.GetAsync("/v3/characters/" + auth.Character.CharacterID + "/assets/", auth, queryParameters);
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("GetCharacterAssetsV3Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("GetCharacterAssetsV3Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return (JsonConvert.DeserializeObject<List<Asset>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -49,14 +44,7 @@ namespace EVEStandard.API
 
             var responseModel = await this.GetAsync("/v2/corporations/" + corporationId + "/assets/", auth, queryParameters);
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("GetCorporationAssetsV2Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("GetCorporationAssetsV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return (JsonConvert.DeserializeObject<List<Asset>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -67,14 +55,7 @@ namespace EVEStandard.API
 
             var responseModel = await this.PostAsync("/v1/characters/" + auth.Character.CharacterID + "/assets/names/", auth, itemIds);
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("GetCharacterAssetNamesV1Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("GetCharacterAssetNamesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<List<AssetName>>(responseModel.JSONString);
         }
@@ -85,14 +66,7 @@ namespace EVEStandard.API
 
             var responseModel = await this.PostAsync("/v2/characters/" + auth.Character.CharacterID + "/assets/locations/", auth, itemIds);
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("GetCharacterAssetLocationsV2Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("GetCharacterAssetLocationsV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<List<AssetLocation>>(responseModel.JSONString);
         }
@@ -103,14 +77,7 @@ namespace EVEStandard.API
 
             var responseModel = await this.PostAsync("/v1/corporations/" + corpId + "/assets/names/", auth, itemIds);
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("GetCorporationAssetNamesV1Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("GetCorporationAssetNamesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<List<AssetName>>(responseModel.JSONString);
         }
@@ -121,14 +88,7 @@ namespace EVEStandard.API
 
             var responseModel = await this.PostAsync("/v2/corporations/" + corpId + "/assets/locations/", auth, itemIds);
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("GetCorporationAssetLocationsV2Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("GetCorporationAssetLocationsV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<List<AssetLocation>>(responseModel.JSONString);
         }

@@ -1,4 +1,5 @@
 ﻿using EVEStandard.Models;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace EVEStandard.API
 {
     public class Alliances : APIBase
     {
+        ILogger Logger { get; } = LibraryLogging.CreateLogger<Alliances>();
         internal Alliances(string dataSource) : base(dataSource)
         {
         }
@@ -20,14 +22,7 @@ namespace EVEStandard.API
         {
             var responseModel = await this.GetAsync("/v3/alliances/" + allianceId + "/");
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("GetAllianceInfoV3Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("GetAllianceInfoV3Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<Alliance>(responseModel.JSONString);
         }
@@ -36,14 +31,7 @@ namespace EVEStandard.API
         {
             var responseModel = await this.GetAsync("/v1/alliances/" + allianceId + "/corporations/");
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("ListAllianceCorporationsV1Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("ListAllianceCorporationsV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString);
         }
@@ -57,14 +45,7 @@ namespace EVEStandard.API
 
             var responseModel = await this.GetAsync("/v2/alliances/names/", queryParameters);
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("GetAllianceNamesV2Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("GetAllianceNamesV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<List<AllianceName>>(responseModel.JSONString);
         }
@@ -73,14 +54,7 @@ namespace EVEStandard.API
         {
             var responseModel = await this.GetAsync("/v1/alliances/" + allianceId + "/icons/");
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("GetAllianceIconV1Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("GetAllianceIconV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<AllianceIcons>(responseModel.JSONString);
         }
@@ -89,14 +63,7 @@ namespace EVEStandard.API
         {
             var responseModel = await this.GetAsync("/v1/alliances/");
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("ListAllAlliancesV1Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("ListAllAlliancesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString);
         }

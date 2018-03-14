@@ -13,5 +13,7 @@ namespace EVEStandard.Models
         public int Players { get; set; }
         [JsonProperty("server_version")]
         public string ServerVersion { get; set; }
+        [JsonProperty("vip")]
+        public bool VIP { get; set; }
     }
 }

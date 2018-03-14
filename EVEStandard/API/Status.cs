@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +9,7 @@ namespace EVEStandard.API
 {
     public class Status : APIBase
     {
+        ILogger Logger { get; } = LibraryLogging.CreateLogger<Status>();
         internal Status(string dataSource) : base(dataSource)
         {
         }
@@ -16,14 +18,7 @@ namespace EVEStandard.API
         {
             var responseModel = await this.GetAsync("/v1/status/");
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("GetStatusV1Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("GetStatusV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<Models.Status>(responseModel.JSONString);
         }

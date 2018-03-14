@@ -23,5 +23,7 @@ namespace EVEStandard.Models
         public DateTime Created { get; set; }
         [JsonProperty("creator_id")]
         public long CreatorId { get; set; }
+        [JsonProperty("coordinates")]
+        public Position Coordinates { get; set; }
     }
 }

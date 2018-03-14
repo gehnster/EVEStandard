@@ -19,5 +19,7 @@ namespace EVEStandard.Models
         public long ExecutorCorporationId { get; set; }
         [JsonProperty("date_founded")]
         public DateTime DateFounded { get; set; }
+        [JsonProperty("faction_id")]
+        public long? FactionId { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace EVEStandard.API
 {
     public class Bookmarks : APIBase
     {
+        ILogger Logger { get; } = LibraryLogging.CreateLogger<Bookmarks>();
         internal Bookmarks(string dataSource) : base(dataSource)
         {
         }
@@ -26,14 +28,7 @@ namespace EVEStandard.API
 
             var responseModel = await this.GetAsync("/v2/characters/" + auth.Character.CharacterID + "/bookmarks/", auth, queryParameters);
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("ListBookmarksV2Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("ListBookmarksV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return (JsonConvert.DeserializeObject<List<Bookmark>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -49,14 +44,7 @@ namespace EVEStandard.API
 
             var responseModel = await this.GetAsync("/v2/characters/" + auth.Character.CharacterID + "/bookmarks/folders/", auth, queryParameters);
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("ListBookmarkFoldersV2Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("ListBookmarkFoldersV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return (JsonConvert.DeserializeObject<List<BookmarkFolder>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -72,14 +60,7 @@ namespace EVEStandard.API
 
             var responseModel = await this.GetAsync("/v1/corporation/" + corporationId + "/bookmarks/", auth, queryParameters);
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("ListCorporationBookmarksV1Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("ListCorporationBookmarksV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return (JsonConvert.DeserializeObject<List<Bookmark>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -95,14 +76,7 @@ namespace EVEStandard.API
 
             var responseModel = await this.GetAsync("/v1/corporation/" + corporationId + "/bookmarks/folders/", auth, queryParameters);
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("ListCorporationBookmarkFoldersV1Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("ListCorporationBookmarkFoldersV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return (JsonConvert.DeserializeObject<List<BookmarkFolder>>(responseModel.JSONString), responseModel.MaxPages);
         }

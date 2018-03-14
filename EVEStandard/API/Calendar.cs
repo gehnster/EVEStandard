@@ -1,6 +1,7 @@
 ﻿using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -12,6 +13,7 @@ namespace EVEStandard.API
 {
     public class Calendar : APIBase
     {
+        ILogger Logger { get; } = LibraryLogging.CreateLogger<Calendar>();
         internal Calendar(string dataSource) : base(dataSource)
         {
         }
@@ -31,14 +33,7 @@ namespace EVEStandard.API
 
             var responseModel = await this.GetAsync("/v1/characters/" + auth.Character.CharacterID + "/calendar/", auth, queryParameters);
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("ListCalendarEventSummariesV1Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("ListCalendarEventSummariesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<List<EventSummary>>(responseModel.JSONString);
         }
@@ -49,14 +44,7 @@ namespace EVEStandard.API
 
             var responseModel = await this.GetAsync("/v3/characters/" + auth.Character.CharacterID + "/calendar/" + eventId + "/", auth);
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("GetAnEventV3Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("GetAnEventV3Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<Event>(responseModel.JSONString);
         }
@@ -70,14 +58,7 @@ namespace EVEStandard.API
 
             var responseModel = await this.PutAsync("/v3/characters/" + auth.Character.CharacterID + "/calendar/" + eventId + "/", auth, body);
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("RespondToAnEventV3Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("RespondToAnEventV3Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
         }
 
         public async Task<List<EventAttendee>> GetAttendeesV1Async(AuthDTO auth, long eventId)
@@ -86,14 +67,7 @@ namespace EVEStandard.API
 
             var responseModel = await this.GetAsync("/v1/characters/" + auth.Character.CharacterID + "/calendar/" + eventId + "/attendees/", auth);
 
-            if (responseModel.Error)
-            {
-                throw new EVEStandardException("GetAttendeesV1Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
-            }
+            checkResponse("GetAttendeesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<List<EventAttendee>>(responseModel.JSONString);
         }

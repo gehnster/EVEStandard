@@ -1,4 +1,5 @@
 ﻿using EVEStandard.Models.API;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -212,6 +213,18 @@ namespace EVEStandard.API
             catch (Exception e)
             {
                 throw e;
+            }
+        }
+
+        internal void checkResponse(string functionName, bool error, bool legacyWarning, ILogger logger)
+        {
+            if (error)
+            {
+                throw new EVEStandardException(functionName + " failed");
+            }
+            if (legacyWarning)
+            {
+                logger.LogWarning("{0} is a legacy end-point and could disappear soon, considering moving to a newer end-point.", functionName);
             }
         }
     }
