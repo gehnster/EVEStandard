@@ -1,4 +1,5 @@
 # EVE Standard - A C# Library to access the EVE Online ESI API
+[![Build Status](https://pointyhatgames.visualstudio.com/_apis/public/build/definitions/0a849367-82ec-47dc-a7ce-23289c57acf9/1/badge)](https://pointyhatgames.visualstudio.com/EVEStandard/_build/index?definitionId={id})
 
 This library is meant to access the EVE Online ESI API through a C# library. This library was built using .NET Standard 2.0 so as to be compatible with as many .NET frameworks as possible.
 

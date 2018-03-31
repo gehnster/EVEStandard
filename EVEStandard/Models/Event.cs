@@ -36,4 +36,5 @@
             character,
             alliance
         }
+    }
 }

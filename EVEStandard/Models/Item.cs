@@ -13,4 +13,3 @@ namespace EVEStandard.Models
         public long ItemId { get; set; }
     }
 }
-}

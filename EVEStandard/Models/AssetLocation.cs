@@ -13,4 +13,3 @@ namespace EVEStandard.Models
         public Position Position { get; set; }
     }
 }
-}
