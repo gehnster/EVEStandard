@@ -13,7 +13,7 @@ namespace EVEStandard.API
 {
     public class Alliances : APIBase
     {
-        ILogger Logger { get; } = LibraryLogging.CreateLogger<Alliances>();
+        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Alliances>();
         internal Alliances(string dataSource) : base(dataSource)
         {
         }
@@ -22,7 +22,7 @@ namespace EVEStandard.API
         {
             var responseModel = await this.GetAsync("/v3/alliances/" + allianceId + "/");
 
-            checkResponse("GetAllianceInfoV3Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            this.checkResponse("GetAllianceInfoV3Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<Alliance>(responseModel.JSONString);
         }
@@ -31,7 +31,7 @@ namespace EVEStandard.API
         {
             var responseModel = await this.GetAsync("/v1/alliances/" + allianceId + "/corporations/");
 
-            checkResponse("ListAllianceCorporationsV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            this.checkResponse("ListAllianceCorporationsV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString);
         }
@@ -45,7 +45,7 @@ namespace EVEStandard.API
 
             var responseModel = await this.GetAsync("/v2/alliances/names/", queryParameters);
 
-            checkResponse("GetAllianceNamesV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            this.checkResponse("GetAllianceNamesV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<List<AllianceName>>(responseModel.JSONString);
         }
@@ -54,7 +54,7 @@ namespace EVEStandard.API
         {
             var responseModel = await this.GetAsync("/v1/alliances/" + allianceId + "/icons/");
 
-            checkResponse("GetAllianceIconV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            this.checkResponse("GetAllianceIconV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<AllianceIcons>(responseModel.JSONString);
         }
@@ -63,7 +63,7 @@ namespace EVEStandard.API
         {
             var responseModel = await this.GetAsync("/v1/alliances/");
 
-            checkResponse("ListAllAlliancesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            this.checkResponse("ListAllAlliancesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString);
         }

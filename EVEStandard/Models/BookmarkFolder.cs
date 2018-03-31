@@ -1,15 +1,13 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EVEStandard.Models
+﻿namespace EVEStandard.Models
 {
-    public class BookmarkFolder
+    using System;
+    using System.Text;
+    using Newtonsoft.Json;
+
+    public class BookmarkFolder : ModelBase<BookmarkFolder>
     {
-        [JsonProperty("folder_id")]
-        public long FolderId { get; set; }
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        [JsonProperty("folder_id")] public long FolderId { get; set; }
+
+        [JsonProperty("name")] public string Name { get; set; }
     }
 }

@@ -45,7 +45,7 @@ namespace EVEStandard
             this.userAgent = userAgent ?? "EVEStandard-default";
             this.dataSource = dataSource == DataSource.Tranquility ? "tranquility" : "singularity";
 
-            initializeAPI();
+            this.initializeAPI();
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace EVEStandard
         /// <returns></returns>
         public async Task<string> TestDevRoute(string httpMethod, string dataSource, string route, Dictionary<string, string> queryParameters)
         {
-            return await TestDevRoute(httpMethod, dataSource, route, queryParameters, null);
+            return await this.TestDevRoute(httpMethod, dataSource, route, queryParameters, null);
         }
 
         /// <summary>
@@ -84,30 +84,26 @@ namespace EVEStandard
 
             APIResponse responseModel;
 
-            if(httpMethod == "GET")
+            if(httpMethod.ToUpper() == "GET")
             {
-                responseModel = await api.GetAsync("/v3/characters/" + auth.Character.CharacterID + "/assets/", auth, queryParameters);
+                responseModel = await api.GetAsync(route, auth, queryParameters);
             }
-            else if(httpMethod == "POST")
+            else if(httpMethod.ToUpper() == "POST")
             {
-                responseModel = await api.PostAsync("/v3/characters/" + auth.Character.CharacterID + "/assets/", auth, queryParameters);
+                responseModel = await api.PostAsync(route, auth, queryParameters);
             }
-            else if (httpMethod == "PUT")
+            else if (httpMethod.ToUpper() == "PUT")
             {
-                responseModel = await api.PutAsync("/v3/characters/" + auth.Character.CharacterID + "/assets/", auth, queryParameters);
+                responseModel = await api.PutAsync(route, auth, queryParameters);
             }
             else
             {
-                responseModel = await api.DeleteAsync("/v3/characters/" + auth.Character.CharacterID + "/assets/", auth, queryParameters);
+                responseModel = await api.DeleteAsync(route, auth, queryParameters);
             }
 
             if (responseModel.Error)
             {
-                throw new EVEStandardException("GetCharacterAssetsV3Async failed");
-            }
-            if (responseModel.LegacyWarning)
-            {
-                // log it? unsure how best to handle this. Maybe throw a legacy exception?
+                throw new EVEStandardException("TestDevRoute failed");
             }
 
             return responseModel.JSONString;

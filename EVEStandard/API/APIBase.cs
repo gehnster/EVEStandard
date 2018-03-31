@@ -13,10 +13,13 @@ using System.Web;
 
 namespace EVEStandard.API
 {
+    using System.Diagnostics.CodeAnalysis;
+
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class APIBase
     {
         private static HttpClient http;
-        private string dataSource;
+        private readonly string dataSource;
 
         public static readonly string ESI_BASE = "https://esi.tech.ccp.is";
 
@@ -29,27 +32,27 @@ namespace EVEStandard.API
 
         internal async Task<APIResponse> GetAsync(string uri, Dictionary<string, string> queryParameters = null)
         {
-            return await GetAsync(uri, null, queryParameters);
+            return await this.GetAsync(uri, null, queryParameters);
         }
 
         internal async Task<APIResponse> GetAsync(string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null)
         {
-            return await RequestAsync(HttpMethod.Get, uri, auth, queryParameters);
+            return await this.RequestAsync(HttpMethod.Get, uri, auth, queryParameters);
         }
 
         internal async Task<APIResponse> PostAsync(string uri, AuthDTO auth, object body, Dictionary<string, string> queryParameters = null)
         {
-            return await RequestAsync(HttpMethod.Post, uri, auth, queryParameters, body);
+            return await this.RequestAsync(HttpMethod.Post, uri, auth, queryParameters, body);
         }
 
         internal async Task<APIResponse> PutAsync(string uri, AuthDTO auth, object body, Dictionary<string, string> queryParameters = null)
         {
-            return await RequestAsync(HttpMethod.Put, uri, auth, queryParameters, body);
+            return await this.RequestAsync(HttpMethod.Put, uri, auth, queryParameters, body);
         }
 
         internal async Task<APIResponse> DeleteAsync(string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null)
         {
-            return await RequestAsync(HttpMethod.Delete, uri, auth, queryParameters);
+            return await this.RequestAsync(HttpMethod.Delete, uri, auth, queryParameters);
         }
 
         internal async Task<APIResponse> RequestAsync(HttpMethod method, string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null, object body = null)
@@ -96,7 +99,7 @@ namespace EVEStandard.API
 
                 var authResponse = await this.HTTP.SendAsync(request).ConfigureAwait(false);
 
-                return await processResponse(authResponse);
+                return await this.processResponse(authResponse);
             }
             catch (Exception)
             {
@@ -123,7 +126,7 @@ namespace EVEStandard.API
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK || response.StatusCode == System.Net.HttpStatusCode.NoContent)
             {
-                return await processSuccess(response, model);
+                return await this.processSuccess(response, model);
             }
             else if (response.IsSuccessStatusCode)
             {

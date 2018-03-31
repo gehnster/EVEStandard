@@ -77,7 +77,7 @@ namespace EVEStandard
         /// <exception cref="EVEStandardException" ><paramref name="scopes"/> parameter was empty or null</exception>
         public Authorization AuthorizeToEVEURI(List<string> scopes)
         {
-            return AuthorizeToEVEURI(scopes, Convert.ToBase64String(Guid.NewGuid().ToByteArray()));
+            return this.AuthorizeToEVEURI(scopes, Convert.ToBase64String(Guid.NewGuid().ToByteArray()));
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace EVEStandard
                 ExpectedState = state ?? ""
             };
 
-            model.SignInURI = GetBaseURL() + SSO_AUTHORIZE + "response_type=code&redirect_uri=" + HttpUtility.UrlEncode(this.callbackUri) +
+            model.SignInURI = this.GetBaseURL() + SSO_AUTHORIZE + "response_type=code&redirect_uri=" + HttpUtility.UrlEncode(this.callbackUri) +
                 "&client_id=" + this.clientId + "&scope=" + HttpUtility.UrlEncode(String.Join(" ", scopes)) + "&state=" + model.ExpectedState;
 
             return model;
@@ -132,14 +132,14 @@ namespace EVEStandard
             try
             {
                 var byteArray = Encoding.ASCII.GetBytes(this.clientId + ":" + this.secretKey);
-                http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+                http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
                 var stringContent = new FormUrlEncodedContent(new[]
                 {
                     new KeyValuePair<string, string>("grant_type", "authorization_code"),
                     new KeyValuePair<string, string>("code", model.AuthorizationCode)
                 });
 
-                var response = await http.PostAsync(GetBaseURL() + SSO_TOKEN, stringContent);
+                var response = await http.PostAsync(this.GetBaseURL() + SSO_TOKEN, stringContent);
                 return JsonConvert.DeserializeObject<AccessTokenDetails>(response.Content.ReadAsStringAsync().Result);
             }
             catch (Exception inner)
@@ -160,14 +160,14 @@ namespace EVEStandard
             try
             {
                 var byteArray = Encoding.ASCII.GetBytes(this.clientId + ":" + this.secretKey);
-                http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+                http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
                 var stringContent = new FormUrlEncodedContent(new[]
                 {
                     new KeyValuePair<string, string>("grant_type", "refresh_token"),
                     new KeyValuePair<string, string>("refresh_token", refreshToken)
                 });
 
-                var response = await http.PostAsync(GetBaseURL() + SSO_TOKEN, stringContent);
+                var response = await http.PostAsync(this.GetBaseURL() + SSO_TOKEN, stringContent);
                 return JsonConvert.DeserializeObject<AccessTokenDetails>(response.Content.ReadAsStringAsync().Result);
             }
             catch (Exception inner)
@@ -187,8 +187,8 @@ namespace EVEStandard
         {
             try
             {
-                http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
-                var verifyResponse = await http.GetAsync(GetBaseURL() + SSO_VERIFY);
+                http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                var verifyResponse = await http.GetAsync(this.GetBaseURL() + SSO_VERIFY);
 
                 return JsonConvert.DeserializeObject<CharacterDetails>(await verifyResponse.Content.ReadAsStringAsync());
             }
@@ -210,14 +210,14 @@ namespace EVEStandard
             try
             {
                 var byteArray = Encoding.ASCII.GetBytes(this.clientId + ":" + this.secretKey);
-                http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+                http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
                 var stringContent = new FormUrlEncodedContent(new[]
                 {
                     new KeyValuePair<string, string>("token_type_hint", type == RevokeType.ACCESS_TOKEN ? "access_token" : "refresh_token"),
                     new KeyValuePair<string, string>("token", token)
                 });
 
-                var response = await http.PostAsync(GetBaseURL() + SSO_REVOKE, stringContent);
+                var response = await http.PostAsync(this.GetBaseURL() + SSO_REVOKE, stringContent);
                 return response.IsSuccessStatusCode;
             }
             catch (Exception inner)

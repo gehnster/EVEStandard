@@ -1,15 +1,13 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EVEStandard.Models
+﻿namespace EVEStandard.Models
 {
-    public class CharacterName
+    using System;
+    using System.Text;
+    using Newtonsoft.Json;
+
+    public class CharacterName : ModelBase<CharacterName>
     {
-        [JsonProperty("character_id")]
-        public long ID { get; set; }
-        [JsonProperty("character_name")]
-        public string Name { get; set; }
+        [JsonProperty("character_id")] public long ID { get; set; }
+
+        [JsonProperty("character_name")] public string Name { get; set; }
     }
 }

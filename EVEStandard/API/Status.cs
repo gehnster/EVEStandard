@@ -9,7 +9,7 @@ namespace EVEStandard.API
 {
     public class Status : APIBase
     {
-        ILogger Logger { get; } = LibraryLogging.CreateLogger<Status>();
+        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Status>();
         internal Status(string dataSource) : base(dataSource)
         {
         }
@@ -18,7 +18,7 @@ namespace EVEStandard.API
         {
             var responseModel = await this.GetAsync("/v1/status/");
 
-            checkResponse("GetStatusV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            this.checkResponse("GetStatusV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<Models.Status>(responseModel.JSONString);
         }

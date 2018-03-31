@@ -1,15 +1,16 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EVEStandard.Models
+﻿namespace EVEStandard.Models
 {
-    public class EventAttendee
+    using System;
+    using System.Text;
+    using Enumerations;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+
+    public class EventAttendee : ModelBase<EventAttendee>
     {
-        [JsonProperty("character_id")]
-        public long CharacterId { get; set; }
-        [JsonProperty("event_response")]
-        public string EventResponse { get; set; }
+        [JsonProperty("character_id")] public long CharacterId { get; set; }
+
+        [JsonProperty("event_response"), JsonConverter(typeof(StringEnumConverter))]
+        public EventResponse EventResponse { get; set; }
     }
 }
