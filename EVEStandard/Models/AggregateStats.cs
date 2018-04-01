@@ -1,6 +1,5 @@
 using System;
 using System.Text;
-using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
 namespace EVEStandard.Models
@@ -15,7 +14,6 @@ namespace EVEStandard.Models
         /// Gregorian year for this set of aggregates
         /// </summary>
         /// <value>Gregorian year for this set of aggregates</value>
-        [Required]
         [JsonProperty("year")]
         public int? Year { get; set; }
 
