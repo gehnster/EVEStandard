@@ -124,7 +124,7 @@ namespace EVEStandard.API
         {
             var model = new APIResponse();
 
-            if (response.StatusCode == System.Net.HttpStatusCode.OK || response.StatusCode == System.Net.HttpStatusCode.NoContent)
+            if (response.StatusCode == System.Net.HttpStatusCode.OK || response.StatusCode == System.Net.HttpStatusCode.NoContent || response.StatusCode == System.Net.HttpStatusCode.Created)
             {
                 return await this.processSuccess(response, model);
             }
