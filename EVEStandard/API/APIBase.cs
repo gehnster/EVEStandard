@@ -14,6 +14,7 @@ using System.Web;
 namespace EVEStandard.API
 {
     using System.Diagnostics.CodeAnalysis;
+    using System.Net;
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class APIBase
@@ -55,7 +56,7 @@ namespace EVEStandard.API
             return await this.RequestAsync(HttpMethod.Delete, uri, auth, queryParameters);
         }
 
-        internal async Task<APIResponse> RequestAsync(HttpMethod method, string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null, object body = null)
+        private async Task<APIResponse> RequestAsync(HttpMethod method, string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null, object body = null)
         {
             var queryParams = "?datasource=" + this.dataSource;
 
@@ -85,7 +86,7 @@ namespace EVEStandard.API
                 {
                     request.Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
                 }
-                if (auth != null && auth.AccessToken != null)
+                if (auth?.AccessToken != null)
                 {
                     if (auth.AccessToken.Expires > DateTime.UtcNow)
                     {
@@ -107,16 +108,16 @@ namespace EVEStandard.API
             }
         }
 
-        protected void checkAuth(AuthDTO auth, string scope)
+        protected static void checkAuth(AuthDTO auth, string scope)
         {
-            if (auth == null || auth.Character == null || auth.AccessToken == null)
+            if (auth?.Character == null || auth.AccessToken == null)
             {
                 throw new ArgumentNullException();
             }
 
             if (!auth.Character.Scopes.Contains(scope))
             {
-                // throw same standard exception or a new no scope exception?
+                throw new EVEStandardScopeNotAcquired("Missing scope: " + scope);
             }
         }
 
@@ -126,47 +127,40 @@ namespace EVEStandard.API
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK || response.StatusCode == System.Net.HttpStatusCode.NoContent || response.StatusCode == System.Net.HttpStatusCode.Created)
             {
-                return await this.processSuccess(response, model);
+                return await processSuccess(response, model);
             }
-            else if (response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
                 throw new EVEStandardException("Success Status Code not handled in GetNoAuthAsync, StatusCode: " + response.StatusCode);
             }
-            else if (response.StatusCode == System.Net.HttpStatusCode.InternalServerError)
+            switch (response.StatusCode)
             {
-                model.Error = true;
-                model.Message = await response.Content.ReadAsStringAsync();
+                case HttpStatusCode.InternalServerError:
+                    model.Error = true;
+                    model.Message = await response.Content.ReadAsStringAsync();
 
-                return model;
-            }
-            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-            {
-                model.Error = true;
-                model.Message = await response.Content.ReadAsStringAsync();
+                    return model;
+                case HttpStatusCode.NotFound:
+                    model.Error = true;
+                    model.Message = await response.Content.ReadAsStringAsync();
 
-                return model;
-            }
-            else if (response.StatusCode == System.Net.HttpStatusCode.Conflict)
-            {
-                model.Error = true;
-                model.Message = "Too many requests made to ESI in a short period of time";
+                    return model;
+                case HttpStatusCode.Conflict:
+                    model.Error = true;
+                    model.Message = "Too many requests made to ESI in a short period of time";
 
-                return model;
-            }
-            else if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
-            {
-                model.Error = true;
-                model.Message = "You don't have the required SSO scope most likely.";
+                    return model;
+                case HttpStatusCode.Forbidden:
+                    model.Error = true;
+                    model.Message = "You don't have the required SSO scope most likely.";
 
-                return model;
-            }
-            else
-            {
-                throw new EVEStandardException("API Response Issue");
+                    return model;
+                default:
+                    throw new EVEStandardException("API Response Issue. Status Code: " + response.StatusCode);
             }
         }
 
-        private async Task<APIResponse> processSuccess(HttpResponseMessage response, APIResponse model)
+        private static async Task<APIResponse> processSuccess(HttpResponseMessage response, APIResponse model)
         {
             if (response.Headers.Contains("warning"))
             {
@@ -215,11 +209,11 @@ namespace EVEStandard.API
             }
             catch (Exception e)
             {
-                throw e;
+                throw;
             }
         }
 
-        internal void checkResponse(string functionName, bool error, bool legacyWarning, ILogger logger)
+        internal static void checkResponse(string functionName, bool error, bool legacyWarning, ILogger logger)
         {
             if (error)
             {

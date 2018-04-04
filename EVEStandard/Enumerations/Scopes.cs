@@ -29,7 +29,7 @@
         public static readonly string ESI_CONTRACTS_READ_CHARACTER_CONTRACTS_1 = "esi-contracts.read_character_contracts.v1";
         public static readonly string ESI_CONTRACTS_READ_CORPORATION_CONTRACTS_1 = "esi-contracts.read_corporation_contracts.v1";
         public static readonly string ESI_CORPORATIONS_READ_BLUEPRINTS_1 = "esi-corporations.read_blueprints.v1";
-        public static readonly string ESI_CORPORATIONS_READ_CONTRACTS_1 = "esi-corporations.read_contacts.v1";
+        public static readonly string ESI_CORPORATIONS_READ_CONTACTS_1 = "esi-corporations.read_contacts.v1";
         public static readonly string ESI_CORPORATIONS_READ_CONTAINER_LOGS_1 = "esi-corporations.read_container_logs.v1";
         public static readonly string ESI_CORPORATIONS_READ_CORPORATION_MEMBERSHIP_1 = "esi-corporations.read_corporation_membership.v1";
         public static readonly string ESI_CORPORATIONS_READ_DIVISIONS_1 = "esi-corporations.read_divisions.v1";

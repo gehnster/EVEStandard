@@ -18,7 +18,7 @@ namespace EVEStandard.API
         {
             var responseModel = await this.GetAsync("/v1/status/");
 
-            this.checkResponse("GetStatusV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetStatusV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<Models.Status>(responseModel.JSONString);
         }

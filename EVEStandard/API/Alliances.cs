@@ -22,7 +22,7 @@ namespace EVEStandard.API
         {
             var responseModel = await this.GetAsync("/v3/alliances/" + allianceId + "/");
 
-            this.checkResponse("GetAllianceInfoV3Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetAllianceInfoV3Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<Alliance>(responseModel.JSONString);
         }
@@ -31,7 +31,7 @@ namespace EVEStandard.API
         {
             var responseModel = await this.GetAsync("/v1/alliances/" + allianceId + "/corporations/");
 
-            this.checkResponse("ListAllianceCorporationsV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ListAllianceCorporationsV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString);
         }
@@ -45,7 +45,7 @@ namespace EVEStandard.API
 
             var responseModel = await this.GetAsync("/v2/alliances/names/", queryParameters);
 
-            this.checkResponse("GetAllianceNamesV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetAllianceNamesV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<List<AllianceName>>(responseModel.JSONString);
         }
@@ -54,7 +54,7 @@ namespace EVEStandard.API
         {
             var responseModel = await this.GetAsync("/v1/alliances/" + allianceId + "/icons/");
 
-            this.checkResponse("GetAllianceIconV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetAllianceIconV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<AllianceIcons>(responseModel.JSONString);
         }
@@ -63,7 +63,7 @@ namespace EVEStandard.API
         {
             var responseModel = await this.GetAsync("/v1/alliances/");
 
-            this.checkResponse("ListAllAlliancesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ListAllAlliancesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString);
         }

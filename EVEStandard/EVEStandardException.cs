@@ -4,25 +4,37 @@ using System.Text;
 
 namespace EVEStandard
 {
-    public class EVEStandardException : Exception
+    internal class EVEStandardException : Exception
     {
-        public EVEStandardException()
+        internal EVEStandardException()
         {
         }
 
-        public EVEStandardException(string message)
+        internal EVEStandardException(string message)
             : base(message)
         {
         }
 
-        public EVEStandardException(string message, Exception inner)
+        internal EVEStandardException(string message, Exception inner)
             : base(message, inner)
         {
         }
     }
 
-    public class EVEStandardAuthExpiredException : EVEStandardException
+    internal class EVEStandardAuthExpiredException : EVEStandardException
     {
 
+    }
+
+    internal class EVEStandardScopeNotAcquired : EVEStandardException
+    {
+        internal EVEStandardScopeNotAcquired()
+        {
+        }
+
+        internal EVEStandardScopeNotAcquired(string message)
+            : base(message)
+        {
+        }
     }
 }

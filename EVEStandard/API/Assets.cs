@@ -19,7 +19,7 @@ namespace EVEStandard.API
 
         public async Task<(List<Asset>, long)> GetCharacterAssetsV3Async(AuthDTO auth, long page)
         {
-            this.checkAuth(auth, Scopes.ESI_ASSETS_READ_ASSETS_1);
+            checkAuth(auth, Scopes.ESI_ASSETS_READ_ASSETS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -28,14 +28,14 @@ namespace EVEStandard.API
 
             var responseModel = await this.GetAsync("/v3/characters/" + auth.Character.CharacterID + "/assets/", auth, queryParameters);
 
-            this.checkResponse("GetCharacterAssetsV3Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetCharacterAssetsV3Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return (JsonConvert.DeserializeObject<List<Asset>>(responseModel.JSONString), responseModel.MaxPages);
         }
 
         public async Task<(List<Asset>, long)> GetCorporationAssetsV2Async(AuthDTO auth, long corporationId, long page)
         {
-            this.checkAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
+            checkAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -44,51 +44,51 @@ namespace EVEStandard.API
 
             var responseModel = await this.GetAsync("/v2/corporations/" + corporationId + "/assets/", auth, queryParameters);
 
-            this.checkResponse("GetCorporationAssetsV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetCorporationAssetsV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return (JsonConvert.DeserializeObject<List<Asset>>(responseModel.JSONString), responseModel.MaxPages);
         }
 
         public async Task<List<AssetName>> GetCharacterAssetNamesV1Async(AuthDTO auth, List<long> itemIds)
         {
-            this.checkAuth(auth, Scopes.ESI_ASSETS_READ_ASSETS_1);
+            checkAuth(auth, Scopes.ESI_ASSETS_READ_ASSETS_1);
 
             var responseModel = await this.PostAsync("/v1/characters/" + auth.Character.CharacterID + "/assets/names/", auth, itemIds);
 
-            this.checkResponse("GetCharacterAssetNamesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetCharacterAssetNamesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<List<AssetName>>(responseModel.JSONString);
         }
 
         public async Task<List<AssetLocation>> GetCharacterAssetLocationsV2Async(AuthDTO auth, List<long> itemIds)
         {
-            this.checkAuth(auth, Scopes.ESI_ASSETS_READ_ASSETS_1);
+            checkAuth(auth, Scopes.ESI_ASSETS_READ_ASSETS_1);
 
             var responseModel = await this.PostAsync("/v2/characters/" + auth.Character.CharacterID + "/assets/locations/", auth, itemIds);
 
-            this.checkResponse("GetCharacterAssetLocationsV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetCharacterAssetLocationsV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<List<AssetLocation>>(responseModel.JSONString);
         }
 
         public async Task<List<AssetName>> GetCorporationAssetNamesV1Async(AuthDTO auth, List<long> itemIds, long corpId)
         {
-            this.checkAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
+            checkAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
 
             var responseModel = await this.PostAsync("/v1/corporations/" + corpId + "/assets/names/", auth, itemIds);
 
-            this.checkResponse("GetCorporationAssetNamesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetCorporationAssetNamesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<List<AssetName>>(responseModel.JSONString);
         }
 
         public async Task<List<AssetLocation>> GetCorporationAssetLocationsV2Async(AuthDTO auth, List<long> itemIds, long corpId)
         {
-            this.checkAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
+            checkAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
 
             var responseModel = await this.PostAsync("/v2/corporations/" + corpId + "/assets/locations/", auth, itemIds);
 
-            this.checkResponse("GetCorporationAssetLocationsV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetCorporationAssetLocationsV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
             return JsonConvert.DeserializeObject<List<AssetLocation>>(responseModel.JSONString);
         }
