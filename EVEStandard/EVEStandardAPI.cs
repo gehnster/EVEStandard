@@ -20,13 +20,6 @@ namespace EVEStandard
         private string dataSource = "tranquility";
         private SSO sso;
 
-        // API
-        private Alliances alliances;
-        private API.Status status;
-        private Assets assets;
-        private Bookmarks bookmarks;
-        private Calendar calendar;
-
         /// <summary>
         /// Initialize the EVEStandard Library
         /// </summary>
@@ -117,31 +110,166 @@ namespace EVEStandard
         /// <summary>
         /// Get data from the Alliances operations in ESI
         /// </summary>
-        public Alliances Alliances => this.alliances;
-        public API.Status Status => this.status;
-        public Assets Assets => this.assets;
-        public Bookmarks Bookmarks => this.bookmarks;
-        public Calendar Calendar => this.calendar;
+        public Alliances Alliances { get; private set; }
+        public Assets Assets { get; private set; }
+        public Bookmarks Bookmarks { get; private set; }
+        public Calendar Calendar { get; private set; }
+        public Character Character { get; private set; }
+        public API.Clones Clones { get; private set; }
+        public Contacts Contacts { get; private set; }
+        public Contracts Contracts { get; private set; }
+        public Corporation Corporation { get; private set; }
+        public Dogma Dogma { get; private set; }
+        public FactionWarfare FactionWarfare { get; private set; }
+        public Fittings Fittings { get; private set; }
+        public Fleets Fleets { get; private set; }
+        public Incursion Incursion { get; private set; }
+        public Industry Industry { get; private set; }
+        public Insurance Insurance { get; private set; }
+        public Killmails Killmails { get; private set; }
+        public API.Location Location { get; private set; }
+        public Loyalty Loyalty { get; private set; }
+        public Mail Mail { get; private set; }
+        public Market Market { get; private set; }
+        public Opportunities Opportunities { get; private set; }
+        public PlanetaryInteraction PlanetaryInteraction { get; private set; }
+        public Routes Routes { get; private set; }
+        public Search Search { get; private set; }
+        public Skills Skills { get; private set; }
+        public Sovereignty Sovereignty { get; private set; }
+        public API.Status Status { get; private set; }
+        public Universe Universe { get; private set; }
+        public UserInterface UserInterface { get; private set; }
+        public Wallet Wallet { get; private set; }
+        public Wars Wars { get; private set; }
 
         private void initializeAPI()
         {
-            this.alliances = new Alliances(this.dataSource)
+            this.Alliances = new Alliances(this.dataSource)
             {
                 HTTP = http
             };
-            this.status = new API.Status(this.dataSource)
+            this.Assets = new Assets(this.dataSource)
             {
                 HTTP = http
             };
-            this.assets = new Assets(this.dataSource)
+            this.Bookmarks = new Bookmarks(this.dataSource)
             {
                 HTTP = http
             };
-            this.bookmarks = new Bookmarks(this.dataSource)
+            this.Calendar = new Calendar(this.dataSource)
             {
                 HTTP = http
             };
-            this.calendar = new Calendar(this.dataSource)
+            this.Character = new Character(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Clones = new API.Clones(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Contacts = new Contacts(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Contracts = new Contracts(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Corporation = new Corporation(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Dogma = new Dogma(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.FactionWarfare = new FactionWarfare(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Fittings = new Fittings(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Fleets = new Fleets(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Incursion = new Incursion(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Industry = new Industry(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Insurance = new Insurance(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Killmails = new Killmails(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Location = new API.Location(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Loyalty = new Loyalty(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Mail = new Mail(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Market = new Market(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Opportunities = new Opportunities(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.PlanetaryInteraction = new PlanetaryInteraction(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Routes = new Routes(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Search = new Search(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Skills = new Skills(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Sovereignty = new Sovereignty(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Status = new API.Status(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Universe = new Universe(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.UserInterface = new UserInterface(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Wallet = new Wallet(this.dataSource)
+            {
+                HTTP = http
+            };
+            this.Wars = new Wars(this.dataSource)
             {
                 HTTP = http
             };
