@@ -132,7 +132,6 @@ namespace EVEStandard
             try
             {
                 var byteArray = Encoding.ASCII.GetBytes(this.clientId + ":" + this.secretKey);
-                http = new HttpClient();
 
                 http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
                 var stringContent = new FormUrlEncodedContent(new[]
