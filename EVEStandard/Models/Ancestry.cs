@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using EVEStandard.Models;
+﻿using EVEStandard.Models;
 using Newtonsoft.Json;
 
 namespace EveCorpMonNet.Libraries.EVEStandard.Models
 {
-    public class Ancestry :ModelBase<Ancestry>
+    public class Ancestry : ModelBase<Ancestry>
     {
         [JsonProperty("id")] public int Id { get; set; }
         [JsonProperty("name")] public string Name { get; set; }
