@@ -2,7 +2,7 @@
 {
     using Newtonsoft.Json;
 
-    public class CharacterIcons : ModelBase<CharacterIcons>
+    public class Icons : ModelBase<Icons>
     {
         /// <summary>
         ///     px64x64 string

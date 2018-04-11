@@ -76,13 +76,13 @@ namespace EVEStandard.API
             return JsonConvert.DeserializeObject<List<CharacterName>>(responseModel.JSONString);
         }
 
-        public async Task<CharacterIcons> GetCharacterPortraitsV2Async(long characterId)
+        public async Task<Icons> GetCharacterPortraitsV2Async(long characterId)
         {
             var responseModel = await this.GetAsync("/v2/characters/" + characterId + "/portrait/");
 
             checkResponse("GetCharacterPortraitsV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
-            return JsonConvert.DeserializeObject<CharacterIcons>(responseModel.JSONString);
+            return JsonConvert.DeserializeObject<Icons>(responseModel.JSONString);
         }
 
         public async Task<(List<CharacterCorporationHistory>, long)> GetCorporationHistoryV1Async(long characterId)
