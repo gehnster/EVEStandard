@@ -115,13 +115,13 @@ namespace EveCorpMonNet.Libraries.EVEStandard.Models
         /// </summary>
         /// <value>dogma_attributes array</value>
         [JsonProperty("dogma_attributes")]
-        public List<GetUniverseTypesTypeIdDogmaAttribute> DogmaAttributes { get; set; }
+        public List<DogmaAttribute> DogmaAttributes { get; set; }
 
         /// <summary>
         /// dogma_effects array
         /// </summary>
         /// <value>dogma_effects array</value>
         [JsonProperty("dogma_effects")]
-        public List<GetUniverseTypesTypeIdDogmaEffect> DogmaEffects { get; set; }
+        public List<DogmaEffect> DogmaEffects { get; set; }
     }
 }

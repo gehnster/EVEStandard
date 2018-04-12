@@ -14,7 +14,7 @@ namespace EveCorpMonNet.Libraries.EVEStandard.Models
         /// </summary>
         /// <value>agents array</value>
         [JsonProperty("agents")]
-        public List<PostUniverseIdsAgent> Agents { get; set; }
+        public List<Agent> Agents { get; set; }
 
         /// <summary>
         /// alliances array
@@ -42,7 +42,7 @@ namespace EveCorpMonNet.Libraries.EVEStandard.Models
         /// </summary>
         /// <value>corporations array</value>
         [JsonProperty("corporations")]
-        public List<PostUniverseIdsCorporation> Corporations { get; set; }
+        public List<CorporationInfo> Corporations { get; set; }
 
         /// <summary>
         /// factions array
