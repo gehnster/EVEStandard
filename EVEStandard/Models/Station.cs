@@ -51,7 +51,7 @@ namespace EveCorpMonNet.Libraries.EVEStandard.Models
         /// </summary>
         [Required]
         [JsonProperty("position")]
-        public GetUniverseStationsStationIdPosition Position { get; set; }
+        public Position Position { get; set; }
 
         /// <summary>
         /// The solar system this station is in

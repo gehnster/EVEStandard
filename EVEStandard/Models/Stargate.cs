@@ -35,7 +35,7 @@ namespace EveCorpMonNet.Libraries.EVEStandard.Models
         /// </summary>
         [Required]
         [JsonProperty("position")]
-        public GetUniverseStargatesStargateIdPosition Position { get; set; }
+        public Position Position { get; set; }
 
         /// <summary>
         /// The solar system this stargate is in
@@ -50,6 +50,6 @@ namespace EveCorpMonNet.Libraries.EVEStandard.Models
         /// </summary>
         [Required]
         [JsonProperty("destination")]
-        public GetUniverseStargatesStargateIdDestination Destination { get; set; }
+        public Location Destination { get; set; }
     }
 }
