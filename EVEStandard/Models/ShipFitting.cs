@@ -34,7 +34,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>items array</value>
         [JsonProperty("items")]
-        public List<PostCharactersCharacterIdFittingsItem> Items { get; set; }
+        public List<FittingItem> Items { get; set; }
     }
 
     public class FittingItem : ModelBase<FittingItem>
