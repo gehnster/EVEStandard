@@ -82,6 +82,19 @@ namespace EVEStandard
 
         /// <summary>
         /// Generates the URL you should have users click on with one of the EVE Online provided button images.
+        /// A state parameter in the URL is optional, but expected for security so this function creates one based on a Base64 encoded Guid.
+        /// This is for Implicit Flow, where a secret key isn't sent
+        /// </summary>
+        /// <param name="scopes">List of the required scopes for your application</param>
+        /// <returns>The <c>Authorization</c> POCO with the SignInURI parameter set and the ExpectedState parameter set.</returns>
+        /// <exception cref="EVEStandardException" ><paramref name="scopes"/> parameter was empty or null</exception>
+        public Authorization AuthorizeToEVEURI_Implicit(List<string> scopes)
+        {
+            return this.AuthorizeToEVEURI_Implicit (scopes, Convert.ToBase64String(Guid.NewGuid().ToByteArray()));
+        }
+
+        /// <summary>
+        /// Generates the URL you should have users click on with one of the EVE Online provided button images.
         /// A state parameter in the URL is optional, but expected for security.
         /// </summary>
         /// <param name="scopes">List of the required scopes for your application</param>
@@ -101,6 +114,33 @@ namespace EVEStandard
             };
 
             model.SignInURI = this.GetBaseURL() + SSO_AUTHORIZE + "response_type=code&redirect_uri=" + HttpUtility.UrlEncode(this.callbackUri) +
+                "&client_id=" + this.clientId + "&scope=" + HttpUtility.UrlEncode(String.Join(" ", scopes)) + "&state=" + model.ExpectedState;
+
+            return model;
+        }
+
+        /// <summary>
+        /// Generates the URL you should have users click on with one of the EVE Online provided button images.
+        /// A state parameter in the URL is optional, but expected for security.
+        /// This is for Implicit Flow, where a secret key isn't sent
+        /// </summary>
+        /// <param name="scopes">List of the required scopes for your application</param>
+        /// <param name="state">State is used to verify that the callback is coming from where you expect it to come from.</param>
+        /// <returns>The <c>Authorization</c> POCO with the SignInURI parameter set and the ExpectedState parameter set.</returns>
+        /// <exception cref="EVEStandardException" ><paramref name="scopes"/> parameter was empty or null</exception>
+        public Authorization AuthorizeToEVEURI_Implicit(List<string> scopes, string state)
+        {
+            if (scopes.Count == 0 || scopes == null)
+            {
+                throw new EVEStandardException("scopes parameter in SSO.AuthorizeToEVEURI is invalid");
+            }
+
+            var model = new Authorization
+            {
+                ExpectedState = state ?? ""
+            };
+
+            model.SignInURI = this.GetBaseURL() + SSO_AUTHORIZE + "response_type=token&redirect_uri=" + HttpUtility.UrlEncode(this.callbackUri) +
                 "&client_id=" + this.clientId + "&scope=" + HttpUtility.UrlEncode(String.Join(" ", scopes)) + "&state=" + model.ExpectedState;
 
             return model;
