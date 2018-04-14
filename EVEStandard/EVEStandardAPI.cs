@@ -141,7 +141,7 @@ namespace EVEStandard
         public Universe Universe { get; private set; }
         public UserInterface UserInterface { get; private set; }
         public Wallet Wallet { get; private set; }
-        public Wars Wars { get; private set; }
+        public API.Wars Wars { get; private set; }
 
         private void initializeAPI()
         {
@@ -269,7 +269,7 @@ namespace EVEStandard
             {
                 HTTP = http
             };
-            this.Wars = new Wars(this.dataSource)
+            this.Wars = new API.Wars(this.dataSource)
             {
                 HTTP = http
             };
