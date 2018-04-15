@@ -123,7 +123,7 @@ namespace EVEStandard
         public FactionWarfare FactionWarfare { get; private set; }
         public Fittings Fittings { get; private set; }
         public Fleets Fleets { get; private set; }
-        public Incursion Incursion { get; private set; }
+        public API.Incursion Incursion { get; private set; }
         public Industry Industry { get; private set; }
         public Insurance Insurance { get; private set; }
         public Killmails Killmails { get; private set; }
@@ -197,7 +197,7 @@ namespace EVEStandard
             {
                 HTTP = http
             };
-            this.Incursion = new Incursion(this.dataSource)
+            this.Incursion = new API.Incursion(this.dataSource)
             {
                 HTTP = http
             };
