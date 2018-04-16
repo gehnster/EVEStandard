@@ -12,4 +12,4 @@ This library is meant to access the EVE Online ESI API through a C# library. Thi
 ### Using Authorized API and getting authorized
 ## Explanation of design decisions made for SSO and API routes
 ## Donations
-Donations keep this project active and up-to-date. I'll gladly accept donations in the form of ISK to the character Gehnster or pull requests!
+Donations are gladly accepted for work already done to the character Gehnster. For future work to complete donations by the way of pull requests are appreciated!
