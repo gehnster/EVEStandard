@@ -129,7 +129,7 @@ namespace EVEStandard
         public Killmails Killmails { get; private set; }
         public API.Location Location { get; private set; }
         public Loyalty Loyalty { get; private set; }
-        public Mail Mail { get; private set; }
+        public API.Mail Mail { get; private set; }
         public Market Market { get; private set; }
         public Opportunities Opportunities { get; private set; }
         public PlanetaryInteraction PlanetaryInteraction { get; private set; }
@@ -221,7 +221,7 @@ namespace EVEStandard
             {
                 HTTP = http
             };
-            this.Mail = new Mail(this.dataSource)
+            this.Mail = new API.Mail(this.dataSource)
             {
                 HTTP = http
             };
