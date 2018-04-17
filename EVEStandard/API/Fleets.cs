@@ -55,7 +55,7 @@ namespace EVEStandard.API
             return JsonConvert.DeserializeObject<CharacterFleetInfo>(responseModel.JSONString);
         }
 
-        public async Task<List<FleetMember>> GetFleetMembersV1Async(AuthDTO auth, long fleetId, string language)
+        public async Task<(List<FleetMember>, string)> GetFleetMembersV1Async(AuthDTO auth, long fleetId, string language = Language.English)
         {
             checkAuth(auth, Scopes.ESI_FLEETS_READ_FLEET_1);
 
@@ -68,7 +68,7 @@ namespace EVEStandard.API
 
             checkResponse("GetFleetMembersV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
-            return JsonConvert.DeserializeObject<List<FleetMember>>(responseModel.JSONString);
+            return (JsonConvert.DeserializeObject<List<FleetMember>>(responseModel.JSONString), responseModel.Language);
         }
 
         public async Task CreateFleetInvitationV1Async(AuthDTO auth, long fleetId, FleetInvitation invite)
@@ -98,7 +98,7 @@ namespace EVEStandard.API
             checkResponse("MoveFleetMemberV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
         }
 
-        public async Task<List<FleetWing>> GetFleetWingsV1Async(AuthDTO auth, long fleetId, string language)
+        public async Task<(List<FleetWing>, string)> GetFleetWingsV1Async(AuthDTO auth, long fleetId, string language = Language.English)
         {
             checkAuth(auth, Scopes.ESI_FLEETS_READ_FLEET_1);
 
@@ -111,7 +111,7 @@ namespace EVEStandard.API
 
             checkResponse("GetFleetWingsV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 
-            return JsonConvert.DeserializeObject<List<FleetWing>>(responseModel.JSONString);
+            return (JsonConvert.DeserializeObject<List<FleetWing>>(responseModel.JSONString), language);
         }
 
         public async Task<long> CreateFleetWingV1Async(AuthDTO auth, long fleetId)
