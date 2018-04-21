@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using EVEStandard.Enumerations;
 
 namespace EVEStandard.Models
 {
@@ -53,17 +54,7 @@ namespace EVEStandard.Models
         /// planet_type string
         /// </summary>
         /// <value>planet_type string</value>
-        public enum PlanetTypeEnum
-        {
-            temperate = 1,
-            barren = 2,
-            oceanic = 3,
-            ice = 4,
-            gas = 5,
-            lava = 6,
-            storm = 7,
-            plasma = 8
-        }
+
 
         /// <summary>
         /// planet_type string

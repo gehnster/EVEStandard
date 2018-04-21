@@ -43,23 +43,6 @@ namespace EVEStandard.Models
         /// <value>location_id integer</value>
         [JsonProperty("location_id")]
         public long? LocationId { get; set; }
-        /// <summary>
-        /// action string
-        /// </summary>
-        /// <value>action string</value>
-        public enum ActionEnum
-        {
-            add = 1,
-            assemble = 2,
-            configure = 3,
-            enter_password = 4,
-            Lock = 5,
-            move = 6,
-            repackage = 7,
-            set_name = 8,
-            set_password = 9,
-            unlock = 10
-        }
 
         /// <summary>
         /// action string

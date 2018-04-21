@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using EVEStandard.Enumerations;
 
 namespace EVEStandard.Models
 {
@@ -13,17 +14,6 @@ namespace EVEStandard.Models
         /// <value>Standing of the contact</value>
         [JsonProperty("standing")]
         public float? Standing { get; set; }
-        /// <summary>
-        /// contact_type string
-        /// </summary>
-        /// <value>contact_type string</value>
-        public enum ContactTypeEnum
-        {
-            character = 1,
-            corporation = 2,
-            alliance = 3,
-            faction = 4
-        }
 
         /// <summary>
         /// contact_type string
