@@ -1,15 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
+using EVEStandard.Enumerations;
+using EVEStandard.Models;
+using EVEStandard.Models.API;
+using Newtonsoft.Json;
 
 namespace EVEStandard.API
 {
-    using System.Threading.Tasks;
-    using Enumerations;
-    using EVEStandard.Models.API;
-    using Models;
-    using Newtonsoft.Json;
 
     public class Market : APIBase
     {
@@ -20,9 +18,9 @@ namespace EVEStandard.API
 
         public async Task<List<MarketPrice>> ListMarketPricesV1Async()
         {
-            var responseModel = await this.GetAsync("/v1/markets/prices/");
+            var responseModel = await GetAsync("/v1/markets/prices/");
 
-            checkResponse("ListMarketPricesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ListMarketPricesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<MarketPrice>>(responseModel.JSONString);
         }
@@ -40,9 +38,9 @@ namespace EVEStandard.API
                 queryParameters.Add("type_id", typeId.ToString());
             }
 
-            var responseModel = await this.GetAsync("/v1/markets/" + regionId + "/orders/", queryParameters);
+            var responseModel = await GetAsync("/v1/markets/" + regionId + "/orders/", queryParameters);
 
-            checkResponse("ListOrdersInRegionV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ListOrdersInRegionV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<MarketOrder>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -54,9 +52,9 @@ namespace EVEStandard.API
                 { "type_id", typeId.ToString() }
             };
 
-            var responseModel = await this.GetAsync("/v1/markets/" + regionId + "/history/", queryParameters);
+            var responseModel = await GetAsync("/v1/markets/" + regionId + "/history/", queryParameters);
 
-            checkResponse("ListHistoricalMarketStatisticsInRegionV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ListHistoricalMarketStatisticsInRegionV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<MarketRegionHistory>>(responseModel.JSONString);
         }
@@ -70,18 +68,18 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await this.GetAsync("/v1/markets/structures/" + structureId + "/", queryParameters);
+            var responseModel = await GetAsync("/v1/markets/structures/" + structureId + "/", queryParameters);
 
-            checkResponse("ListOrdersInStructureV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ListOrdersInStructureV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<MarketOrder>>(responseModel.JSONString), responseModel.MaxPages);
         }
 
         public async Task<int> GetItemGroupsV1Async()
         {
-            var responseModel = await this.GetAsync("/v1/markets/groups/");
+            var responseModel = await GetAsync("/v1/markets/groups/");
 
-            checkResponse("GetItemGroupsV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetItemGroupsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<int>(responseModel.JSONString);
         }
@@ -93,9 +91,9 @@ namespace EVEStandard.API
                 { "language", language ??Language.English }
             };
 
-            var responseModel = await this.GetAsync("/v1/markets/groups/" + marketGroupId + "/", queryParameters);
+            var responseModel = await GetAsync("/v1/markets/groups/" + marketGroupId + "/", queryParameters);
 
-            checkResponse("GetItemGroupInfoV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetItemGroupInfoV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<MarketGroup>(responseModel.JSONString), responseModel.Language);
         }
@@ -104,9 +102,9 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_MARKETS_READ_CHARACTER_ORDERS_1);
 
-            var responseModel = await this.GetAsync("/v2/characters/" + auth.Character.CharacterID + "/orders/");
+            var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/orders/");
 
-            checkResponse("ListOpenOrdersFromCharacterV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ListOpenOrdersFromCharacterV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<CharacterMarketOrder>>(responseModel.JSONString);
         }
@@ -120,9 +118,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await this.GetAsync("/v1/characters/" + auth.Character.CharacterID + "/orders/history/", queryParameters);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/orders/history/", queryParameters);
 
-            checkResponse("ListHistoricalOrdersByCharacterV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ListHistoricalOrdersByCharacterV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<CharacterMarketOrderHistory>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -134,9 +132,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await this.GetAsync("/v1/markets/" + regionId + "/types/", queryParameters);
+            var responseModel = await GetAsync("/v1/markets/" + regionId + "/types/", queryParameters);
 
-            checkResponse("ListHistoricalOrdersByCharacterV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ListHistoricalOrdersByCharacterV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -145,9 +143,9 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_MARKETS_READ_CORPORATION_ORDERS_1);
 
-            var responseModel = await this.GetAsync("/v2/corporations/" + corporationId + "/orders/");
+            var responseModel = await GetAsync("/v2/corporations/" + corporationId + "/orders/");
 
-            checkResponse("ListOpenOrdersFromCorporationV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ListOpenOrdersFromCorporationV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<CorporationMarketOrder>>(responseModel.JSONString);
         }
@@ -161,9 +159,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await this.GetAsync("/v1/corporations/" + corporationId + "/orders/history/", queryParameters);
+            var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/orders/history/", queryParameters);
 
-            checkResponse("ListHistoricalOrdersByCorporationV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ListHistoricalOrdersByCorporationV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<CorporationMarketOrderHistory>>(responseModel.JSONString), responseModel.MaxPages);
         }

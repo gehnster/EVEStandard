@@ -1,11 +1,8 @@
 ﻿using EVEStandard.Enumerations;
-using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EVEStandard.API
@@ -21,9 +18,9 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CLONES_READ_CLONES_1);
 
-            var responseModel = await this.GetAsync("/v3/characters/" + auth.Character.CharacterID + "/clones/", auth);
+            var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/clones/", auth);
 
-            checkResponse("GetClonesV3Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetClonesV3Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Clones>(responseModel.JSONString);
         }
@@ -32,9 +29,9 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CLONES_READ_IMPLANTS_1);
 
-            var responseModel = await this.GetAsync("/v1/characters/" + auth.Character.CharacterID + "/implants/", auth);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/implants/", auth);
 
-            checkResponse("GetActiveImplantsV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetActiveImplantsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
         }

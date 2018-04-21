@@ -29,9 +29,9 @@ namespace EVEStandard.API
                 };
             }
 
-            var responseModel = await this.GetAsync("/v1/characters/" + auth.Character.CharacterID + "/calendar/", auth, queryParameters);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/calendar/", auth, queryParameters);
 
-            checkResponse("ListCalendarEventSummariesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ListCalendarEventSummariesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<EventSummary>>(responseModel.JSONString);
         }
@@ -40,9 +40,9 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CALENDAR_READ_CALENDAR_EVENTS_1);
 
-            var responseModel = await this.GetAsync("/v3/characters/" + auth.Character.CharacterID + "/calendar/" + eventId + "/", auth);
+            var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/calendar/" + eventId + "/", auth);
 
-            checkResponse("GetAnEventV3Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetAnEventV3Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Event>(responseModel.JSONString);
         }
@@ -56,16 +56,16 @@ namespace EVEStandard.API
 
             var responseModel = await this.PutAsync("/v3/characters/" + auth.Character.CharacterID + "/calendar/" + eventId + "/", auth, body);
 
-            checkResponse("RespondToAnEventV3Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("RespondToAnEventV3Async", responseModel.Error, responseModel.LegacyWarning, Logger);
         }
 
         public async Task<List<EventAttendee>> GetAttendeesV1Async(AuthDTO auth, long eventId)
         {
             checkAuth(auth, Scopes.ESI_CALENDAR_READ_CALENDAR_EVENTS_1);
 
-            var responseModel = await this.GetAsync("/v1/characters/" + auth.Character.CharacterID + "/calendar/" + eventId + "/attendees/", auth);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/calendar/" + eventId + "/attendees/", auth);
 
-            checkResponse("GetAttendeesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetAttendeesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<EventAttendee>>(responseModel.JSONString);
         }

@@ -3,9 +3,7 @@ using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EVEStandard.API
@@ -19,9 +17,9 @@ namespace EVEStandard.API
 
         public async Task<Killmail> GetKillmailV1Async(int killmailId, string killmailHash)
         {
-            var responseModel = await this.GetAsync("/v1/killmails/" + killmailId + "/" + killmailHash + "/");
+            var responseModel = await GetAsync("/v1/killmails/" + killmailId + "/" + killmailHash + "/");
 
-            checkResponse("GetKillmailV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetKillmailV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Killmail>(responseModel.JSONString);
         }
@@ -36,9 +34,9 @@ namespace EVEStandard.API
                 { "max_kill_id", maxKillId.ToString() }
             };
 
-            var responseModel = await this.GetAsync("/v1/characters/" + auth.Character.CharacterID + "/killmails/recent/", auth, queryParameters);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/killmails/recent/", auth, queryParameters);
 
-            checkResponse("GetCharacterKillsAndLossesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetCharacterKillsAndLossesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<RecentKillmail>>(responseModel.JSONString);
         }
@@ -52,9 +50,9 @@ namespace EVEStandard.API
                 { "max_kill_id", maxKillId.ToString() }
             };
 
-            var responseModel = await this.GetAsync("/v1/corporations/" + corporationId + "/killmails/recent/", auth, queryParameters);
+            var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/killmails/recent/", auth, queryParameters);
 
-            checkResponse("GetCorporationKillsAndLossesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetCorporationKillsAndLossesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<RecentKillmail>>(responseModel.JSONString);
         }

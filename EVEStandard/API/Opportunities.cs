@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace EVEStandard.API
 {
@@ -20,9 +18,9 @@ namespace EVEStandard.API
 
         public async Task<List<int>> GetOpportunitiesGroupsV1Async()
         {
-            var responseModel = await this.GetAsync("/v1/opportunities/groups/");
+            var responseModel = await GetAsync("/v1/opportunities/groups/");
 
-            checkResponse("GetOpportunitiesGroupsV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetOpportunitiesGroupsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
         }
@@ -34,27 +32,27 @@ namespace EVEStandard.API
                 { "language", language ??Language.English }
             };
 
-            var responseModel = await this.GetAsync("/v1/opportunities/groups/" + groupId + "/", null, queryParameters);
+            var responseModel = await GetAsync("/v1/opportunities/groups/" + groupId + "/", null, queryParameters);
 
-            checkResponse("GetOpportunitiesGroupV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetOpportunitiesGroupV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<OpportunitiesGroup>(responseModel.JSONString), responseModel.Language);
         }
 
         public async Task<List<int>> GetOpportunitiesTasksV1Async()
         {
-            var responseModel = await this.GetAsync("/v1/opportunities/tasks/");
+            var responseModel = await GetAsync("/v1/opportunities/tasks/");
 
-            checkResponse("GetOpportunitiesTasksV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetOpportunitiesTasksV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
         }
 
         public async Task<OpportunitiesTask> GetOpportunitiesTaskV1Async(int taskId)
         {
-            var responseModel = await this.GetAsync("/v1/opportunities/tasks/" + taskId + "/");
+            var responseModel = await GetAsync("/v1/opportunities/tasks/" + taskId + "/");
 
-            checkResponse("GetOpportunitiesTaskV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetOpportunitiesTaskV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<OpportunitiesTask>(responseModel.JSONString);
         }
@@ -63,9 +61,9 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_OPPORTUNITIES_1);
 
-            var responseModel = await this.GetAsync("/v1/characters/" + auth.Character.CharacterID + "/opportunities/");
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/opportunities/");
 
-            checkResponse("GetCharacterCompletedTaskV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetCharacterCompletedTaskV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<CharacterTask>>(responseModel.JSONString);
         }
