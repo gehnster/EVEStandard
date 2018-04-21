@@ -1,9 +1,7 @@
 ﻿using EVEStandard.Models;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EVEStandard.API
@@ -17,9 +15,9 @@ namespace EVEStandard.API
 
         public async Task<List<InsurancePrice>> ListInsuranceLevelsV1Async()
         {
-            var responseModel = await this.GetAsync("/v1/insurance/prices/");
+            var responseModel = await GetAsync("/v1/insurance/prices/");
 
-            checkResponse("ListInsuranceLevelsV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ListInsuranceLevelsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<InsurancePrice>>(responseModel.JSONString);
         }

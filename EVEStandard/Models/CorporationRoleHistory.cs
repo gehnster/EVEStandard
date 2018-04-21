@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using EVEStandard.Enumerations;
 
 namespace EVEStandard.Models
 {
@@ -28,19 +29,7 @@ namespace EVEStandard.Models
         /// <value>ID of the character who issued this change</value>
         [JsonProperty("issuer_id")]
         public int? IssuerId { get; set; }
-
-        public enum RoleTypeEnum
-        {
-            grantable_roles,
-            grantable_roles_at_base,
-            grantable_roles_at_hq,
-            grantable_roles_at_other,
-            roles,
-            roles_at_base,
-            roles_at_hq,
-            roles_at_other
-        }
-
+        
         /// <summary>
         /// role_type string
         /// </summary>

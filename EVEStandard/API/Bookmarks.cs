@@ -3,9 +3,7 @@ using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EVEStandard.API
@@ -26,9 +24,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await this.GetAsync("/v2/characters/" + auth.Character.CharacterID + "/bookmarks/", auth, queryParameters);
+            var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/bookmarks/", auth, queryParameters);
 
-            checkResponse("ListBookmarksV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ListBookmarksV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<Bookmark>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -42,9 +40,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await this.GetAsync("/v2/characters/" + auth.Character.CharacterID + "/bookmarks/folders/", auth, queryParameters);
+            var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/bookmarks/folders/", auth, queryParameters);
 
-            checkResponse("ListBookmarkFoldersV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ListBookmarkFoldersV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<BookmarkFolder>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -58,9 +56,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await this.GetAsync("/v1/corporation/" + corporationId + "/bookmarks/", auth, queryParameters);
+            var responseModel = await GetAsync("/v1/corporation/" + corporationId + "/bookmarks/", auth, queryParameters);
 
-            checkResponse("ListCorporationBookmarksV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ListCorporationBookmarksV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<Bookmark>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -74,7 +72,7 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await this.GetAsync("/v1/corporation/" + corporationId + "/bookmarks/folders/", auth, queryParameters);
+            var responseModel = await GetAsync("/v1/corporation/" + corporationId + "/bookmarks/folders/", auth, queryParameters);
 
             checkResponse("ListCorporationBookmarkFoldersV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
 

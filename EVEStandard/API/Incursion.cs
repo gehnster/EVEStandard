@@ -1,14 +1,10 @@
-﻿using EVEStandard.Enumerations;
-using EVEStandard.Models.API;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
-    using Models;
 
     public class Incursion : APIBase
     {
@@ -19,9 +15,9 @@ namespace EVEStandard.API
 
         public async Task<List<Incursion>> ListIncursionsV1Async()
         {
-            var responseModel = await this.GetAsync("/v1/incursions/");
+            var responseModel = await GetAsync("/v1/incursions/");
 
-            checkResponse("ListIncursionsV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ListIncursionsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<Incursion>>(responseModel.JSONString);
         }

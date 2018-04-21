@@ -31,7 +31,10 @@
         public const string ESI_CORPORATIONS_READ_BLUEPRINTS_1 = "esi-corporations.read_blueprints.v1";
         public const string ESI_CORPORATIONS_READ_CONTACTS_1 = "esi-corporations.read_contacts.v1";
         public const string ESI_CORPORATIONS_READ_CONTAINER_LOGS_1 = "esi-corporations.read_container_logs.v1";
-        public const string ESI_CORPORATIONS_READ_CORPORATION_MEMBERSHIP_1 = "esi-corporations.read_corporation_membership.v1";
+
+        public const string ESI_CORPORATIONS_READ_CORPORATION_MEMBERSHIP_1 =
+            "esi-corporations.read_corporation_membership.v1";
+
         public const string ESI_CORPORATIONS_READ_DIVISIONS_1 = "esi-corporations.read_divisions.v1";
         public const string ESI_CORPORATIONS_READ_FACILITIES_1 = "esi-corporations.read_facilities.v1";
         public const string ESI_CORPORATIONS_READ_FW_STATS_1 = "esi-corporations.read_fw_stats.v1";

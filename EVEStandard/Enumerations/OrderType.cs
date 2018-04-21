@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EVEStandard.Enumerations
+﻿namespace EVEStandard.Enumerations
 {
-    using Models;
-
     public static class OrderType
     {
         public const string All = "all";

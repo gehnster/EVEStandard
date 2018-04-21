@@ -1,16 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
+using EVEStandard.Enumerations;
+using EVEStandard.Models;
+using EVEStandard.Models.API;
+using Newtonsoft.Json;
 
 namespace EVEStandard.API
 {
-    using System.Threading.Tasks;
-    using Enumerations;
-    using Models;
-    using Models.API;
-    using Newtonsoft.Json;
-
     public class Mail : APIBase
     {
         private ILogger Logger { get; } = LibraryLogging.CreateLogger<Mail>();
@@ -28,9 +25,9 @@ namespace EVEStandard.API
                 { "last_mail_id", lastMailId.ToString() }
             };
 
-            var responseModel = await this.GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/", auth, queryParameters);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/", auth, queryParameters);
 
-            checkResponse("ReturnMailHeadersV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ReturnMailHeadersV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<Mail>>(responseModel.JSONString);
         }
@@ -39,9 +36,9 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_MAIL_SEND_MAIL_1);
 
-            var responseModel = await this.PostAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/", auth, mail);
+            var responseModel = await PostAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/", auth, mail);
 
-            checkResponse("SendNewMailV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("SendNewMailV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<int>(responseModel.JSONString);
         }
@@ -50,9 +47,9 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_MAIL_READ_MAIL_1);
 
-            var responseModel = await this.GetAsync("/v3/characters/" + auth.Character.CharacterID + "/mail/labels/", auth);
+            var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/mail/labels/", auth);
 
-            checkResponse("GetMailLabelsAndUnreadCountsV3Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetMailLabelsAndUnreadCountsV3Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<UnreadMail>(responseModel.JSONString);
         }
@@ -67,9 +64,9 @@ namespace EVEStandard.API
                 color = labelHexColor
             };
 
-            var responseModel = await this.PostAsync("/v2/characters/" + auth.Character.CharacterID + "/mail/labels/", auth, body);
+            var responseModel = await PostAsync("/v2/characters/" + auth.Character.CharacterID + "/mail/labels/", auth, body);
 
-            checkResponse("CreateMailLabelV2Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("CreateMailLabelV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<long>(responseModel.JSONString);
         }
@@ -78,18 +75,18 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_MAIL_ORGANIZE_MAIL_1);
 
-            var responseModel = await this.DeleteAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/labels/" + labelId + "/", auth);
+            var responseModel = await DeleteAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/labels/" + labelId + "/", auth);
 
-            checkResponse("DeleteMailLabelV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("DeleteMailLabelV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
         }
 
         public async Task<List<MailList>> ReturnMailingListSubscriptionsV1Async(AuthDTO auth, List<long> labels, long lastMailId)
         {
             checkAuth(auth, Scopes.ESI_MAIL_READ_MAIL_1);
 
-            var responseModel = await this.GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/lists/", auth);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/lists/", auth);
 
-            checkResponse("ReturnMailingListSubscriptionsV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ReturnMailingListSubscriptionsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<MailList>>(responseModel.JSONString);
         }
@@ -98,18 +95,18 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_MAIL_ORGANIZE_MAIL_1);
 
-            var responseModel = await this.DeleteAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/" + mailId + "/", auth);
+            var responseModel = await DeleteAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/" + mailId + "/", auth);
 
-            checkResponse("DeleteMailV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("DeleteMailV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
         }
 
         public async Task<MailContent> ReturnMailV1Async(AuthDTO auth, long mailId)
         {
             checkAuth(auth, Scopes.ESI_MAIL_READ_MAIL_1);
 
-            var responseModel = await this.GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/" + mailId + "/", auth);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/" + mailId + "/", auth);
 
-            checkResponse("ReturnMailV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ReturnMailV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<MailContent>(responseModel.JSONString);
         }
@@ -118,9 +115,9 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_MAIL_ORGANIZE_MAIL_1);
 
-            var responseModel = await this.PutAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/" + mailId + "/", auth, contents);
+            var responseModel = await PutAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/" + mailId + "/", auth, contents);
 
-            checkResponse("ReturnMailV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ReturnMailV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
         }
     }
 }

@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EVEStandard.Enumerations
+﻿namespace EVEStandard.Enumerations
 {
-    using System.Runtime.ConstrainedExecution;
-
     public static class Language
     {
         public const string German = "de";

@@ -1,16 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
+using EVEStandard.Enumerations;
+using EVEStandard.Models;
+using EVEStandard.Models.API;
+using Newtonsoft.Json;
 
 namespace EVEStandard.API
 {
-    using System.Threading.Tasks;
-    using Enumerations;
-    using Models;
-    using Models.API;
-    using Newtonsoft.Json;
-
     public class PlanetaryInteraction : APIBase
     {
         private ILogger Logger { get; } = LibraryLogging.CreateLogger<PlanetaryInteraction>();
@@ -22,9 +19,9 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_PLANETS_MANAGE_PLANETS_1);
 
-            var responseModel = await this.GetAsync("/v1/characters/" + auth.Character.CharacterID + "/planets/", auth);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/planets/", auth);
 
-            checkResponse("GetColoniesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetColoniesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<Colony>>(responseModel.JSONString);
         }
@@ -33,18 +30,18 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_PLANETS_MANAGE_PLANETS_1);
 
-            var responseModel = await this.GetAsync("/v3/characters/" + auth.Character.CharacterID + "/planets/" + planetId + "/", auth);
+            var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/planets/" + planetId + "/", auth);
 
-            checkResponse("GetColonyLayoutV3Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetColonyLayoutV3Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<ColonyLayout>(responseModel.JSONString);
         }
 
         public async Task<FactorySchematic> GetSchematicInfoV1Async(int schematicId)
         {
-            var responseModel = await this.GetAsync("/v1/universe/schematics/" + schematicId + "/");
+            var responseModel = await GetAsync("/v1/universe/schematics/" + schematicId + "/");
 
-            checkResponse("GetSchematicInfoV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetSchematicInfoV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<FactorySchematic>(responseModel.JSONString);
         }
@@ -58,9 +55,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await this.GetAsync("/v1/corporations/" + corporationId + "/customs_offices/", auth, queryParameters);
+            var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/customs_offices/", auth, queryParameters);
 
-            checkResponse("ListCorporationCustomsOfficesV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ListCorporationCustomsOfficesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<CustomsOffice>>(responseModel.JSONString), responseModel.MaxPages);
         }
