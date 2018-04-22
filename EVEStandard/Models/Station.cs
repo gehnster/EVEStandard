@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using EveCorpMonNet.Libraries.EVEStandard.Enumerations;
-using EVEStandard.Models;
 using Newtonsoft.Json;
+using EVEStandard.Enumerations;
 
 namespace EVEStandard.Models
 {

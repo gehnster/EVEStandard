@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
-using EveCorpMonNet.Libraries.EVEStandard.Enumerations;
-using EVEStandard.Models;
 using Newtonsoft.Json;
+using EVEStandard.Enumerations;
 
 namespace EVEStandard.Models
 {

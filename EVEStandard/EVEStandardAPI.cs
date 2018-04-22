@@ -138,7 +138,7 @@ namespace EVEStandard
         public Skills Skills { get; private set; }
         public Sovereignty Sovereignty { get; private set; }
         public API.Status Status { get; private set; }
-        public Universe Universe { get; private set; }
+        public API.Universe Universe { get; private set; }
         public UserInterface UserInterface { get; private set; }
         public Wallet Wallet { get; private set; }
         public Wars Wars { get; private set; }
@@ -257,7 +257,7 @@ namespace EVEStandard
             {
                 HTTP = http
             };
-            this.Universe = new Universe(this.dataSource)
+            this.Universe = new API.Universe(this.dataSource)
             {
                 HTTP = http
             };

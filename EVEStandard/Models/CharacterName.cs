@@ -1,7 +1,6 @@
 ﻿namespace EVEStandard.Models
 {
-    using System;
-    using System.Text;
+    using global::System;
     using Newtonsoft.Json;
 
     public class CharacterName : ModelBase<CharacterName>

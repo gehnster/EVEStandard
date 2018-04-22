@@ -1,8 +1,7 @@
 ﻿namespace EVEStandard.Models
 {
-    using System;
-    using System.Text;
     using Newtonsoft.Json;
+    using global::System;
 
     public class Bookmark : ModelBase<Bookmark>
     {
