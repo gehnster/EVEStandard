@@ -3,7 +3,7 @@ using EveCorpMonNet.Libraries.EVEStandard.Enumerations;
 using EVEStandard.Models;
 using Newtonsoft.Json;
 
-namespace EveCorpMonNet.Libraries.EVEStandard.Models
+namespace EVEStandard.Models
 {
     public class Names : ModelBase<Names>
     {

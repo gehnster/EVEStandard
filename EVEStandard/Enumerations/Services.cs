@@ -1,4 +1,4 @@
-﻿namespace EveCorpMonNet.Libraries.EVEStandard.Enumerations
+﻿namespace EVEStandard.Enumerations
 {
     public enum ServicesEnum
     {

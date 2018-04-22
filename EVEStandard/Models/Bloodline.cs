@@ -2,7 +2,7 @@
 using EVEStandard.Models;
 using Newtonsoft.Json;
 
-namespace EveCorpMonNet.Libraries.EVEStandard.Models
+namespace EVEStandard.Models
 {
     public class Bloodline : ModelBase<Bloodline>
     {
