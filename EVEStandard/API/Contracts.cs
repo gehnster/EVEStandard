@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
+using EVEStandard.Enumerations;
+using EVEStandard.Models;
+using EVEStandard.Models.API;
 
 namespace EVEStandard.API
 {
-    using Microsoft.Extensions.Logging;
-    using Newtonsoft.Json;
-    using System.Threading.Tasks;
-    using Enumerations;
-    using Models;
-    using Models.API;
-
     public class Contracts : APIBase
     {
         private ILogger Logger { get; } = LibraryLogging.CreateLogger<Contracts>();
@@ -27,9 +24,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await this.GetAsync("/v1/characters/" + auth.Character.CharacterID + "/contracts/", auth, queryParameters);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/contracts/", auth, queryParameters);
 
-            checkResponse("GetContractsV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetContractsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<Contract>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -38,9 +35,9 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CHARACTER_CONTRACTS_1);
 
-            var responseModel = await this.GetAsync("/v1/characters/" + auth.Character.CharacterID + "/contracts/" + contractId + "/items/", auth);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/contracts/" + contractId + "/items/", auth);
 
-            checkResponse("GetContractItemsV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetContractItemsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<ContractItem>>(responseModel.JSONString);
         }
@@ -49,9 +46,9 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CHARACTER_CONTRACTS_1);
 
-            var responseModel = await this.GetAsync("/v1/characters/" + auth.Character.CharacterID + "/contracts/" + contractId + "/bids/", auth);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/contracts/" + contractId + "/bids/", auth);
 
-            checkResponse("GetContractBidsV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetContractBidsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<ContractBid>>(responseModel.JSONString);
         }
@@ -65,9 +62,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await this.GetAsync("/v1/corporations/" + corporationId + "/contracts/", auth, queryParameters);
+            var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/contracts/", auth, queryParameters);
 
-            checkResponse("GetCorporationContractsV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetCorporationContractsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<Contract>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -76,9 +73,9 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CORPORATION_CONTRACTS_1);
 
-            var responseModel = await this.GetAsync("/v1/corporations/" + auth.Character.CharacterID + "/contracts/" + contractId + "/items/", auth);
+            var responseModel = await GetAsync("/v1/corporations/" + auth.Character.CharacterID + "/contracts/" + contractId + "/items/", auth);
 
-            checkResponse("GetCorporationContractItemsV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetCorporationContractItemsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<ContractItem>>(responseModel.JSONString);
         }
@@ -87,9 +84,9 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CORPORATION_CONTRACTS_1);
 
-            var responseModel = await this.GetAsync("/v1/corporations/" + auth.Character.CharacterID + "/contracts/" + contractId + "/bids/", auth);
+            var responseModel = await GetAsync("/v1/corporations/" + auth.Character.CharacterID + "/contracts/" + contractId + "/bids/", auth);
 
-            checkResponse("GetCorporationContractBidsV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetCorporationContractBidsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<ContractBid>>(responseModel.JSONString);
         }

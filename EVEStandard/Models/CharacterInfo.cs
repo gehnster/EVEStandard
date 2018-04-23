@@ -1,20 +1,11 @@
 ﻿namespace EVEStandard.Models
 {
     using System;
+    using EVEStandard.Enumerations;
     using Newtonsoft.Json;
 
     public class CharacterInfo : ModelBase<CharacterInfo>
     {
-        /// <summary>
-        ///     gender string
-        /// </summary>
-        /// <value>gender string</value>
-        public enum GenderEnum
-        {
-            female = 1,
-            male = 2
-        }
-
         /// <summary>
         ///     name string
         /// </summary>
