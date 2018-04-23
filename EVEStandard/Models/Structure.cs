@@ -1,6 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using EVEStandard.Models;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace EVEStandard.Models
 {

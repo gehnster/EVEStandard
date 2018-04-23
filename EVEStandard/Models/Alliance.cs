@@ -1,9 +1,9 @@
-﻿namespace EVEStandard.Models
-{
-    using System;
-    using System.Text;
-    using Newtonsoft.Json;
+﻿using System;
+using System.Text;
+using Newtonsoft.Json;
 
+namespace EVEStandard.Models
+{
     public class Alliance : ModelBase<Alliance>
     {
         [JsonProperty("name")] public string Name { get; set; }
