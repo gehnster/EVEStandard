@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 using System.Threading.Tasks;
 
 namespace EVEStandard.API
@@ -16,9 +14,9 @@ namespace EVEStandard.API
 
         public async Task<Models.Status> GetStatusV1Async()
         {
-            var responseModel = await this.GetAsync("/v1/status/");
+            var responseModel = await GetAsync("/v1/status/");
 
-            checkResponse("GetStatusV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("GetStatusV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Models.Status>(responseModel.JSONString);
         }

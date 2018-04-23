@@ -3,19 +3,8 @@ using Newtonsoft.Json;
 
 namespace EVEStandard.Models
 {
-
     public class CharacterInfo : ModelBase<CharacterInfo>
     {
-        /// <summary>
-        ///     gender string
-        /// </summary>
-        /// <value>gender string</value>
-        public enum GenderEnum
-        {
-            female = 1,
-            male = 2
-        }
-
         /// <summary>
         ///     name string
         /// </summary>

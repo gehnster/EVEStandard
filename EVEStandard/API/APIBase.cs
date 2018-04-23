@@ -181,9 +181,13 @@ namespace EVEStandard.API
                 {
                     model.MaxPages = long.TryParse(xPagesEnumerable.FirstOrDefault(), out var xPages) ? xPages : 1;
                 }
+                if (response.Headers.TryGetValues("Content-Language", out var language))
+                {
+                    model.Language = language.FirstOrDefault();
+                }
 
                 // Check whether response is compressed
-                if(response.StatusCode != System.Net.HttpStatusCode.NoContent)
+                if (response.StatusCode != System.Net.HttpStatusCode.NoContent)
                 {
                     if (response.Content.Headers.ContentEncoding.Any(x => x == "gzip"))
                     {
