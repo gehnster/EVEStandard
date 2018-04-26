@@ -12,7 +12,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>skills array</value>
         [JsonProperty("skills")]
-        public List<GetCharactersCharacterIdSkillsSkill> Skills { get; set; }
+        public List<Skill> Skills { get; set; }
 
         /// <summary>
         /// total_sp integer
