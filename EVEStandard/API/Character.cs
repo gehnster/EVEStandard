@@ -67,7 +67,7 @@ namespace EVEStandard.API
                 { "character_ids", characterIds == null || characterIds.Count == 0 ? "" : string.Join(",", characterIds) }
             };
 
-            var responseModel = await GetAsync("/v1/characters/names/");
+            var responseModel = await GetAsync("/v1/characters/names/", queryParameters);
 
             checkResponse("GetCharacterNamesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
