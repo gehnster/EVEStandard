@@ -18,7 +18,7 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<Search> SearchCharacterV3Async(AuthDTO auth, List<string> categories, string search, bool strict=false, string language=Language.English)
+        public async Task<CharacterSearch> SearchCharacterV3Async(AuthDTO auth, List<string> categories, string search, bool strict=false, string language=Language.English)
         {
             checkAuth(auth, Scopes.ESI_SEARCH_SEARCH_STRUCTURES_1);
 
@@ -39,7 +39,7 @@ namespace EVEStandard.API
 
             checkResponse("SearchCharacterV3Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Search>(responseModel.JSONString);
+            return JsonConvert.DeserializeObject<CharacterSearch>(responseModel.JSONString);
         }
 
         public async Task<Search> SearchV2Async(List<string> categories, string search, bool strict = false, string language = Language.English)

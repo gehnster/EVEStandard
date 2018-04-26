@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace EVEStandard.Models
 {
-    public class Search : ModelBase<Search>
+    public class CharacterSearch : ModelBase<CharacterSearch>
     {
         /// <summary>
         /// agent array
@@ -76,5 +76,12 @@ namespace EVEStandard.Models
         /// <value>station array</value>
         [JsonProperty("station")]
         public List<int?> Station { get; set; }
+
+        /// <summary>
+        /// structure array
+        /// </summary>
+        /// <value>structure array</value>
+        [JsonProperty("structure")]
+        public List<long?> Structure { get; set; }
     }
 }
