@@ -134,7 +134,7 @@ namespace EVEStandard
         public Opportunities Opportunities { get; private set; }
         public PlanetaryInteraction PlanetaryInteraction { get; private set; }
         public Routes Routes { get; private set; }
-        public Search Search { get; private set; }
+        public API.Search Search { get; private set; }
         public Skills Skills { get; private set; }
         public Sovereignty Sovereignty { get; private set; }
         public API.Status Status { get; private set; }
@@ -241,7 +241,7 @@ namespace EVEStandard
             {
                 HTTP = http
             };
-            this.Search = new Search(this.dataSource)
+            this.Search = new API.Search(this.dataSource)
             {
                 HTTP = http
             };
