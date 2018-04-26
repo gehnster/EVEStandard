@@ -24,7 +24,7 @@ namespace EVEStandard.API
             return JsonConvert.DeserializeObject<Killmail>(responseModel.JSONString);
         }
 
-        public async Task<List<RecentKillmail>> GetCharacterKillsAndLossesV1Async(AuthDTO auth, int maxCount, int maxKillId)
+        public async Task<List<KillmailIndex>> GetCharacterKillsAndLossesV1Async(AuthDTO auth, int maxCount, int maxKillId)
         {
             checkAuth(auth, Scopes.ESI_KILLMAILS_READ_KILLMAILS_1);
 
@@ -38,10 +38,10 @@ namespace EVEStandard.API
 
             checkResponse("GetCharacterKillsAndLossesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<RecentKillmail>>(responseModel.JSONString);
+            return JsonConvert.DeserializeObject<List<KillmailIndex>>(responseModel.JSONString);
         }
 
-        public async Task<List<RecentKillmail>> GetCorporationKillsAndLossesV1Async(AuthDTO auth, long corporationId, int maxKillId)
+        public async Task<List<KillmailIndex>> GetCorporationKillsAndLossesV1Async(AuthDTO auth, long corporationId, int maxKillId)
         {
             checkAuth(auth, Scopes.ESI_KILLMAILS_READ_CORPORATION_KILLMAILS_1);
 
@@ -54,7 +54,7 @@ namespace EVEStandard.API
 
             checkResponse("GetCorporationKillsAndLossesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<RecentKillmail>>(responseModel.JSONString);
+            return JsonConvert.DeserializeObject<List<KillmailIndex>>(responseModel.JSONString);
         }
     }
 }

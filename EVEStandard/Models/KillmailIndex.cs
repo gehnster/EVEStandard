@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EVEStandard.Models
 {
-    public class RecentKillmail : ModelBase<RecentKillmail>
+    public class KillmailIndex : ModelBase<KillmailIndex>
     {
         /// <summary>
         /// ID of this killmail
