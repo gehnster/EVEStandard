@@ -37,7 +37,7 @@ namespace EVEStandard.API
             return JsonConvert.DeserializeObject<War>(responseModel.JSONString);
         }
 
-        public async Task<(List<KillmailIndex>, long)> ListKillsForWarV1Async(int warId, int page=1)
+        public async Task<(List<KillmailIndex>, long)> ListKillsForWarV1Async(int warId, long page=1)
         {
             var queryParameters = new Dictionary<string, string>
             {
