@@ -1,9 +1,8 @@
-﻿namespace EVEStandard.Models
-{
-    using System;
-    using EVEStandard.Enumerations;
-    using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
+namespace EVEStandard.Models
+{
     public class CharacterInfo : ModelBase<CharacterInfo>
     {
         /// <summary>

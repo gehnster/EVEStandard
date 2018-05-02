@@ -1,8 +1,7 @@
 ﻿namespace EVEStandard.Models
 {
-    using System;
-    using System.Text;
     using Enumerations;
+    using global::System;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 

@@ -4,8 +4,6 @@
 
 namespace EVEStandard.Models
 {
-    using System;
-    using System.Text;
     using Newtonsoft.Json;
 
     public class Status : ModelBase<Status>

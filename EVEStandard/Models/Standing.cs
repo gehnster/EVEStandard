@@ -4,7 +4,6 @@ using System.Text;
 
 namespace EVEStandard.Models
 {
-    using System.Runtime.Serialization;
     using Newtonsoft.Json;
 
     public class Standing : ModelBase<Standing>

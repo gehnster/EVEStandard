@@ -1,8 +1,8 @@
 ﻿namespace EVEStandard.Models
 {
-    using System;
-    using System.Linq;
-    using System.Text;
+    using global::System;
+    using global::System.Linq;
+    using global::System.Text;
     using Newtonsoft.Json;
 
     public class ModelBase<T> : IEquatable<T>

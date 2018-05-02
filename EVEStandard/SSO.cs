@@ -77,7 +77,7 @@ namespace EVEStandard
         /// <exception cref="EVEStandardException" ><paramref name="scopes"/> parameter was empty or null</exception>
         public Authorization AuthorizeToEVEURI(List<string> scopes)
         {
-            return this.AuthorizeToEVEURI(scopes, Convert.ToBase64String(Guid.NewGuid().ToByteArray()));
+            return this.AuthorizeToEVEURI(scopes, Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Replace("+","P"));
         }
 
         /// <summary>
@@ -132,13 +132,13 @@ namespace EVEStandard
             try
             {
                 var byteArray = Encoding.ASCII.GetBytes(this.clientId + ":" + this.secretKey);
+
                 http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
                 var stringContent = new FormUrlEncodedContent(new[]
                 {
                     new KeyValuePair<string, string>("grant_type", "authorization_code"),
                     new KeyValuePair<string, string>("code", model.AuthorizationCode)
                 });
-
                 var response = await http.PostAsync(this.GetBaseURL() + SSO_TOKEN, stringContent);
                 return JsonConvert.DeserializeObject<AccessTokenDetails>(response.Content.ReadAsStringAsync().Result);
             }

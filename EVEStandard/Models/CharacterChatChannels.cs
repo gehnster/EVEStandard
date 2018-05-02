@@ -1,10 +1,10 @@
-﻿namespace EVEStandard.Models
-{
-    using System;
-    using System.Collections.Generic;
-    using Enumerations;
-    using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
+using EVEStandard.Enumerations;
+using Newtonsoft.Json;
 
+namespace EVEStandard.Models
+{
     public class CharacterChatChannels : ModelBase<CharacterChatChannels>
     {
         /// <summary>
