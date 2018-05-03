@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using EVEStandard.Enumerations;
 
 namespace EVEStandard.Models
@@ -10,7 +9,6 @@ namespace EVEStandard.Models
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [Required]
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -18,7 +16,6 @@ namespace EVEStandard.Models
         /// solar_system_id integer
         /// </summary>
         /// <value>solar_system_id integer</value>
-        [Required]
         [JsonProperty("solar_system_id")]
         public int? SolarSystemId { get; set; }
 
@@ -26,7 +23,6 @@ namespace EVEStandard.Models
         /// type_id integer
         /// </summary>
         /// <value>type_id integer</value>
-        [Required]
         [JsonProperty("type_id")]
         public int? TypeId { get; set; }
 
@@ -34,7 +30,6 @@ namespace EVEStandard.Models
         /// Age of star in years
         /// </summary>
         /// <value>Age of star in years</value>
-        [Required]
         [JsonProperty("age")]
         public long? Age { get; set; }
 
@@ -42,7 +37,6 @@ namespace EVEStandard.Models
         /// luminosity number
         /// </summary>
         /// <value>luminosity number</value>
-        [Required]
         [JsonProperty("luminosity")]
         public float? Luminosity { get; set; }
 
@@ -50,7 +44,6 @@ namespace EVEStandard.Models
         /// radius integer
         /// </summary>
         /// <value>radius integer</value>
-        [Required]
         [JsonProperty("radius")]
         public long? Radius { get; set; }
         /// <summary>
@@ -63,15 +56,13 @@ namespace EVEStandard.Models
         /// spectral_class string
         /// </summary>
         /// <value>spectral_class string</value>
-        [Required]
         [JsonProperty("spectral_class")]
-        public SpectralClassEnum? SpectralClass { get; set; }
+        public string SpectralClass { get; set; }
 
         /// <summary>
         /// temperature integer
         /// </summary>
         /// <value>temperature integer</value>
-        [Required]
         [JsonProperty("temperature")]
         public int? Temperature { get; set; }
     }

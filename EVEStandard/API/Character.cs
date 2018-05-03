@@ -92,17 +92,6 @@ namespace EVEStandard.API
             return (JsonConvert.DeserializeObject<List<CharacterCorporationHistory>>(responseModel.JSONString), responseModel.MaxPages);
         }
 
-        public async Task<List<CharacterChatChannels>> GetChatChannelsV1Async(AuthDTO auth)
-        {
-            checkAuth(auth, Scopes.ESI_CHARACTERS_READ_CHAT_CHANNELS_1);
-
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/chat_channels/", auth);
-
-            checkResponse("GetChatChannelsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
-
-            return JsonConvert.DeserializeObject<List<CharacterChatChannels>>(responseModel.JSONString);
-        }
-
         public async Task<List<CharacterMedals>> GetMedalsV1Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_MEDALS_1);

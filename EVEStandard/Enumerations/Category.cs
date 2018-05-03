@@ -8,13 +8,13 @@ namespace EVEStandard.Enumerations
 {
     public enum CategoryEnum
     {
-        AllianceEnum = 1,
-        CharacterEnum = 2,
-        ConstellationEnum = 3,
-        CorporationEnum = 4,
-        InventoryTypeEnum = 5,
-        RegionEnum = 6,
-        SolarSystemEnum = 7,
-        StationEnum = 8
+        alliance = 1,
+        character = 2,
+        constellation = 3,
+        corporation = 4,
+        inventory_type = 5,
+        region = 6,
+        solar_system = 7,
+        station = 8
     }
 }

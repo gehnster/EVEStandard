@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using EVEStandard.Models;
 using Newtonsoft.Json;
 
@@ -11,7 +10,6 @@ namespace EVEStandard.Models
         /// type_id integer
         /// </summary>
         /// <value>type_id integer</value>
-        [Required]
         [JsonProperty("type_id")]
         public int? TypeId { get; set; }
 
@@ -19,7 +17,6 @@ namespace EVEStandard.Models
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [Required]
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -27,7 +24,6 @@ namespace EVEStandard.Models
         /// description string
         /// </summary>
         /// <value>description string</value>
-        [Required]
         [JsonProperty("description")]
         public string Description { get; set; }
 
@@ -35,7 +31,6 @@ namespace EVEStandard.Models
         /// published boolean
         /// </summary>
         /// <value>published boolean</value>
-        [Required]
         [JsonProperty("published")]
         public bool? Published { get; set; }
 
@@ -43,7 +38,6 @@ namespace EVEStandard.Models
         /// group_id integer
         /// </summary>
         /// <value>group_id integer</value>
-        [Required]
         [JsonProperty("group_id")]
         public int? GroupId { get; set; }
 
@@ -115,13 +109,47 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>dogma_attributes array</value>
         [JsonProperty("dogma_attributes")]
-        public List<DogmaAttribute> DogmaAttributes { get; set; }
+        public List<UniverseDogmaAttribute> DogmaAttributes { get; set; }
 
         /// <summary>
         /// dogma_effects array
         /// </summary>
         /// <value>dogma_effects array</value>
         [JsonProperty("dogma_effects")]
-        public List<DogmaEffect> DogmaEffects { get; set; }
+        public List<UniverseDogmaEffect> DogmaEffects { get; set; }
+    }
+
+    public class UniverseDogmaAttribute : ModelBase<UniverseDogmaAttribute>
+    {
+        /// <summary>
+        /// attribute_id integer
+        /// </summary>
+        /// <value>attribute_id integer</value>
+        [JsonProperty("attribute_id")]
+        public int? AttributeId { get; set; }
+
+        /// <summary>
+        /// value number
+        /// </summary>
+        /// <value>value number</value>
+        [JsonProperty("value")]
+        public float? Value { get; set; }
+    }
+
+    public class UniverseDogmaEffect : ModelBase<UniverseDogmaEffect>
+    {
+        /// <summary>
+        /// effect_id integer
+        /// </summary>
+        /// <value>effect_id integer</value>
+        [JsonProperty("effect_id")]
+        public int? EffectId { get; set; }
+
+        /// <summary>
+        /// is_default boolean
+        /// </summary>
+        /// <value>is_default boolean</value>
+        [JsonProperty("is_default")]
+        public bool? IsDefault { get; set; }
     }
 }

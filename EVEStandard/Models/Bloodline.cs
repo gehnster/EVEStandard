@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using EVEStandard.Models;
+﻿using EVEStandard.Models;
 using Newtonsoft.Json;
 
 namespace EVEStandard.Models
@@ -10,7 +9,6 @@ namespace EVEStandard.Models
         /// bloodline_id integer
         /// </summary>
         /// <value>bloodline_id integer</value>
-        [Required]
         [JsonProperty("bloodline_id")]
         public int? BloodlineId { get; set; }
 
@@ -18,7 +16,6 @@ namespace EVEStandard.Models
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [Required]
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -26,7 +23,6 @@ namespace EVEStandard.Models
         /// description string
         /// </summary>
         /// <value>description string</value>
-        [Required]
         [JsonProperty("description")]
         public string Description { get; set; }
 
@@ -34,7 +30,6 @@ namespace EVEStandard.Models
         /// race_id integer
         /// </summary>
         /// <value>race_id integer</value>
-        [Required]
         [JsonProperty("race_id")]
         public int? RaceId { get; set; }
 
@@ -42,7 +37,6 @@ namespace EVEStandard.Models
         /// ship_type_id integer
         /// </summary>
         /// <value>ship_type_id integer</value>
-        [Required]
         [JsonProperty("ship_type_id")]
         public int? ShipTypeId { get; set; }
 
@@ -50,7 +44,6 @@ namespace EVEStandard.Models
         /// corporation_id integer
         /// </summary>
         /// <value>corporation_id integer</value>
-        [Required]
         [JsonProperty("corporation_id")]
         public int? CorporationId { get; set; }
 
@@ -58,7 +51,6 @@ namespace EVEStandard.Models
         /// perception integer
         /// </summary>
         /// <value>perception integer</value>
-        [Required]
         [JsonProperty("perception")]
         public int? Perception { get; set; }
 
@@ -66,7 +58,6 @@ namespace EVEStandard.Models
         /// willpower integer
         /// </summary>
         /// <value>willpower integer</value>
-        [Required]
         [JsonProperty("willpower")]
         public int? Willpower { get; set; }
 
@@ -74,7 +65,6 @@ namespace EVEStandard.Models
         /// charisma integer
         /// </summary>
         /// <value>charisma integer</value>
-        [Required]
         [JsonProperty("charisma")]
         public int? Charisma { get; set; }
 
@@ -82,7 +72,6 @@ namespace EVEStandard.Models
         /// memory integer
         /// </summary>
         /// <value>memory integer</value>
-        [Required]
         [JsonProperty("memory")]
         public int? Memory { get; set; }
 
@@ -90,7 +79,6 @@ namespace EVEStandard.Models
         /// intelligence integer
         /// </summary>
         /// <value>intelligence integer</value>
-        [Required]
         [JsonProperty("intelligence")]
         public int? Intelligence { get; set; }
     }

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using EVEStandard.Models;
+﻿using EVEStandard.Models;
 using Newtonsoft.Json;
 
 namespace EVEStandard.Models
@@ -10,7 +9,6 @@ namespace EVEStandard.Models
         /// system_id integer
         /// </summary>
         /// <value>system_id integer</value>
-        [Required]
         [JsonProperty("system_id")]
         public int? SystemId { get; set; }
 
@@ -18,7 +16,6 @@ namespace EVEStandard.Models
         /// Number of player ships killed in this system
         /// </summary>
         /// <value>Number of player ships killed in this system</value>
-        [Required]
         [JsonProperty("ship_kills")]
         public int? ShipKills { get; set; }
 
@@ -26,7 +23,6 @@ namespace EVEStandard.Models
         /// Number of NPC ships killed in this system
         /// </summary>
         /// <value>Number of NPC ships killed in this system</value>
-        [Required]
         [JsonProperty("npc_kills")]
         public int? NpcKills { get; set; }
 
@@ -34,7 +30,6 @@ namespace EVEStandard.Models
         /// Number of pods killed in this system
         /// </summary>
         /// <value>Number of pods killed in this system</value>
-        [Required]
         [JsonProperty("pod_kills")]
         public int? PodKills { get; set; }
     }

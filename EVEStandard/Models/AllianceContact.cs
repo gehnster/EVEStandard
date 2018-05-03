@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using EVEStandard.Enumerations;
+using Newtonsoft.Json;
 
 namespace EVEStandard.Models
 {
-    public class Contact : ModelBase<Contact>
+    public class AllianceContact : ModelBase<AllianceContact>
     {
         /// <summary>
         /// Standing of the contact
@@ -20,7 +20,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>contact_type string</value>
         [JsonProperty("contact_type")]
-        public ContactTypeEnum? ContactType { get; set; }
+        public string ContactType { get; set; }
 
         /// <summary>
         /// contact_id integer
@@ -33,21 +33,7 @@ namespace EVEStandard.Models
         /// Custom label of the contact
         /// </summary>
         /// <value>Custom label of the contact</value>
-        [JsonProperty("label_id")]
-        public long? LabelId { get; set; }
-
-        /// <summary>
-        /// Whether this contact is being watched
-        /// </summary>
-        /// <value>Whether this contact is being watched</value>
-        [JsonProperty("is_watched")]
-        public bool? IsWatched { get; set; }
-
-        /// <summary>
-        /// Whether this contact is in the blocked list. Note a missing value denotes unknown, not true or false
-        /// </summary>
-        /// <value>Whether this contact is in the blocked list. Note a missing value denotes unknown, not true or false</value>
-        [JsonProperty("is_blocked")]
-        public bool? IsBlocked { get; set; }
+        [JsonProperty("label_ids")]
+        public List<long> LabelIds { get; set; }
     }
 }

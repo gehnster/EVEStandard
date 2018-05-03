@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using EVEStandard.Models;
+﻿using EVEStandard.Models;
 using Newtonsoft.Json;
 
 namespace EVEStandard.Models
@@ -10,7 +9,6 @@ namespace EVEStandard.Models
         /// race_id integer
         /// </summary>
         /// <value>race_id integer</value>
-        [Required]
         [JsonProperty("race_id")]
         public int? RaceId { get; set; }
 
@@ -18,7 +16,6 @@ namespace EVEStandard.Models
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [Required]
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -26,7 +23,6 @@ namespace EVEStandard.Models
         /// description string
         /// </summary>
         /// <value>description string</value>
-        [Required]
         [JsonProperty("description")]
         public string Description { get; set; }
 
@@ -34,7 +30,6 @@ namespace EVEStandard.Models
         /// The alliance generally associated with this race
         /// </summary>
         /// <value>The alliance generally associated with this race</value>
-        [Required]
         [JsonProperty("alliance_id")]
         public int? AllianceId { get; set; }
     }

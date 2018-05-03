@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using EVEStandard.Enumerations;
 
@@ -11,7 +10,6 @@ namespace EVEStandard.Models
         /// station_id integer
         /// </summary>
         /// <value>station_id integer</value>
-        [Required]
         [JsonProperty("station_id")]
         public int? StationId { get; set; }
 
@@ -19,7 +17,6 @@ namespace EVEStandard.Models
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [Required]
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -34,7 +31,6 @@ namespace EVEStandard.Models
         /// type_id integer
         /// </summary>
         /// <value>type_id integer</value>
-        [Required]
         [JsonProperty("type_id")]
         public int? TypeId { get; set; }
 
@@ -48,7 +44,6 @@ namespace EVEStandard.Models
         /// <summary>
         /// Gets or Sets Position
         /// </summary>
-        [Required]
         [JsonProperty("position")]
         public Position Position { get; set; }
 
@@ -56,7 +51,6 @@ namespace EVEStandard.Models
         /// The solar system this station is in
         /// </summary>
         /// <value>The solar system this station is in</value>
-        [Required]
         [JsonProperty("system_id")]
         public int? SystemId { get; set; }
 
@@ -64,7 +58,6 @@ namespace EVEStandard.Models
         /// reprocessing_efficiency number
         /// </summary>
         /// <value>reprocessing_efficiency number</value>
-        [Required]
         [JsonProperty("reprocessing_efficiency")]
         public float? ReprocessingEfficiency { get; set; }
 
@@ -72,7 +65,6 @@ namespace EVEStandard.Models
         /// reprocessing_stations_take number
         /// </summary>
         /// <value>reprocessing_stations_take number</value>
-        [Required]
         [JsonProperty("reprocessing_stations_take")]
         public float? ReprocessingStationsTake { get; set; }
 
@@ -80,7 +72,6 @@ namespace EVEStandard.Models
         /// max_dockable_ship_volume number
         /// </summary>
         /// <value>max_dockable_ship_volume number</value>
-        [Required]
         [JsonProperty("max_dockable_ship_volume")]
         public float? MaxDockableShipVolume { get; set; }
 
@@ -88,7 +79,6 @@ namespace EVEStandard.Models
         /// office_rental_cost number
         /// </summary>
         /// <value>office_rental_cost number</value>
-        [Required]
         [JsonProperty("office_rental_cost")]
         public float? OfficeRentalCost { get; set; }
 
@@ -96,7 +86,6 @@ namespace EVEStandard.Models
         /// services array
         /// </summary>
         /// <value>services array</value>
-        [Required]
         [JsonProperty("services")]
         public List<ServicesEnum> Services { get; set; }
     }

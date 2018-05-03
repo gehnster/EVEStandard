@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using EVEStandard.Models;
+﻿using EVEStandard.Models;
 using Newtonsoft.Json;
 
 namespace EVEStandard.Models
@@ -10,7 +9,6 @@ namespace EVEStandard.Models
         /// graphic_id integer
         /// </summary>
         /// <value>graphic_id integer</value>
-        [Required]
         [JsonProperty("graphic_id")]
         public int? GraphicId { get; set; }
 

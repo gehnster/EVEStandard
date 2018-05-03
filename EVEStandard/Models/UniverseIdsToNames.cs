@@ -1,16 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using EVEStandard.Enumerations;
+using Newtonsoft.Json;
 
 namespace EVEStandard.Models
 {
-    public class Names : ModelBase<Names>
+    public class UniverseIdsToNames : ModelBase<UniverseIdsToNames>
     {
         /// <summary>
         /// id integer
         /// </summary>
         /// <value>id integer</value>
-        [Required]
         [JsonProperty("id")]
         public int? Id { get; set; }
 
@@ -18,15 +19,13 @@ namespace EVEStandard.Models
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [Required]
         [JsonProperty("name")]
         public string Name { get; set; }
-    
+
         /// <summary>
         /// category string
         /// </summary>
         /// <value>category string</value>
-        [Required]
         [JsonProperty("category")]
         public CategoryEnum? Category { get; set; }
     }

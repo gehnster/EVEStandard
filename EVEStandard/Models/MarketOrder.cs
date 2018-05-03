@@ -35,6 +35,9 @@ namespace EVEStandard.Models
         [JsonProperty("volume_total")]
         public int? VolumeTotal { get; set; }
 
+        [JsonProperty("system_id")]
+        public int SystemId { get; set; }
+
         /// <summary>
         /// volume_remain integer
         /// </summary>

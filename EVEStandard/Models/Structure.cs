@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
 
 namespace EVEStandard.Models
 {
@@ -9,7 +8,6 @@ namespace EVEStandard.Models
         /// The full name of the structure
         /// </summary>
         /// <value>The full name of the structure</value>
-        [Required]
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -17,7 +15,6 @@ namespace EVEStandard.Models
         /// solar_system_id integer
         /// </summary>
         /// <value>solar_system_id integer</value>
-        [Required]
         [JsonProperty("solar_system_id")]
         public int? SolarSystemId { get; set; }
 

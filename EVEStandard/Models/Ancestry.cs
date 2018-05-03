@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using EVEStandard.Models;
+﻿using EVEStandard.Models;
 using Newtonsoft.Json;
 
 namespace EVEStandard.Models
@@ -10,7 +9,6 @@ namespace EVEStandard.Models
         /// id integer
         /// </summary>
         /// <value>id integer</value>
-        [Required]
         [JsonProperty("id")]
         public int? Id { get; set; }
 
@@ -18,7 +16,6 @@ namespace EVEStandard.Models
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [Required]
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -26,7 +23,6 @@ namespace EVEStandard.Models
         /// The bloodline associated with this ancestry
         /// </summary>
         /// <value>The bloodline associated with this ancestry</value>
-        [Required]
         [JsonProperty("bloodline_id")]
         public int? BloodlineId { get; set; }
 
@@ -34,7 +30,6 @@ namespace EVEStandard.Models
         /// description string
         /// </summary>
         /// <value>description string</value>
-        [Required]
         [JsonProperty("description")]
         public string Description { get; set; }
 

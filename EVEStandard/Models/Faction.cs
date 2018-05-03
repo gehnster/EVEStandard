@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using EVEStandard.Models;
+﻿using EVEStandard.Models;
 using Newtonsoft.Json;
 
 namespace EVEStandard.Models
@@ -10,7 +9,6 @@ namespace EVEStandard.Models
         /// faction_id integer
         /// </summary>
         /// <value>faction_id integer</value>
-        [Required]
         [JsonProperty("faction_id")]
         public int? FactionId { get; set; }
 
@@ -18,7 +16,6 @@ namespace EVEStandard.Models
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [Required]
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -26,7 +23,6 @@ namespace EVEStandard.Models
         /// description string
         /// </summary>
         /// <value>description string</value>
-        [Required]
         [JsonProperty("description")]
         public string Description { get; set; }
 
@@ -55,7 +51,6 @@ namespace EVEStandard.Models
         /// size_factor number
         /// </summary>
         /// <value>size_factor number</value>
-        [Required]
         [JsonProperty("size_factor")]
         public float? SizeFactor { get; set; }
 
@@ -63,7 +58,6 @@ namespace EVEStandard.Models
         /// station_count integer
         /// </summary>
         /// <value>station_count integer</value>
-        [Required]
         [JsonProperty("station_count")]
         public int? StationCount { get; set; }
 
@@ -71,7 +65,6 @@ namespace EVEStandard.Models
         /// station_system_count integer
         /// </summary>
         /// <value>station_system_count integer</value>
-        [Required]
         [JsonProperty("station_system_count")]
         public int? StationSystemCount { get; set; }
 
@@ -79,7 +72,6 @@ namespace EVEStandard.Models
         /// is_unique boolean
         /// </summary>
         /// <value>is_unique boolean</value>
-        [Required]
         [JsonProperty("is_unique")]
         public bool? IsUnique { get; set; }
     }

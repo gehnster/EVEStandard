@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using EVEStandard.Models;
 using Newtonsoft.Json;
 
@@ -11,7 +10,6 @@ namespace EVEStandard.Models
         /// group_id integer
         /// </summary>
         /// <value>group_id integer</value>
-        [Required]
         [JsonProperty("group_id")]
         public int? GroupId { get; set; }
 
@@ -19,7 +17,6 @@ namespace EVEStandard.Models
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [Required]
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -27,7 +24,6 @@ namespace EVEStandard.Models
         /// published boolean
         /// </summary>
         /// <value>published boolean</value>
-        [Required]
         [JsonProperty("published")]
         public bool? Published { get; set; }
 
@@ -35,7 +31,6 @@ namespace EVEStandard.Models
         /// category_id integer
         /// </summary>
         /// <value>category_id integer</value>
-        [Required]
         [JsonProperty("category_id")]
         public int? CategoryId { get; set; }
 
@@ -43,9 +38,8 @@ namespace EVEStandard.Models
         /// types array
         /// </summary>
         /// <value>types array</value>
-        [Required]
         [JsonProperty("types")]
-        public List<int?> Types { get; set; }
+        public List<int> Types { get; set; }
 
     }
 }

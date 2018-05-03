@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using EVEStandard.Models;
+﻿using EVEStandard.Models;
 using Newtonsoft.Json;
 
 namespace EVEStandard.Models
@@ -10,7 +9,6 @@ namespace EVEStandard.Models
         /// system_id integer
         /// </summary>
         /// <value>system_id integer</value>
-        [Required]
         [JsonProperty("system_id")]
         public int? SystemId { get; set; }
 
@@ -18,7 +16,6 @@ namespace EVEStandard.Models
         /// ship_jumps integer
         /// </summary>
         /// <value>ship_jumps integer</value>
-        [Required]
         [JsonProperty("ship_jumps")]
         public int? ShipJumps { get; set; }
 

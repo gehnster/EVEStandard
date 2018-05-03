@@ -77,7 +77,7 @@ namespace EVEStandard
         /// <exception cref="EVEStandardException" ><paramref name="scopes"/> parameter was empty or null</exception>
         public Authorization AuthorizeToEVEURI(List<string> scopes)
         {
-            return this.AuthorizeToEVEURI(scopes, Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Replace("+","P"));
+            return this.AuthorizeToEVEURI(scopes, Convert.ToBase64String(Guid.NewGuid().ToByteArray()));
         }
 
         /// <summary>

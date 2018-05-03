@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using EVEStandard.Models;
 using Newtonsoft.Json;
 
@@ -11,7 +10,6 @@ namespace EVEStandard.Models
         /// region_id integer
         /// </summary>
         /// <value>region_id integer</value>
-        [Required]
         [JsonProperty("region_id")]
         public int? RegionId { get; set; }
 
@@ -19,7 +17,6 @@ namespace EVEStandard.Models
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [Required]
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -34,7 +31,6 @@ namespace EVEStandard.Models
         /// constellations array
         /// </summary>
         /// <value>constellations array</value>
-        [Required]
         [JsonProperty("constellations")]
         public List<int?> Constellations { get; set; }
     }

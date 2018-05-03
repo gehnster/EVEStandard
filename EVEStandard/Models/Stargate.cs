@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using EVEStandard.Models;
+﻿using EVEStandard.Models;
 using Newtonsoft.Json;
 
 namespace EVEStandard.Models
@@ -10,7 +9,6 @@ namespace EVEStandard.Models
         /// stargate_id integer
         /// </summary>
         /// <value>stargate_id integer</value>
-        [Required]
         [JsonProperty("stargate_id")]
         public int? StargateId { get; set; }
 
@@ -18,7 +16,6 @@ namespace EVEStandard.Models
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [Required]
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -26,14 +23,12 @@ namespace EVEStandard.Models
         /// type_id integer
         /// </summary>
         /// <value>type_id integer</value>
-        [Required]
         [JsonProperty("type_id")]
         public int? TypeId { get; set; }
 
         /// <summary>
         /// Gets or Sets Position
         /// </summary>
-        [Required]
         [JsonProperty("position")]
         public Position Position { get; set; }
 
@@ -41,15 +36,30 @@ namespace EVEStandard.Models
         /// The solar system this stargate is in
         /// </summary>
         /// <value>The solar system this stargate is in</value>
-        [Required]
         [JsonProperty("system_id")]
         public int? SystemId { get; set; }
 
         /// <summary>
         /// Gets or Sets Destination
         /// </summary>
-        [Required]
         [JsonProperty("destination")]
-        public Location Destination { get; set; }
+        public StargateDestination Destination { get; set; }
+    }
+
+    public class StargateDestination : ModelBase<StargateDestination>
+    {
+        /// <summary>
+        /// The solar system this stargate connects to
+        /// </summary>
+        /// <value>The solar system this stargate connects to</value>
+        [JsonProperty("system_id")]
+        public int? SystemId { get; set; }
+
+        /// <summary>
+        /// The stargate this stargate connects to
+        /// </summary>
+        /// <value>The stargate this stargate connects to</value>
+        [JsonProperty("stargate_id")]
+        public int? StargateId { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using EVEStandard.Models;
 using Newtonsoft.Json;
 
@@ -11,7 +10,6 @@ namespace EVEStandard.Models
         /// star_id integer
         /// </summary>
         /// <value>star_id integer</value>
-        [Required]
         [JsonProperty("star_id")]
         public int? StarId { get; set; }
 
@@ -19,7 +17,6 @@ namespace EVEStandard.Models
         /// system_id integer
         /// </summary>
         /// <value>system_id integer</value>
-        [Required]
         [JsonProperty("system_id")]
         public int? SystemId { get; set; }
 
@@ -27,14 +24,12 @@ namespace EVEStandard.Models
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [Required]
         [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Position
         /// </summary>
-        [Required]
         [JsonProperty("position")]
         public Position Position { get; set; }
 
@@ -42,7 +37,6 @@ namespace EVEStandard.Models
         /// security_status number
         /// </summary>
         /// <value>security_status number</value>
-        [Required]
         [JsonProperty("security_status")]
         public float? SecurityStatus { get; set; }
 
@@ -57,7 +51,6 @@ namespace EVEStandard.Models
         /// The constellation this solar system is in
         /// </summary>
         /// <value>The constellation this solar system is in</value>
-        [Required]
         [JsonProperty("constellation_id")]
         public int? ConstellationId { get; set; }
 
@@ -65,9 +58,8 @@ namespace EVEStandard.Models
         /// planets array
         /// </summary>
         /// <value>planets array</value>
-        [Required]
         [JsonProperty("planets")]
-        public List<Planet> Planets { get; set; }
+        public List<SolarSystemPlanet> Planets { get; set; }
 
         /// <summary>
         /// stargates array
@@ -82,5 +74,15 @@ namespace EVEStandard.Models
         /// <value>stations array</value>
         [JsonProperty("stations")]
         public List<int?> Stations { get; set; }
+    }
+
+    public class SolarSystemPlanet : ModelBase<SolarSystemPlanet>
+    {
+        [JsonProperty("asteroid_belts")]
+        public List<long> AsteroidBelts { get; set; }
+        [JsonProperty("moons")]
+        public List<long> Moons { get; set; }
+        [JsonProperty("planet_id")]
+        public long PlanetId { get; set; }
     }
 }
