@@ -1,10 +1,10 @@
-﻿using EVEStandard.Enumerations;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
@@ -74,7 +74,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporation/" + corporationId + "/bookmarks/folders/", auth, queryParameters);
 
-            checkResponse("ListCorporationBookmarkFoldersV1Async", responseModel.Error, responseModel.LegacyWarning, this.Logger);
+            checkResponse("ListCorporationBookmarkFoldersV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<BookmarkFolder>>(responseModel.JSONString), responseModel.MaxPages);
         }

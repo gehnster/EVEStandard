@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using EVEStandard.Models;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace EVEStandard.API

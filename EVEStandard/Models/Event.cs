@@ -1,9 +1,9 @@
-﻿namespace EVEStandard.Models
-{
-    using global::System;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
+﻿using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
+namespace EVEStandard.Models
+{
     public class Event : ModelBase<Event>
     {
         [JsonProperty("event_id")] public long EventId { get; set; }

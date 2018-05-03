@@ -1,5 +1,4 @@
-﻿using EVEStandard.Models;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace EVEStandard.Models
 {

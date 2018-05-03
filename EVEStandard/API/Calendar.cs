@@ -1,11 +1,11 @@
-﻿using EVEStandard.Enumerations;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {

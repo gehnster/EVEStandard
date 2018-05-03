@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Newtonsoft.Json;
 
 namespace EVEStandard.Models
 {
-    using Newtonsoft.Json;
-
     public class CorporationStructure : ModelBase<CorporationStructure>
     {
         /// <summary>

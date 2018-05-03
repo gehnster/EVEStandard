@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using EVEStandard.Enumerations;
-using EVEStandard.Models;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using EVEStandard.Enumerations;
+using Newtonsoft.Json;
 
 namespace EVEStandard.Models
 {
-    using EVEStandard.Enumerations;
-    using Newtonsoft.Json;
-
     public class JumpClone : ModelBase<JumpClone>
     {
         /// <summary>

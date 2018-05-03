@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace EVEStandard.API

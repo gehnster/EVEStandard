@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EVEStandard.Models
+﻿namespace EVEStandard.Models
 {
-    using Newtonsoft.Json;
-
     public class Position : ModelBase<Position>
     {
         public long X { get; set; }

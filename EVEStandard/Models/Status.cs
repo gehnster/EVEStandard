@@ -2,10 +2,10 @@
 
 // ReSharper disable InconsistentNaming
 
+using Newtonsoft.Json;
+
 namespace EVEStandard.Models
 {
-    using Newtonsoft.Json;
-
     public class Status : ModelBase<Status>
     {
         [JsonProperty("start_time")] public string StartTime { get; set; }

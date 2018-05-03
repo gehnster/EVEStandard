@@ -1,10 +1,10 @@
-﻿using EVEStandard.Enumerations;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using EVEStandard.Enumerations;
+using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Models;
 
 namespace EVEStandard.API
 {
@@ -137,7 +137,7 @@ namespace EVEStandard.API
 
             var body = new
             {
-                name,
+                name
             };
 
             var responseModel = await PutAsync("/v1/fleets/" + fleetId + "/wings/" + wingId + "/", auth, body);
@@ -171,7 +171,7 @@ namespace EVEStandard.API
 
             var body = new
             {
-                name,
+                name
             };
 
             var responseModel = await PutAsync("/v1/fleets/" + fleetId + "/squads/" + squadId + "/", auth, body);

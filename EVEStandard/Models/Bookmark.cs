@@ -1,8 +1,8 @@
-﻿namespace EVEStandard.Models
-{
-    using Newtonsoft.Json;
-    using global::System;
+﻿using System;
+using Newtonsoft.Json;
 
+namespace EVEStandard.Models
+{
     public class Bookmark : ModelBase<Bookmark>
     {
         [JsonProperty("bookmark_id")] public long BookmarkId { get; set; }

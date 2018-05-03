@@ -1,14 +1,12 @@
-﻿using EVEStandard.API;
-using EVEStandard.Enumerations;
-using EVEStandard.Models;
-using EVEStandard.Models.API;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
+using EVEStandard.API;
+using EVEStandard.Enumerations;
+using EVEStandard.Models.API;
 
 namespace EVEStandard
 {
@@ -16,9 +14,8 @@ namespace EVEStandard
     {
         
         private static HttpClient http;
-        private string userAgent = "EVEStandard-non-given";
-        private string dataSource = "tranquility";
-        private SSO sso;
+        private string userAgent;
+        private readonly string dataSource;
 
         /// <summary>
         /// Initialize the EVEStandard Library
@@ -38,9 +35,10 @@ namespace EVEStandard
             this.userAgent = userAgent ?? "EVEStandard-default";
             this.dataSource = dataSource == DataSource.Tranquility ? "tranquility" : "singularity";
 
-            this.initializeAPI();
+            initializeAPI();
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Initialize the EVE Standard Library with Single Sign On support.
         /// </summary>
@@ -53,45 +51,63 @@ namespace EVEStandard
         public EVEStandardAPI(string userAgent, DataSource dataSource, TimeSpan timeOut, string callbackUri, string clientId, string secretKey) : this(userAgent, dataSource, timeOut)
         {
             SSO.HTTP = http;
-            this.sso = new SSO(callbackUri, clientId, secretKey, dataSource);
+            SSO = new SSO(callbackUri, clientId, secretKey, dataSource);
         }
 
         /// <summary>
         /// Test a route that is still in development.
         /// </summary>
+        /// <param name="httpMethod"></param>
+        /// <param name="dataSource"></param>
         /// <param name="route">The entire VERSIONED route you want to test, including query parameters like datasource and user agent. (Example: /v3/alliances/{alliance_id}/?datasource=tranquility&user_agent=EVEStandard)</param>
+        /// <param name="queryParameters"></param>
         /// <returns></returns>
         public async Task<string> TestDevRoute(string httpMethod, string dataSource, string route, Dictionary<string, string> queryParameters)
         {
-            return await this.TestDevRoute(httpMethod, dataSource, route, queryParameters, null);
+            if (string.IsNullOrWhiteSpace(dataSource))
+            {
+                throw new ArgumentException("Argument was invalid", nameof(dataSource));
+            }
+
+            return await TestDevRoute(httpMethod, dataSource, route, queryParameters, null);
         }
 
         /// <summary>
         /// Test a route that is still in development and requires authentication via SSO
         /// </summary>
+        /// <param name="dataSource"></param>
         /// <param name="route">The entire VERSIONED route you want to test, including query parameters like datasource and useragent. (Example: /v3/alliances/{alliance_id}/?datasource=tranquility&user_agent=EVEStandard)</param>
+        /// <param name="httpMethod"></param>
+        /// <param name="queryParameters"></param>
+        /// <param name="auth"></param>
         /// <returns></returns>
         public async Task<string> TestDevRoute(string httpMethod, string dataSource, string route, Dictionary<string, string> queryParameters, AuthDTO auth)
         {
+            if (string.IsNullOrEmpty(dataSource))
+            {
+                throw new ArgumentException("Argument was invalid", nameof(dataSource));
+            }
+
             var api = new APIBase(dataSource);
 
             APIResponse responseModel;
 
-            if(httpMethod.ToUpper() == "GET")
+            switch (httpMethod.ToUpper())
             {
-                responseModel = await api.GetAsync(route, auth, queryParameters);
-            }
-            else if(httpMethod.ToUpper() == "POST")
-            {
-                responseModel = await api.PostAsync(route, auth, queryParameters);
-            }
-            else if (httpMethod.ToUpper() == "PUT")
-            {
-                responseModel = await api.PutAsync(route, auth, queryParameters);
-            }
-            else
-            {
-                responseModel = await api.DeleteAsync(route, auth, queryParameters);
+                case "GET":
+                    responseModel = await api.GetAsync(route, auth, queryParameters);
+                    break;
+                case "POST":
+                    responseModel = await api.PostAsync(route, auth, queryParameters);
+                    break;
+                case "PUT":
+                    responseModel = await api.PutAsync(route, auth, queryParameters);
+                    break;
+                case "DELETE":
+                    responseModel = await api.DeleteAsync(route, auth, queryParameters);
+                    break;
+                default:
+                    throw new ArgumentException("Argument was invalid", nameof(httpMethod));
             }
 
             if (responseModel.Error)
@@ -105,17 +121,14 @@ namespace EVEStandard
         /// <summary>
         /// Perform SSO Authentication operations
         /// </summary>
-        public SSO SSO => this.sso;
+        public SSO SSO { get; }
 
-        /// <summary>
-        /// Get data from the Alliances operations in ESI
-        /// </summary>
         public Alliances Alliances { get; private set; }
         public Assets Assets { get; private set; }
         public Bookmarks Bookmarks { get; private set; }
         public Calendar Calendar { get; private set; }
         public Character Character { get; private set; }
-        public API.Clones Clones { get; private set; }
+        public Clones Clones { get; private set; }
         public Contacts Contacts { get; private set; }
         public Contracts Contracts { get; private set; }
         public Corporation Corporation { get; private set; }
@@ -123,153 +136,154 @@ namespace EVEStandard
         public FactionWarfare FactionWarfare { get; private set; }
         public Fittings Fittings { get; private set; }
         public Fleets Fleets { get; private set; }
-        public API.Incursion Incursion { get; private set; }
+        public Incursion Incursion { get; private set; }
         public Industry Industry { get; private set; }
         public Insurance Insurance { get; private set; }
         public Killmails Killmails { get; private set; }
-        public API.Location Location { get; private set; }
+        public Location Location { get; private set; }
         public Loyalty Loyalty { get; private set; }
-        public API.Mail Mail { get; private set; }
+        public Mail Mail { get; private set; }
         public Market Market { get; private set; }
         public Opportunities Opportunities { get; private set; }
         public PlanetaryInteraction PlanetaryInteraction { get; private set; }
         public Routes Routes { get; private set; }
-        public API.Search Search { get; private set; }
+        public Search Search { get; private set; }
         public Skills Skills { get; private set; }
         public Sovereignty Sovereignty { get; private set; }
-        public API.Status Status { get; private set; }
-        public API.Universe Universe { get; private set; }
+        public Status Status { get; private set; }
+        public Universe Universe { get; private set; }
         public UserInterface UserInterface { get; private set; }
         public Wallet Wallet { get; private set; }
         public Wars Wars { get; private set; }
 
+        // ReSharper disable once InconsistentNaming
         private void initializeAPI()
         {
-            this.Alliances = new Alliances(this.dataSource)
+            Alliances = new Alliances(dataSource)
             {
                 HTTP = http
             };
-            this.Assets = new Assets(this.dataSource)
+            Assets = new Assets(dataSource)
             {
                 HTTP = http
             };
-            this.Bookmarks = new Bookmarks(this.dataSource)
+            Bookmarks = new Bookmarks(dataSource)
             {
                 HTTP = http
             };
-            this.Calendar = new Calendar(this.dataSource)
+            Calendar = new Calendar(dataSource)
             {
                 HTTP = http
             };
-            this.Character = new Character(this.dataSource)
+            Character = new Character(dataSource)
             {
                 HTTP = http
             };
-            this.Clones = new API.Clones(this.dataSource)
+            Clones = new Clones(dataSource)
             {
                 HTTP = http
             };
-            this.Contacts = new Contacts(this.dataSource)
+            Contacts = new Contacts(dataSource)
             {
                 HTTP = http
             };
-            this.Contracts = new Contracts(this.dataSource)
+            Contracts = new Contracts(dataSource)
             {
                 HTTP = http
             };
-            this.Corporation = new Corporation(this.dataSource)
+            Corporation = new Corporation(dataSource)
             {
                 HTTP = http
             };
-            this.Dogma = new Dogma(this.dataSource)
+            Dogma = new Dogma(dataSource)
             {
                 HTTP = http
             };
-            this.FactionWarfare = new FactionWarfare(this.dataSource)
+            FactionWarfare = new FactionWarfare(dataSource)
             {
                 HTTP = http
             };
-            this.Fittings = new Fittings(this.dataSource)
+            Fittings = new Fittings(dataSource)
             {
                 HTTP = http
             };
-            this.Fleets = new Fleets(this.dataSource)
+            Fleets = new Fleets(dataSource)
             {
                 HTTP = http
             };
-            this.Incursion = new API.Incursion(this.dataSource)
+            Incursion = new Incursion(dataSource)
             {
                 HTTP = http
             };
-            this.Industry = new Industry(this.dataSource)
+            Industry = new Industry(dataSource)
             {
                 HTTP = http
             };
-            this.Insurance = new Insurance(this.dataSource)
+            Insurance = new Insurance(dataSource)
             {
                 HTTP = http
             };
-            this.Killmails = new Killmails(this.dataSource)
+            Killmails = new Killmails(dataSource)
             {
                 HTTP = http
             };
-            this.Location = new API.Location(this.dataSource)
+            Location = new Location(dataSource)
             {
                 HTTP = http
             };
-            this.Loyalty = new Loyalty(this.dataSource)
+            Loyalty = new Loyalty(dataSource)
             {
                 HTTP = http
             };
-            this.Mail = new API.Mail(this.dataSource)
+            Mail = new Mail(dataSource)
             {
                 HTTP = http
             };
-            this.Market = new Market(this.dataSource)
+            Market = new Market(dataSource)
             {
                 HTTP = http
             };
-            this.Opportunities = new Opportunities(this.dataSource)
+            Opportunities = new Opportunities(dataSource)
             {
                 HTTP = http
             };
-            this.PlanetaryInteraction = new PlanetaryInteraction(this.dataSource)
+            PlanetaryInteraction = new PlanetaryInteraction(dataSource)
             {
                 HTTP = http
             };
-            this.Routes = new Routes(this.dataSource)
+            Routes = new Routes(dataSource)
             {
                 HTTP = http
             };
-            this.Search = new API.Search(this.dataSource)
+            Search = new Search(dataSource)
             {
                 HTTP = http
             };
-            this.Skills = new Skills(this.dataSource)
+            Skills = new Skills(dataSource)
             {
                 HTTP = http
             };
-            this.Sovereignty = new Sovereignty(this.dataSource)
+            Sovereignty = new Sovereignty(dataSource)
             {
                 HTTP = http
             };
-            this.Status = new API.Status(this.dataSource)
+            Status = new Status(dataSource)
             {
                 HTTP = http
             };
-            this.Universe = new API.Universe(this.dataSource)
+            Universe = new Universe(dataSource)
             {
                 HTTP = http
             };
-            this.UserInterface = new UserInterface(this.dataSource)
+            UserInterface = new UserInterface(dataSource)
             {
                 HTTP = http
             };
-            this.Wallet = new Wallet(this.dataSource)
+            Wallet = new Wallet(dataSource)
             {
                 HTTP = http
             };
-            this.Wars = new Wars(this.dataSource)
+            Wars = new Wars(dataSource)
             {
                 HTTP = http
             };

@@ -6,7 +6,6 @@ using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-
 namespace EVEStandard.API
 {
     public class Wallet : APIBase

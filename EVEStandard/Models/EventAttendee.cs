@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using EVEStandard.Enumerations;
+﻿using EVEStandard.Enumerations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 

@@ -1,7 +1,7 @@
-﻿namespace EVEStandard.Models
-{
-    using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
+namespace EVEStandard.Models
+{
     public class Icons : ModelBase<Icons>
     {
         /// <summary>

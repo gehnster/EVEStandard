@@ -1,8 +1,8 @@
-﻿using EVEStandard.Models;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using EVEStandard.Models;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {

@@ -1,10 +1,10 @@
-﻿namespace EVEStandard.Models
-{
-    using Enumerations;
-    using global::System;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
+﻿using System;
+using EVEStandard.Enumerations;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
+namespace EVEStandard.Models
+{
     public class EventSummary : ModelBase<EventSummary>
     {
         [JsonProperty("event_id")] public long EventId { get; set; }

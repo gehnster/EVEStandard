@@ -1,13 +1,12 @@
-﻿using EVEStandard.Enumerations;
+﻿using System.Threading.Tasks;
+using EVEStandard.Enumerations;
+using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
-    using Models;
-
     public class Location : APIBase
     {
         private ILogger Logger { get; } = LibraryLogging.CreateLogger<Location>();

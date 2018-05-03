@@ -1,8 +1,7 @@
-﻿namespace EVEStandard.Models
-{
-    using global::System;
-    using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
+namespace EVEStandard.Models
+{
     public class AllianceName : ModelBase<AllianceName>
     {
         [JsonProperty("alliance_id")] public long Id { get; set; }

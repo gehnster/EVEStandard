@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using EVEStandard.Enumerations;
+using Newtonsoft.Json;
 
 namespace EVEStandard.Models
 {
-    using Newtonsoft.Json;
-
     public class Colony : ModelBase<Colony>
     {
         /// <summary>

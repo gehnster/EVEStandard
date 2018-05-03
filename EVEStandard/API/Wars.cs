@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 using EVEStandard.Models;
 using Microsoft.Extensions.Logging;

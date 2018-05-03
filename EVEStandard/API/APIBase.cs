@@ -1,21 +1,20 @@
-﻿using EVEStandard.Models.API;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using EVEStandard.Models.API;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace EVEStandard.API
 {
-    using System.Diagnostics.CodeAnalysis;
-    using System.Net;
-
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class APIBase
     {
@@ -33,32 +32,32 @@ namespace EVEStandard.API
 
         internal async Task<APIResponse> GetAsync(string uri, Dictionary<string, string> queryParameters = null)
         {
-            return await this.GetAsync(uri, null, queryParameters);
+            return await GetAsync(uri, null, queryParameters);
         }
 
         internal async Task<APIResponse> GetAsync(string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null)
         {
-            return await this.RequestAsync(HttpMethod.Get, uri, auth, queryParameters);
+            return await RequestAsync(HttpMethod.Get, uri, auth, queryParameters);
         }
 
         internal async Task<APIResponse> PostAsync(string uri, AuthDTO auth, object body, Dictionary<string, string> queryParameters = null)
         {
-            return await this.RequestAsync(HttpMethod.Post, uri, auth, queryParameters, body);
+            return await RequestAsync(HttpMethod.Post, uri, auth, queryParameters, body);
         }
 
         internal async Task<APIResponse> PutAsync(string uri, AuthDTO auth, object body, Dictionary<string, string> queryParameters = null)
         {
-            return await this.RequestAsync(HttpMethod.Put, uri, auth, queryParameters, body);
+            return await RequestAsync(HttpMethod.Put, uri, auth, queryParameters, body);
         }
 
         internal async Task<APIResponse> DeleteAsync(string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null)
         {
-            return await this.RequestAsync(HttpMethod.Delete, uri, auth, queryParameters);
+            return await RequestAsync(HttpMethod.Delete, uri, auth, queryParameters);
         }
 
         private async Task<APIResponse> RequestAsync(HttpMethod method, string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null, object body = null)
         {
-            var queryParams = "?datasource=" + this.dataSource;
+            var queryParams = "?datasource=" + dataSource;
 
             if (queryParameters != null && queryParameters.Count > 0)
             {
@@ -77,7 +76,7 @@ namespace EVEStandard.API
             
             try
             {
-                var request = new HttpRequestMessage()
+                var request = new HttpRequestMessage
                 {
                     RequestUri = new Uri(ESI_BASE + uri + queryParams),
                     Method = method
@@ -98,9 +97,9 @@ namespace EVEStandard.API
                     }
                 }
 
-                var authResponse = await this.HTTP.SendAsync(request).ConfigureAwait(false);
+                var authResponse = await HTTP.SendAsync(request).ConfigureAwait(false);
 
-                return await this.processResponse(authResponse);
+                return await processResponse(authResponse);
             }
             catch (Exception)
             {
@@ -125,7 +124,7 @@ namespace EVEStandard.API
         {
             var model = new APIResponse();
 
-            if (response.StatusCode == System.Net.HttpStatusCode.OK || response.StatusCode == System.Net.HttpStatusCode.NoContent || response.StatusCode == System.Net.HttpStatusCode.Created)
+            if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.Created)
             {
                 return await processSuccess(response, model);
             }
@@ -187,7 +186,7 @@ namespace EVEStandard.API
                 }
 
                 // Check whether response is compressed
-                if (response.StatusCode != System.Net.HttpStatusCode.NoContent)
+                if (response.StatusCode != HttpStatusCode.NoContent)
                 {
                     if (response.Content.Headers.ContentEncoding.Any(x => x == "gzip"))
                     {

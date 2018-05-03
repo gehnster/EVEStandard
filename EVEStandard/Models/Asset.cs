@@ -1,10 +1,9 @@
-﻿namespace EVEStandard.Models
-{
-    using global::System;
-    using Enumerations;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
+﻿using EVEStandard.Enumerations;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
+namespace EVEStandard.Models
+{
     public class Asset : ModelBase<Asset>
     {
         [JsonProperty("location_flag"), JsonConverter(typeof(StringEnumConverter))] public LocationFlag LocationFlag { get; set; }

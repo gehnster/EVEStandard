@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using EVEStandard.Models;
 using Newtonsoft.Json;
 
 namespace EVEStandard.Models

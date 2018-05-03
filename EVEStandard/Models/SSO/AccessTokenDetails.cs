@@ -1,7 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace EVEStandard.Models.SSO
 {
@@ -14,11 +12,11 @@ namespace EVEStandard.Models.SSO
         [JsonProperty("expires_in")]
         public int ExpiresIn
         {
-            get => this._expiresIn;
+            get => _expiresIn;
             set
             {
-                this.Expires = DateTime.UtcNow.AddSeconds(value);
-                this._expiresIn = value;
+                Expires = DateTime.UtcNow.AddSeconds(value);
+                _expiresIn = value;
             }
         }
         [JsonProperty("refresh_token")]

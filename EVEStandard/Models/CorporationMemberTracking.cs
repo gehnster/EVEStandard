@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using Newtonsoft.Json;
 
 namespace EVEStandard.Models
 {
-    using Newtonsoft.Json;
-
     public class CorporationMemberTracking : ModelBase<CorporationMemberTracking>
     {
         /// <summary>

@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using EVEStandard.Enumerations;
 
 namespace EVEStandard.Models
 {

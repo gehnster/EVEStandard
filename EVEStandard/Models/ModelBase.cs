@@ -1,10 +1,10 @@
-﻿namespace EVEStandard.Models
-{
-    using global::System;
-    using global::System.Linq;
-    using global::System.Text;
-    using Newtonsoft.Json;
+﻿using System;
+using System.Linq;
+using System.Text;
+using Newtonsoft.Json;
 
+namespace EVEStandard.Models
+{
     public class ModelBase<T> : IEquatable<T>
     {
         /// <summary>
@@ -14,8 +14,8 @@
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class " + this.GetType().Name + " {\n");
-            foreach (var propertyInfo in this.GetType().GetProperties())
+            sb.Append("class " + GetType().Name + " {\n");
+            foreach (var propertyInfo in GetType().GetProperties())
             {
                 sb.Append("  " + propertyInfo.Name + ": ").Append(propertyInfo.GetValue(this)).Append("\n");
             }
@@ -41,7 +41,7 @@
                 return true;
             }
 
-            var firstType = this.GetType();
+            var firstType = GetType();
             // Handle type mismatch anyway you please:
             if (other.GetType() != firstType)
             {
@@ -73,7 +73,7 @@
                 return true;
             }
 
-            return obj.GetType() == this.GetType() && this.Equals((T) obj);
+            return obj.GetType() == GetType() && Equals((T) obj);
         }
 
         /// <summary>
@@ -84,7 +84,7 @@
         {
             unchecked // Overflow is fine, just wrap
             {
-                return this.GetType().GetProperties().Where(propertyInfo => propertyInfo.CanRead).Aggregate(41, (current, propertyInfo) => current * 59 + propertyInfo.GetValue(this).GetHashCode());
+                return GetType().GetProperties().Where(propertyInfo => propertyInfo.CanRead).Aggregate(41, (current, propertyInfo) => current * 59 + propertyInfo.GetValue(this).GetHashCode());
             }
         }
     }

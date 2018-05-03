@@ -1,7 +1,7 @@
-﻿namespace EVEStandard.Models
-{
-    using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
+namespace EVEStandard.Models
+{
     public class AllianceIcons : ModelBase<AllianceIcons>
     {
         [JsonProperty("px64x64")] public string Px64x64 { get; set; }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EVEStandard.Models.SSO
+﻿namespace EVEStandard.Models.SSO
 {
     public class Authorization
     {
