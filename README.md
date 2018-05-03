@@ -11,5 +11,7 @@ This library is meant to access the EVE Online ESI API through a C# library. Thi
 ### Just using non-authorized API
 ### Using Authorized API and getting authorized
 ## Explanation of design decisions made for SSO and API routes
+## NuGet
+The package is now on NuGet! You can find it here: [EVEStandard NuGet Page](https://www.nuget.org/packages/PointyHatGames.EVEStandard)
 ## Donations
 Donations are gladly accepted for work already done to the character Gehnster. For future work, donations by the way of pull requests are appreciated!
