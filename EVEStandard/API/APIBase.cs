@@ -211,7 +211,7 @@ namespace EVEStandard.API
 
                 return model;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }
