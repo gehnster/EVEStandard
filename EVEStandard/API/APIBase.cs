@@ -178,7 +178,7 @@ namespace EVEStandard.API
 
                 if (response.Headers.TryGetValues("X-Pages", out var xPagesEnumerable))
                 {
-                    model.MaxPages = long.TryParse(xPagesEnumerable.FirstOrDefault(), out var xPages) ? xPages : 1;
+                    model.MaxPages = int.TryParse(xPagesEnumerable.FirstOrDefault(), out var xPages) ? xPages : 1;
                 }
                 if (response.Headers.TryGetValues("Content-Language", out var language))
                 {
