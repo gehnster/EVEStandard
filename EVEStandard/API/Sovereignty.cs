@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using EVEStandard.Models;
+using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -13,31 +14,31 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<List<SovereigntyStructure>> ListSovereigntyStructuresV1Async()
+        public async Task<ESIModelDTO<List<SovereigntyStructure>>> ListSovereigntyStructuresV1Async()
         {
             var responseModel = await GetAsync("/v1/sovereignty/structures/");
 
             checkResponse("ListSovereigntyStructuresV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<SovereigntyStructure>>(responseModel.JSONString);
+            return returnModelDTO<List<SovereigntyStructure>>(responseModel);
         }
 
-        public async Task<List<SovereigntyCampaign>> ListSovereigntyCampaignsV1Async()
+        public async Task<ESIModelDTO<List<SovereigntyCampaign>>> ListSovereigntyCampaignsV1Async()
         {
             var responseModel = await GetAsync("/v1/sovereignty/campaigns/");
 
             checkResponse("ListSovereigntyCampaignsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<SovereigntyCampaign>>(responseModel.JSONString);
+            return returnModelDTO<List<SovereigntyCampaign>>(responseModel);
         }
 
-        public async Task<List<SovereigntyMap>> ListSovereigntyOfSystemsV1Async()
+        public async Task<ESIModelDTO<List<SovereigntyMap>>> ListSovereigntyOfSystemsV1Async()
         {
             var responseModel = await GetAsync("/v1/sovereignty/map/");
 
             checkResponse("ListSovereigntyOfSystemsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<SovereigntyMap>>(responseModel.JSONString);
+            return returnModelDTO<List<SovereigntyMap>>(responseModel);
         }
     }
 }

@@ -16,16 +16,16 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<List<MarketPrice>> ListMarketPricesV1Async()
+        public async Task<ESIModelDTO<List<MarketPrice>>> ListMarketPricesV1Async()
         {
             var responseModel = await GetAsync("/v1/markets/prices/");
 
             checkResponse("ListMarketPricesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<MarketPrice>>(responseModel.JSONString);
+            return returnModelDTO<List<MarketPrice>>(responseModel);
         }
 
-        public async Task<(List<MarketOrder>, long)> ListOrdersInRegionV1Async(long page, int regionId, long? typeId = null, string orderType = OrderType.All)
+        public async Task<ESIModelDTO<List<MarketOrder>>> ListOrdersInRegionV1Async(int page, int regionId, long? typeId = null, string orderType = OrderType.All)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -42,10 +42,10 @@ namespace EVEStandard.API
 
             checkResponse("ListOrdersInRegionV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<MarketOrder>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<MarketOrder>>(responseModel);
         }
 
-        public async Task<List<MarketRegionHistory>> ListHistoricalMarketStatisticsInRegionV1Async(long page, int regionId, long typeId)
+        public async Task<ESIModelDTO<List<MarketRegionHistory>>> ListHistoricalMarketStatisticsInRegionV1Async(int page, int regionId, long typeId)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -56,10 +56,10 @@ namespace EVEStandard.API
 
             checkResponse("ListHistoricalMarketStatisticsInRegionV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<MarketRegionHistory>>(responseModel.JSONString);
+            return returnModelDTO<List<MarketRegionHistory>>(responseModel);
         }
 
-        public async Task<(List<MarketOrder>, long)> ListOrdersInStructureV1Async(AuthDTO auth, long page, long structureId)
+        public async Task<ESIModelDTO<List<MarketOrder>>> ListOrdersInStructureV1Async(AuthDTO auth, int page, long structureId)
         {
             checkAuth(auth, Scopes.ESI_MARKETS_STRUCTURE_MARKETS_1);
 
@@ -72,19 +72,19 @@ namespace EVEStandard.API
 
             checkResponse("ListOrdersInStructureV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<MarketOrder>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<MarketOrder>>(responseModel);
         }
 
-        public async Task<int> GetItemGroupsV1Async()
+        public async Task<ESIModelDTO<int>> GetItemGroupsV1Async()
         {
             var responseModel = await GetAsync("/v1/markets/groups/");
 
             checkResponse("GetItemGroupsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<int>(responseModel.JSONString);
+            return returnModelDTO<int>(responseModel);
         }
 
-        public async Task<(MarketGroup, string)> GetItemGroupInfoV1Async(int marketGroupId, string language = Language.English)
+        public async Task<ESIModelDTO<MarketGroup>> GetItemGroupInfoV1Async(int marketGroupId, string language = Language.English)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -95,10 +95,10 @@ namespace EVEStandard.API
 
             checkResponse("GetItemGroupInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<MarketGroup>(responseModel.JSONString), responseModel.Language);
+            return returnModelDTO<MarketGroup>(responseModel);
         }
 
-        public async Task<List<CharacterMarketOrder>> ListOpenOrdersFromCharacterV2Async(AuthDTO auth)
+        public async Task<ESIModelDTO<List<CharacterMarketOrder>>> ListOpenOrdersFromCharacterV2Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_MARKETS_READ_CHARACTER_ORDERS_1);
 
@@ -106,10 +106,10 @@ namespace EVEStandard.API
 
             checkResponse("ListOpenOrdersFromCharacterV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<CharacterMarketOrder>>(responseModel.JSONString);
+            return returnModelDTO<List<CharacterMarketOrder>>(responseModel);
         }
 
-        public async Task<(List<CharacterMarketOrderHistory>, long)> ListHistoricalOrdersByCharacterV1Async(AuthDTO auth, long page)
+        public async Task<ESIModelDTO<List<CharacterMarketOrderHistory>>> ListHistoricalOrdersByCharacterV1Async(AuthDTO auth, int page)
         {
             checkAuth(auth, Scopes.ESI_MARKETS_READ_CHARACTER_ORDERS_1);
 
@@ -122,10 +122,10 @@ namespace EVEStandard.API
 
             checkResponse("ListHistoricalOrdersByCharacterV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<CharacterMarketOrderHistory>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<CharacterMarketOrderHistory>>(responseModel);
         }
 
-        public async Task<(List<long>, long)> ListTypeIdsRelevantToMarketV1Async(long page, int regionId)
+        public async Task<ESIModelDTO<List<long>>> ListTypeIdsRelevantToMarketV1Async(int page, int regionId)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -136,10 +136,10 @@ namespace EVEStandard.API
 
             checkResponse("ListHistoricalOrdersByCharacterV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<long>>(responseModel);
         }
 
-        public async Task<List<CorporationMarketOrder>> ListOpenOrdersFromCorporationV2Async(AuthDTO auth, long corporationId)
+        public async Task<ESIModelDTO<List<CorporationMarketOrder>>> ListOpenOrdersFromCorporationV2Async(AuthDTO auth, int corporationId)
         {
             checkAuth(auth, Scopes.ESI_MARKETS_READ_CORPORATION_ORDERS_1);
 
@@ -147,10 +147,10 @@ namespace EVEStandard.API
 
             checkResponse("ListOpenOrdersFromCorporationV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<CorporationMarketOrder>>(responseModel.JSONString);
+            return returnModelDTO<List<CorporationMarketOrder>>(responseModel);
         }
 
-        public async Task<(List<CorporationMarketOrderHistory>, long)> ListHistoricalOrdersByCorporationV1Async(AuthDTO auth, long page, long corporationId)
+        public async Task<ESIModelDTO<List<CorporationMarketOrderHistory>>> ListHistoricalOrdersByCorporationV1Async(AuthDTO auth, int page, int corporationId)
         {
             checkAuth(auth, Scopes.ESI_MARKETS_READ_CHARACTER_ORDERS_1);
 
@@ -163,7 +163,7 @@ namespace EVEStandard.API
 
             checkResponse("ListHistoricalOrdersByCorporationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<CorporationMarketOrderHistory>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<CorporationMarketOrderHistory>>(responseModel);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace EVEStandard.API
         private static HttpClient http;
         private readonly string dataSource;
 
-        public static readonly string ESI_BASE = "https://esi.tech.ccp.is";
+        public static readonly string ESI_BASE = "https://esi.evetech.net";
 
         internal HttpClient HTTP { get => http; set => http = value; }
 
@@ -142,6 +142,7 @@ namespace EVEStandard.API
                 case HttpStatusCode.BadRequest:
                     model.Error = true;
                     model.Message = await response.Content.ReadAsStringAsync();
+                    model.RemainingErrors = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
 
                     return model;
                 case HttpStatusCode.Unauthorized:
@@ -149,6 +150,7 @@ namespace EVEStandard.API
                 case HttpStatusCode.Conflict:
                     model.Error = true;
                     model.Message = "Too many requests made to ESI in a short period of time";
+                    model.RemainingErrors = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
 
                     return model;
                 case HttpStatusCode.Forbidden:
@@ -222,14 +224,8 @@ namespace EVEStandard.API
 
         private static APIResponse getExpiresAndLastModified(HttpResponseMessage response, APIResponse model)
         {
-            if (response.Headers.TryGetValues("expires", out var expiresEnumerable))
-            {
-                model.Expires = DateTime.TryParse(expiresEnumerable.FirstOrDefault(), out var expires) ? expires : DateTime.UtcNow;
-            }
-            if (response.Headers.TryGetValues("last-modified", out var lastModifiedEnumerable))
-            {
-                model.LastModified = DateTime.TryParse(lastModifiedEnumerable.FirstOrDefault(), out var lastModified) ? lastModified : DateTime.UtcNow;
-            }
+            model.Expires = response.Content.Headers.Expires;
+            model.LastModified = response.Content.Headers.LastModified;
 
             return model;
         }

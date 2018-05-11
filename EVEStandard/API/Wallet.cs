@@ -15,7 +15,7 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<double> GetCharacterWalletBalanceV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<double>> GetCharacterWalletBalanceV1Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_WALLET_READ_CHARACTER_WALLET_1);
 
@@ -23,10 +23,10 @@ namespace EVEStandard.API
 
             checkResponse("CalculationCSPAChargeCostV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<double>(responseModel.JSONString);
+            return returnModelDTO<double>(responseModel);
         }
 
-        public async Task<(List<CharacterWalletJournal>, long)> GetCharacterWalletJournalV4Async(AuthDTO auth, long page)
+        public async Task<ESIModelDTO<List<CharacterWalletJournal>>> GetCharacterWalletJournalV4Async(AuthDTO auth, int page)
         {
             checkAuth(auth, Scopes.ESI_WALLET_READ_CHARACTER_WALLET_1);
 
@@ -39,10 +39,10 @@ namespace EVEStandard.API
 
             checkResponse("GetCharacterWalletJournalV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<CharacterWalletJournal>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<CharacterWalletJournal>>(responseModel);
         }
 
-        public async Task<List<WalletTransaction>> GetCharacterWalletTransactionsV1Async(AuthDTO auth, long fromId)
+        public async Task<ESIModelDTO<List<WalletTransaction>>> GetCharacterWalletTransactionsV1Async(AuthDTO auth, long fromId)
         {
             checkAuth(auth, Scopes.ESI_WALLET_READ_CHARACTER_WALLET_1);
 
@@ -55,10 +55,10 @@ namespace EVEStandard.API
 
             checkResponse("GetCharacterWalletTransactionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<WalletTransaction>>(responseModel.JSONString);
+            return returnModelDTO<List<WalletTransaction>>(responseModel);
         }
 
-        public async Task<List<CorporationWallet>> ReturnCorporationWalletBalanceV1Async(AuthDTO auth, int corpId)
+        public async Task<ESIModelDTO<List<CorporationWallet>>> ReturnCorporationWalletBalanceV1Async(AuthDTO auth, int corpId)
         {
             checkAuth(auth, Scopes.ESI_WALLET_READ_CORPORATION_WALLETS_1);
 
@@ -66,10 +66,10 @@ namespace EVEStandard.API
 
             checkResponse("ReturnCorporationWalletBalanceV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<CorporationWallet>>(responseModel.JSONString);
+            return returnModelDTO<List<CorporationWallet>>(responseModel);
         }
 
-        public async Task<(List<CorporationWalletJournal>, long)> GetCorporationWalletJournalV3Async(AuthDTO auth, int corpId, int division, long page)
+        public async Task<ESIModelDTO<List<CorporationWalletJournal>>> GetCorporationWalletJournalV3Async(AuthDTO auth, int corpId, int division, int page)
         {
             checkAuth(auth, Scopes.ESI_WALLET_READ_CORPORATION_WALLETS_1);
 
@@ -82,10 +82,10 @@ namespace EVEStandard.API
 
             checkResponse("GetCorporationWalletJournalV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<CorporationWalletJournal>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<CorporationWalletJournal>>(responseModel);
         }
 
-        public async Task<List<WalletTransaction>> GetCorporationWalletTransactionsV1Async(AuthDTO auth, int corpId, int division, long fromId)
+        public async Task<ESIModelDTO<List<WalletTransaction>>> GetCorporationWalletTransactionsV1Async(AuthDTO auth, int corpId, int division, long fromId)
         {
             checkAuth(auth, Scopes.ESI_WALLET_READ_CORPORATION_WALLETS_1);
 
@@ -98,7 +98,7 @@ namespace EVEStandard.API
 
             checkResponse("GetCharacterWalletTransactionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<WalletTransaction>>(responseModel.JSONString);
+            return returnModelDTO<List<WalletTransaction>>(responseModel);
         }
     }
 }

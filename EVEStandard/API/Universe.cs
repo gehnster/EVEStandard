@@ -21,7 +21,7 @@ namespace EVEStandard.API
         /// Get all character ancestries
         /// </summary>
         /// <returns>List of character ancestries</returns>
-        public async Task<List<Ancestry>> GetAncestriesV1Async(string language = Language.English)
+        public async Task<ESIModelDTO<List<Ancestry>>> GetAncestriesV1Async(string language = Language.English)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -32,10 +32,10 @@ namespace EVEStandard.API
 
             checkResponse("GetAncestriesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<Ancestry>>(responseModel.JSONString);
+            return returnModelDTO<List<Ancestry>>(responseModel);
         }
 
-        public async Task<AsteroidBelt> GetAsteroidBeltV1Async(int asteroidBeltId)
+        public async Task<ESIModelDTO<AsteroidBelt>> GetAsteroidBeltV1Async(int asteroidBeltId)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -46,14 +46,14 @@ namespace EVEStandard.API
 
             checkResponse("GetAsteroidBeltV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<AsteroidBelt>(responseModel.JSONString);
+            return returnModelDTO<AsteroidBelt>(responseModel);
         }
 
         /// <summary>
         /// Get a list of bloodlines
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Bloodline>> GetBloodlinesV1Async(string language = Language.English)
+        public async Task<ESIModelDTO<List<Bloodline>>> GetBloodlinesV1Async(string language = Language.English)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -64,20 +64,20 @@ namespace EVEStandard.API
 
             checkResponse("GetBloodlinesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<Bloodline>>(responseModel.JSONString);
+            return returnModelDTO<List<Bloodline>>(responseModel);
         }
 
         /// <summary>
         /// Get a list of item categories
         /// </summary>
         /// <returns></returns>
-        public async Task<List<int>> GetItemCategoriesV1Async()
+        public async Task<ESIModelDTO<List<int>>> GetItemCategoriesV1Async()
         {
             var responseModel = await GetAsync("/v1/universe/categories/");
 
             checkResponse("GetItemCategoriesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
+            return returnModelDTO<List<int>>(responseModel);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace EVEStandard.API
         /// <param name="categoryId"></param>
         /// <param name="language"></param>
         /// <returns></returns>
-        public async Task<Category> GetItemCategoryInfoV1Async(int categoryId, string language = Language.English)
+        public async Task<ESIModelDTO<Category>> GetItemCategoryInfoV1Async(int categoryId, string language = Language.English)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -97,20 +97,20 @@ namespace EVEStandard.API
 
             checkResponse("GetItemCategoryInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Category>(responseModel.JSONString);
+            return returnModelDTO<Category>(responseModel);
         }
 
         /// <summary>
         /// Get a list of constellations
         /// </summary>
         /// <returns></returns>
-        public async Task<List<int>> GetConstellationsV1Async()
+        public async Task<ESIModelDTO<List<int>>> GetConstellationsV1Async()
         {
             var responseModel = await GetAsync("/v1/universe/constellations/");
 
             checkResponse("GetConstellationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
+            return returnModelDTO<List<int>>(responseModel);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace EVEStandard.API
         /// <param name="constellationId"></param>
         /// <param name="language"></param>
         /// <returns></returns>
-        public async Task<Constellation> GetConstellationV1Async(int constellationId,
+        public async Task<ESIModelDTO<Constellation>> GetConstellationV1Async(int constellationId,
             string language = Language.English)
         {
             var queryParameters = new Dictionary<string, string>
@@ -131,14 +131,14 @@ namespace EVEStandard.API
 
             checkResponse("GetConstellationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Constellation>(responseModel.JSONString);
+            return returnModelDTO<Constellation>(responseModel);
         }
 
         /// <summary>
         /// Get a list of factions
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Faction>> GetFactionsV2Async(string language = Language.English)
+        public async Task<ESIModelDTO<List<Faction>>> GetFactionsV2Async(string language = Language.English)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -149,20 +149,20 @@ namespace EVEStandard.API
 
             checkResponse("GetFactionsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<Faction>>(responseModel.JSONString);
+            return returnModelDTO<List<Faction>>(responseModel);
         }
 
         /// <summary>
         /// Get a list of graphics
         /// </summary>
         /// <returns></returns>
-        public async Task<List<int>> GetGraphicsV1Async()
+        public async Task<ESIModelDTO<List<int>>> GetGraphicsV1Async()
         {
             var responseModel = await GetAsync("/v1/universe/graphics/");
 
             checkResponse("GetGraphicsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
+            return returnModelDTO<List<int>>(responseModel);
         }
 
         /// <summary>
@@ -170,26 +170,26 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="graphicId"></param>
         /// <returns></returns>
-        public async Task<Graphic> GetGraphicV1Async(int graphicId)
+        public async Task<ESIModelDTO<Graphic>> GetGraphicV1Async(int graphicId)
         {
             var responseModel = await GetAsync($"/v1/universe/graphics/{graphicId}/");
 
             checkResponse("GetGraphicV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Graphic>(responseModel.JSONString);
+            return returnModelDTO<Graphic>(responseModel);
         }
 
         /// <summary>
         /// Get a list of item groups
         /// </summary>
         /// <returns></returns>
-        public async Task<(List<int>, long)> GetItemGroupsV1Async(long page)
+        public async Task<ESIModelDTO<List<int>>> GetItemGroupsV1Async(int page)
         {
             var responseModel = await GetAsync("/v1/universe/groups/");
 
             checkResponse("GetItemGroupsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<int>>(responseModel);
         }
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace EVEStandard.API
         /// <param name="groupId"></param>
         /// <param name="language"></param>
         /// <returns></returns>
-        public async Task<Group> GetItemGroupV1Async(int groupId, string language = Language.English)
+        public async Task<ESIModelDTO<Group>> GetItemGroupV1Async(int groupId, string language = Language.English)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -209,7 +209,7 @@ namespace EVEStandard.API
 
             checkResponse("GetItemGroupV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Group>(responseModel.JSONString);
+            return returnModelDTO<Group>(responseModel);
         }
 
         /// <summary>
@@ -220,7 +220,7 @@ namespace EVEStandard.API
         /// <param name="names"></param>
         /// <param name="language"></param>
         /// <returns></returns>
-        public async Task<Models.Universe> BulkNamesToIdsV1Async(List<string> names, string language = Language.English)
+        public async Task<ESIModelDTO<Models.Universe>> BulkNamesToIdsV1Async(List<string> names, string language = Language.English)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -231,37 +231,37 @@ namespace EVEStandard.API
 
             checkResponse("BulkNamesToIdsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Models.Universe>(responseModel.JSONString);
+            return returnModelDTO<Models.Universe>(responseModel);
         }
 
-        public async Task<Moon> GetMoonInfoV1Async(long moonId)
+        public async Task<ESIModelDTO<Moon>> GetMoonInfoV1Async(long moonId)
         {
             var responseModel = await GetAsync($"/v1/universe/moons/{moonId}/");
 
             checkResponse("GetItemGroupsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Moon>(responseModel.JSONString);
+            return returnModelDTO<Moon>(responseModel);
         }
 
-        public async Task<UniverseIdsToNames> GetNamesAndCategoriesFromIdsV2Async(List<int> ids)
+        public async Task<ESIModelDTO<UniverseIdsToNames>> GetNamesAndCategoriesFromIdsV2Async(List<int> ids)
         {
             var responseModel = await PostAsync("/v2/universe/names/", null, ids);
 
             checkResponse("GetNamesAndCategoriesFromIdsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<UniverseIdsToNames>(responseModel.JSONString);
+            return returnModelDTO<UniverseIdsToNames>(responseModel);
         }
 
-        public async Task<Planet> GetPlanetInfoV1Async(long planetId)
+        public async Task<ESIModelDTO<Planet>> GetPlanetInfoV1Async(long planetId)
         {
             var responseModel = await GetAsync($"/v1/universe/planets/{planetId}/");
 
             checkResponse("GetPlanetInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Planet>(responseModel.JSONString);
+            return returnModelDTO<Planet>(responseModel);
         }
 
-        public async Task<List<Race>> GetCharacterRacesV1Async(string language = Language.English)
+        public async Task<ESIModelDTO<List<Race>>> GetCharacterRacesV1Async(string language = Language.English)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -272,19 +272,19 @@ namespace EVEStandard.API
 
             checkResponse("GetCharacterRacesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<Race>>(responseModel.JSONString);
+            return returnModelDTO<List<Race>>(responseModel);
         }
 
-        public async Task<List<int>> GetRegionsV1Async()
+        public async Task<ESIModelDTO<List<int>>> GetRegionsV1Async()
         {
             var responseModel = await GetAsync("/v1/universe/regions/");
 
             checkResponse("GetRegionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
+            return returnModelDTO<List<int>>(responseModel);
         }
 
-        public async Task<Region> GetRegionInfoV1Async(int regionId, string language = Language.English)
+        public async Task<ESIModelDTO<Region>> GetRegionInfoV1Async(int regionId, string language = Language.English)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -295,46 +295,46 @@ namespace EVEStandard.API
 
             checkResponse("GetRegionInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Region>(responseModel.JSONString);
+            return returnModelDTO<Region>(responseModel);
         }
 
-        public async Task<Stargate> GetStargateInfoV1Async(int stargateId)
+        public async Task<ESIModelDTO<Stargate>> GetStargateInfoV1Async(int stargateId)
         {
             var responseModel = await GetAsync($"/v1/universe/stargates/{stargateId}/");
 
             checkResponse("GetStargateInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Stargate>(responseModel.JSONString);
+            return returnModelDTO<Stargate>(responseModel);
         }
 
-        public async Task<Star> GetStarInfoV1Async(int starId)
+        public async Task<ESIModelDTO<Star>> GetStarInfoV1Async(int starId)
         {
             var responseModel = await GetAsync($"/v1/universe/stars/{starId}/");
 
             checkResponse("GetStarInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Star>(responseModel.JSONString);
+            return returnModelDTO<Star>(responseModel);
         }
 
-        public async Task<Station> GetStationInfoV2Async(int stationId)
+        public async Task<ESIModelDTO<Station>> GetStationInfoV2Async(int stationId)
         {
             var responseModel = await GetAsync($"/v2/universe/stations/{stationId}/");
 
             checkResponse("GetStationInfoV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Station>(responseModel.JSONString);
+            return returnModelDTO<Station>(responseModel);
         }
 
-        public async Task<List<long>> ListAllPublicStructuresV1Async()
+        public async Task<ESIModelDTO<List<long>>> ListAllPublicStructuresV1Async()
         {
             var responseModel = await GetAsync("/v1/universe/structures/");
 
             checkResponse("ListAllPublicStructuresV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString);
+            return returnModelDTO<List<long>>(responseModel);
         }
 
-        public async Task<Structure> GetStructureInfoV1Async(AuthDTO auth, long structureId)
+        public async Task<ESIModelDTO<Structure>> GetStructureInfoV1Async(AuthDTO auth, long structureId)
         {
             checkAuth(auth, Scopes.ESI_UNIVERSE_READ_STRUCTURES_1);
 
@@ -342,37 +342,37 @@ namespace EVEStandard.API
 
             checkResponse("GetStructureInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Structure>(responseModel.JSONString);
+            return returnModelDTO<Structure>(responseModel);
         }
 
-        public async Task<List<SystemJumps>> GetSystemJumpsV1Async()
+        public async Task<ESIModelDTO<List<SystemJumps>>> GetSystemJumpsV1Async()
         {
             var responseModel = await GetAsync("/v1/universe/system_jumps/");
 
             checkResponse("GetSystemJumpsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<SystemJumps>>(responseModel.JSONString);
+            return returnModelDTO<List<SystemJumps>>(responseModel);
         }
 
-        public async Task<List<SystemKills>> GetSystemKillsV2Async()
+        public async Task<ESIModelDTO<List<SystemKills>>> GetSystemKillsV2Async()
         {
             var responseModel = await GetAsync("/v2/universe/system_kills/");
 
             checkResponse("GetSystemKillsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<SystemKills>>(responseModel.JSONString);
+            return returnModelDTO<List<SystemKills>>(responseModel);
         }
 
-        public async Task<List<int>> GetSolarSystemsV1Async()
+        public async Task<ESIModelDTO<List<int>>> GetSolarSystemsV1Async()
         {
             var responseModel = await GetAsync("/v1/universe/systems/");
 
             checkResponse("GetSolarSystemsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
+            return returnModelDTO<List<int>>(responseModel);
         }
 
-        public async Task<Models.System> GetSolarSystemInfoV3Async(int systemId, string language = Language.English)
+        public async Task<ESIModelDTO<Models.System>> GetSolarSystemInfoV3Async(int systemId, string language = Language.English)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -383,19 +383,19 @@ namespace EVEStandard.API
 
             checkResponse("GetSolarSystemInfoV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Models.System>(responseModel.JSONString);
+            return returnModelDTO<Models.System>(responseModel);
         }
 
-        public async Task<(List<int>, long)> GetTypesV1Async(long page=1)
+        public async Task<ESIModelDTO<List<int>>> GetTypesV1Async(int page=1)
         {
             var responseModel = await GetAsync("/v1/universe/types/");
 
             checkResponse("GetTypesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<int>>(responseModel);
         }
 
-        public async Task<Type> GetTypeInfoV3Async(int typeId, string language = Language.English)
+        public async Task<ESIModelDTO<Type>> GetTypeInfoV3Async(int typeId, string language = Language.English)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -406,7 +406,7 @@ namespace EVEStandard.API
 
             checkResponse("GetTypeInfoV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Type>(responseModel.JSONString);
+            return returnModelDTO<Type>(responseModel);
         }
     }
 }

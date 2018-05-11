@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using EVEStandard.Models;
+using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -13,25 +14,25 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<Alliance> GetAllianceInfoV3Async(long allianceId)
+        public async Task<ESIModelDTO<Alliance>> GetAllianceInfoV3Async(int allianceId)
         {
             var responseModel = await GetAsync("/v3/alliances/" + allianceId + "/");
 
             checkResponse("GetAllianceInfoV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Alliance>(responseModel.JSONString);
+            return returnModelDTO<Alliance>(responseModel);
         }
 
-        public async Task<List<long>> ListAllianceCorporationsV1Async(long allianceId)
+        public async Task<ESIModelDTO<List<int>>> ListAllianceCorporationsV1Async(int allianceId)
         {
             var responseModel = await GetAsync("/v1/alliances/" + allianceId + "/corporations/");
 
             checkResponse("ListAllianceCorporationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString);
+            return returnModelDTO<List<int>>(responseModel);
         }
 
-        public async Task<List<AllianceName>> GetAllianceNamesV2Async(List<long> allianceIds)
+        public async Task<ESIModelDTO<List<AllianceName>>> GetAllianceNamesV2Async(List<int> allianceIds)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -42,25 +43,25 @@ namespace EVEStandard.API
 
             checkResponse("GetAllianceNamesV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<AllianceName>>(responseModel.JSONString);
+            return returnModelDTO<List<AllianceName>>(responseModel);
         }
 
-        public async Task<AllianceIcons> GetAllianceIconV1Async(long allianceId)
+        public async Task<ESIModelDTO<AllianceIcons>> GetAllianceIconV1Async(int allianceId)
         {
             var responseModel = await GetAsync("/v1/alliances/" + allianceId + "/icons/");
 
             checkResponse("GetAllianceIconV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<AllianceIcons>(responseModel.JSONString);
+            return returnModelDTO<AllianceIcons>(responseModel);
         }
 
-        public async Task<List<long>> ListAllAlliancesV1Async()
+        public async Task<ESIModelDTO<List<int>>> ListAllAlliancesV1Async()
         {
             var responseModel = await GetAsync("/v1/alliances/");
 
             checkResponse("ListAllAlliancesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString);
+            return returnModelDTO<List<int>>(responseModel);
         }
     }
 }

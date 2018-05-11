@@ -15,7 +15,7 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task DeleteContactsV2Async(AuthDTO auth, List<long> contactIds)
+        public async Task DeleteContactsV2Async(AuthDTO auth, List<int> contactIds)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_WRITE_CONTACTS_1);
 
@@ -29,7 +29,7 @@ namespace EVEStandard.API
             checkResponse("DeleteContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
-        public async Task<(List<CharacterContact>, long)> GetContactsV2Async(AuthDTO auth, long page)
+        public async Task<ESIModelDTO<List<CharacterContact>>> GetContactsV2Async(AuthDTO auth, int page)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_CONTACTS_1);
 
@@ -37,10 +37,10 @@ namespace EVEStandard.API
 
             checkResponse("GetContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<CharacterContact>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<CharacterContact>>(responseModel);
         }
 
-        public async Task<List<long>> AddContactsV2Async(AuthDTO auth, List<long> contactIds, List<long> labelIds, float standing, bool isWatched=false)
+        public async Task<ESIModelDTO<List<int>>> AddContactsV2Async(AuthDTO auth, List<int> contactIds, List<long> labelIds, float standing, bool isWatched=false)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_WRITE_CONTACTS_1);
 
@@ -55,10 +55,10 @@ namespace EVEStandard.API
 
             checkResponse("AddContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString);
+            return returnModelDTO<List<int>>(responseModel);
         }
 
-        public async Task EditContactsV2Async(AuthDTO auth, List<long> contactIds, List<long> labelIds, float standing, bool isWatched=false)
+        public async Task EditContactsV2Async(AuthDTO auth, List<int> contactIds, List<long> labelIds, float standing, bool isWatched=false)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_WRITE_CONTACTS_1);
 
@@ -74,7 +74,7 @@ namespace EVEStandard.API
             checkResponse("EditContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
-        public async Task<(List<CorporationContact>, long)> GetCorporationContactsV2Async(AuthDTO auth, long page, long corporationId)
+        public async Task<ESIModelDTO<List<CorporationContact>>> GetCorporationContactsV2Async(AuthDTO auth, int page, int corporationId)
         {
             checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_CONTACTS_1);
 
@@ -82,10 +82,10 @@ namespace EVEStandard.API
 
             checkResponse("GetCorporationContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<CorporationContact>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<CorporationContact>>(responseModel);
         }
 
-        public async Task<(List<AllianceContact>, long)> GetAllianceContactsV2Async(AuthDTO auth, long page, long allianceId)
+        public async Task<ESIModelDTO<List<AllianceContact>>> GetAllianceContactsV2Async(AuthDTO auth, int page, int allianceId)
         {
             checkAuth(auth, Scopes.ESI_ALLIANCE_READ_CONTACTS_1);
 
@@ -93,10 +93,10 @@ namespace EVEStandard.API
 
             checkResponse("GetAllianceContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<AllianceContact>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<AllianceContact>>(responseModel);
         }
 
-        public async Task<List<ContactLabel>> GetContactLabelsV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<List<ContactLabel>>> GetContactLabelsV1Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_CONTACTS_1);
 
@@ -104,10 +104,10 @@ namespace EVEStandard.API
 
             checkResponse("GetContactLabelsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<ContactLabel>>(responseModel.JSONString);
+            return returnModelDTO<List<ContactLabel>>(responseModel);
         }
 
-        public async Task<List<ContactLabel>> GetAllianceContactLabelsV1Async(AuthDTO auth, int allianceId)
+        public async Task<ESIModelDTO<List<ContactLabel>>> GetAllianceContactLabelsV1Async(AuthDTO auth, int allianceId)
         {
             checkAuth(auth, Scopes.ESI_ALLIANCE_READ_CONTACTS_1);
 
@@ -115,18 +115,18 @@ namespace EVEStandard.API
 
             checkResponse("GetAllianceContactLabelsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<ContactLabel>>(responseModel.JSONString);
+            return returnModelDTO<List<ContactLabel>>(responseModel);
         }
 
-        public async Task<List<ContactLabel>> GetCorporationContactLabelsV1Async(AuthDTO auth, int corpId)
+        public async Task<ESIModelDTO<List<ContactLabel>>> GetCorporationContactLabelsV1Async(AuthDTO auth, int corporationId)
         {
             checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_CONTACTS_1);
 
-            var responseModel = await GetAsync($"/v1/corporations/{corpId}/contacts/labels/", auth);
+            var responseModel = await GetAsync($"/v1/corporations/{corporationId}/contacts/labels/", auth);
 
             checkResponse("GetCorporationContactLabelsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<ContactLabel>>(responseModel.JSONString);
+            return returnModelDTO<List<ContactLabel>>(responseModel);
         }
     }
 }

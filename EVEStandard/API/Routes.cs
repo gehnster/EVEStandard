@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using EVEStandard.Enumerations;
+using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -13,7 +14,7 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<List<int>> GetRouteV1Async(int origin, int destination, List<int> avoidSystems, List<int> connections, string flag=RoutePreference.SHORTEST)
+        public async Task<ESIModelDTO<List<int>>> GetRouteV1Async(int origin, int destination, List<int> avoidSystems, List<int> connections, string flag=RoutePreference.SHORTEST)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -26,7 +27,7 @@ namespace EVEStandard.API
 
             checkResponse("GetRouteV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
+            return returnModelDTO<List<int>>(responseModel);
         }
     }
 }

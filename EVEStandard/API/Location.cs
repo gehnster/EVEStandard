@@ -14,7 +14,7 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<CharacterLocation> GetCharacterLocationV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<CharacterLocation>> GetCharacterLocationV1Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_LOCATION_READ_LOCATION_1);
 
@@ -22,10 +22,10 @@ namespace EVEStandard.API
 
             checkResponse("GetCharacterLocationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<CharacterLocation>(responseModel.JSONString);
+            return returnModelDTO<CharacterLocation>(responseModel);
         }
 
-        public async Task<CharacterShip> GetCurrentShipV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<CharacterShip>> GetCurrentShipV1Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_LOCATION_READ_SHIP_TYPE_1);
 
@@ -33,10 +33,10 @@ namespace EVEStandard.API
 
             checkResponse("GetCurrentShipV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<CharacterShip>(responseModel.JSONString);
+            return returnModelDTO<CharacterShip>(responseModel);
         }
 
-        public async Task<CharacterOnline> GetCharacterOnlineV2Async(AuthDTO auth)
+        public async Task<ESIModelDTO<CharacterOnline>> GetCharacterOnlineV2Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_LOCATION_READ_ONLINE_1);
 
@@ -44,7 +44,7 @@ namespace EVEStandard.API
 
             checkResponse("GetCharacterOnlineV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<CharacterOnline>(responseModel.JSONString);
+            return returnModelDTO<CharacterOnline>(responseModel);
         }
     }
 }

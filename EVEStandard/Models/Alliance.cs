@@ -9,16 +9,16 @@ namespace EVEStandard.Models
 
         [JsonProperty("ticker")] public string Ticker { get; set; }
 
-        [JsonProperty("creator_id")] public long CreatorId { get; set; }
+        [JsonProperty("creator_id")] public int CreatorId { get; set; }
 
         [JsonProperty("creator_corporation_id")]
-        public long CreatorCorporationId { get; set; }
+        public int CreatorCorporationId { get; set; }
 
         [JsonProperty("executor_corporation_id")]
-        public long? ExecutorCorporationId { get; set; }
+        public int? ExecutorCorporationId { get; set; }
 
         [JsonProperty("date_founded")] public DateTime DateFounded { get; set; }
 
-        [JsonProperty("faction_id")] public long? FactionId { get; set; }
+        [JsonProperty("faction_id")] public int? FactionId { get; set; }
     }
 }

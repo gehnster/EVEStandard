@@ -15,7 +15,7 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<(List<Bookmark>, long)> ListBookmarksV2Async(AuthDTO auth, long page)
+        public async Task<ESIModelDTO<List<Bookmark>>> ListBookmarksV2Async(AuthDTO auth, int page)
         {
             checkAuth(auth, Scopes.ESI_BOOKMARKS_READ_CHARACTER_BOOKMARKS_1);
 
@@ -28,10 +28,10 @@ namespace EVEStandard.API
 
             checkResponse("ListBookmarksV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<Bookmark>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<Bookmark>>(responseModel);
         }
 
-        public async Task<(List<BookmarkFolder>, long)> ListBookmarkFoldersV2Async(AuthDTO auth, long page)
+        public async Task<ESIModelDTO<List<BookmarkFolder>>> ListBookmarkFoldersV2Async(AuthDTO auth, int page)
         {
             checkAuth(auth, Scopes.ESI_BOOKMARKS_READ_CHARACTER_BOOKMARKS_1);
 
@@ -44,10 +44,10 @@ namespace EVEStandard.API
 
             checkResponse("ListBookmarkFoldersV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<BookmarkFolder>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<BookmarkFolder>>(responseModel);
         }
 
-        public async Task<(List<Bookmark>, long)> ListCorporationBookmarksV1Async(AuthDTO auth, long corporationId, long page)
+        public async Task<ESIModelDTO<List<Bookmark>>> ListCorporationBookmarksV1Async(AuthDTO auth, int corporationId, int page)
         {
             checkAuth(auth, Scopes.ESI_BOOKMARKS_READ_CORPORATION_BOOKMARKS_1);
 
@@ -60,10 +60,10 @@ namespace EVEStandard.API
 
             checkResponse("ListCorporationBookmarksV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<Bookmark>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<Bookmark>>(responseModel);
         }
 
-        public async Task<(List<BookmarkFolder>, long)> ListCorporationBookmarkFoldersV1Async(AuthDTO auth, long corporationId, long page)
+        public async Task<ESIModelDTO<List<BookmarkFolder>>> ListCorporationBookmarkFoldersV1Async(AuthDTO auth, int corporationId, int page)
         {
             checkAuth(auth, Scopes.ESI_BOOKMARKS_READ_CORPORATION_BOOKMARKS_1);
 
@@ -76,7 +76,7 @@ namespace EVEStandard.API
 
             checkResponse("ListCorporationBookmarkFoldersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<BookmarkFolder>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<BookmarkFolder>>(responseModel);
         }
     }
 }

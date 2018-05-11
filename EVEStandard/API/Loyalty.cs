@@ -16,16 +16,16 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<List<LoyaltyStoreOffer>> ListLoyaltyStoreOffersV1Async(long corporationId)
+        public async Task<ESIModelDTO<List<LoyaltyStoreOffer>>> ListLoyaltyStoreOffersV1Async(int corporationId)
         {
             var responseModel = await GetAsync("/v1/loyalty/stores/" + corporationId + "/offers/");
 
             checkResponse("ListLoyaltyStoreOffersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<LoyaltyStoreOffer>>(responseModel.JSONString);
+            return returnModelDTO<List<LoyaltyStoreOffer>>(responseModel);
         }
 
-        public async Task<List<LoyaltyPoints>> GetLoyaltyPointsV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<List<LoyaltyPoints>>> GetLoyaltyPointsV1Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_LOYALTY_1);
 
@@ -33,7 +33,7 @@ namespace EVEStandard.API
 
             checkResponse("GetLoyaltyPointsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<LoyaltyPoints>>(responseModel.JSONString);
+            return returnModelDTO<List<LoyaltyPoints>>(responseModel);
         }
     }
 }

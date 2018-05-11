@@ -15,7 +15,7 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<CharacterSkills> GetCharacterSkillsV4Async(AuthDTO auth)
+        public async Task<ESIModelDTO<CharacterSkills>> GetCharacterSkillsV4Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_SKILLS_READ_SKILLS_1);
 
@@ -23,10 +23,10 @@ namespace EVEStandard.API
 
             checkResponse("GetCharacterSkillsV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<CharacterSkills>(responseModel.JSONString);
+            return returnModelDTO<CharacterSkills>(responseModel);
         }
 
-        public async Task<CharacterAttributes> GetCharacterAttributesV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<CharacterAttributes>> GetCharacterAttributesV1Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_SKILLS_READ_SKILLS_1);
 
@@ -34,10 +34,10 @@ namespace EVEStandard.API
 
             checkResponse("GetCharacterAttributesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<CharacterAttributes>(responseModel.JSONString);
+            return returnModelDTO<CharacterAttributes>(responseModel);
         }
 
-        public async Task<List<SkillQueue>> GetCharacterSkillQueueV2Async(AuthDTO auth)
+        public async Task<ESIModelDTO<List<SkillQueue>>> GetCharacterSkillQueueV2Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_SKILLS_READ_SKILLQUEUE_1);
 
@@ -45,7 +45,7 @@ namespace EVEStandard.API
 
             checkResponse("GetCharacterSkillQueueV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<SkillQueue>>(responseModel.JSONString);
+            return returnModelDTO<List<SkillQueue>>(responseModel);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<List<Colony>> GetColoniesV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<List<Colony>>> GetColoniesV1Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_PLANETS_MANAGE_PLANETS_1);
 
@@ -23,10 +23,10 @@ namespace EVEStandard.API
 
             checkResponse("GetColoniesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<Colony>>(responseModel.JSONString);
+            return returnModelDTO<List<Colony>>(responseModel);
         }
 
-        public async Task<ColonyLayout> GetColonyLayoutV3Async(AuthDTO auth, int planetId)
+        public async Task<ESIModelDTO<ColonyLayout>> GetColonyLayoutV3Async(AuthDTO auth, int planetId)
         {
             checkAuth(auth, Scopes.ESI_PLANETS_MANAGE_PLANETS_1);
 
@@ -34,19 +34,19 @@ namespace EVEStandard.API
 
             checkResponse("GetColonyLayoutV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<ColonyLayout>(responseModel.JSONString);
+            return returnModelDTO<ColonyLayout>(responseModel);
         }
 
-        public async Task<FactorySchematic> GetSchematicInfoV1Async(int schematicId)
+        public async Task<ESIModelDTO<FactorySchematic>> GetSchematicInfoV1Async(int schematicId)
         {
             var responseModel = await GetAsync("/v1/universe/schematics/" + schematicId + "/");
 
             checkResponse("GetSchematicInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<FactorySchematic>(responseModel.JSONString);
+            return returnModelDTO<FactorySchematic>(responseModel);
         }
 
-        public async Task<(List<CustomsOffice>, long)> ListCorporationCustomsOfficesV1Async(AuthDTO auth, long page, long corporationId)
+        public async Task<ESIModelDTO<List<CustomsOffice>>> ListCorporationCustomsOfficesV1Async(AuthDTO auth, int page, int corporationId)
         {
             checkAuth(auth, Scopes.ESI_PLANETS_READ_CUSTOMS_OFFICES_1);
 
@@ -59,7 +59,7 @@ namespace EVEStandard.API
 
             checkResponse("ListCorporationCustomsOfficesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<CustomsOffice>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<CustomsOffice>>(responseModel);
         }
     }
 }

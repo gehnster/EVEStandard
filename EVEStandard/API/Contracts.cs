@@ -15,7 +15,7 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<(List<Contract>, long)> GetContractsV1Async(AuthDTO auth, long page)
+        public async Task<ESIModelDTO<List<Contract>>> GetContractsV1Async(AuthDTO auth, int page)
         {
             checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CHARACTER_CONTRACTS_1);
 
@@ -28,10 +28,10 @@ namespace EVEStandard.API
 
             checkResponse("GetContractsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<Contract>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<Contract>>(responseModel);
         }
 
-        public async Task<List<ContractItem>> GetContractItemsV1Async(AuthDTO auth, long contractId)
+        public async Task<ESIModelDTO<List<ContractItem>>> GetContractItemsV1Async(AuthDTO auth, int contractId)
         {
             checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CHARACTER_CONTRACTS_1);
 
@@ -39,10 +39,10 @@ namespace EVEStandard.API
 
             checkResponse("GetContractItemsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<ContractItem>>(responseModel.JSONString);
+            return returnModelDTO<List<ContractItem>>(responseModel);
         }
 
-        public async Task<List<ContractBid>> GetContractBidsV1Async(AuthDTO auth, long contractId)
+        public async Task<ESIModelDTO<List<ContractBid>>> GetContractBidsV1Async(AuthDTO auth, int contractId)
         {
             checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CHARACTER_CONTRACTS_1);
 
@@ -50,10 +50,10 @@ namespace EVEStandard.API
 
             checkResponse("GetContractBidsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<ContractBid>>(responseModel.JSONString);
+            return returnModelDTO<List<ContractBid>>(responseModel);
         }
 
-        public async Task<(List<Contract>, long)> GetCorporationContractsV1Async(AuthDTO auth, long page, long corporationId)
+        public async Task<ESIModelDTO<List<Contract>>> GetCorporationContractsV1Async(AuthDTO auth, int page, int corporationId)
         {
             checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CORPORATION_CONTRACTS_1);
 
@@ -66,10 +66,10 @@ namespace EVEStandard.API
 
             checkResponse("GetCorporationContractsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<Contract>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<Contract>>(responseModel);
         }
 
-        public async Task<List<ContractItem>> GetCorporationContractItemsV1Async(AuthDTO auth, long contractId)
+        public async Task<ESIModelDTO<List<ContractItem>>> GetCorporationContractItemsV1Async(AuthDTO auth, int contractId)
         {
             checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CORPORATION_CONTRACTS_1);
 
@@ -77,10 +77,10 @@ namespace EVEStandard.API
 
             checkResponse("GetCorporationContractItemsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<ContractItem>>(responseModel.JSONString);
+            return returnModelDTO<List<ContractItem>>(responseModel);
         }
 
-        public async Task<List<ContractBid>> GetCorporationContractBidsV1Async(AuthDTO auth, long contractId)
+        public async Task<ESIModelDTO<List<ContractBid>>> GetCorporationContractBidsV1Async(AuthDTO auth, int contractId)
         {
             checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CORPORATION_CONTRACTS_1);
 
@@ -88,7 +88,7 @@ namespace EVEStandard.API
 
             checkResponse("GetCorporationContractBidsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<ContractBid>>(responseModel.JSONString);
+            return returnModelDTO<List<ContractBid>>(responseModel);
         }
     }
 }

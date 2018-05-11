@@ -15,25 +15,25 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<List<IndustryFacility>> ListIndustryFacilitiesV1Async()
+        public async Task<ESIModelDTO<List<IndustryFacility>>> ListIndustryFacilitiesV1Async()
         {
             var responseModel = await GetAsync("/v1/industry/facilities/");
 
             checkResponse("ListIndustryFacilitiesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<IndustryFacility>>(responseModel.JSONString);
+            return returnModelDTO<List<IndustryFacility>>(responseModel);
         }
 
-        public async Task<List<IndustrySystem>> ListSolarSystemCostIndiciesV1Async()
+        public async Task<ESIModelDTO<List<IndustrySystem>>> ListSolarSystemCostIndiciesV1Async()
         {
             var responseModel = await GetAsync("/v1/industry/systems/");
 
             checkResponse("ListSolarSystemCostIndiciesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<IndustrySystem>>(responseModel.JSONString);
+            return returnModelDTO<List<IndustrySystem>>(responseModel);
         }
 
-        public async Task<List<IndustryJob>> ListCharacterIndustryJobsV1Async(AuthDTO auth, bool includeCompleted)
+        public async Task<ESIModelDTO<List<IndustryJob>>> ListCharacterIndustryJobsV1Async(AuthDTO auth, bool includeCompleted)
         {
             checkAuth(auth, Scopes.ESI_INDUSTRY_READ_CHARACTER_JOBS_1);
 
@@ -46,10 +46,10 @@ namespace EVEStandard.API
 
             checkResponse("ListCharacterIndustryJobsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<IndustryJob>>(responseModel.JSONString);
+            return returnModelDTO<List<IndustryJob>>(responseModel);
         }
 
-        public async Task<(List<CharacterMining>, long)> CharacterMiningLedgerV1Async(AuthDTO auth, long page)
+        public async Task<ESIModelDTO<List<CharacterMining>>> CharacterMiningLedgerV1Async(AuthDTO auth, int page)
         {
             checkAuth(auth, Scopes.ESI_INDUSTRY_READ_CHARACTER_MINING_1);
 
@@ -62,10 +62,10 @@ namespace EVEStandard.API
 
             checkResponse("CharacterMiningLedgerV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<CharacterMining>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<CharacterMining>>(responseModel);
         }
 
-        public async Task<(List<CorporationMiningObserver>, long)> CorporationMiningObserversV1Async(AuthDTO auth, long page, long corporationId)
+        public async Task<ESIModelDTO<List<CorporationMiningObserver>>> CorporationMiningObserversV1Async(AuthDTO auth, int page, int corporationId)
         {
             checkAuth(auth, Scopes.ESI_INDUSTRY_READ_CORPORATION_MINING_1);
 
@@ -78,10 +78,10 @@ namespace EVEStandard.API
 
             checkResponse("CorporationMiningObserversV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<CorporationMiningObserver>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<CorporationMiningObserver>>(responseModel);
         }
 
-        public async Task<(List<CorporationObservedMining>, long)> ObservedCorporationMiningV1Async(AuthDTO auth, long page, long corporationId, long observerId)
+        public async Task<ESIModelDTO<List<CorporationObservedMining>>> ObservedCorporationMiningV1Async(AuthDTO auth, int page, int corporationId, long observerId)
         {
             checkAuth(auth, Scopes.ESI_INDUSTRY_READ_CORPORATION_MINING_1);
 
@@ -94,10 +94,10 @@ namespace EVEStandard.API
 
             checkResponse("ObservedCorporationMiningV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<CorporationObservedMining>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<CorporationObservedMining>>(responseModel);
         }
 
-        public async Task<(List<IndustryJob>, long)> ListCorporationIndustryJobsV1Async(AuthDTO auth, long page, long corporationId, bool includeCompleted = false)
+        public async Task<ESIModelDTO<List<IndustryJob>>> ListCorporationIndustryJobsV1Async(AuthDTO auth, int page, int corporationId, bool includeCompleted = false)
         {
             checkAuth(auth, Scopes.ESI_INDUSTRY_READ_CORPORATION_JOBS_1);
 
@@ -111,10 +111,10 @@ namespace EVEStandard.API
 
             checkResponse("ListCorporationIndustryJobsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<IndustryJob>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<IndustryJob>>(responseModel);
         }
 
-        public async Task<(List<MiningExtraction>, long)> MoonExtractionTimersV1Async(AuthDTO auth, long page, long corporationId, bool includeCompleted = false)
+        public async Task<ESIModelDTO<List<MiningExtraction>>> MoonExtractionTimersV1Async(AuthDTO auth, int page, int corporationId, bool includeCompleted = false)
         {
             checkAuth(auth, Scopes.ESI_INDUSTRY_READ_CORPORATION_MINING_1);
 
@@ -128,7 +128,7 @@ namespace EVEStandard.API
 
             checkResponse("MoonExtractionTimersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<MiningExtraction>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<MiningExtraction>>(responseModel);
         }
     }
 }

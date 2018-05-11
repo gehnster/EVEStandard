@@ -15,7 +15,7 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<(List<AggregateStats>, long)> YearlyAggregateStatsV2Async(AuthDTO auth, long page)
+        public async Task<ESIModelDTO<List<AggregateStats>>> YearlyAggregateStatsV2Async(AuthDTO auth, int page)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERSTATS_READ_1);
 
@@ -28,28 +28,28 @@ namespace EVEStandard.API
 
             checkResponse("YearlyAggregateStatsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<AggregateStats>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<AggregateStats>>(responseModel);
         }
 
-        public async Task<CharacterInfo> GetCharacterPublicInfoV4Async(long characterId)
+        public async Task<ESIModelDTO<CharacterInfo>> GetCharacterPublicInfoV4Async(int characterId)
         {
             var responseModel = await GetAsync("/v4/characters/" + characterId + "/");
 
             checkResponse("PublicInfoV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<CharacterInfo>(responseModel.JSONString);
+            return returnModelDTO<CharacterInfo>(responseModel);
         }
 
-        public async Task<List<CharacterAffiliation>> AffiliationV1Async(List<long> characterIds)
+        public async Task<ESIModelDTO<List<CharacterAffiliation>>> AffiliationV1Async(List<int> characterIds)
         {
             var responseModel = await PostAsync("/v1/characters/affiliation/", null, characterIds);
 
             checkResponse("AffiliationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<CharacterAffiliation>>(responseModel.JSONString);
+            return returnModelDTO<List<CharacterAffiliation>>(responseModel);
         }
 
-        public async Task<float> CalculationCSPAChargeCostV4Async(AuthDTO auth, List<long> characterIds)
+        public async Task<ESIModelDTO<float>> CalculationCSPAChargeCostV4Async(AuthDTO auth, List<int> characterIds)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_CONTACTS_1);
 
@@ -57,10 +57,10 @@ namespace EVEStandard.API
 
             checkResponse("CalculationCSPAChargeCostV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<float>(responseModel.JSONString);
+            return returnModelDTO<float>(responseModel);
         }
 
-        public async Task<List<CharacterName>> GetCharacterNamesV1Async(List<long> characterIds)
+        public async Task<ESIModelDTO<List<CharacterName>>> GetCharacterNamesV1Async(List<int> characterIds)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -71,28 +71,28 @@ namespace EVEStandard.API
 
             checkResponse("GetCharacterNamesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<CharacterName>>(responseModel.JSONString);
+            return returnModelDTO<List<CharacterName>>(responseModel);
         }
 
-        public async Task<Icons> GetCharacterPortraitsV2Async(long characterId)
+        public async Task<ESIModelDTO<Icons>> GetCharacterPortraitsV2Async(int characterId)
         {
             var responseModel = await GetAsync("/v2/characters/" + characterId + "/portrait/");
 
             checkResponse("GetCharacterPortraitsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Icons>(responseModel.JSONString);
+            return returnModelDTO<Icons>(responseModel);
         }
 
-        public async Task<(List<CharacterCorporationHistory>, long)> GetCorporationHistoryV1Async(long characterId)
+        public async Task<ESIModelDTO<List<CharacterCorporationHistory>>> GetCorporationHistoryV1Async(int characterId)
         {
             var responseModel = await GetAsync("/v1/characters/" + characterId + "/corporationhistory/");
 
             checkResponse("GetCorporationHistoryV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<CharacterCorporationHistory>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<CharacterCorporationHistory>>(responseModel);
         }
 
-        public async Task<List<CharacterMedals>> GetMedalsV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<List<CharacterMedals>>> GetMedalsV1Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_MEDALS_1);
 
@@ -100,10 +100,10 @@ namespace EVEStandard.API
 
             checkResponse("GetMedalsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<CharacterMedals>>(responseModel.JSONString);
+            return returnModelDTO<List<CharacterMedals>>(responseModel);
         }
 
-        public async Task<(List<Standing>, long)> GetStandingsV1Async(AuthDTO auth, long page)
+        public async Task<ESIModelDTO<List<Standing>>> GetStandingsV1Async(AuthDTO auth, int page)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_STANDINGS_1);
 
@@ -111,10 +111,10 @@ namespace EVEStandard.API
 
             checkResponse("GetStandingsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<Standing>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<Standing>>(responseModel);
         }
 
-        public async Task<List<AgentResearch>> GetAgentsResearchV1Async(AuthDTO auth, long page)
+        public async Task<ESIModelDTO<List<AgentResearch>>> GetAgentsResearchV1Async(AuthDTO auth, int page)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_AGENTS_RESEARCH_1);
 
@@ -122,10 +122,10 @@ namespace EVEStandard.API
 
             checkResponse("GetAgentsResearchV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<AgentResearch>>(responseModel.JSONString);
+            return returnModelDTO<List<AgentResearch>>(responseModel);
         }
 
-        public async Task<(List<Blueprint>, long)> GetBlueprintsV2Async(AuthDTO auth, long page)
+        public async Task<ESIModelDTO<List<Blueprint>>> GetBlueprintsV2Async(AuthDTO auth, int page)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_BLUEPRINTS_1);
 
@@ -138,10 +138,10 @@ namespace EVEStandard.API
 
             checkResponse("GetBlueprintsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<Blueprint>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<Blueprint>>(responseModel);
         }
 
-        public async Task<Fatigue> GetJumpFatigueV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<Fatigue>> GetJumpFatigueV1Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_FATIGUE_1);
 
@@ -149,10 +149,10 @@ namespace EVEStandard.API
 
             checkResponse("GetJumpFatigueV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Fatigue>(responseModel.JSONString);
+            return returnModelDTO<Fatigue>(responseModel);
         }
 
-        public async Task<(List<CharacterContactNotification>, long)> GetNewContactNotificationsV1Async(AuthDTO auth, long page)
+        public async Task<ESIModelDTO<List<CharacterContactNotification>>> GetNewContactNotificationsV1Async(AuthDTO auth, int page)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERSTATS_READ_1);
 
@@ -165,10 +165,10 @@ namespace EVEStandard.API
 
             checkResponse("GetNewContactNotificationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<CharacterContactNotification>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<CharacterContactNotification>>(responseModel);
         }
 
-        public async Task<List<Notification>> GetCharacterNotificationsV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<List<Notification>>> GetCharacterNotificationsV1Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_NOTIFICATIONS_1);
 
@@ -176,10 +176,10 @@ namespace EVEStandard.API
 
             checkResponse("GetCharacterNotificationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<Notification>>(responseModel.JSONString);
+            return returnModelDTO<List<Notification>>(responseModel);
         }
 
-        public async Task<CharacterCorporationRoles> GetCharacterCorporationRolesV2Async(AuthDTO auth)
+        public async Task<ESIModelDTO<CharacterCorporationRoles>> GetCharacterCorporationRolesV2Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_CORPORATION_ROLES_1);
 
@@ -187,10 +187,10 @@ namespace EVEStandard.API
 
             checkResponse("GetCharacterCorporationRolesV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<CharacterCorporationRoles>(responseModel.JSONString);
+            return returnModelDTO<CharacterCorporationRoles>(responseModel);
         }
 
-        public async Task<List<CharacterTitle>> GetCharacterCorporationTitlesV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<List<CharacterTitle>>> GetCharacterCorporationTitlesV1Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_TITLES_1);
 
@@ -198,7 +198,7 @@ namespace EVEStandard.API
 
             checkResponse("GetCharacterCorporationTitlesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<CharacterTitle>>(responseModel.JSONString);
+            return returnModelDTO<List<CharacterTitle>>(responseModel);
         }
     }
 }

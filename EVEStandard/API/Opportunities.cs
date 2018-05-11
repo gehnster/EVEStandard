@@ -15,16 +15,16 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<List<int>> GetOpportunitiesGroupsV1Async()
+        public async Task<ESIModelDTO<List<int>>> GetOpportunitiesGroupsV1Async()
         {
             var responseModel = await GetAsync("/v1/opportunities/groups/");
 
             checkResponse("GetOpportunitiesGroupsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
+            return returnModelDTO<List<int>>(responseModel);
         }
 
-        public async Task<(OpportunitiesGroup, string)> GetOpportunitiesGroupV1Async(int groupId, string language = Language.English)
+        public async Task<ESIModelDTO<OpportunitiesGroup>> GetOpportunitiesGroupV1Async(int groupId, string language = Language.English)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -35,28 +35,28 @@ namespace EVEStandard.API
 
             checkResponse("GetOpportunitiesGroupV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<OpportunitiesGroup>(responseModel.JSONString), responseModel.Language);
+            return returnModelDTO<OpportunitiesGroup>(responseModel);
         }
 
-        public async Task<List<int>> GetOpportunitiesTasksV1Async()
+        public async Task<ESIModelDTO<List<int>>> GetOpportunitiesTasksV1Async()
         {
             var responseModel = await GetAsync("/v1/opportunities/tasks/");
 
             checkResponse("GetOpportunitiesTasksV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
+            return returnModelDTO<List<int>>(responseModel);
         }
 
-        public async Task<OpportunitiesTask> GetOpportunitiesTaskV1Async(int taskId)
+        public async Task<ESIModelDTO<OpportunitiesTask>> GetOpportunitiesTaskV1Async(int taskId)
         {
             var responseModel = await GetAsync("/v1/opportunities/tasks/" + taskId + "/");
 
             checkResponse("GetOpportunitiesTaskV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<OpportunitiesTask>(responseModel.JSONString);
+            return returnModelDTO<OpportunitiesTask>(responseModel);
         }
 
-        public async Task<List<CharacterTask>> GetCharacterCompletedTaskV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<List<CharacterTask>>> GetCharacterCompletedTaskV1Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_OPPORTUNITIES_1);
 
@@ -64,7 +64,7 @@ namespace EVEStandard.API
 
             checkResponse("GetCharacterCompletedTaskV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<CharacterTask>>(responseModel.JSONString);
+            return returnModelDTO<List<CharacterTask>>(responseModel);
         }
     }
 }

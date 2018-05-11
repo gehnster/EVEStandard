@@ -24,7 +24,7 @@ namespace EVEStandard.API
             checkResponse("DeleteFittingV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
-        public async Task<List<CharacterFitting>> GetFittingsV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<List<CharacterFitting>>> GetFittingsV1Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_FITTINGS_READ_FITTINGS_1);
 
@@ -32,10 +32,10 @@ namespace EVEStandard.API
 
             checkResponse("TrackCorporationMembersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<CharacterFitting>>(responseModel.JSONString);
+            return returnModelDTO<List<CharacterFitting>>(responseModel);
         }
 
-        public async Task<long> CreateFittingV1Async(AuthDTO auth, ShipFitting fitting)
+        public async Task<ESIModelDTO<long>> CreateFittingV1Async(AuthDTO auth, ShipFitting fitting)
         {
             checkAuth(auth, Scopes.ESI_FITTINGS_READ_FITTINGS_1);
 
@@ -43,7 +43,7 @@ namespace EVEStandard.API
 
             checkResponse("TrackCorporationMembersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<long>(responseModel.JSONString);
+            return returnModelDTO<long>(responseModel);
         }
     }
 }

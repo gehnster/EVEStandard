@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using EVEStandard.Models;
+using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -13,7 +14,7 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<List<int>> ListWarsV1Async(int maxWarId)
+        public async Task<ESIModelDTO<List<int>>> ListWarsV1Async(int maxWarId)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -24,19 +25,19 @@ namespace EVEStandard.API
 
             checkResponse("ListWarsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
+            return returnModelDTO<List<int>>(responseModel);
         }
 
-        public async Task<War> GetWarInformationV1Async(int warId)
+        public async Task<ESIModelDTO<War>> GetWarInformationV1Async(int warId)
         {
             var responseModel = await GetAsync("/v1/wars/" + warId + "/");
 
             checkResponse("GetWarInformationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<War>(responseModel.JSONString);
+            return returnModelDTO<War>(responseModel);
         }
 
-        public async Task<(List<KillmailIndex>, long)> ListKillsForWarV1Async(int warId, long page=1)
+        public async Task<ESIModelDTO<List<KillmailIndex>>> ListKillsForWarV1Async(int warId, int page=1)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -47,7 +48,7 @@ namespace EVEStandard.API
 
             checkResponse("ListKillsForWarV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<KillmailIndex>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<KillmailIndex>>(responseModel);
         }
     }
 }

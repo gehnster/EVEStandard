@@ -15,7 +15,7 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<(List<Asset>, long)> GetCharacterAssetsV3Async(AuthDTO auth, long page)
+        public async Task<ESIModelDTO<List<Asset>>> GetCharacterAssetsV3Async(AuthDTO auth, int page)
         {
             checkAuth(auth, Scopes.ESI_ASSETS_READ_ASSETS_1);
 
@@ -28,10 +28,10 @@ namespace EVEStandard.API
 
             checkResponse("GetCharacterAssetsV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<Asset>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<Asset>>(responseModel);
         }
 
-        public async Task<(List<Asset>, long)> GetCorporationAssetsV2Async(AuthDTO auth, long corporationId, long page)
+        public async Task<ESIModelDTO<List<Asset>>> GetCorporationAssetsV2Async(AuthDTO auth, int corporationId, int page)
         {
             checkAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
 
@@ -44,10 +44,10 @@ namespace EVEStandard.API
 
             checkResponse("GetCorporationAssetsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return (JsonConvert.DeserializeObject<List<Asset>>(responseModel.JSONString), responseModel.MaxPages);
+            return returnModelDTO<List<Asset>>(responseModel);
         }
 
-        public async Task<List<AssetName>> GetCharacterAssetNamesV1Async(AuthDTO auth, List<long> itemIds)
+        public async Task<ESIModelDTO<List<AssetName>>> GetCharacterAssetNamesV1Async(AuthDTO auth, List<long> itemIds)
         {
             checkAuth(auth, Scopes.ESI_ASSETS_READ_ASSETS_1);
 
@@ -55,10 +55,10 @@ namespace EVEStandard.API
 
             checkResponse("GetCharacterAssetNamesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<AssetName>>(responseModel.JSONString);
+            return returnModelDTO<List<AssetName>>(responseModel);
         }
 
-        public async Task<List<AssetLocation>> GetCharacterAssetLocationsV2Async(AuthDTO auth, List<long> itemIds)
+        public async Task<ESIModelDTO<List<AssetLocation>>> GetCharacterAssetLocationsV2Async(AuthDTO auth, List<long> itemIds)
         {
             checkAuth(auth, Scopes.ESI_ASSETS_READ_ASSETS_1);
 
@@ -66,10 +66,10 @@ namespace EVEStandard.API
 
             checkResponse("GetCharacterAssetLocationsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<AssetLocation>>(responseModel.JSONString);
+            return returnModelDTO<List<AssetLocation>>(responseModel);
         }
 
-        public async Task<List<AssetName>> GetCorporationAssetNamesV1Async(AuthDTO auth, List<long> itemIds, long corpId)
+        public async Task<ESIModelDTO<List<AssetName>>> GetCorporationAssetNamesV1Async(AuthDTO auth, List<long> itemIds, long corpId)
         {
             checkAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
 
@@ -77,10 +77,10 @@ namespace EVEStandard.API
 
             checkResponse("GetCorporationAssetNamesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<AssetName>>(responseModel.JSONString);
+            return returnModelDTO<List<AssetName>>(responseModel);
         }
 
-        public async Task<List<AssetLocation>> GetCorporationAssetLocationsV2Async(AuthDTO auth, List<long> itemIds, long corpId)
+        public async Task<ESIModelDTO<List<AssetLocation>>> GetCorporationAssetLocationsV2Async(AuthDTO auth, List<long> itemIds, long corpId)
         {
             checkAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
 
@@ -88,7 +88,7 @@ namespace EVEStandard.API
 
             checkResponse("GetCorporationAssetLocationsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<AssetLocation>>(responseModel.JSONString);
+            return returnModelDTO<List<AssetLocation>>(responseModel);
         }
     }
 }

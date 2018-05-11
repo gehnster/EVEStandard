@@ -14,7 +14,7 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<Clones> GetClonesV3Async(AuthDTO auth)
+        public async Task<ESIModelDTO<Clones>> GetClonesV3Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_CLONES_READ_CLONES_1);
 
@@ -22,10 +22,10 @@ namespace EVEStandard.API
 
             checkResponse("GetClonesV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Clones>(responseModel.JSONString);
+            return returnModelDTO<Clones>(responseModel);
         }
 
-        public async Task<List<int>> GetActiveImplantsV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<List<int>>> GetActiveImplantsV1Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_CLONES_READ_IMPLANTS_1);
 
@@ -33,7 +33,7 @@ namespace EVEStandard.API
 
             checkResponse("GetActiveImplantsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
+            return returnModelDTO<List<int>>(responseModel);
         }
     }
 }

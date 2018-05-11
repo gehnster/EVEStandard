@@ -10,8 +10,9 @@ namespace EVEStandard.Models.API
         public bool NotModified { get; set; }
         public string ETag { get; set; }
         public string Language { get; set; }
-        public DateTime Expires { get; set; }
-        public DateTime LastModified { get; set; }
-        public long MaxPages { get; set; }
+        public DateTimeOffset? Expires { get; set; }
+        public DateTimeOffset? LastModified { get; set; }
+        public int MaxPages { get; set; }
+        public int RemainingErrors { get; set; }
     }
 }

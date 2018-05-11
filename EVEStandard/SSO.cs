@@ -80,7 +80,7 @@ namespace EVEStandard
         /// <exception cref="EVEStandardException" ><paramref name="scopes"/> parameter was empty or null</exception>
         public Authorization AuthorizeToEVEUri(List<string> scopes)
         {
-            return AuthorizeToEVEUri(scopes, Convert.ToBase64String(Guid.NewGuid().ToByteArray()));
+            return AuthorizeToEVEUri(scopes, Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Replace("+", ""));  // Bug fix: Web API has an issue with returning + signs so we are removing them from the state string.
         }
 
         /// <summary>

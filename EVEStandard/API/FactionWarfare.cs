@@ -16,61 +16,61 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<List<FactionWarData>> DataAboutFactionWarsV1Async()
+        public async Task<ESIModelDTO<List<FactionWarData>>> DataAboutFactionWarsV1Async()
         {
             var responseModel = await GetAsync("/v1/fw/wars/");
 
             checkResponse("DataAboutFactionWarsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<FactionWarData>>(responseModel.JSONString);
+            return returnModelDTO<List<FactionWarData>>(responseModel);
         }
 
-        public async Task<List<FactionWarStats>> StatsAboutFactionWarsV1Async()
+        public async Task<ESIModelDTO<List<FactionWarStats>>> StatsAboutFactionWarsV1Async()
         {
             var responseModel = await GetAsync("/v1/fw/stats/");
 
             checkResponse("StatsAboutFactionWarsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<FactionWarStats>>(responseModel.JSONString);
+            return returnModelDTO<List<FactionWarStats>>(responseModel);
         }
 
-        public async Task<List<FactionWarSystem>> FactionWarSystemOwnershipV1Async()
+        public async Task<ESIModelDTO<List<FactionWarSystem>>> FactionWarSystemOwnershipV1Async()
         {
             var responseModel = await GetAsync("/v1/fw/systems/");
 
             checkResponse("FactionWarSystemOwnershipV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<FactionWarSystem>>(responseModel.JSONString);
+            return returnModelDTO<List<FactionWarSystem>>(responseModel);
         }
 
-        public async Task<FactionWarFactionLeaderboard> TopFactionsV1Async()
+        public async Task<ESIModelDTO<FactionWarFactionLeaderboard>> TopFactionsV1Async()
         {
             var responseModel = await GetAsync("/v1/fw/leaderboards/");
 
             checkResponse("TopFactionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<FactionWarFactionLeaderboard>(responseModel.JSONString);
+            return returnModelDTO<FactionWarFactionLeaderboard>(responseModel);
         }
 
-        public async Task<FactionWarPilotLeaderboard> TopPilotsV1Async()
+        public async Task<ESIModelDTO<FactionWarPilotLeaderboard>> TopPilotsV1Async()
         {
             var responseModel = await GetAsync("/v1/fw/leaderboards/characters/");
 
             checkResponse("TopPilotsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<FactionWarPilotLeaderboard>(responseModel.JSONString);
+            return returnModelDTO<FactionWarPilotLeaderboard>(responseModel);
         }
 
-        public async Task<FactionWarCorporationLeaderboard> TopCorporationsV1Async()
+        public async Task<ESIModelDTO<FactionWarCorporationLeaderboard>> TopCorporationsV1Async()
         {
             var responseModel = await GetAsync("/v1/fw/leaderboards/corporations/");
 
             checkResponse("TopCorporationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<FactionWarCorporationLeaderboard>(responseModel.JSONString);
+            return returnModelDTO<FactionWarCorporationLeaderboard>(responseModel);
         }
 
-        public async Task<FactionWarCorporationStats> CorporationOverviewInFactionWarsV1Async(AuthDTO auth, long corporationId)
+        public async Task<ESIModelDTO<FactionWarCorporationStats>> CorporationOverviewInFactionWarsV1Async(AuthDTO auth, int corporationId)
         {
             checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_FW_STATS_1);
 
@@ -78,10 +78,10 @@ namespace EVEStandard.API
 
             checkResponse("CorporationOverviewInFactionWarsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<FactionWarCorporationStats>(responseModel.JSONString);
+            return returnModelDTO<FactionWarCorporationStats>(responseModel);
         }
 
-        public async Task<FactionWarCharacterStats> CharacterOverviewInFactionWarsV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<FactionWarCharacterStats>> CharacterOverviewInFactionWarsV1Async(AuthDTO auth)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_FW_STATS_1);
 
@@ -89,7 +89,7 @@ namespace EVEStandard.API
 
             checkResponse("CharacterOverviewInFactionWarsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<FactionWarCharacterStats>(responseModel.JSONString);
+            return returnModelDTO<FactionWarCharacterStats>(responseModel);
         }
     }
 }

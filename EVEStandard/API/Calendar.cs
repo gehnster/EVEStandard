@@ -16,7 +16,7 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<List<EventSummary>> ListCalendarEventSummariesV1Async(AuthDTO auth, long? fromEventId=null)
+        public async Task<ESIModelDTO<List<EventSummary>>> ListCalendarEventSummariesV1Async(AuthDTO auth, long? fromEventId=null)
         {
             checkAuth(auth, Scopes.ESI_CALENDAR_READ_CALENDAR_EVENTS_1);
 
@@ -33,10 +33,10 @@ namespace EVEStandard.API
 
             checkResponse("ListCalendarEventSummariesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<EventSummary>>(responseModel.JSONString);
+            return returnModelDTO<List<EventSummary>>(responseModel);
         }
 
-        public async Task<Event> GetAnEventV3Async(AuthDTO auth, long eventId)
+        public async Task<ESIModelDTO<Event>> GetAnEventV3Async(AuthDTO auth, long eventId)
         {
             checkAuth(auth, Scopes.ESI_CALENDAR_READ_CALENDAR_EVENTS_1);
 
@@ -44,7 +44,7 @@ namespace EVEStandard.API
 
             checkResponse("GetAnEventV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<Event>(responseModel.JSONString);
+            return returnModelDTO<Event>(responseModel);
         }
 
         public async Task RespondToAnEventV3Async(AuthDTO auth, long eventId, EventResponse response)
@@ -59,7 +59,7 @@ namespace EVEStandard.API
             checkResponse("RespondToAnEventV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
-        public async Task<List<EventAttendee>> GetAttendeesV1Async(AuthDTO auth, long eventId)
+        public async Task<ESIModelDTO<List<EventAttendee>>> GetAttendeesV1Async(AuthDTO auth, long eventId)
         {
             checkAuth(auth, Scopes.ESI_CALENDAR_READ_CALENDAR_EVENTS_1);
 
@@ -67,7 +67,7 @@ namespace EVEStandard.API
 
             checkResponse("GetAttendeesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
-            return JsonConvert.DeserializeObject<List<EventAttendee>>(responseModel.JSONString);
+            return returnModelDTO<List<EventAttendee>>(responseModel);
         }
     }
 }
