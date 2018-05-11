@@ -35,7 +35,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/search/", auth, queryParameters);
 
-            checkResponse("SearchCharacterV3Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("SearchCharacterV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<CharacterSearch>(responseModel.JSONString);
         }
@@ -57,7 +57,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/search/", queryParameters);
 
-            checkResponse("SearchV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("SearchV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Search>(responseModel.JSONString);
         }

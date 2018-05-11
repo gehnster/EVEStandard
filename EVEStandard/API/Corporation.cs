@@ -26,7 +26,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/shareholders/", auth, queryParameters);
 
-            checkResponse("GetCorporationShareholdersV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationShareholdersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<Shareholder>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -35,7 +35,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v4/corporations/" + corporationId + "/");
 
-            checkResponse("GetCorporationInfoV4Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationInfoV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<CorporationInfo>(responseModel.JSONString);
         }
@@ -44,7 +44,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v2/corporations/" + corporationId + "/alliancehistory/");
 
-            checkResponse("GetAllianceHistoryV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetAllianceHistoryV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<AllianceHistory>>(responseModel.JSONString);
         }
@@ -58,7 +58,7 @@ namespace EVEStandard.API
                 { "corporation_ids", corporationIds == null || corporationIds.Count == 0 ? "" : string.Join(",", corporationIds) }
             };
 
-            checkResponse("GetCorporationNamesV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationNamesV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<CorporationName>>(responseModel.JSONString);
         }
@@ -69,7 +69,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v3/corporations/" + corporationId + "/members/", auth);
 
-            checkResponse("GetCorporationMembersV3Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationMembersV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString);
         }
@@ -80,7 +80,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/roles/", auth);
 
-            checkResponse("GetCorporationMemberRolesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationMemberRolesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<CorporationRoles>>(responseModel.JSONString);
         }
@@ -96,7 +96,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/roles/history/", auth, queryParameters);
 
-            checkResponse("GetCorporationMemberRolesHistoryV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationMemberRolesHistoryV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<CorporationRoleHistory>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -105,7 +105,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/icons/");
 
-            checkResponse("GetCorporationIconV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationIconV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Icons>(responseModel.JSONString);
         }
@@ -114,7 +114,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/corporations/npccorps/");
 
-            checkResponse("GetNPCCorporationsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetNPCCorporationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString);
         }
@@ -130,7 +130,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/corporations/" + corporationId + "/structures/", auth, queryParameters);
 
-            checkResponse("GetCorporationStructuresV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationStructuresV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<CorporationStructure>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -141,7 +141,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/membertracking/", auth);
 
-            checkResponse("TrackCorporationMembersV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("TrackCorporationMembersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<CorporationMemberTracking>>(responseModel.JSONString);
         }
@@ -152,7 +152,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/divisions/", auth);
 
-            checkResponse("GetCorporationDivisionsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationDivisionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<CorporationDivision>(responseModel.JSONString);
         }
@@ -163,7 +163,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/members/limit/", auth);
 
-            checkResponse("GetCorporationMemberLimitV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationMemberLimitV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<int>(responseModel.JSONString);
         }
@@ -174,7 +174,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/titles/", auth);
 
-            checkResponse("GetCorporationTitlesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationTitlesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<CorporationTitle>>(responseModel.JSONString);
         }
@@ -185,7 +185,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/members/titles/", auth);
 
-            checkResponse("GetCorporationsMembersTitlesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationsMembersTitlesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<CorporationMemberTitles>>(responseModel.JSONString);
         }
@@ -201,7 +201,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/corporations/" + corporationId + "/blueprints/", auth, queryParameters);
 
-            checkResponse("GetCorporationBlueprintsV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationBlueprintsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<Blueprint>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -217,7 +217,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/standings/", auth);
 
-            checkResponse("GetStandingsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetStandingsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<Standing>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -233,7 +233,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/starbases/", auth);
 
-            checkResponse("GetCorporationStarbasesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationStarbasesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<Starbase>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -249,7 +249,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/starbases/" + starbaseId + "/", auth, queryParameters);
 
-            checkResponse("GetStarbaseDetailV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetStarbaseDetailV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<StarbaseDetail>(responseModel.JSONString);
         }
@@ -265,7 +265,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/corporations/" + corporationId + "/containers/logs/", auth);
 
-            checkResponse("GetAllCorporationALSCLogsV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetAllCorporationALSCLogsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<ContainerLogs>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -276,7 +276,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/facilities/", auth);
 
-            checkResponse("GetCorporationFacilitiesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationFacilitiesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<Facility>>(responseModel.JSONString);
         }
@@ -292,7 +292,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/medals/", auth);
 
-            checkResponse("GetCorporationMedalsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationMedalsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<CorporationMedal>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -308,7 +308,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/medals/issued/", auth);
 
-            checkResponse("GetCorporationIssuedMedalsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationIssuedMedalsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<CorporationMedalIssued>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -324,7 +324,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/outposts/", auth);
 
-            checkResponse("GetCorporationOutpostsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationOutpostsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -335,7 +335,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/outposts/" + outpostId + "/", auth);
 
-            checkResponse("GetCorporationOutpostDetailsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationOutpostDetailsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<OutpostDetail>(responseModel.JSONString);
         }

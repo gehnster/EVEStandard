@@ -12,5 +12,7 @@ namespace EVEStandard.Models.API
         public string Language { get; set; }
         public DateTime Expires { get; set; }
         public DateTime LastModified { get; set; }
+        public string ETag { get; set; }
+        public bool NotModified { get; set; }
     }
 }

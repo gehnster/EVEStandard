@@ -31,7 +31,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/calendar/", auth, queryParameters);
 
-            checkResponse("ListCalendarEventSummariesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListCalendarEventSummariesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<EventSummary>>(responseModel.JSONString);
         }
@@ -42,7 +42,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/calendar/" + eventId + "/", auth);
 
-            checkResponse("GetAnEventV3Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetAnEventV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Event>(responseModel.JSONString);
         }
@@ -56,7 +56,7 @@ namespace EVEStandard.API
 
             var responseModel = await this.PutAsync("/v3/characters/" + auth.Character.CharacterID + "/calendar/" + eventId + "/", auth, body);
 
-            checkResponse("RespondToAnEventV3Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("RespondToAnEventV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
         public async Task<List<EventAttendee>> GetAttendeesV1Async(AuthDTO auth, long eventId)
@@ -65,7 +65,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/calendar/" + eventId + "/attendees/", auth);
 
-            checkResponse("GetAttendeesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetAttendeesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<EventAttendee>>(responseModel.JSONString);
         }

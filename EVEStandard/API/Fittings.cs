@@ -21,7 +21,7 @@ namespace EVEStandard.API
 
             var responseModel = await DeleteAsync("/v1/characters/" + auth.Character.CharacterID + "/fittings/" + fittingId + "/", auth);
 
-            checkResponse("DeleteFittingV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("DeleteFittingV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
         public async Task<List<CharacterFitting>> GetFittingsV1Async(AuthDTO auth)
@@ -30,7 +30,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/fittings/", auth);
 
-            checkResponse("TrackCorporationMembersV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("TrackCorporationMembersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<CharacterFitting>>(responseModel.JSONString);
         }
@@ -41,7 +41,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/characters/" + auth.Character.CharacterID + "/fittings/", auth, fitting);
 
-            checkResponse("TrackCorporationMembersV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("TrackCorporationMembersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<long>(responseModel.JSONString);
         }

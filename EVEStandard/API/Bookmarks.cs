@@ -26,7 +26,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/bookmarks/", auth, queryParameters);
 
-            checkResponse("ListBookmarksV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListBookmarksV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<Bookmark>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -42,7 +42,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/bookmarks/folders/", auth, queryParameters);
 
-            checkResponse("ListBookmarkFoldersV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListBookmarkFoldersV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<BookmarkFolder>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -58,7 +58,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporation/" + corporationId + "/bookmarks/", auth, queryParameters);
 
-            checkResponse("ListCorporationBookmarksV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListCorporationBookmarksV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<Bookmark>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -74,7 +74,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporation/" + corporationId + "/bookmarks/folders/", auth, queryParameters);
 
-            checkResponse("ListCorporationBookmarkFoldersV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListCorporationBookmarkFoldersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<BookmarkFolder>>(responseModel.JSONString), responseModel.MaxPages);
         }

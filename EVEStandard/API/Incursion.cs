@@ -17,7 +17,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/incursions/");
 
-            checkResponse("ListIncursionsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListIncursionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<Incursion>>(responseModel.JSONString);
         }

@@ -21,7 +21,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v4/characters/" + auth.Character.CharacterID + "/skills/", auth);
 
-            checkResponse("GetCharacterSkillsV4Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterSkillsV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<CharacterSkills>(responseModel.JSONString);
         }
@@ -32,7 +32,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/attributes/", auth);
 
-            checkResponse("GetCharacterAttributesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterAttributesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<CharacterAttributes>(responseModel.JSONString);
         }
@@ -43,7 +43,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/skillqueue/", auth);
 
-            checkResponse("GetCharacterSkillQueueV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterSkillQueueV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<SkillQueue>>(responseModel.JSONString);
         }

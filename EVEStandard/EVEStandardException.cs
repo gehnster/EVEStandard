@@ -21,7 +21,6 @@ namespace EVEStandard
 
     internal class EVEStandardAuthExpiredException : EVEStandardException
     {
-
     }
 
     internal class EVEStandardScopeNotAcquired : EVEStandardException
@@ -34,5 +33,9 @@ namespace EVEStandard
             : base(message)
         {
         }
+    }
+
+    internal class EVEStandardUnauthorizedException : EVEStandardException
+    {
     }
 }

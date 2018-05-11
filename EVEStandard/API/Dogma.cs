@@ -17,7 +17,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/dogma/attributes/");
 
-            checkResponse("GetAttributesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetAttributesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString);
         }
@@ -26,7 +26,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/dogma/attributes/" + attributeId + "/");
 
-            checkResponse("GetAttributeInfoV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetAttributeInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<DogmaAttribute>(responseModel.JSONString);
         }
@@ -35,7 +35,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/dogma/effects/");
 
-            checkResponse("GetEffectsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetEffectsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString);
         }
@@ -44,7 +44,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v2/dogma/effects/" + effectId + "/");
 
-            checkResponse("GetEffectInfoV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetEffectInfoV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<DogmaEffect>(responseModel.JSONString);
         }

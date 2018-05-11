@@ -20,7 +20,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/markets/prices/");
 
-            checkResponse("ListMarketPricesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListMarketPricesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<MarketPrice>>(responseModel.JSONString);
         }
@@ -40,7 +40,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/markets/" + regionId + "/orders/", queryParameters);
 
-            checkResponse("ListOrdersInRegionV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListOrdersInRegionV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<MarketOrder>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -54,7 +54,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/markets/" + regionId + "/history/", queryParameters);
 
-            checkResponse("ListHistoricalMarketStatisticsInRegionV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListHistoricalMarketStatisticsInRegionV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<MarketRegionHistory>>(responseModel.JSONString);
         }
@@ -70,7 +70,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/markets/structures/" + structureId + "/", queryParameters);
 
-            checkResponse("ListOrdersInStructureV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListOrdersInStructureV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<MarketOrder>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -79,7 +79,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/markets/groups/");
 
-            checkResponse("GetItemGroupsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetItemGroupsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<int>(responseModel.JSONString);
         }
@@ -93,7 +93,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/markets/groups/" + marketGroupId + "/", queryParameters);
 
-            checkResponse("GetItemGroupInfoV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetItemGroupInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<MarketGroup>(responseModel.JSONString), responseModel.Language);
         }
@@ -104,7 +104,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/orders/");
 
-            checkResponse("ListOpenOrdersFromCharacterV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListOpenOrdersFromCharacterV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<CharacterMarketOrder>>(responseModel.JSONString);
         }
@@ -120,7 +120,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/orders/history/", queryParameters);
 
-            checkResponse("ListHistoricalOrdersByCharacterV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListHistoricalOrdersByCharacterV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<CharacterMarketOrderHistory>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -134,7 +134,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/markets/" + regionId + "/types/", queryParameters);
 
-            checkResponse("ListHistoricalOrdersByCharacterV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListHistoricalOrdersByCharacterV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -145,7 +145,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/corporations/" + corporationId + "/orders/");
 
-            checkResponse("ListOpenOrdersFromCorporationV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListOpenOrdersFromCorporationV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<CorporationMarketOrder>>(responseModel.JSONString);
         }
@@ -161,7 +161,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/orders/history/", queryParameters);
 
-            checkResponse("ListHistoricalOrdersByCorporationV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListHistoricalOrdersByCorporationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<CorporationMarketOrderHistory>>(responseModel.JSONString), responseModel.MaxPages);
         }

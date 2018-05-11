@@ -26,7 +26,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/assets/", auth, queryParameters);
 
-            checkResponse("GetCharacterAssetsV3Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterAssetsV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<Asset>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -42,7 +42,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/corporations/" + corporationId + "/assets/", auth, queryParameters);
 
-            checkResponse("GetCorporationAssetsV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationAssetsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<Asset>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -53,7 +53,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/characters/" + auth.Character.CharacterID + "/assets/names/", auth, itemIds);
 
-            checkResponse("GetCharacterAssetNamesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterAssetNamesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<AssetName>>(responseModel.JSONString);
         }
@@ -64,7 +64,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v2/characters/" + auth.Character.CharacterID + "/assets/locations/", auth, itemIds);
 
-            checkResponse("GetCharacterAssetLocationsV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterAssetLocationsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<AssetLocation>>(responseModel.JSONString);
         }
@@ -75,7 +75,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/corporations/" + corpId + "/assets/names/", auth, itemIds);
 
-            checkResponse("GetCorporationAssetNamesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationAssetNamesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<AssetName>>(responseModel.JSONString);
         }
@@ -86,7 +86,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v2/corporations/" + corpId + "/assets/locations/", auth, itemIds);
 
-            checkResponse("GetCorporationAssetLocationsV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationAssetLocationsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<AssetLocation>>(responseModel.JSONString);
         }

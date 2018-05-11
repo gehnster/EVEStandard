@@ -21,7 +21,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/planets/", auth);
 
-            checkResponse("GetColoniesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetColoniesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<Colony>>(responseModel.JSONString);
         }
@@ -32,7 +32,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/planets/" + planetId + "/", auth);
 
-            checkResponse("GetColonyLayoutV3Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetColonyLayoutV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<ColonyLayout>(responseModel.JSONString);
         }
@@ -41,7 +41,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/universe/schematics/" + schematicId + "/");
 
-            checkResponse("GetSchematicInfoV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetSchematicInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<FactorySchematic>(responseModel.JSONString);
         }
@@ -57,7 +57,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/customs_offices/", auth, queryParameters);
 
-            checkResponse("ListCorporationCustomsOfficesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListCorporationCustomsOfficesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<CustomsOffice>>(responseModel.JSONString), responseModel.MaxPages);
         }

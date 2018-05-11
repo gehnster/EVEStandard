@@ -17,7 +17,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v3/alliances/" + allianceId + "/");
 
-            checkResponse("GetAllianceInfoV3Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetAllianceInfoV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Alliance>(responseModel.JSONString);
         }
@@ -26,7 +26,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/alliances/" + allianceId + "/corporations/");
 
-            checkResponse("ListAllianceCorporationsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListAllianceCorporationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString);
         }
@@ -40,7 +40,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/alliances/names/", queryParameters);
 
-            checkResponse("GetAllianceNamesV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetAllianceNamesV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<AllianceName>>(responseModel.JSONString);
         }
@@ -49,7 +49,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/alliances/" + allianceId + "/icons/");
 
-            checkResponse("GetAllianceIconV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetAllianceIconV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<AllianceIcons>(responseModel.JSONString);
         }
@@ -58,7 +58,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/alliances/");
 
-            checkResponse("ListAllAlliancesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListAllAlliancesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString);
         }

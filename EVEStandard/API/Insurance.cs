@@ -17,7 +17,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/insurance/prices/");
 
-            checkResponse("ListInsuranceLevelsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListInsuranceLevelsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<InsurancePrice>>(responseModel.JSONString);
         }

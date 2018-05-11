@@ -20,7 +20,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/loyalty/stores/" + corporationId + "/offers/");
 
-            checkResponse("ListLoyaltyStoreOffersV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListLoyaltyStoreOffersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<LoyaltyStoreOffer>>(responseModel.JSONString);
         }
@@ -31,7 +31,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/loyalty/points/", auth);
 
-            checkResponse("GetLoyaltyPointsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetLoyaltyPointsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<LoyaltyPoints>>(responseModel.JSONString);
         }

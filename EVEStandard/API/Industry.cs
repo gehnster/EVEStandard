@@ -19,7 +19,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/industry/facilities/");
 
-            checkResponse("ListIndustryFacilitiesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListIndustryFacilitiesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<IndustryFacility>>(responseModel.JSONString);
         }
@@ -28,7 +28,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/industry/systems/");
 
-            checkResponse("ListSolarSystemCostIndiciesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListSolarSystemCostIndiciesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<IndustrySystem>>(responseModel.JSONString);
         }
@@ -44,7 +44,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/industry/jobs/", auth, queryParameters);
 
-            checkResponse("ListCharacterIndustryJobsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListCharacterIndustryJobsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<IndustryJob>>(responseModel.JSONString);
         }
@@ -60,7 +60,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mining/", auth, queryParameters);
 
-            checkResponse("CharacterMiningLedgerV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("CharacterMiningLedgerV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<CharacterMining>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -76,7 +76,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporation/" + corporationId + "/mining/observers/", auth, queryParameters);
 
-            checkResponse("CorporationMiningObserversV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("CorporationMiningObserversV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<CorporationMiningObserver>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -92,7 +92,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporation/" + corporationId + "/mining/observers/" + observerId + "/", auth, queryParameters);
 
-            checkResponse("ObservedCorporationMiningV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ObservedCorporationMiningV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<CorporationObservedMining>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -109,7 +109,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporation/" + corporationId + "/industry/jobs/", auth, queryParameters);
 
-            checkResponse("ListCorporationIndustryJobsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListCorporationIndustryJobsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<IndustryJob>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -126,7 +126,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporation/" + corporationId + "/industry/jobs/", auth, queryParameters);
 
-            checkResponse("MoonExtractionTimersV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("MoonExtractionTimersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<MiningExtraction>>(responseModel.JSONString), responseModel.MaxPages);
         }

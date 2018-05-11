@@ -24,7 +24,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/route/" + origin + "/" + destination + "/", queryParameters);
 
-            checkResponse("GetRouteV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetRouteV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
         }

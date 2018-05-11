@@ -17,7 +17,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/sovereignty/structures/");
 
-            checkResponse("ListSovereigntyStructuresV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListSovereigntyStructuresV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<SovereigntyStructure>>(responseModel.JSONString);
         }
@@ -26,7 +26,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/sovereignty/campaigns/");
 
-            checkResponse("ListSovereigntyCampaignsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListSovereigntyCampaignsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<SovereigntyCampaign>>(responseModel.JSONString);
         }
@@ -35,7 +35,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/sovereignty/map/");
 
-            checkResponse("ListSovereigntyOfSystemsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListSovereigntyOfSystemsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<SovereigntyMap>>(responseModel.JSONString);
         }

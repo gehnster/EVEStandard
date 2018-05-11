@@ -19,7 +19,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/killmails/" + killmailId + "/" + killmailHash + "/");
 
-            checkResponse("GetKillmailV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetKillmailV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Killmail>(responseModel.JSONString);
         }
@@ -36,7 +36,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/killmails/recent/", auth, queryParameters);
 
-            checkResponse("GetCharacterKillsAndLossesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterKillsAndLossesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<KillmailIndex>>(responseModel.JSONString);
         }
@@ -52,7 +52,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/killmails/recent/", auth, queryParameters);
 
-            checkResponse("GetCorporationKillsAndLossesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationKillsAndLossesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<KillmailIndex>>(responseModel.JSONString);
         }

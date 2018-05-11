@@ -20,7 +20,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/location/", auth);
 
-            checkResponse("GetCharacterLocationV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterLocationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<CharacterLocation>(responseModel.JSONString);
         }
@@ -31,7 +31,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/ship/", auth);
 
-            checkResponse("GetCurrentShipV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCurrentShipV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<CharacterShip>(responseModel.JSONString);
         }
@@ -42,7 +42,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/online/", auth);
 
-            checkResponse("GetCharacterOnlineV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterOnlineV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<CharacterOnline>(responseModel.JSONString);
         }

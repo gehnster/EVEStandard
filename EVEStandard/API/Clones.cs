@@ -20,7 +20,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/clones/", auth);
 
-            checkResponse("GetClonesV3Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetClonesV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Clones>(responseModel.JSONString);
         }
@@ -31,7 +31,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/implants/", auth);
 
-            checkResponse("GetActiveImplantsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetActiveImplantsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
         }

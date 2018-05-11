@@ -27,7 +27,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v2/ui/autopilot/waypoint/", auth, null, queryParameters);
 
-            checkResponse("SetAutopilotWaypointV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("SetAutopilotWaypointV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
         public async Task OpenContractWindowV1Async(AuthDTO auth, long contractId)
@@ -41,7 +41,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/ui/openwindow/contract/", auth, null, queryParameters);
 
-            checkResponse("OpenContractWindowV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("OpenContractWindowV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
         public async Task OpenInformationWindowV1Async(AuthDTO auth, long targetId)
@@ -55,7 +55,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/ui/openwindow/information/", auth, null, queryParameters);
 
-            checkResponse("OpenInformationWindowV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("OpenInformationWindowV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
         public async Task OpenMarketDetailsV1Async(AuthDTO auth, long typeId)
@@ -69,7 +69,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/ui/openwindow/marketdetails/", auth, null, queryParameters);
 
-            checkResponse("OpenMarketDetailsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("OpenMarketDetailsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
         public async Task OpenNewMailWindowV1Async(AuthDTO auth, UiNewMail mail)
@@ -78,7 +78,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/ui/openwindow/newmail/", auth, mail);
 
-            checkResponse("OpenNewMailWindowV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("OpenNewMailWindowV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
     }
 }

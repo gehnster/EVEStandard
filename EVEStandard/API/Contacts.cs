@@ -26,7 +26,7 @@ namespace EVEStandard.API
 
             var responseModel = await DeleteAsync($"/v2/characters/{auth.Character.CharacterID}/contacts/", auth, queryParameters);
 
-            checkResponse("DeleteContactsV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("DeleteContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
         public async Task<(List<CharacterContact>, long)> GetContactsV2Async(AuthDTO auth, long page)
@@ -35,7 +35,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v2/characters/{auth.Character.CharacterID}/contacts/", auth);
 
-            checkResponse("GetContactsV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<CharacterContact>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -53,7 +53,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync($"/v2/characters/{auth.Character.CharacterID}/contacts/", auth, contactIds, queryParameters);
 
-            checkResponse("AddContactsV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("AddContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString);
         }
@@ -71,7 +71,7 @@ namespace EVEStandard.API
 
             var responseModel = await PutAsync($"/v2/characters/{auth.Character.CharacterID}/contacts/", auth, contactIds, queryParameters);
 
-            checkResponse("EditContactsV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("EditContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
         public async Task<(List<CorporationContact>, long)> GetCorporationContactsV2Async(AuthDTO auth, long page, long corporationId)
@@ -80,7 +80,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v2/corporations/{corporationId}/contacts/", auth);
 
-            checkResponse("GetCorporationContactsV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<CorporationContact>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -91,7 +91,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v2/alliances/{allianceId}/contacts/", auth);
 
-            checkResponse("GetAllianceContactsV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetAllianceContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<AllianceContact>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -102,7 +102,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/characters/{auth.Character.CharacterID}/contacts/labels/", auth);
 
-            checkResponse("GetContactLabelsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetContactLabelsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<ContactLabel>>(responseModel.JSONString);
         }
@@ -113,7 +113,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/alliances/{allianceId}/contacts/labels/", auth);
 
-            checkResponse("GetAllianceContactLabelsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetAllianceContactLabelsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<ContactLabel>>(responseModel.JSONString);
         }
@@ -124,7 +124,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporations/{corpId}/contacts/labels/", auth);
 
-            checkResponse("GetCorporationContactLabelsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationContactLabelsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<ContactLabel>>(responseModel.JSONString);
         }

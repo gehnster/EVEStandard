@@ -26,7 +26,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/stats/", auth, queryParameters);
 
-            checkResponse("YearlyAggregateStatsV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("YearlyAggregateStatsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<AggregateStats>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -35,7 +35,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v4/characters/" + characterId + "/");
 
-            checkResponse("PublicInfoV4Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("PublicInfoV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<CharacterInfo>(responseModel.JSONString);
         }
@@ -44,7 +44,7 @@ namespace EVEStandard.API
         {
             var responseModel = await PostAsync("/v1/characters/affiliation/", null, characterIds);
 
-            checkResponse("AffiliationV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("AffiliationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<CharacterAffiliation>>(responseModel.JSONString);
         }
@@ -55,7 +55,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v4/characters/" + auth.Character.CharacterID + "/cspa/", auth, characterIds);
 
-            checkResponse("CalculationCSPAChargeCostV4Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("CalculationCSPAChargeCostV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<float>(responseModel.JSONString);
         }
@@ -69,7 +69,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/names/", queryParameters);
 
-            checkResponse("GetCharacterNamesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterNamesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<CharacterName>>(responseModel.JSONString);
         }
@@ -78,7 +78,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v2/characters/" + characterId + "/portrait/");
 
-            checkResponse("GetCharacterPortraitsV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterPortraitsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Icons>(responseModel.JSONString);
         }
@@ -87,7 +87,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/characters/" + characterId + "/corporationhistory/");
 
-            checkResponse("GetCorporationHistoryV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationHistoryV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<CharacterCorporationHistory>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -98,7 +98,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/medals/", auth);
 
-            checkResponse("GetMedalsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetMedalsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<CharacterMedals>>(responseModel.JSONString);
         }
@@ -109,7 +109,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/standings/", auth);
 
-            checkResponse("GetStandingsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetStandingsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<Standing>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -120,7 +120,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/agents_research/", auth);
 
-            checkResponse("GetAgentsResearchV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetAgentsResearchV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<AgentResearch>>(responseModel.JSONString);
         }
@@ -136,7 +136,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/blueprints/", auth, queryParameters);
 
-            checkResponse("GetBlueprintsV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetBlueprintsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<Blueprint>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -147,7 +147,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/fatigue/", auth);
 
-            checkResponse("GetJumpFatigueV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetJumpFatigueV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Fatigue>(responseModel.JSONString);
         }
@@ -163,7 +163,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/notifications/contacts/", auth, queryParameters);
 
-            checkResponse("GetNewContactNotificationsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetNewContactNotificationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<CharacterContactNotification>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -174,7 +174,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/notifications/", auth);
 
-            checkResponse("GetCharacterNotificationsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterNotificationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<Notification>>(responseModel.JSONString);
         }
@@ -185,7 +185,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/roles/", auth);
 
-            checkResponse("GetCharacterCorporationRolesV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterCorporationRolesV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<CharacterCorporationRoles>(responseModel.JSONString);
         }
@@ -196,7 +196,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/titles/", auth);
 
-            checkResponse("GetCharacterCorporationTitlesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterCorporationTitlesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<CharacterTitle>>(responseModel.JSONString);
         }

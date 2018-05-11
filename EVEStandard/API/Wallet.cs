@@ -21,7 +21,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/wallet/", auth);
 
-            checkResponse("CalculationCSPAChargeCostV4Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("CalculationCSPAChargeCostV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<double>(responseModel.JSONString);
         }
@@ -37,7 +37,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v4/characters/" + auth.Character.CharacterID + "/wallet/journal/", auth, queryParameters);
 
-            checkResponse("GetCharacterWalletJournalV4Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterWalletJournalV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<CharacterWalletJournal>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -53,7 +53,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/wallet/transactions/", auth, queryParameters);
 
-            checkResponse("GetCharacterWalletTransactionsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterWalletTransactionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<WalletTransaction>>(responseModel.JSONString);
         }
@@ -64,7 +64,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corpId + "/wallet/", auth);
 
-            checkResponse("ReturnCorporationWalletBalanceV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ReturnCorporationWalletBalanceV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<CorporationWallet>>(responseModel.JSONString);
         }
@@ -80,7 +80,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v3/corporations/" + corpId + "/wallet/" + division + "/journal/", auth, queryParameters);
 
-            checkResponse("GetCorporationWalletJournalV3Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationWalletJournalV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<CorporationWalletJournal>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -96,7 +96,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corpId + "/wallet/" + division + "/transactions/", auth, queryParameters);
 
-            checkResponse("GetCharacterWalletTransactionsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterWalletTransactionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<WalletTransaction>>(responseModel.JSONString);
         }

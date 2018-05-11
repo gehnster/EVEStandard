@@ -30,7 +30,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/universe/ancestries/", queryParameters);
 
-            checkResponse("GetAncestriesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetAncestriesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<Ancestry>>(responseModel.JSONString);
         }
@@ -44,7 +44,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/universe/asteroid_belts/{asteroidBeltId}/", queryParameters);
 
-            checkResponse("GetAsteroidBeltV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetAsteroidBeltV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<AsteroidBelt>(responseModel.JSONString);
         }
@@ -62,7 +62,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/universe/bloodlines/", queryParameters);
 
-            checkResponse("GetBloodlinesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetBloodlinesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<Bloodline>>(responseModel.JSONString);
         }
@@ -75,7 +75,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/universe/categories/");
 
-            checkResponse("GetItemCategoriesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetItemCategoriesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
         }
@@ -95,7 +95,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/universe/categories/{categoryId}/", queryParameters);
 
-            checkResponse("GetItemCategoryInfoV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetItemCategoryInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Category>(responseModel.JSONString);
         }
@@ -108,7 +108,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/universe/constellations/");
 
-            checkResponse("GetConstellationsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetConstellationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
         }
@@ -129,7 +129,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/universe/constellations/{constellationId}/", queryParameters);
 
-            checkResponse("GetConstellationV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetConstellationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Constellation>(responseModel.JSONString);
         }
@@ -147,7 +147,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync(" /v2/universe/factions/", queryParameters);
 
-            checkResponse("GetFactionsV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetFactionsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<Faction>>(responseModel.JSONString);
         }
@@ -160,7 +160,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/universe/graphics/");
 
-            checkResponse("GetGraphicsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetGraphicsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
         }
@@ -174,7 +174,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/universe/graphics/{graphicId}/");
 
-            checkResponse("GetGraphicV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetGraphicV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Graphic>(responseModel.JSONString);
         }
@@ -187,7 +187,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/universe/groups/");
 
-            checkResponse("GetItemGroupsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetItemGroupsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -207,7 +207,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/universe/groups/{groupId}/", queryParameters);
 
-            checkResponse("GetItemGroupV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetItemGroupV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Group>(responseModel.JSONString);
         }
@@ -229,7 +229,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/universe/ids/", null, names, queryParameters);
 
-            checkResponse("BulkNamesToIdsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("BulkNamesToIdsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Models.Universe>(responseModel.JSONString);
         }
@@ -238,7 +238,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/universe/moons/{moonId}/");
 
-            checkResponse("GetItemGroupsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetItemGroupsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Moon>(responseModel.JSONString);
         }
@@ -247,8 +247,7 @@ namespace EVEStandard.API
         {
             var responseModel = await PostAsync("/v2/universe/names/", null, ids);
 
-            checkResponse("GetNamesAndCategoriesFromIdsV2Async", responseModel.Error, responseModel.LegacyWarning,
-                Logger);
+            checkResponse("GetNamesAndCategoriesFromIdsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<UniverseIdsToNames>(responseModel.JSONString);
         }
@@ -257,7 +256,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/universe/planets/{planetId}/");
 
-            checkResponse("GetPlanetInfoV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetPlanetInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Planet>(responseModel.JSONString);
         }
@@ -271,7 +270,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/universe/races/", queryParameters);
 
-            checkResponse("GetCharacterRacesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterRacesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<Race>>(responseModel.JSONString);
         }
@@ -280,7 +279,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/universe/regions/");
 
-            checkResponse("GetRegionsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetRegionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
         }
@@ -294,7 +293,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/universe/regions/{regionId}/", queryParameters);
 
-            checkResponse("GetRegionInfoV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetRegionInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Region>(responseModel.JSONString);
         }
@@ -303,7 +302,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/universe/stargates/{stargateId}/");
 
-            checkResponse("GetStargateInfoV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetStargateInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Stargate>(responseModel.JSONString);
         }
@@ -312,7 +311,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/universe/stars/{starId}/");
 
-            checkResponse("GetStarInfoV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetStarInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Star>(responseModel.JSONString);
         }
@@ -321,7 +320,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v2/universe/stations/{stationId}/");
 
-            checkResponse("GetStationInfoV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetStationInfoV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Station>(responseModel.JSONString);
         }
@@ -330,7 +329,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/universe/structures/");
 
-            checkResponse("ListAllPublicStructuresV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListAllPublicStructuresV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<long>>(responseModel.JSONString);
         }
@@ -341,7 +340,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/universe/structures/{structureId}/");
 
-            checkResponse("GetStructureInfoV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetStructureInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Structure>(responseModel.JSONString);
         }
@@ -350,7 +349,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/universe/system_jumps/");
 
-            checkResponse("GetSystemJumpsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetSystemJumpsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<SystemJumps>>(responseModel.JSONString);
         }
@@ -359,7 +358,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v2/universe/system_kills/");
 
-            checkResponse("GetSystemKillsV2Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetSystemKillsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<SystemKills>>(responseModel.JSONString);
         }
@@ -368,7 +367,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/universe/systems/");
 
-            checkResponse("GetSolarSystemsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetSolarSystemsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
         }
@@ -382,7 +381,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v3/universe/systems/{systemId}/", queryParameters);
 
-            checkResponse("GetSolarSystemInfoV3Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetSolarSystemInfoV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Models.System>(responseModel.JSONString);
         }
@@ -391,7 +390,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/universe/types/");
 
-            checkResponse("GetTypesV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetTypesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString), responseModel.MaxPages);
         }
@@ -405,7 +404,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v3/universe/types/{typeId}/", queryParameters);
 
-            checkResponse("GetTypeInfoV3Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetTypeInfoV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<Type>(responseModel.JSONString);
         }

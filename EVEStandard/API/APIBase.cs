@@ -6,6 +6,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -120,7 +121,7 @@ namespace EVEStandard.API
             }
         }
 
-        private async Task<APIResponse> processResponse(HttpResponseMessage response)
+        private static async Task<APIResponse> processResponse(HttpResponseMessage response)
         {
             var model = new APIResponse();
 
@@ -135,23 +136,26 @@ namespace EVEStandard.API
             switch (response.StatusCode)
             {
                 case HttpStatusCode.InternalServerError:
-                    model.Error = true;
-                    model.Message = await response.Content.ReadAsStringAsync();
-
-                    return model;
                 case HttpStatusCode.NotFound:
+                case HttpStatusCode.BadGateway:
+                case HttpStatusCode.ServiceUnavailable:
+                case HttpStatusCode.BadRequest:
                     model.Error = true;
                     model.Message = await response.Content.ReadAsStringAsync();
 
                     return model;
+                case HttpStatusCode.Unauthorized:
+                    throw new EVEStandardUnauthorizedException();
                 case HttpStatusCode.Conflict:
                     model.Error = true;
                     model.Message = "Too many requests made to ESI in a short period of time";
 
                     return model;
                 case HttpStatusCode.Forbidden:
-                    model.Error = true;
-                    model.Message = "You don't have the required SSO scope most likely.";
+                    throw new EVEStandardScopeNotAcquired(await response.Content.ReadAsStringAsync());
+                case HttpStatusCode.NotModified:
+                    model.NotModified = true;
+                    model = getExpiresAndLastModified(response, model);
 
                     return model;
                 default:
@@ -168,14 +172,8 @@ namespace EVEStandard.API
             }
             try
             {
-                if (response.Headers.TryGetValues("expires", out var expiresEnumerable))
-                {
-                    model.Expires = DateTime.TryParse(expiresEnumerable.FirstOrDefault(), out var expires) ? expires : DateTime.UtcNow;
-                }
-                if (response.Headers.TryGetValues("last-modified", out var lastModifiedEnumerable))
-                {
-                    model.LastModified = DateTime.TryParse(lastModifiedEnumerable.FirstOrDefault(), out var lastModified) ? lastModified : DateTime.UtcNow;
-                }
+                model = getExpiresAndLastModified(response, model);
+
                 if (response.Headers.TryGetValues("X-Pages", out var xPagesEnumerable))
                 {
                     model.MaxPages = long.TryParse(xPagesEnumerable.FirstOrDefault(), out var xPages) ? xPages : 1;
@@ -184,28 +182,34 @@ namespace EVEStandard.API
                 {
                     model.Language = language.FirstOrDefault();
                 }
+                if (response.Headers.TryGetValues("ETag", out var eTag))
+                {
+                    model.ETag = eTag.FirstOrDefault();
+                }
 
                 // Check whether response is compressed
-                if (response.StatusCode != HttpStatusCode.NoContent)
+                if (response.StatusCode == HttpStatusCode.NoContent)
                 {
-                    if (response.Content.Headers.ContentEncoding.Any(x => x == "gzip"))
+                    return model;
+                }
+
+                if (response.Content.Headers.ContentEncoding.Any(x => x == "gzip"))
+                {
+                    // Decompress manually
+                    using (var s = await response.Content.ReadAsStreamAsync())
                     {
-                        // Decompress manually
-                        using (var s = await response.Content.ReadAsStreamAsync())
+                        using (var decompressed = new GZipStream(s, CompressionMode.Decompress))
                         {
-                            using (var decompressed = new GZipStream(s, CompressionMode.Decompress))
+                            using (var rdr = new StreamReader(decompressed))
                             {
-                                using (var rdr = new StreamReader(decompressed))
-                                {
-                                    model.JSONString = await rdr.ReadToEndAsync();
-                                }
+                                model.JSONString = await rdr.ReadToEndAsync();
                             }
                         }
                     }
-                    else
-                    {
-                        model.JSONString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    }
+                }
+                else
+                {
+                    model.JSONString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
 
                 return model;
@@ -216,16 +220,45 @@ namespace EVEStandard.API
             }
         }
 
-        internal static void checkResponse(string functionName, bool error, bool legacyWarning, ILogger logger)
+        private static APIResponse getExpiresAndLastModified(HttpResponseMessage response, APIResponse model)
+        {
+            if (response.Headers.TryGetValues("expires", out var expiresEnumerable))
+            {
+                model.Expires = DateTime.TryParse(expiresEnumerable.FirstOrDefault(), out var expires) ? expires : DateTime.UtcNow;
+            }
+            if (response.Headers.TryGetValues("last-modified", out var lastModifiedEnumerable))
+            {
+                model.LastModified = DateTime.TryParse(lastModifiedEnumerable.FirstOrDefault(), out var lastModified) ? lastModified : DateTime.UtcNow;
+            }
+
+            return model;
+        }
+
+        internal static void checkResponse(string functionName, bool error, string errorMessage, bool legacyWarning, ILogger logger)
         {
             if (error)
             {
-                throw new EVEStandardException(functionName + " failed");
+                logger.LogError("{0} returned with this error: {1}", functionName, errorMessage);
+                throw new EVEStandardException($"Unhandled error: {errorMessage}");
             }
             if (legacyWarning)
             {
                 logger.LogWarning("{0} is a legacy end-point and could disappear soon, considering moving to a newer end-point.", functionName);
             }
+        }
+
+        protected ESIModelDTO<T> returnModelDTO<T>(APIResponse response)
+        {
+            return new ESIModelDTO<T>()
+            {
+                NotModified = response.NotModified,
+                ETag = response.ETag,
+                Language = response.Language,
+                Expires = response.Expires,
+                LastModified = response.LastModified,
+                MaxPages = response.MaxPages,
+                Model = JsonConvert.DeserializeObject<T>(response.JSONString ?? "")
+        };
         }
     }
 }

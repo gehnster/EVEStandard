@@ -22,7 +22,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/wars/", queryParameters);
 
-            checkResponse("ListWarsV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListWarsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<List<int>>(responseModel.JSONString);
         }
@@ -31,7 +31,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/wars/" + warId + "/");
 
-            checkResponse("GetWarInformationV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("GetWarInformationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return JsonConvert.DeserializeObject<War>(responseModel.JSONString);
         }
@@ -45,7 +45,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/wars/" + warId + "/killmails/", queryParameters);
 
-            checkResponse("ListKillsForWarV1Async", responseModel.Error, responseModel.LegacyWarning, Logger);
+            checkResponse("ListKillsForWarV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return (JsonConvert.DeserializeObject<List<KillmailIndex>>(responseModel.JSONString), responseModel.MaxPages);
         }
