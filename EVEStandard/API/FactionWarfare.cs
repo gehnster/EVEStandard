@@ -43,6 +43,15 @@ namespace EVEStandard.API
             return returnModelDTO<List<FactionWarSystem>>(responseModel);
         }
 
+        public async Task<ESIModelDTO<List<FactionWarSystem>>> FactionWarSystemOwnershipV2Async()
+        {
+            var responseModel = await GetAsync("/v2/fw/systems/");
+
+            checkResponse("FactionWarSystemOwnershipV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+
+            return returnModelDTO<List<FactionWarSystem>>(responseModel);
+        }
+
         public async Task<ESIModelDTO<FactionWarFactionLeaderboard>> TopFactionsV1Async()
         {
             var responseModel = await GetAsync("/v1/fw/leaderboards/");

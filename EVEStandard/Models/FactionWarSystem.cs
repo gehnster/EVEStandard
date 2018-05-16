@@ -39,11 +39,7 @@ namespace EVEStandard.Models
         [JsonProperty("victory_points_threshold")]
         public int? VictoryPointsThreshold { get; set; }
 
-        /// <summary>
-        /// contested boolean
-        /// </summary>
-        /// <value>contested boolean</value>
         [JsonProperty("contested")]
-        public bool? Contested { get; set; }
+        public string Contested { get; set; }
     }
 }
