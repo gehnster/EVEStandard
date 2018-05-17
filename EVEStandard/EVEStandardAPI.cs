@@ -62,14 +62,14 @@ namespace EVEStandard
         /// <param name="route">The entire VERSIONED route you want to test, including query parameters like datasource and user agent. (Example: /v3/alliances/{alliance_id}/?datasource=tranquility&user_agent=EVEStandard)</param>
         /// <param name="queryParameters"></param>
         /// <returns></returns>
-        public async Task<string> TestDevRoute(string httpMethod, string dataSource, string route, Dictionary<string, string> queryParameters)
+        public async Task<string> TestDevRoute(string httpMethod, string dataSource, string route, Dictionary<string, string> queryParameters, object body, string ifNoneMatch = null)
         {
             if (string.IsNullOrWhiteSpace(dataSource))
             {
                 throw new ArgumentException("Argument was invalid", nameof(dataSource));
             }
 
-            return await TestDevRoute(httpMethod, dataSource, route, queryParameters, null);
+            return await TestDevRoute(httpMethod, dataSource, route, queryParameters, null, body, ifNoneMatch);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace EVEStandard
         /// <param name="queryParameters"></param>
         /// <param name="auth"></param>
         /// <returns></returns>
-        public async Task<string> TestDevRoute(string httpMethod, string dataSource, string route, Dictionary<string, string> queryParameters, AuthDTO auth)
+        public async Task<string> TestDevRoute(string httpMethod, string dataSource, string route, Dictionary<string, string> queryParameters, AuthDTO auth, object body, string ifNoneMatch = null)
         {
             if (string.IsNullOrEmpty(dataSource))
             {
@@ -95,13 +95,13 @@ namespace EVEStandard
             switch (httpMethod.ToUpper())
             {
                 case "GET":
-                    responseModel = await api.GetAsync(route, auth, queryParameters);
+                    responseModel = await api.GetAsync(route, auth, ifNoneMatch, queryParameters);
                     break;
                 case "POST":
-                    responseModel = await api.PostAsync(route, auth, queryParameters);
+                    responseModel = await api.PostAsync(route, auth, body, ifNoneMatch, queryParameters);
                     break;
                 case "PUT":
-                    responseModel = await api.PutAsync(route, auth, queryParameters);
+                    responseModel = await api.PutAsync(route, auth, body, queryParameters);
                     break;
                 case "DELETE":
                     responseModel = await api.DeleteAsync(route, auth, queryParameters);
