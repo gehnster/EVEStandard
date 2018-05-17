@@ -16,20 +16,20 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<ESIModelDTO<List<LoyaltyStoreOffer>>> ListLoyaltyStoreOffersV1Async(int corporationId)
+        public async Task<ESIModelDTO<List<LoyaltyStoreOffer>>> ListLoyaltyStoreOffersV1Async(int corporationId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/loyalty/stores/" + corporationId + "/offers/");
+            var responseModel = await GetAsync("/v1/loyalty/stores/" + corporationId + "/offers/", ifNoneMatch);
 
             checkResponse("ListLoyaltyStoreOffersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<LoyaltyStoreOffer>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<LoyaltyPoints>>> GetLoyaltyPointsV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<List<LoyaltyPoints>>> GetLoyaltyPointsV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_LOYALTY_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/loyalty/points/", auth);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/loyalty/points/", auth, ifNoneMatch);
 
             checkResponse("GetLoyaltyPointsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

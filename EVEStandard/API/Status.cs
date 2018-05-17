@@ -12,9 +12,9 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<ESIModelDTO<Models.Status>> GetStatusV1Async()
+        public async Task<ESIModelDTO<Models.Status>> GetStatusV1Async(string ifNoneMatch=null)
         {
-            var responseModel = await GetAsync("/v1/status/");
+            var responseModel = await GetAsync("/v1/status/", ifNoneMatch);
 
             checkResponse("GetStatusV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

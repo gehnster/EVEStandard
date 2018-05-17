@@ -15,7 +15,7 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<ESIModelDTO<List<Asset>>> GetCharacterAssetsV3Async(AuthDTO auth, int page)
+        public async Task<ESIModelDTO<List<Asset>>> GetCharacterAssetsV3Async(AuthDTO auth, int page=1, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_ASSETS_READ_ASSETS_1);
 
@@ -24,14 +24,14 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/assets/", auth, queryParameters);
+            var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/assets/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("GetCharacterAssetsV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<Asset>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<Asset>>> GetCorporationAssetsV2Async(AuthDTO auth, int corporationId, int page)
+        public async Task<ESIModelDTO<List<Asset>>> GetCorporationAssetsV2Async(AuthDTO auth, int corporationId, int page=1, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
 
@@ -40,7 +40,7 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync("/v2/corporations/" + corporationId + "/assets/", auth, queryParameters);
+            var responseModel = await GetAsync("/v2/corporations/" + corporationId + "/assets/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("GetCorporationAssetsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

@@ -14,27 +14,27 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<ESIModelDTO<List<SovereigntyStructure>>> ListSovereigntyStructuresV1Async()
+        public async Task<ESIModelDTO<List<SovereigntyStructure>>> ListSovereigntyStructuresV1Async(string ifNoneMatch=null)
         {
-            var responseModel = await GetAsync("/v1/sovereignty/structures/");
+            var responseModel = await GetAsync("/v1/sovereignty/structures/", ifNoneMatch);
 
             checkResponse("ListSovereigntyStructuresV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<SovereigntyStructure>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<SovereigntyCampaign>>> ListSovereigntyCampaignsV1Async()
+        public async Task<ESIModelDTO<List<SovereigntyCampaign>>> ListSovereigntyCampaignsV1Async(string ifNoneMatch=null)
         {
-            var responseModel = await GetAsync("/v1/sovereignty/campaigns/");
+            var responseModel = await GetAsync("/v1/sovereignty/campaigns/", ifNoneMatch);
 
             checkResponse("ListSovereigntyCampaignsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<SovereigntyCampaign>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<SovereigntyMap>>> ListSovereigntyOfSystemsV1Async()
+        public async Task<ESIModelDTO<List<SovereigntyMap>>> ListSovereigntyOfSystemsV1Async(string ifNoneMatch=null)
         {
-            var responseModel = await GetAsync("/v1/sovereignty/map/");
+            var responseModel = await GetAsync("/v1/sovereignty/map/", ifNoneMatch);
 
             checkResponse("ListSovereigntyOfSystemsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

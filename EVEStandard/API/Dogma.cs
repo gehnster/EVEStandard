@@ -14,36 +14,36 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<ESIModelDTO<List<int>>> GetAttributesV1Async()
+        public async Task<ESIModelDTO<List<int>>> GetAttributesV1Async(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/dogma/attributes/");
+            var responseModel = await GetAsync("/v1/dogma/attributes/", ifNoneMatch);
 
             checkResponse("GetAttributesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<int>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<DogmaAttribute>> GetAttributeInfoV1Async(int attributeId)
+        public async Task<ESIModelDTO<DogmaAttribute>> GetAttributeInfoV1Async(int attributeId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/dogma/attributes/" + attributeId + "/");
+            var responseModel = await GetAsync("/v1/dogma/attributes/" + attributeId + "/", ifNoneMatch);
 
             checkResponse("GetAttributeInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<DogmaAttribute>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<int>>> GetEffectsV1Async()
+        public async Task<ESIModelDTO<List<int>>> GetEffectsV1Async(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/dogma/effects/");
+            var responseModel = await GetAsync("/v1/dogma/effects/", ifNoneMatch);
 
             checkResponse("GetEffectsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<int>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<DogmaEffect>> GetEffectInfoV2Async(int effectId)
+        public async Task<ESIModelDTO<DogmaEffect>> GetEffectInfoV2Async(int effectId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v2/dogma/effects/" + effectId + "/");
+            var responseModel = await GetAsync("/v2/dogma/effects/" + effectId + "/", ifNoneMatch);
 
             checkResponse("GetEffectInfoV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

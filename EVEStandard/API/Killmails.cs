@@ -15,16 +15,16 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<ESIModelDTO<Killmail>> GetKillmailV1Async(int killmailId, string killmailHash)
+        public async Task<ESIModelDTO<Killmail>> GetKillmailV1Async(int killmailId, string killmailHash, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/killmails/" + killmailId + "/" + killmailHash + "/");
+            var responseModel = await GetAsync("/v1/killmails/" + killmailId + "/" + killmailHash + "/", ifNoneMatch);
 
             checkResponse("GetKillmailV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<Killmail>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<KillmailIndex>>> GetCharacterKillsAndLossesV1Async(AuthDTO auth, int maxCount, int maxKillId)
+        public async Task<ESIModelDTO<List<KillmailIndex>>> GetCharacterKillsAndLossesV1Async(AuthDTO auth, int maxCount, int maxKillId, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_KILLMAILS_READ_KILLMAILS_1);
 
@@ -34,14 +34,14 @@ namespace EVEStandard.API
                 { "max_kill_id", maxKillId.ToString() }
             };
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/killmails/recent/", auth, queryParameters);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/killmails/recent/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("GetCharacterKillsAndLossesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<KillmailIndex>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<KillmailIndex>>> GetCorporationKillsAndLossesV1Async(AuthDTO auth, int corporationId, int maxKillId)
+        public async Task<ESIModelDTO<List<KillmailIndex>>> GetCorporationKillsAndLossesV1Async(AuthDTO auth, int corporationId, int maxKillId, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_KILLMAILS_READ_CORPORATION_KILLMAILS_1);
 
@@ -50,7 +50,7 @@ namespace EVEStandard.API
                 { "max_kill_id", maxKillId.ToString() }
             };
 
-            var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/killmails/recent/", auth, queryParameters);
+            var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/killmails/recent/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("GetCorporationKillsAndLossesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

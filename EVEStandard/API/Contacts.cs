@@ -29,11 +29,11 @@ namespace EVEStandard.API
             checkResponse("DeleteContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
-        public async Task<ESIModelDTO<List<CharacterContact>>> GetContactsV2Async(AuthDTO auth, int page)
+        public async Task<ESIModelDTO<List<CharacterContact>>> GetContactsV2Async(AuthDTO auth, int page=1, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_CONTACTS_1);
 
-            var responseModel = await GetAsync($"/v2/characters/{auth.Character.CharacterID}/contacts/", auth);
+            var responseModel = await GetAsync($"/v2/characters/{auth.Character.CharacterID}/contacts/", auth, ifNoneMatch);
 
             checkResponse("GetContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -51,7 +51,7 @@ namespace EVEStandard.API
                 { "watched", isWatched.ToString() }
             };
 
-            var responseModel = await PostAsync($"/v2/characters/{auth.Character.CharacterID}/contacts/", auth, contactIds, queryParameters);
+            var responseModel = await PostAsync($"/v2/characters/{auth.Character.CharacterID}/contacts/", auth, contactIds, null, queryParameters);
 
             checkResponse("AddContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -74,44 +74,44 @@ namespace EVEStandard.API
             checkResponse("EditContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
-        public async Task<ESIModelDTO<List<CorporationContact>>> GetCorporationContactsV2Async(AuthDTO auth, int page, int corporationId)
+        public async Task<ESIModelDTO<List<CorporationContact>>> GetCorporationContactsV2Async(AuthDTO auth, int page, int corporationId, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_CONTACTS_1);
 
-            var responseModel = await GetAsync($"/v2/corporations/{corporationId}/contacts/", auth);
+            var responseModel = await GetAsync($"/v2/corporations/{corporationId}/contacts/", auth, ifNoneMatch);
 
             checkResponse("GetCorporationContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<CorporationContact>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<AllianceContact>>> GetAllianceContactsV2Async(AuthDTO auth, int page, int allianceId)
+        public async Task<ESIModelDTO<List<AllianceContact>>> GetAllianceContactsV2Async(AuthDTO auth, int page, int allianceId, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_ALLIANCE_READ_CONTACTS_1);
 
-            var responseModel = await GetAsync($"/v2/alliances/{allianceId}/contacts/", auth);
+            var responseModel = await GetAsync($"/v2/alliances/{allianceId}/contacts/", auth, ifNoneMatch);
 
             checkResponse("GetAllianceContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<AllianceContact>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<ContactLabel>>> GetContactLabelsV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<List<ContactLabel>>> GetContactLabelsV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_CONTACTS_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.Character.CharacterID}/contacts/labels/", auth);
+            var responseModel = await GetAsync($"/v1/characters/{auth.Character.CharacterID}/contacts/labels/", auth, ifNoneMatch);
 
             checkResponse("GetContactLabelsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<ContactLabel>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<ContactLabel>>> GetAllianceContactLabelsV1Async(AuthDTO auth, int allianceId)
+        public async Task<ESIModelDTO<List<ContactLabel>>> GetAllianceContactLabelsV1Async(AuthDTO auth, int allianceId, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_ALLIANCE_READ_CONTACTS_1);
 
-            var responseModel = await GetAsync($"/v1/alliances/{allianceId}/contacts/labels/", auth);
+            var responseModel = await GetAsync($"/v1/alliances/{allianceId}/contacts/labels/", auth, ifNoneMatch);
 
             checkResponse("GetAllianceContactLabelsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

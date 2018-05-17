@@ -14,9 +14,9 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<ESIModelDTO<List<InsurancePrice>>> ListInsuranceLevelsV1Async()
+        public async Task<ESIModelDTO<List<InsurancePrice>>> ListInsuranceLevelsV1Async(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/insurance/prices/");
+            var responseModel = await GetAsync("/v1/insurance/prices/", ifNoneMatch);
 
             checkResponse("ListInsuranceLevelsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

@@ -15,11 +15,11 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<ESIModelDTO<FleetInfo>> GetFleetInfoV1Async(AuthDTO auth, long fleetId)
+        public async Task<ESIModelDTO<FleetInfo>> GetFleetInfoV1Async(AuthDTO auth, long fleetId, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_FLEETS_READ_FLEET_1);
 
-            var responseModel = await GetAsync("/v1/fleets/" + fleetId + "/", auth);
+            var responseModel = await GetAsync("/v1/fleets/" + fleetId + "/", auth, ifNoneMatch);
 
             checkResponse("GetFleetInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -41,18 +41,18 @@ namespace EVEStandard.API
             checkResponse("UpdateFleetV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
-        public async Task<ESIModelDTO<CharacterFleetInfo>> GetCharacterFleetInfoV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<CharacterFleetInfo>> GetCharacterFleetInfoV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_FLEETS_READ_FLEET_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/fleet/", auth);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/fleet/", auth, ifNoneMatch);
 
             checkResponse("GetCharacterFleetInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<CharacterFleetInfo>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<FleetMember>>> GetFleetMembersV1Async(AuthDTO auth, long fleetId, string language = Language.English)
+        public async Task<ESIModelDTO<List<FleetMember>>> GetFleetMembersV1Async(AuthDTO auth, long fleetId, string language = Language.English, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_FLEETS_READ_FLEET_1);
 
@@ -61,7 +61,7 @@ namespace EVEStandard.API
                 { "language", language ??Language.English }
             };
 
-            var responseModel = await GetAsync("/v1/fleets/" + fleetId + "/members/", auth);
+            var responseModel = await GetAsync("/v1/fleets/" + fleetId + "/members/", auth, ifNoneMatch);
 
             checkResponse("GetFleetMembersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -95,7 +95,7 @@ namespace EVEStandard.API
             checkResponse("MoveFleetMemberV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
-        public async Task<ESIModelDTO<List<FleetWing>>> GetFleetWingsV1Async(AuthDTO auth, long fleetId, string language = Language.English)
+        public async Task<ESIModelDTO<List<FleetWing>>> GetFleetWingsV1Async(AuthDTO auth, long fleetId, string language = Language.English, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_FLEETS_READ_FLEET_1);
 
@@ -104,7 +104,7 @@ namespace EVEStandard.API
                 { "language", language ??Language.English }
             };
 
-            var responseModel = await GetAsync("/v1/fleets/" + fleetId + "/wings/", auth);
+            var responseModel = await GetAsync("/v1/fleets/" + fleetId + "/wings/", auth, ifNoneMatch);
 
             checkResponse("GetFleetWingsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

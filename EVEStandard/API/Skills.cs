@@ -15,33 +15,33 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<ESIModelDTO<CharacterSkills>> GetCharacterSkillsV4Async(AuthDTO auth)
+        public async Task<ESIModelDTO<CharacterSkills>> GetCharacterSkillsV4Async(AuthDTO auth, string ifNoneMatch=null)
         {
             checkAuth(auth, Scopes.ESI_SKILLS_READ_SKILLS_1);
 
-            var responseModel = await GetAsync("/v4/characters/" + auth.Character.CharacterID + "/skills/", auth);
+            var responseModel = await GetAsync($"/v4/characters/{auth.Character.CharacterID}/skills/", auth, ifNoneMatch);
 
             checkResponse("GetCharacterSkillsV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<CharacterSkills>(responseModel);
         }
 
-        public async Task<ESIModelDTO<CharacterAttributes>> GetCharacterAttributesV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<CharacterAttributes>> GetCharacterAttributesV1Async(AuthDTO auth, string ifNoneMatch=null)
         {
             checkAuth(auth, Scopes.ESI_SKILLS_READ_SKILLS_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/attributes/", auth);
+            var responseModel = await GetAsync($"/v1/characters/{auth.Character.CharacterID}/attributes/", auth, ifNoneMatch);
 
             checkResponse("GetCharacterAttributesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<CharacterAttributes>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<SkillQueue>>> GetCharacterSkillQueueV2Async(AuthDTO auth)
+        public async Task<ESIModelDTO<List<SkillQueue>>> GetCharacterSkillQueueV2Async(AuthDTO auth, string ifNoneMatch=null)
         {
             checkAuth(auth, Scopes.ESI_SKILLS_READ_SKILLQUEUE_1);
 
-            var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/skillqueue/", auth);
+            var responseModel = await GetAsync($"/v2/characters/{auth.Character.CharacterID}/skillqueue/", auth, ifNoneMatch);
 
             checkResponse("GetCharacterSkillQueueV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

@@ -31,32 +31,32 @@ namespace EVEStandard.API
             this.dataSource = dataSource ?? "tranquility";
         }
 
-        internal async Task<APIResponse> GetAsync(string uri, Dictionary<string, string> queryParameters = null)
+        internal async Task<APIResponse> GetAsync(string uri, string ifNoneMatch=null, Dictionary<string, string> queryParameters = null)
         {
-            return await GetAsync(uri, null, queryParameters);
+            return await GetAsync(uri, null, ifNoneMatch, queryParameters);
         }
 
-        internal async Task<APIResponse> GetAsync(string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null)
+        internal async Task<APIResponse> GetAsync(string uri, AuthDTO auth, string ifNoneMatch=null, Dictionary<string, string> queryParameters = null)
         {
-            return await RequestAsync(HttpMethod.Get, uri, auth, queryParameters);
+            return await RequestAsync(HttpMethod.Get, uri, auth, ifNoneMatch, queryParameters);
         }
 
-        internal async Task<APIResponse> PostAsync(string uri, AuthDTO auth, object body, Dictionary<string, string> queryParameters = null)
+        internal async Task<APIResponse> PostAsync(string uri, AuthDTO auth, object body, string ifNoneMatch=null, Dictionary<string, string> queryParameters = null)
         {
-            return await RequestAsync(HttpMethod.Post, uri, auth, queryParameters, body);
+            return await RequestAsync(HttpMethod.Post, uri, auth, ifNoneMatch, queryParameters, body);
         }
 
         internal async Task<APIResponse> PutAsync(string uri, AuthDTO auth, object body, Dictionary<string, string> queryParameters = null)
         {
-            return await RequestAsync(HttpMethod.Put, uri, auth, queryParameters, body);
+            return await RequestAsync(HttpMethod.Put, uri, auth, null, queryParameters, body);
         }
 
         internal async Task<APIResponse> DeleteAsync(string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null)
         {
-            return await RequestAsync(HttpMethod.Delete, uri, auth, queryParameters);
+            return await RequestAsync(HttpMethod.Delete, uri, auth, null, queryParameters);
         }
 
-        private async Task<APIResponse> RequestAsync(HttpMethod method, string uri, AuthDTO auth, Dictionary<string, string> queryParameters = null, object body = null)
+        private async Task<APIResponse> RequestAsync(HttpMethod method, string uri, AuthDTO auth, string ifNoneMatch=null, Dictionary<string, string> queryParameters = null, object body = null)
         {
             var queryParams = "?datasource=" + dataSource;
 
@@ -96,6 +96,11 @@ namespace EVEStandard.API
                     {
                         throw new EVEStandardAuthExpiredException();
                     }
+                }
+
+                if (ifNoneMatch != null)
+                {
+                    request.Headers.Add("If-None-Match", ifNoneMatch);
                 }
 
                 var authResponse = await HTTP.SendAsync(request).ConfigureAwait(false);

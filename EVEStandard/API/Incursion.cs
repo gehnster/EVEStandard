@@ -14,9 +14,9 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<ESIModelDTO<List<Incursion>>> ListIncursionsV1Async()
+        public async Task<ESIModelDTO<List<Incursion>>> ListIncursionsV1Async(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/incursions/");
+            var responseModel = await GetAsync("/v1/incursions/", ifNoneMatch);
 
             checkResponse("ListIncursionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

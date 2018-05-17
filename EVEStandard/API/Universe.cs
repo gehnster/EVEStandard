@@ -21,28 +21,28 @@ namespace EVEStandard.API
         /// Get all character ancestries
         /// </summary>
         /// <returns>List of character ancestries</returns>
-        public async Task<ESIModelDTO<List<Ancestry>>> GetAncestriesV1Async(string language = Language.English)
+        public async Task<ESIModelDTO<List<Ancestry>>> GetAncestriesV1Async(string language = Language.English, string ifNoneMatch=null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync("/v1/universe/ancestries/", queryParameters);
+            var responseModel = await GetAsync("/v1/universe/ancestries/", ifNoneMatch, queryParameters);
 
             checkResponse("GetAncestriesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<Ancestry>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<AsteroidBelt>> GetAsteroidBeltV1Async(int asteroidBeltId)
+        public async Task<ESIModelDTO<AsteroidBelt>> GetAsteroidBeltV1Async(int asteroidBeltId, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"asteroid_belt_id", asteroidBeltId.ToString()}
             };
 
-            var responseModel = await GetAsync($"/v1/universe/asteroid_belts/{asteroidBeltId}/", queryParameters);
+            var responseModel = await GetAsync($"/v1/universe/asteroid_belts/{asteroidBeltId}/", ifNoneMatch, queryParameters);
 
             checkResponse("GetAsteroidBeltV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -53,14 +53,14 @@ namespace EVEStandard.API
         /// Get a list of bloodlines
         /// </summary>
         /// <returns></returns>
-        public async Task<ESIModelDTO<List<Bloodline>>> GetBloodlinesV1Async(string language = Language.English)
+        public async Task<ESIModelDTO<List<Bloodline>>> GetBloodlinesV1Async(string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync("/v1/universe/bloodlines/", queryParameters);
+            var responseModel = await GetAsync("/v1/universe/bloodlines/", ifNoneMatch, queryParameters);
 
             checkResponse("GetBloodlinesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -71,9 +71,9 @@ namespace EVEStandard.API
         /// Get a list of item categories
         /// </summary>
         /// <returns></returns>
-        public async Task<ESIModelDTO<List<int>>> GetItemCategoriesV1Async()
+        public async Task<ESIModelDTO<List<int>>> GetItemCategoriesV1Async(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/universe/categories/");
+            var responseModel = await GetAsync("/v1/universe/categories/", ifNoneMatch);
 
             checkResponse("GetItemCategoriesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -86,14 +86,14 @@ namespace EVEStandard.API
         /// <param name="categoryId"></param>
         /// <param name="language"></param>
         /// <returns></returns>
-        public async Task<ESIModelDTO<Category>> GetItemCategoryInfoV1Async(int categoryId, string language = Language.English)
+        public async Task<ESIModelDTO<Category>> GetItemCategoryInfoV1Async(int categoryId, string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync($"/v1/universe/categories/{categoryId}/", queryParameters);
+            var responseModel = await GetAsync($"/v1/universe/categories/{categoryId}/", ifNoneMatch, queryParameters);
 
             checkResponse("GetItemCategoryInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -104,9 +104,9 @@ namespace EVEStandard.API
         /// Get a list of constellations
         /// </summary>
         /// <returns></returns>
-        public async Task<ESIModelDTO<List<int>>> GetConstellationsV1Async()
+        public async Task<ESIModelDTO<List<int>>> GetConstellationsV1Async(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/universe/constellations/");
+            var responseModel = await GetAsync("/v1/universe/constellations/", ifNoneMatch);
 
             checkResponse("GetConstellationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -119,15 +119,14 @@ namespace EVEStandard.API
         /// <param name="constellationId"></param>
         /// <param name="language"></param>
         /// <returns></returns>
-        public async Task<ESIModelDTO<Constellation>> GetConstellationV1Async(int constellationId,
-            string language = Language.English)
+        public async Task<ESIModelDTO<Constellation>> GetConstellationV1Async(int constellationId, string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync($"/v1/universe/constellations/{constellationId}/", queryParameters);
+            var responseModel = await GetAsync($"/v1/universe/constellations/{constellationId}/", ifNoneMatch, queryParameters);
 
             checkResponse("GetConstellationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -138,14 +137,14 @@ namespace EVEStandard.API
         /// Get a list of factions
         /// </summary>
         /// <returns></returns>
-        public async Task<ESIModelDTO<List<Faction>>> GetFactionsV2Async(string language = Language.English)
+        public async Task<ESIModelDTO<List<Faction>>> GetFactionsV2Async(string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync(" /v2/universe/factions/", queryParameters);
+            var responseModel = await GetAsync(" /v2/universe/factions/", ifNoneMatch, queryParameters);
 
             checkResponse("GetFactionsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -156,9 +155,9 @@ namespace EVEStandard.API
         /// Get a list of graphics
         /// </summary>
         /// <returns></returns>
-        public async Task<ESIModelDTO<List<int>>> GetGraphicsV1Async()
+        public async Task<ESIModelDTO<List<int>>> GetGraphicsV1Async(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/universe/graphics/");
+            var responseModel = await GetAsync("/v1/universe/graphics/", ifNoneMatch);
 
             checkResponse("GetGraphicsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -170,9 +169,9 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="graphicId"></param>
         /// <returns></returns>
-        public async Task<ESIModelDTO<Graphic>> GetGraphicV1Async(int graphicId)
+        public async Task<ESIModelDTO<Graphic>> GetGraphicV1Async(int graphicId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync($"/v1/universe/graphics/{graphicId}/");
+            var responseModel = await GetAsync($"/v1/universe/graphics/{graphicId}/", ifNoneMatch);
 
             checkResponse("GetGraphicV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -183,9 +182,9 @@ namespace EVEStandard.API
         /// Get a list of item groups
         /// </summary>
         /// <returns></returns>
-        public async Task<ESIModelDTO<List<int>>> GetItemGroupsV1Async(int page)
+        public async Task<ESIModelDTO<List<int>>> GetItemGroupsV1Async(int page=1, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/universe/groups/");
+            var responseModel = await GetAsync("/v1/universe/groups/", ifNoneMatch);
 
             checkResponse("GetItemGroupsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -198,14 +197,14 @@ namespace EVEStandard.API
         /// <param name="groupId"></param>
         /// <param name="language"></param>
         /// <returns></returns>
-        public async Task<ESIModelDTO<Group>> GetItemGroupV1Async(int groupId, string language = Language.English)
+        public async Task<ESIModelDTO<Group>> GetItemGroupV1Async(int groupId, string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync($"/v1/universe/groups/{groupId}/", queryParameters);
+            var responseModel = await GetAsync($"/v1/universe/groups/{groupId}/", ifNoneMatch, queryParameters);
 
             checkResponse("GetItemGroupV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -227,16 +226,16 @@ namespace EVEStandard.API
                 {"language", language}
             };
 
-            var responseModel = await PostAsync("/v1/universe/ids/", null, names, queryParameters);
+            var responseModel = await PostAsync("/v1/universe/ids/", null, names, null, queryParameters);
 
             checkResponse("BulkNamesToIdsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<Models.Universe>(responseModel);
         }
 
-        public async Task<ESIModelDTO<Moon>> GetMoonInfoV1Async(long moonId)
+        public async Task<ESIModelDTO<Moon>> GetMoonInfoV1Async(long moonId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync($"/v1/universe/moons/{moonId}/");
+            var responseModel = await GetAsync($"/v1/universe/moons/{moonId}/", ifNoneMatch);
 
             checkResponse("GetItemGroupsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -252,157 +251,157 @@ namespace EVEStandard.API
             return returnModelDTO<UniverseIdsToNames>(responseModel);
         }
 
-        public async Task<ESIModelDTO<Planet>> GetPlanetInfoV1Async(long planetId)
+        public async Task<ESIModelDTO<Planet>> GetPlanetInfoV1Async(long planetId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync($"/v1/universe/planets/{planetId}/");
+            var responseModel = await GetAsync($"/v1/universe/planets/{planetId}/", ifNoneMatch);
 
             checkResponse("GetPlanetInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<Planet>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<Race>>> GetCharacterRacesV1Async(string language = Language.English)
+        public async Task<ESIModelDTO<List<Race>>> GetCharacterRacesV1Async(string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync("/v1/universe/races/", queryParameters);
+            var responseModel = await GetAsync("/v1/universe/races/", ifNoneMatch, queryParameters);
 
             checkResponse("GetCharacterRacesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<Race>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<int>>> GetRegionsV1Async()
+        public async Task<ESIModelDTO<List<int>>> GetRegionsV1Async(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/universe/regions/");
+            var responseModel = await GetAsync("/v1/universe/regions/", ifNoneMatch);
 
             checkResponse("GetRegionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<int>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<Region>> GetRegionInfoV1Async(int regionId, string language = Language.English)
+        public async Task<ESIModelDTO<Region>> GetRegionInfoV1Async(int regionId, string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync($"/v1/universe/regions/{regionId}/", queryParameters);
+            var responseModel = await GetAsync($"/v1/universe/regions/{regionId}/", ifNoneMatch, queryParameters);
 
             checkResponse("GetRegionInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<Region>(responseModel);
         }
 
-        public async Task<ESIModelDTO<Stargate>> GetStargateInfoV1Async(int stargateId)
+        public async Task<ESIModelDTO<Stargate>> GetStargateInfoV1Async(int stargateId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync($"/v1/universe/stargates/{stargateId}/");
+            var responseModel = await GetAsync($"/v1/universe/stargates/{stargateId}/", ifNoneMatch);
 
             checkResponse("GetStargateInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<Stargate>(responseModel);
         }
 
-        public async Task<ESIModelDTO<Star>> GetStarInfoV1Async(int starId)
+        public async Task<ESIModelDTO<Star>> GetStarInfoV1Async(int starId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync($"/v1/universe/stars/{starId}/");
+            var responseModel = await GetAsync($"/v1/universe/stars/{starId}/", ifNoneMatch);
 
             checkResponse("GetStarInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<Star>(responseModel);
         }
 
-        public async Task<ESIModelDTO<Station>> GetStationInfoV2Async(int stationId)
+        public async Task<ESIModelDTO<Station>> GetStationInfoV2Async(int stationId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync($"/v2/universe/stations/{stationId}/");
+            var responseModel = await GetAsync($"/v2/universe/stations/{stationId}/", ifNoneMatch);
 
             checkResponse("GetStationInfoV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<Station>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<long>>> ListAllPublicStructuresV1Async()
+        public async Task<ESIModelDTO<List<long>>> ListAllPublicStructuresV1Async(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/universe/structures/");
+            var responseModel = await GetAsync("/v1/universe/structures/", ifNoneMatch);
 
             checkResponse("ListAllPublicStructuresV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<long>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<Structure>> GetStructureInfoV1Async(AuthDTO auth, long structureId)
+        public async Task<ESIModelDTO<Structure>> GetStructureInfoV1Async(AuthDTO auth, long structureId, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_UNIVERSE_READ_STRUCTURES_1);
 
-            var responseModel = await GetAsync($"/v1/universe/structures/{structureId}/");
+            var responseModel = await GetAsync($"/v1/universe/structures/{structureId}/", ifNoneMatch);
 
             checkResponse("GetStructureInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<Structure>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<SystemJumps>>> GetSystemJumpsV1Async()
+        public async Task<ESIModelDTO<List<SystemJumps>>> GetSystemJumpsV1Async(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/universe/system_jumps/");
+            var responseModel = await GetAsync("/v1/universe/system_jumps/", ifNoneMatch);
 
             checkResponse("GetSystemJumpsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<SystemJumps>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<SystemKills>>> GetSystemKillsV2Async()
+        public async Task<ESIModelDTO<List<SystemKills>>> GetSystemKillsV2Async(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v2/universe/system_kills/");
+            var responseModel = await GetAsync("/v2/universe/system_kills/", ifNoneMatch);
 
             checkResponse("GetSystemKillsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<SystemKills>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<int>>> GetSolarSystemsV1Async()
+        public async Task<ESIModelDTO<List<int>>> GetSolarSystemsV1Async(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/universe/systems/");
+            var responseModel = await GetAsync("/v1/universe/systems/", ifNoneMatch);
 
             checkResponse("GetSolarSystemsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<int>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<Models.System>> GetSolarSystemInfoV3Async(int systemId, string language = Language.English)
+        public async Task<ESIModelDTO<Models.System>> GetSolarSystemInfoV3Async(int systemId, string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync($"/v3/universe/systems/{systemId}/", queryParameters);
+            var responseModel = await GetAsync($"/v3/universe/systems/{systemId}/", ifNoneMatch, queryParameters);
 
             checkResponse("GetSolarSystemInfoV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<Models.System>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<int>>> GetTypesV1Async(int page=1)
+        public async Task<ESIModelDTO<List<int>>> GetTypesV1Async(int page=1, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/universe/types/");
+            var responseModel = await GetAsync("/v1/universe/types/", ifNoneMatch);
 
             checkResponse("GetTypesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<int>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<Type>> GetTypeInfoV3Async(int typeId, string language = Language.English)
+        public async Task<ESIModelDTO<Type>> GetTypeInfoV3Async(int typeId, string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync($"/v3/universe/types/{typeId}/", queryParameters);
+            var responseModel = await GetAsync($"/v3/universe/types/{typeId}/", ifNoneMatch, queryParameters);
 
             checkResponse("GetTypeInfoV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

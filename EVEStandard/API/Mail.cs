@@ -15,7 +15,7 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<ESIModelDTO<List<Mail>>> ReturnMailHeadersV1Async(AuthDTO auth, List<long> labels, long lastMailId)
+        public async Task<ESIModelDTO<List<Mail>>> ReturnMailHeadersV1Async(AuthDTO auth, List<long> labels, long lastMailId, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_MAIL_READ_MAIL_1);
 
@@ -25,7 +25,7 @@ namespace EVEStandard.API
                 { "last_mail_id", lastMailId.ToString() }
             };
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/", auth, queryParameters);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("ReturnMailHeadersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -43,11 +43,11 @@ namespace EVEStandard.API
             return returnModelDTO<int>(responseModel);
         }
 
-        public async Task<ESIModelDTO<UnreadMail>> GetMailLabelsAndUnreadCountsV3Async(AuthDTO auth, List<long> labels, long lastMailId)
+        public async Task<ESIModelDTO<UnreadMail>> GetMailLabelsAndUnreadCountsV3Async(AuthDTO auth, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_MAIL_READ_MAIL_1);
 
-            var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/mail/labels/", auth);
+            var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/mail/labels/", auth, ifNoneMatch);
 
             checkResponse("GetMailLabelsAndUnreadCountsV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -80,11 +80,11 @@ namespace EVEStandard.API
             checkResponse("DeleteMailLabelV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
-        public async Task<ESIModelDTO<List<MailList>>> ReturnMailingListSubscriptionsV1Async(AuthDTO auth, List<long> labels, long lastMailId)
+        public async Task<ESIModelDTO<List<MailList>>> ReturnMailingListSubscriptionsV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_MAIL_READ_MAIL_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/lists/", auth);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/lists/", auth, ifNoneMatch);
 
             checkResponse("ReturnMailingListSubscriptionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -100,11 +100,11 @@ namespace EVEStandard.API
             checkResponse("DeleteMailV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
-        public async Task<ESIModelDTO<MailContent>> ReturnMailV1Async(AuthDTO auth, long mailId)
+        public async Task<ESIModelDTO<MailContent>> ReturnMailV1Async(AuthDTO auth, long mailId, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_MAIL_READ_MAIL_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/" + mailId + "/", auth);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/" + mailId + "/", auth, ifNoneMatch);
 
             checkResponse("ReturnMailV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

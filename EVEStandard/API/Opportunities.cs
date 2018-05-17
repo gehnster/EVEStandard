@@ -15,52 +15,52 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<ESIModelDTO<List<int>>> GetOpportunitiesGroupsV1Async()
+        public async Task<ESIModelDTO<List<int>>> GetOpportunitiesGroupsV1Async(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/opportunities/groups/");
+            var responseModel = await GetAsync("/v1/opportunities/groups/", ifNoneMatch);
 
             checkResponse("GetOpportunitiesGroupsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<int>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<OpportunitiesGroup>> GetOpportunitiesGroupV1Async(int groupId, string language = Language.English)
+        public async Task<ESIModelDTO<OpportunitiesGroup>> GetOpportunitiesGroupV1Async(int groupId, string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 { "language", language ??Language.English }
             };
 
-            var responseModel = await GetAsync("/v1/opportunities/groups/" + groupId + "/", null, queryParameters);
+            var responseModel = await GetAsync("/v1/opportunities/groups/" + groupId + "/", ifNoneMatch, queryParameters);
 
             checkResponse("GetOpportunitiesGroupV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<OpportunitiesGroup>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<int>>> GetOpportunitiesTasksV1Async()
+        public async Task<ESIModelDTO<List<int>>> GetOpportunitiesTasksV1Async(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/opportunities/tasks/");
+            var responseModel = await GetAsync("/v1/opportunities/tasks/", ifNoneMatch);
 
             checkResponse("GetOpportunitiesTasksV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<int>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<OpportunitiesTask>> GetOpportunitiesTaskV1Async(int taskId)
+        public async Task<ESIModelDTO<OpportunitiesTask>> GetOpportunitiesTaskV1Async(int taskId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/opportunities/tasks/" + taskId + "/");
+            var responseModel = await GetAsync("/v1/opportunities/tasks/" + taskId + "/", ifNoneMatch);
 
             checkResponse("GetOpportunitiesTaskV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<OpportunitiesTask>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<CharacterTask>>> GetCharacterCompletedTaskV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<List<CharacterTask>>> GetCharacterCompletedTaskV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_OPPORTUNITIES_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/opportunities/");
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/opportunities/", ifNoneMatch);
 
             checkResponse("GetCharacterCompletedTaskV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

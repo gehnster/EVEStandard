@@ -16,7 +16,7 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<ESIModelDTO<List<EventSummary>>> ListCalendarEventSummariesV1Async(AuthDTO auth, long? fromEventId=null)
+        public async Task<ESIModelDTO<List<EventSummary>>> ListCalendarEventSummariesV1Async(AuthDTO auth, long? fromEventId=null, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_CALENDAR_READ_CALENDAR_EVENTS_1);
 
@@ -29,18 +29,18 @@ namespace EVEStandard.API
                 };
             }
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/calendar/", auth, queryParameters);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/calendar/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("ListCalendarEventSummariesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<EventSummary>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<Event>> GetAnEventV3Async(AuthDTO auth, long eventId)
+        public async Task<ESIModelDTO<Event>> GetAnEventV3Async(AuthDTO auth, long eventId, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_CALENDAR_READ_CALENDAR_EVENTS_1);
 
-            var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/calendar/" + eventId + "/", auth);
+            var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/calendar/" + eventId + "/", auth, ifNoneMatch);
 
             checkResponse("GetAnEventV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -59,11 +59,11 @@ namespace EVEStandard.API
             checkResponse("RespondToAnEventV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
-        public async Task<ESIModelDTO<List<EventAttendee>>> GetAttendeesV1Async(AuthDTO auth, long eventId)
+        public async Task<ESIModelDTO<List<EventAttendee>>> GetAttendeesV1Async(AuthDTO auth, long eventId, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_CALENDAR_READ_CALENDAR_EVENTS_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/calendar/" + eventId + "/attendees/", auth);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/calendar/" + eventId + "/attendees/", auth, ifNoneMatch);
 
             checkResponse("GetAttendeesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

@@ -14,7 +14,7 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<ESIModelDTO<List<int>>> GetRouteV1Async(int origin, int destination, List<int> avoidSystems, List<int> connections, string flag=RoutePreference.SHORTEST)
+        public async Task<ESIModelDTO<List<int>>> GetRouteV1Async(int origin, int destination, List<int> avoidSystems, List<int> connections, string flag=RoutePreference.SHORTEST, string ifNoneMatch=null)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -23,7 +23,7 @@ namespace EVEStandard.API
                 { "flag", flag }
             };
 
-            var responseModel = await GetAsync("/v1/route/" + origin + "/" + destination + "/", queryParameters);
+            var responseModel = await GetAsync($"/v1/route/{origin}/{destination}/", ifNoneMatch, queryParameters);
 
             checkResponse("GetRouteV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

@@ -14,37 +14,37 @@ namespace EVEStandard.API
         {
         }
 
-        public async Task<ESIModelDTO<List<int>>> ListWarsV1Async(int maxWarId)
+        public async Task<ESIModelDTO<List<int>>> ListWarsV1Async(int maxWarId, string ifNoneMatch=null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 { "max_war_id", maxWarId.ToString() }
             };
 
-            var responseModel = await GetAsync("/v1/wars/", queryParameters);
+            var responseModel = await GetAsync("/v1/wars/", ifNoneMatch, queryParameters);
 
             checkResponse("ListWarsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<List<int>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<War>> GetWarInformationV1Async(int warId)
+        public async Task<ESIModelDTO<War>> GetWarInformationV1Async(int warId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/wars/" + warId + "/");
+            var responseModel = await GetAsync("/v1/wars/" + warId + "/", ifNoneMatch);
 
             checkResponse("GetWarInformationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<War>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<KillmailIndex>>> ListKillsForWarV1Async(int warId, int page=1)
+        public async Task<ESIModelDTO<List<KillmailIndex>>> ListKillsForWarV1Async(int warId, int page=1, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync("/v1/wars/" + warId + "/killmails/", queryParameters);
+            var responseModel = await GetAsync("/v1/wars/" + warId + "/killmails/", ifNoneMatch, queryParameters);
 
             checkResponse("ListKillsForWarV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

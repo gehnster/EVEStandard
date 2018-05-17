@@ -25,7 +25,7 @@ namespace EVEStandard.API
                 {"destination_id", destinationId.ToString()}
             };
 
-            var responseModel = await PostAsync("/v2/ui/autopilot/waypoint/", auth, null, queryParameters);
+            var responseModel = await PostAsync("/v2/ui/autopilot/waypoint/", auth, null, null, queryParameters);
 
             checkResponse("SetAutopilotWaypointV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
@@ -39,7 +39,7 @@ namespace EVEStandard.API
                 {"contract_id", contractId.ToString()}
             };
 
-            var responseModel = await PostAsync("/v1/ui/openwindow/contract/", auth, null, queryParameters);
+            var responseModel = await PostAsync("/v1/ui/openwindow/contract/", auth, null, null, queryParameters);
 
             checkResponse("OpenContractWindowV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
@@ -53,7 +53,7 @@ namespace EVEStandard.API
                 {"target_id", targetId.ToString()}
             };
 
-            var responseModel = await PostAsync("/v1/ui/openwindow/information/", auth, null, queryParameters);
+            var responseModel = await PostAsync("/v1/ui/openwindow/information/", auth, null, null, queryParameters);
 
             checkResponse("OpenInformationWindowV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
@@ -67,7 +67,7 @@ namespace EVEStandard.API
                 {"type_id", typeId.ToString()}
             };
 
-            var responseModel = await PostAsync("/v1/ui/openwindow/marketdetails/", auth, null, queryParameters);
+            var responseModel = await PostAsync("/v1/ui/openwindow/marketdetails/", auth, null, null, queryParameters);
 
             checkResponse("OpenMarketDetailsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }

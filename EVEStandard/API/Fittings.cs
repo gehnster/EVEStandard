@@ -24,11 +24,11 @@ namespace EVEStandard.API
             checkResponse("DeleteFittingV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
 
-        public async Task<ESIModelDTO<List<CharacterFitting>>> GetFittingsV1Async(AuthDTO auth)
+        public async Task<ESIModelDTO<List<CharacterFitting>>> GetFittingsV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_FITTINGS_READ_FITTINGS_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/fittings/", auth);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/fittings/", auth, ifNoneMatch);
 
             checkResponse("TrackCorporationMembersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
