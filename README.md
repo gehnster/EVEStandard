@@ -3,8 +3,6 @@
 
 ## [Discord Server](https://discord.gg/SVyVze5)
 
-[![Open Hub](https://www.openhub.net/p/EVEStandard/widgets/project_thin_badge.gif)](https://www.openhub.net/p/EVEStandard)
-
 This library is meant to access the EVE Online ESI API through a C# library. This library was built using .NET Standard so as to be compatible with as many .NET frameworks as possible.
 
 ## Version scheme
