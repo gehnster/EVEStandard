@@ -6,6 +6,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,7 +91,7 @@ namespace EVEStandard.API
                 {
                     if (auth.AccessToken.Expires > DateTime.UtcNow)
                     {
-                        request.Headers.Add("token", auth.AccessToken.AccessToken);
+                        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", auth.AccessToken.AccessToken);
                     }
                     else
                     {

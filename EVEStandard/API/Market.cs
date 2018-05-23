@@ -102,7 +102,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_MARKETS_READ_CHARACTER_ORDERS_1);
 
-            var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/orders/", ifNoneMatch);
+            var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/orders/", auth, ifNoneMatch);
 
             checkResponse("ListOpenOrdersFromCharacterV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -118,7 +118,7 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/orders/history/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/orders/history/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("ListHistoricalOrdersByCharacterV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

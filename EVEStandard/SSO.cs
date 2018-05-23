@@ -136,13 +136,20 @@ namespace EVEStandard
             {
                 var byteArray = Encoding.ASCII.GetBytes(ClientId + ":" + SecretKey);
 
-                http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
                 var stringContent = new FormUrlEncodedContent(new[]
                 {
                     new KeyValuePair<string, string>("grant_type", "authorization_code"),
                     new KeyValuePair<string, string>("code", model.AuthorizationCode)
                 });
-                var response = await http.PostAsync(GetBaseURL() + SSO_TOKEN, stringContent);
+                var request = new HttpRequestMessage
+                {
+                    RequestUri = new Uri(GetBaseURL() + SSO_TOKEN),
+                    Method = HttpMethod.Post,
+                    Content = stringContent
+                };
+                request.Headers.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+
+                var response = await http.SendAsync(request).ConfigureAwait(false);
                 return JsonConvert.DeserializeObject<AccessTokenDetails>(response.Content.ReadAsStringAsync().Result);
             }
             catch (Exception inner)
@@ -163,14 +170,20 @@ namespace EVEStandard
             try
             {
                 var byteArray = Encoding.ASCII.GetBytes(ClientId + ":" + SecretKey);
-                http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
                 var stringContent = new FormUrlEncodedContent(new[]
                 {
                     new KeyValuePair<string, string>("grant_type", "refresh_token"),
                     new KeyValuePair<string, string>("refresh_token", refreshToken)
                 });
+                var request = new HttpRequestMessage
+                {
+                    RequestUri = new Uri(GetBaseURL() + SSO_TOKEN),
+                    Method = HttpMethod.Post,
+                    Content = stringContent
+                };
+                request.Headers.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
 
-                var response = await http.PostAsync(GetBaseURL() + SSO_TOKEN, stringContent);
+                var response = await http.SendAsync(request).ConfigureAwait(false);
                 return JsonConvert.DeserializeObject<AccessTokenDetails>(response.Content.ReadAsStringAsync().Result);
             }
             catch (Exception inner)
@@ -190,9 +203,14 @@ namespace EVEStandard
         {
             try
             {
-                http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                var verifyResponse = await http.GetAsync(GetBaseURL() + SSO_VERIFY);
+                var request = new HttpRequestMessage
+                {
+                    RequestUri = new Uri(GetBaseURL() + SSO_VERIFY),
+                    Method = HttpMethod.Get
+                };
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
+                var verifyResponse = await http.SendAsync(request).ConfigureAwait(false);
                 return JsonConvert.DeserializeObject<CharacterDetails>(await verifyResponse.Content.ReadAsStringAsync());
             }
             catch (Exception inner)
@@ -213,14 +231,20 @@ namespace EVEStandard
             try
             {
                 var byteArray = Encoding.ASCII.GetBytes(ClientId + ":" + SecretKey);
-                http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
                 var stringContent = new FormUrlEncodedContent(new[]
                 {
                     new KeyValuePair<string, string>("token_type_hint", type == RevokeType.ACCESS_TOKEN ? "access_token" : "refresh_token"),
                     new KeyValuePair<string, string>("token", token)
                 });
+                var request = new HttpRequestMessage
+                {
+                    RequestUri = new Uri(GetBaseURL() + SSO_REVOKE),
+                    Method = HttpMethod.Post,
+                    Content = stringContent
+                };
+                request.Headers.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
 
-                var response = await http.PostAsync(GetBaseURL() + SSO_REVOKE, stringContent);
+                var response = await http.SendAsync(request);
                 return response.IsSuccessStatusCode;
             }
             catch (Exception inner)
