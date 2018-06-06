@@ -11,7 +11,7 @@ namespace EVEStandard.Utilities
      *  If a given image is not found in the database, the service responds with a 302 Moved HTTP response and redirects the HTTP client to a generic image. If you request an image in an invalid size, you get a plain 404.
      *  You are welcome to point your clients and applications directly at the image server and use it as a CDN. You do not need to cache the images and serve them yourself.
     */
-    public class ImageServer
+    public static class ImageServer
     {
         private const string BASE_URL = "https://imageserver.eveonline.com";
 
@@ -22,32 +22,32 @@ namespace EVEStandard.Utilities
         public enum InventoryTypesWidth { x32 = 32, x64 = 64 }
         public enum ShipAndDroneRendersWidth { x32 = 32, x64 = 64, x128 = 128, x256 = 256, x512 = 512 }
 
-        public string AllianceImageURL(int allianceId, AllianceWidth width)
+        public static string AllianceImageURL(int allianceId, AllianceWidth width)
         {
             return BASE_URL + $"/Alliance/{allianceId}_{width.ToString()}.png";
         }
 
-        public string CorporationImageURL(int corpId, CorporationWidth width)
+        public static string CorporationImageURL(int corpId, CorporationWidth width)
         {
             return BASE_URL + $"/Corporation/{corpId}_{width.ToString()}.png";
         }
 
-        public string CharacterImageURL(int characterId, CharacterWidth width)
+        public static string CharacterImageURL(int characterId, CharacterWidth width)
         {
             return BASE_URL + $"/Character/{characterId}_{width.ToString()}.jpg";
         }
 
-        public string FactionImageURL(int factionId, FactionWidth width)
+        public static string FactionImageURL(int factionId, FactionWidth width)
         {
             return BASE_URL + $"/Alliance/{factionId}_{width.ToString()}.png";
         }
 
-        public string InventoryImageURL(int typeId, InventoryTypesWidth width)
+        public static string InventoryImageURL(int typeId, InventoryTypesWidth width)
         {
             return BASE_URL + $"/Type/{typeId}_{width.ToString()}.png";
         }
 
-        public string ShipAndDroneRenderImageURL(int typeId, ShipAndDroneRendersWidth width)
+        public static string ShipAndDroneRenderImageURL(int typeId, ShipAndDroneRendersWidth width)
         {
             return BASE_URL + $"/Render/{typeId}_{width.ToString()}.png";
         }
