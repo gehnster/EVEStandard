@@ -93,9 +93,9 @@ namespace EVEStandard
         /// <exception cref="EVEStandardException" ><paramref name="scopes"/> parameter was empty or null</exception>
         public Authorization AuthorizeToEVEUri(List<string> scopes, string state)
         {
-            if (scopes.Count == 0 || scopes == null)
+            if (scopes == null)
             {
-                throw new EVEStandardException("scopes parameter in SSO.AuthorizeToEVEURI is invalid");
+                throw new ArgumentNullException();
             }
 
             var model = new Authorization
