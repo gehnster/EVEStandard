@@ -24,14 +24,13 @@ namespace EVEStandard.API
             return returnModelDTO<Killmail>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<KillmailIndex>>> GetCharacterKillsAndLossesV1Async(AuthDTO auth, int maxCount, int maxKillId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<KillmailIndex>>> GetCharacterKillsAndLossesV1Async(AuthDTO auth, int page = 1, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_KILLMAILS_READ_KILLMAILS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
-                { "max_count", maxCount.ToString() },
-                { "max_kill_id", maxKillId.ToString() }
+                { "page", page.ToString() },
             };
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/killmails/recent/", auth, ifNoneMatch, queryParameters);
@@ -41,13 +40,13 @@ namespace EVEStandard.API
             return returnModelDTO<List<KillmailIndex>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<KillmailIndex>>> GetCorporationKillsAndLossesV1Async(AuthDTO auth, int corporationId, int maxKillId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<KillmailIndex>>> GetCorporationKillsAndLossesV1Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_KILLMAILS_READ_CORPORATION_KILLMAILS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
-                { "max_kill_id", maxKillId.ToString() }
+                { "page", page.ToString() }
             };
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/killmails/recent/", auth, ifNoneMatch, queryParameters);
