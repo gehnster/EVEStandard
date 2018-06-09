@@ -4,12 +4,14 @@ namespace EVEStandard.Models
 {
     public class MarketPrice : ModelBase<MarketPrice>
     {
+        #region Properties
+
         /// <summary>
-        /// type_id integer
+        /// adjusted_price number
         /// </summary>
-        /// <value>type_id integer</value>
-        [JsonProperty("type_id")]
-        public int? TypeId { get; set; }
+        /// <value>adjusted_price number</value>
+        [JsonProperty("adjusted_price")]
+        public double? AdjustedPrice { get; set; }
 
         /// <summary>
         /// average_price number
@@ -19,10 +21,12 @@ namespace EVEStandard.Models
         public double? AveragePrice { get; set; }
 
         /// <summary>
-        /// adjusted_price number
+        /// type_id integer
         /// </summary>
-        /// <value>adjusted_price number</value>
-        [JsonProperty("adjusted_price")]
-        public double? AdjustedPrice { get; set; }
+        /// <value>type_id integer</value>
+        [JsonProperty("type_id")]
+        public int TypeId { get; set; }
+
+        #endregion Properties
     }
 }

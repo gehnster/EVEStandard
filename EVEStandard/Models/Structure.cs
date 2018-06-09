@@ -4,6 +4,8 @@ namespace EVEStandard.Models
 {
     public class Structure : ModelBase<Structure>
     {
+        #region Properties
+
         /// <summary>
         /// The full name of the structure
         /// </summary>
@@ -12,11 +14,17 @@ namespace EVEStandard.Models
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or Sets Position
+        /// </summary>
+        [JsonProperty("position")]
+        public Position Position { get; set; }
+
+        /// <summary>
         /// solar_system_id integer
         /// </summary>
         /// <value>solar_system_id integer</value>
         [JsonProperty("solar_system_id")]
-        public int? SolarSystemId { get; set; }
+        public int SolarSystemId { get; set; }
 
         /// <summary>
         /// type_id integer
@@ -25,10 +33,6 @@ namespace EVEStandard.Models
         [JsonProperty("type_id")]
         public int? TypeId { get; set; }
 
-        /// <summary>
-        /// Gets or Sets Position
-        /// </summary>
-        [JsonProperty("position")]
-        public Position Position { get; set; }
+        #endregion Properties
     }
 }

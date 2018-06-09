@@ -7,13 +7,8 @@ namespace EVEStandard.Models
     /// </summary>
     
     public class AggregateStats : ModelBase<AggregateStats>
-    { 
-        /// <summary>
-        /// Gregorian year for this set of aggregates
-        /// </summary>
-        /// <value>Gregorian year for this set of aggregates</value>
-        [JsonProperty("year")]
-        public int? Year { get; set; }
+    {
+        #region Properties
 
         /// <summary>
         /// Gets or Sets Character
@@ -86,9 +81,20 @@ namespace EVEStandard.Models
         /// </summary>
         [JsonProperty("travel")]
         public TravelStats Travel { get; set; }
+
+        /// <summary>
+        /// Gregorian year for this set of aggregates
+        /// </summary>
+        /// <value>Gregorian year for this set of aggregates</value>
+        [JsonProperty("year")]
+        public int Year { get; set; }
+
+        #endregion Properties
     }
     public class CharacterStats : ModelBase<CharacterStats>
     {
+        #region Properties
+
         /// <summary>
         /// days_of_activity integer
         /// </summary>
@@ -109,9 +115,13 @@ namespace EVEStandard.Models
         /// <value>sessions_started integer</value>
         [JsonProperty("sessions_started")]
         public long? SessionsStarted { get; set; }
+
+        #endregion Properties
     }
     public class CombatStats : ModelBase<CombatStats>
     {
+        #region Properties
+
         /// <summary>
         /// cap_drainedby_npc integer
         /// </summary>
@@ -722,13 +732,6 @@ namespace EVEStandard.Models
         public long? SelfDestructs { get; set; }
 
         /// <summary>
-        /// warp_scramble_pc integer
-        /// </summary>
-        /// <value>warp_scramble_pc integer</value>
-        [JsonProperty("warp_scramble_pc")]
-        public long? WarpScramblePc { get; set; }
-
-        /// <summary>
         /// warp_scrambledby_npc integer
         /// </summary>
         /// <value>warp_scrambledby_npc integer</value>
@@ -742,6 +745,12 @@ namespace EVEStandard.Models
         [JsonProperty("warp_scrambledby_pc")]
         public long? WarpScrambledbyPc { get; set; }
 
+        /// <summary>
+        /// warp_scramble_pc integer
+        /// </summary>
+        /// <value>warp_scramble_pc integer</value>
+        [JsonProperty("warp_scramble_pc")]
+        public long? WarpScramblePc { get; set; }
         /// <summary>
         /// weapon_flag_set integer
         /// </summary>
@@ -769,9 +778,13 @@ namespace EVEStandard.Models
         /// <value>webifying_pc integer</value>
         [JsonProperty("webifying_pc")]
         public long? WebifyingPc { get; set; }
+
+        #endregion Properties
     }
     public class IndustryStats : ModelBase<IndustryStats>
     {
+        #region Properties
+
         /// <summary>
         /// hacking_successes integer
         /// </summary>
@@ -1023,9 +1036,13 @@ namespace EVEStandard.Models
         /// <value>reprocess_item_quantity integer</value>
         [JsonProperty("reprocess_item_quantity")]
         public long? ReprocessItemQuantity { get; set; }
+
+        #endregion Properties
     }
     public class InventoryStats : ModelBase<InventoryStats>
     {
+        #region Properties
+
         /// <summary>
         /// abandon_loot_quantity integer
         /// </summary>
@@ -1039,9 +1056,13 @@ namespace EVEStandard.Models
         /// <value>trash_item_quantity integer</value>
         [JsonProperty("trash_item_quantity")]
         public long? TrashItemQuantity { get; set; }
+
+        #endregion Properties
     }
     public class IskStats : ModelBase<IskStats>
     {
+        #region Properties
+
         /// <summary>
         /// in integer
         /// </summary>
@@ -1055,9 +1076,13 @@ namespace EVEStandard.Models
         /// <value>out integer</value>
         [JsonProperty("out")]
         public long? Out { get; set; }
+
+        #endregion Properties
     }
     public class MarketStats : ModelBase<MarketStats>
     {
+        #region Properties
+
         /// <summary>
         /// accept_contracts_courier integer
         /// </summary>
@@ -1148,9 +1173,13 @@ namespace EVEStandard.Models
         /// <value>sell_orders_placed integer</value>
         [JsonProperty("sell_orders_placed")]
         public long? SellOrdersPlaced { get; set; }
+
+        #endregion Properties
     }
     public class MiningStats : ModelBase<MiningStats>
     {
+        #region Properties
+
         /// <summary>
         /// drone_mine integer
         /// </summary>
@@ -1283,9 +1312,13 @@ namespace EVEStandard.Models
         /// <value>ore_veldspar integer</value>
         [JsonProperty("ore_veldspar")]
         public long? OreVeldspar { get; set; }
+
+        #endregion Properties
     }
     public class ModuleStats : ModelBase<ModuleStats>
     {
+        #region Properties
+
         /// <summary>
         /// activations_armor_hardener integer
         /// </summary>
@@ -1768,9 +1801,13 @@ namespace EVEStandard.Models
         /// <value>repairs integer</value>
         [JsonProperty("repairs")]
         public long? Repairs { get; set; }
+
+        #endregion Properties
     }
     public class OrbitalStats : ModelBase<OrbitalStats>
     {
+        #region Properties
+
         /// <summary>
         /// strike_characters_killed integer
         /// </summary>
@@ -1791,9 +1828,13 @@ namespace EVEStandard.Models
         /// <value>strike_damage_to_players_shield_amount integer</value>
         [JsonProperty("strike_damage_to_players_shield_amount")]
         public long? StrikeDamageToPlayersShieldAmount { get; set; }
+
+        #endregion Properties
     }
     public class PveStats : ModelBase<PveStats>
     {
+        #region Properties
+
         /// <summary>
         /// dungeons_completed_agent integer
         /// </summary>
@@ -1821,9 +1862,13 @@ namespace EVEStandard.Models
         /// <value>missions_succeeded_epic_arc integer</value>
         [JsonProperty("missions_succeeded_epic_arc")]
         public long? MissionsSucceededEpicArc { get; set; }
+
+        #endregion Properties
     }
     public class SocialStats : ModelBase<SocialStats>
     {
+        #region Properties
+
         /// <summary>
         /// add_contact_bad integer
         /// </summary>
@@ -1860,13 +1905,6 @@ namespace EVEStandard.Models
         public long? AddContactNeutral { get; set; }
 
         /// <summary>
-        /// add_note integer
-        /// </summary>
-        /// <value>add_note integer</value>
-        [JsonProperty("add_note")]
-        public long? AddNote { get; set; }
-
-        /// <summary>
         /// added_as_contact_bad integer
         /// </summary>
         /// <value>added_as_contact_bad integer</value>
@@ -1901,6 +1939,12 @@ namespace EVEStandard.Models
         [JsonProperty("added_as_contact_neutral")]
         public long? AddedAsContactNeutral { get; set; }
 
+        /// <summary>
+        /// add_note integer
+        /// </summary>
+        /// <value>add_note integer</value>
+        [JsonProperty("add_note")]
+        public long? AddNote { get; set; }
         /// <summary>
         /// calendar_event_created integer
         /// </summary>
@@ -1998,9 +2042,13 @@ namespace EVEStandard.Models
         /// <value>mails_sent integer</value>
         [JsonProperty("mails_sent")]
         public long? MailsSent { get; set; }
+
+        #endregion Properties
     }
     public class TravelStats : ModelBase<TravelStats>
     {
+        #region Properties
+
         /// <summary>
         /// acceleration_gate_activations integer
         /// </summary>
@@ -2147,5 +2195,7 @@ namespace EVEStandard.Models
         /// <value>warps_wormhole integer</value>
         [JsonProperty("warps_wormhole")]
         public long? WarpsWormhole { get; set; }
+
+        #endregion Properties
     }
 }

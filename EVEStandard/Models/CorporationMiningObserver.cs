@@ -10,14 +10,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>last_updated string</value>
         [JsonProperty("last_updated")]
-        public DateTime? LastUpdated { get; set; }
+        public DateTime LastUpdated { get; set; }
 
         /// <summary>
         /// The entity that was observing the asteroid field when it was mined. 
         /// </summary>
         /// <value>The entity that was observing the asteroid field when it was mined. </value>
         [JsonProperty("observer_id")]
-        public long? ObserverId { get; set; }
+        public long ObserverId { get; set; }
         /// <summary>
         /// The category of the observing entity
         /// </summary>
@@ -32,6 +32,6 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The category of the observing entity</value>
         [JsonProperty("observer_type")]
-        public ObserverTypeEnum? ObserverType { get; set; }
+        public ObserverTypeEnum ObserverType { get; set; }
     }
 }

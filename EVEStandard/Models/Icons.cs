@@ -4,6 +4,8 @@ namespace EVEStandard.Models
 {
     public class Icons : ModelBase<Icons>
     {
+        #region Properties
+
         /// <summary>
         ///     px64x64 string
         /// </summary>
@@ -31,5 +33,7 @@ namespace EVEStandard.Models
         /// <value>px512x512 string</value>
         [JsonProperty("px512x512")]
         public string Px512x512 { get; set; }
+
+        #endregion
     }
 }

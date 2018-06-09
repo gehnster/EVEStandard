@@ -4,9 +4,14 @@ namespace EVEStandard.Models
 {
     public class Item : ModelBase<Item>
     {
-        [JsonProperty("type_id")]
-        public long TypeId { get; set; }
+        #region Properties
+
         [JsonProperty("item_id")]
         public long ItemId { get; set; }
+
+        [JsonProperty("type_id")]
+        public int TypeId { get; set; }
+
+        #endregion Properties
     }
 }

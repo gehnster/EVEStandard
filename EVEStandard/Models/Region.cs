@@ -5,19 +5,14 @@ namespace EVEStandard.Models
 {
     public class Region : ModelBase<Region>
     {
-        /// <summary>
-        /// region_id integer
-        /// </summary>
-        /// <value>region_id integer</value>
-        [JsonProperty("region_id")]
-        public int? RegionId { get; set; }
+        #region Properties
 
         /// <summary>
-        /// name string
+        /// constellations array
         /// </summary>
-        /// <value>name string</value>
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        /// <value>constellations array</value>
+        [JsonProperty("constellations")]
+        public List<int> Constellations { get; set; }
 
         /// <summary>
         /// description string
@@ -27,10 +22,19 @@ namespace EVEStandard.Models
         public string Description { get; set; }
 
         /// <summary>
-        /// constellations array
+        /// name string
         /// </summary>
-        /// <value>constellations array</value>
-        [JsonProperty("constellations")]
-        public List<int?> Constellations { get; set; }
+        /// <value>name string</value>
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// region_id integer
+        /// </summary>
+        /// <value>region_id integer</value>
+        [JsonProperty("region_id")]
+        public int RegionId { get; set; }
+
+        #endregion Properties
     }
 }

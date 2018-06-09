@@ -4,12 +4,7 @@ namespace EVEStandard.Models
 {
     public class SovereigntyMap : ModelBase<SovereigntyMap>
     {
-        /// <summary>
-        /// system_id integer
-        /// </summary>
-        /// <value>system_id integer</value>
-        [JsonProperty("system_id")]
-        public int? SystemId { get; set; }
+        #region Properties
 
         /// <summary>
         /// alliance_id integer
@@ -31,5 +26,14 @@ namespace EVEStandard.Models
         /// <value>faction_id integer</value>
         [JsonProperty("faction_id")]
         public int? FactionId { get; set; }
+
+        /// <summary>
+        /// system_id integer
+        /// </summary>
+        /// <value>system_id integer</value>
+        [JsonProperty("system_id")]
+        public int SystemId { get; set; }
+
+        #endregion Properties
     }
 }

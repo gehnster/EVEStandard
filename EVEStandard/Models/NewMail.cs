@@ -5,6 +5,22 @@ namespace EVEStandard.Models
 {
     public class NewMail : ModelBase<NewMail>
     {
+        #region Properties
+
+        /// <summary>
+        /// approved_cost integer
+        /// </summary>
+        /// <value>approved_cost integer</value>
+        [JsonProperty("approved_cost")]
+        public long? ApprovedCost { get; set; }
+
+        /// <summary>
+        /// body string
+        /// </summary>
+        /// <value>body string</value>
+        [JsonProperty("body")]
+        public string Body { get; set; }
+
         /// <summary>
         /// recipients array
         /// </summary>
@@ -19,18 +35,6 @@ namespace EVEStandard.Models
         [JsonProperty("subject")]
         public string Subject { get; set; }
 
-        /// <summary>
-        /// body string
-        /// </summary>
-        /// <value>body string</value>
-        [JsonProperty("body")]
-        public string Body { get; set; }
-
-        /// <summary>
-        /// approved_cost integer
-        /// </summary>
-        /// <value>approved_cost integer</value>
-        [JsonProperty("approved_cost")]
-        public long? ApprovedCost { get; set; }
+        #endregion Properties
     }
 }

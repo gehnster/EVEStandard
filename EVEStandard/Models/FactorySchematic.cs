@@ -4,6 +4,15 @@ namespace EVEStandard.Models
 {
     public class FactorySchematic : ModelBase<FactorySchematic>
     {
+        #region Properties
+
+        /// <summary>
+        /// Time in seconds to process a run
+        /// </summary>
+        /// <value>Time in seconds to process a run</value>
+        [JsonProperty("cycle_time")]
+        public int CycleTime { get; set; }
+
         /// <summary>
         /// schematic_name string
         /// </summary>
@@ -11,11 +20,6 @@ namespace EVEStandard.Models
         [JsonProperty("schematic_name")]
         public string SchematicName { get; set; }
 
-        /// <summary>
-        /// Time in seconds to process a run
-        /// </summary>
-        /// <value>Time in seconds to process a run</value>
-        [JsonProperty("cycle_time")]
-        public int? CycleTime { get; set; }
+        #endregion Properties
     }
 }

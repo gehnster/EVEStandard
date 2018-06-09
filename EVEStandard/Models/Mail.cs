@@ -6,19 +6,7 @@ namespace EVEStandard.Models
 {
     public class Mail : ModelBase<Mail>
     {
-        /// <summary>
-        /// mail_id integer
-        /// </summary>
-        /// <value>mail_id integer</value>
-        [JsonProperty("mail_id")]
-        public long? MailId { get; set; }
-
-        /// <summary>
-        /// Mail subject
-        /// </summary>
-        /// <value>Mail subject</value>
-        [JsonProperty("subject")]
-        public string Subject { get; set; }
+        #region Properties
 
         /// <summary>
         /// From whom the mail was sent
@@ -28,11 +16,11 @@ namespace EVEStandard.Models
         public int? From { get; set; }
 
         /// <summary>
-        /// When the mail was sent
+        /// is_read boolean
         /// </summary>
-        /// <value>When the mail was sent</value>
-        [JsonProperty("timestamp")]
-        public DateTime? Timestamp { get; set; }
+        /// <value>is_read boolean</value>
+        [JsonProperty("is_read")]
+        public bool? IsRead { get; set; }
 
         /// <summary>
         /// labels array
@@ -42,6 +30,13 @@ namespace EVEStandard.Models
         public List<long?> Labels { get; set; }
 
         /// <summary>
+        /// mail_id integer
+        /// </summary>
+        /// <value>mail_id integer</value>
+        [JsonProperty("mail_id")]
+        public long? MailId { get; set; }
+
+        /// <summary>
         /// Recipients of the mail
         /// </summary>
         /// <value>Recipients of the mail</value>
@@ -49,10 +44,19 @@ namespace EVEStandard.Models
         public List<MailRecipient> Recipients { get; set; }
 
         /// <summary>
-        /// is_read boolean
+        /// Mail subject
         /// </summary>
-        /// <value>is_read boolean</value>
-        [JsonProperty("is_read")]
-        public bool? IsRead { get; set; }
+        /// <value>Mail subject</value>
+        [JsonProperty("subject")]
+        public string Subject { get; set; }
+
+        /// <summary>
+        /// When the mail was sent
+        /// </summary>
+        /// <value>When the mail was sent</value>
+        [JsonProperty("timestamp")]
+        public DateTime? Timestamp { get; set; }
+
+        #endregion Properties
     }
 }

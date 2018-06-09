@@ -5,6 +5,8 @@ namespace EVEStandard.Models
 {
     public class CorporationDivision : ModelBase<CorporationDivision>
     {
+        #region Properties
+
         /// <summary>
         /// hangar array
         /// </summary>
@@ -18,10 +20,14 @@ namespace EVEStandard.Models
         /// <value>wallet array</value>
         [JsonProperty("wallet")]
         public List<DivisionWallet> Wallet { get; set; }
+
+        #endregion Properties
     }
 
     public class DivisionHanger : ModelBase<DivisionHanger>
     {
+        #region Properties
+
         /// <summary>
         /// division integer
         /// </summary>
@@ -35,10 +41,14 @@ namespace EVEStandard.Models
         /// <value>name string</value>
         [JsonProperty("name")]
         public string Name { get; set; }
+
+        #endregion Properties
     }
 
     public class DivisionWallet : ModelBase<DivisionWallet>
     {
+        #region Properties
+
         /// <summary>
         /// division integer
         /// </summary>
@@ -52,5 +62,7 @@ namespace EVEStandard.Models
         /// <value>name string</value>
         [JsonProperty("name")]
         public string Name { get; set; }
+
+        #endregion Properties
     }
 }

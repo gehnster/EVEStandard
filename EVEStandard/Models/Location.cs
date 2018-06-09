@@ -5,6 +5,8 @@ namespace EVEStandard.Models
 {
     public class Location : ModelBase<Location>
     {
+        #region Properties
+
         /// <summary>
         /// location_id integer
         /// </summary>
@@ -18,5 +20,7 @@ namespace EVEStandard.Models
         /// <value>location_type string</value>
         [JsonProperty("location_type")]
         public LocationType? LocationType { get; set; }
+
+        #endregion Properties
     }
 }
