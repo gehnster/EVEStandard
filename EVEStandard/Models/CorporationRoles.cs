@@ -5,19 +5,14 @@ namespace EVEStandard.Models
 {
     public class CorporationRoles : ModelBase<CorporationRoles>
     {
+        #region Properties
+
         /// <summary>
         /// character_id integer
         /// </summary>
         /// <value>character_id integer</value>
         [JsonProperty("character_id")]
-        public int? CharacterId { get; set; }
-
-        /// <summary>
-        /// roles array
-        /// </summary>
-        /// <value>roles array</value>
-        [JsonProperty("roles")]
-        public List<string> Roles { get; set; }
+        public int CharacterId { get; set; }
 
         /// <summary>
         /// grantable_roles array
@@ -27,11 +22,11 @@ namespace EVEStandard.Models
         public List<string> GrantableRoles { get; set; }
 
         /// <summary>
-        /// roles_at_hq array
+        /// grantable_roles_at_base array
         /// </summary>
-        /// <value>roles_at_hq array</value>
-        [JsonProperty("roles_at_hq")]
-        public List<string> RolesAtHq { get; set; }
+        /// <value>grantable_roles_at_base array</value>
+        [JsonProperty("grantable_roles_at_base")]
+        public List<string> GrantableRolesAtBase { get; set; }
 
         /// <summary>
         /// grantable_roles_at_hq array
@@ -41,6 +36,19 @@ namespace EVEStandard.Models
         public List<string> GrantableRolesAtHq { get; set; }
 
         /// <summary>
+        /// grantable_roles_at_other array
+        /// </summary>
+        /// <value>grantable_roles_at_other array</value>
+        [JsonProperty("grantable_roles_at_other")]
+        public List<string> GrantableRolesAtOther { get; set; }
+
+        /// <summary>
+        /// roles array
+        /// </summary>
+        /// <value>roles array</value>
+        [JsonProperty("roles")]
+        public List<string> Roles { get; set; }
+        /// <summary>
         /// roles_at_base array
         /// </summary>
         /// <value>roles_at_base array</value>
@@ -48,12 +56,11 @@ namespace EVEStandard.Models
         public List<string> RolesAtBase { get; set; }
 
         /// <summary>
-        /// grantable_roles_at_base array
+        /// roles_at_hq array
         /// </summary>
-        /// <value>grantable_roles_at_base array</value>
-        [JsonProperty("grantable_roles_at_base")]
-        public List<string> GrantableRolesAtBase { get; set; }
-
+        /// <value>roles_at_hq array</value>
+        [JsonProperty("roles_at_hq")]
+        public List<string> RolesAtHq { get; set; }
         /// <summary>
         /// roles_at_other array
         /// </summary>
@@ -61,11 +68,6 @@ namespace EVEStandard.Models
         [JsonProperty("roles_at_other")]
         public List<string> RolesAtOther { get; set; }
 
-        /// <summary>
-        /// grantable_roles_at_other array
-        /// </summary>
-        /// <value>grantable_roles_at_other array</value>
-        [JsonProperty("grantable_roles_at_other")]
-        public List<string> GrantableRolesAtOther { get; set; }
+        #endregion Properties
     }
 }

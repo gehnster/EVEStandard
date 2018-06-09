@@ -3,8 +3,35 @@ using Newtonsoft.Json;
 
 namespace EVEStandard.Models
 {
+    public class NameToId
+    {
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
+        [JsonProperty("id")]
+        public long Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        #endregion Properties
+    }
+
     public class Universe : ModelBase<Universe>
     {
+        #region Properties
+
         /// <summary>
         /// agents array
         /// </summary>
@@ -62,25 +89,19 @@ namespace EVEStandard.Models
         public List<NameToId> Regions { get; set; }
 
         /// <summary>
+        /// stations array
+        /// </summary>
+        /// <value>stations array</value>
+        [JsonProperty("stations")]
+        public List<NameToId> Stations { get; set; }
+
+        /// <summary>
         /// systems array
         /// </summary>
         /// <value>systems array</value>
         [JsonProperty("systems")]
         public List<NameToId> Systems { get; set; }
 
-        /// <summary>
-        /// stations array
-        /// </summary>
-        /// <value>stations array</value>
-        [JsonProperty("stations")]
-        public List<NameToId> Stations { get; set; }
-    }
-
-    public class NameToId
-    {
-        [JsonProperty("id")]
-        public long Id { get; set; }
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        #endregion Properties
     }
 }

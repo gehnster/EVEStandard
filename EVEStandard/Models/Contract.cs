@@ -5,74 +5,20 @@ namespace EVEStandard.Models
 {
     public class Contract : ModelBase<Contract>
     {
-        /// <summary>
-        /// contract_id integer
-        /// </summary>
-        /// <value>contract_id integer</value>
-        [JsonProperty("contract_id")]
-        public int? ContractId { get; set; }
+        #region Enums
 
         /// <summary>
-        /// Character ID for the issuer
+        /// To whom the contract is available
         /// </summary>
-        /// <value>Character ID for the issuer</value>
-        [JsonProperty("issuer_id")]
-        public int? IssuerId { get; set; }
-
-        /// <summary>
-        /// Character&#39;s corporation ID for the issuer
-        /// </summary>
-        /// <value>Character&#39;s corporation ID for the issuer</value>
-        [JsonProperty("issuer_corporation_id")]
-        public int? IssuerCorporationId { get; set; }
-
-        /// <summary>
-        /// ID to whom the contract is assigned, can be corporation or character ID
-        /// </summary>
-        /// <value>ID to whom the contract is assigned, can be corporation or character ID</value>
-        [JsonProperty("assignee_id")]
-        public int? AssigneeId { get; set; }
-
-        /// <summary>
-        /// Who will accept the contract
-        /// </summary>
-        /// <value>Who will accept the contract</value>
-        [JsonProperty("acceptor_id")]
-        public int? AcceptorId { get; set; }
-
-        /// <summary>
-        /// Start location ID (for Couriers contract)
-        /// </summary>
-        /// <value>Start location ID (for Couriers contract)</value>
-        [JsonProperty("start_location_id")]
-        public long? StartLocationId { get; set; }
-
-        /// <summary>
-        /// End location ID (for Couriers contract)
-        /// </summary>
-        /// <value>End location ID (for Couriers contract)</value>
-        [JsonProperty("end_location_id")]
-        public long? EndLocationId { get; set; }
-
-        /// <summary>
-        /// Type of the contract
-        /// </summary>
-        /// <value>Type of the contract</value>
-        public enum TypeEnum
+        /// <value>To whom the contract is available</value>
+        public enum AvailabilityEnum
         {
-            unknown = 1,
-            item_exchange = 2,
-            auction = 3,
-            courier = 4,
-            loan = 5
+            [JsonProperty("public")]
+            publicEnum = 1,
+            personal = 2,
+            corporation = 3,
+            alliance = 4
         }
-
-        /// <summary>
-        /// Type of the contract
-        /// </summary>
-        /// <value>Type of the contract</value>
-        [JsonProperty("type")]
-        public TypeEnum? Type { get; set; }
 
         /// <summary>
         /// Status of the the contract
@@ -93,58 +39,63 @@ namespace EVEStandard.Models
         }
 
         /// <summary>
-        /// Status of the the contract
+        /// Type of the contract
         /// </summary>
-        /// <value>Status of the the contract</value>
-        [JsonProperty("status")]
-        public StatusEnum? Status { get; set; }
-
-        /// <summary>
-        /// Title of the contract
-        /// </summary>
-        /// <value>Title of the contract</value>
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        /// <summary>
-        /// true if the contract was issued on behalf of the issuer&#39;s corporation
-        /// </summary>
-        /// <value>true if the contract was issued on behalf of the issuer&#39;s corporation</value>
-        [JsonProperty("for_corporation")]
-        public bool? ForCorporation { get; set; }
-
-        /// <summary>
-        /// To whom the contract is available
-        /// </summary>
-        /// <value>To whom the contract is available</value>
-        public enum AvailabilityEnum
+        /// <value>Type of the contract</value>
+        public enum TypeEnum
         {
-            [JsonProperty("public")] publicEnum = 1,
-            personal = 2,
-            corporation = 3,
-            alliance = 4
+            unknown = 1,
+            item_exchange = 2,
+            auction = 3,
+            courier = 4,
+            loan = 5
         }
+
+        #endregion Enums
+
+        #region Properties
+
+        /// <summary>
+        /// Who will accept the contract
+        /// </summary>
+        /// <value>Who will accept the contract</value>
+        [JsonProperty("acceptor_id")]
+        public int AcceptorId { get; set; }
+
+        /// <summary>
+        /// ID to whom the contract is assigned, can be corporation or character ID
+        /// </summary>
+        /// <value>ID to whom the contract is assigned, can be corporation or character ID</value>
+        [JsonProperty("assignee_id")]
+        public int AssigneeId { get; set; }
 
         /// <summary>
         /// To whom the contract is available
         /// </summary>
         /// <value>To whom the contract is available</value>
         [JsonProperty("availability")]
-        public AvailabilityEnum? Availability { get; set; }
+        public AvailabilityEnum Availability { get; set; }
 
         /// <summary>
-        /// Сreation date of the contract
+        /// Buyout price (for Auctions only)
         /// </summary>
-        /// <value>Сreation date of the contract</value>
-        [JsonProperty("date_issued")]
-        public DateTime? DateIssued { get; set; }
+        /// <value>Buyout price (for Auctions only)</value>
+        [JsonProperty("buyout")]
+        public double? Buyout { get; set; }
 
         /// <summary>
-        /// Expiration date of the contract
+        /// Collateral price (for Couriers only)
         /// </summary>
-        /// <value>Expiration date of the contract</value>
-        [JsonProperty("date_expired")]
-        public DateTime? DateExpired { get; set; }
+        /// <value>Collateral price (for Couriers only)</value>
+        [JsonProperty("collateral")]
+        public double? Collateral { get; set; }
+
+        /// <summary>
+        /// contract_id integer
+        /// </summary>
+        /// <value>contract_id integer</value>
+        [JsonProperty("contract_id")]
+        public int ContractId { get; set; }
 
         /// <summary>
         /// Date of confirmation of contract
@@ -154,6 +105,27 @@ namespace EVEStandard.Models
         public DateTime? DateAccepted { get; set; }
 
         /// <summary>
+        /// Date of completed of contract
+        /// </summary>
+        /// <value>Date of completed of contract</value>
+        [JsonProperty("date_completed")]
+        public DateTime? DateCompleted { get; set; }
+
+        /// <summary>
+        /// Expiration date of the contract
+        /// </summary>
+        /// <value>Expiration date of the contract</value>
+        [JsonProperty("date_expired")]
+        public DateTime DateExpired { get; set; }
+
+        /// <summary>
+        /// Сreation date of the contract
+        /// </summary>
+        /// <value>Сreation date of the contract</value>
+        [JsonProperty("date_issued")]
+        public DateTime DateIssued { get; set; }
+
+        /// <summary>
         /// Number of days to perform the contract
         /// </summary>
         /// <value>Number of days to perform the contract</value>
@@ -161,12 +133,32 @@ namespace EVEStandard.Models
         public int? DaysToComplete { get; set; }
 
         /// <summary>
-        /// Date of completed of contract
+        /// End location ID (for Couriers contract)
         /// </summary>
-        /// <value>Date of completed of contract</value>
-        [JsonProperty("date_completed")]
-        public DateTime? DateCompleted { get; set; }
+        /// <value>End location ID (for Couriers contract)</value>
+        [JsonProperty("end_location_id")]
+        public long? EndLocationId { get; set; }
 
+        /// <summary>
+        /// true if the contract was issued on behalf of the issuer&#39;s corporation
+        /// </summary>
+        /// <value>true if the contract was issued on behalf of the issuer&#39;s corporation</value>
+        [JsonProperty("for_corporation")]
+        public bool ForCorporation { get; set; }
+
+        /// <summary>
+        /// Character&#39;s corporation ID for the issuer
+        /// </summary>
+        /// <value>Character&#39;s corporation ID for the issuer</value>
+        [JsonProperty("issuer_corporation_id")]
+        public int IssuerCorporationId { get; set; }
+
+        /// <summary>
+        /// Character ID for the issuer
+        /// </summary>
+        /// <value>Character ID for the issuer</value>
+        [JsonProperty("issuer_id")]
+        public int IssuerId { get; set; }
         /// <summary>
         /// Price of contract (for ItemsExchange and Auctions)
         /// </summary>
@@ -182,24 +174,38 @@ namespace EVEStandard.Models
         public double? Reward { get; set; }
 
         /// <summary>
-        /// Collateral price (for Couriers only)
+        /// Start location ID (for Couriers contract)
         /// </summary>
-        /// <value>Collateral price (for Couriers only)</value>
-        [JsonProperty("collateral")]
-        public double? Collateral { get; set; }
+        /// <value>Start location ID (for Couriers contract)</value>
+        [JsonProperty("start_location_id")]
+        public long? StartLocationId { get; set; }
+        /// <summary>
+        /// Status of the the contract
+        /// </summary>
+        /// <value>Status of the the contract</value>
+        [JsonProperty("status")]
+        public StatusEnum Status { get; set; }
 
         /// <summary>
-        /// Buyout price (for Auctions only)
+        /// Title of the contract
         /// </summary>
-        /// <value>Buyout price (for Auctions only)</value>
-        [JsonProperty("buyout")]
-        public double? Buyout { get; set; }
+        /// <value>Title of the contract</value>
+        [JsonProperty("title")]
+        public string Title { get; set; }
 
+        /// <summary>
+        /// Type of the contract
+        /// </summary>
+        /// <value>Type of the contract</value>
+        [JsonProperty("type")]
+        public TypeEnum Type { get; set; }
         /// <summary>
         /// Volume of items in the contract
         /// </summary>
         /// <value>Volume of items in the contract</value>
         [JsonProperty("volume")]
         public double? Volume { get; set; }
+
+        #endregion Properties
     }
 }

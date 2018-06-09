@@ -5,12 +5,7 @@ namespace EVEStandard.Models
 {
     public class AllianceHistory : ModelBase<AllianceHistory>
     {
-        /// <summary>
-        /// start_date string
-        /// </summary>
-        /// <value>start_date string</value>
-        [JsonProperty("start_date")]
-        public DateTime? StartDate { get; set; }
+        #region Properties
 
         /// <summary>
         /// alliance_id integer
@@ -31,6 +26,15 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>An incrementing ID that can be used to canonically establish order of records in cases where dates may be ambiguous</value>
         [JsonProperty("record_id")]
-        public int? RecordId { get; set; }
+        public int RecordId { get; set; }
+
+        /// <summary>
+        /// start_date string
+        /// </summary>
+        /// <value>start_date string</value>
+        [JsonProperty("start_date")]
+        public DateTime StartDate { get; set; }
+
+        #endregion Properties
     }
 }

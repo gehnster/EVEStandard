@@ -5,12 +5,21 @@ namespace EVEStandard.Models
 {
     public class Group : ModelBase<Group>
     {
+        #region Properties
+
+        /// <summary>
+        /// category_id integer
+        /// </summary>
+        /// <value>category_id integer</value>
+        [JsonProperty("category_id")]
+        public int CategoryId { get; set; }
+
         /// <summary>
         /// group_id integer
         /// </summary>
         /// <value>group_id integer</value>
         [JsonProperty("group_id")]
-        public int? GroupId { get; set; }
+        public int GroupId { get; set; }
 
         /// <summary>
         /// name string
@@ -24,21 +33,15 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>published boolean</value>
         [JsonProperty("published")]
-        public bool? Published { get; set; }
-
-        /// <summary>
-        /// category_id integer
-        /// </summary>
-        /// <value>category_id integer</value>
-        [JsonProperty("category_id")]
-        public int? CategoryId { get; set; }
-
+        public bool Published { get; set; }
         /// <summary>
         /// types array
         /// </summary>
         /// <value>types array</value>
         [JsonProperty("types")]
         public List<int> Types { get; set; }
+
+        #endregion Properties
 
     }
 }

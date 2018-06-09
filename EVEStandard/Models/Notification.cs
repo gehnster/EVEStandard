@@ -5,19 +5,8 @@ namespace EVEStandard.Models
 {
     public class Notification : ModelBase<Notification>
     {
-        /// <summary>
-        /// notification_id integer
-        /// </summary>
-        /// <value>notification_id integer</value>
-        [JsonProperty("notification_id")]
-        public long? NotificationId { get; set; }
+        #region Enums
 
-        /// <summary>
-        /// sender_id integer
-        /// </summary>
-        /// <value>sender_id integer</value>
-        [JsonProperty("sender_id")]
-        public int? SenderId { get; set; }
         /// <summary>
         /// sender_type string
         /// </summary>
@@ -31,33 +20,6 @@ namespace EVEStandard.Models
             other = 5
         }
 
-        /// <summary>
-        /// sender_type string
-        /// </summary>
-        /// <value>sender_type string</value>
-        [JsonProperty("sender_type")]
-        public SenderTypeEnum? SenderType { get; set; }
-
-        /// <summary>
-        /// timestamp string
-        /// </summary>
-        /// <value>timestamp string</value>
-        [JsonProperty("timestamp")]
-        public DateTime? Timestamp { get; set; }
-
-        /// <summary>
-        /// is_read boolean
-        /// </summary>
-        /// <value>is_read boolean</value>
-        [JsonProperty("is_read")]
-        public bool? IsRead { get; set; }
-
-        /// <summary>
-        /// text string
-        /// </summary>
-        /// <value>text string</value>
-        [JsonProperty("text")]
-        public string Text { get; set; }
         /// <summary>
         /// type string
         /// </summary>
@@ -242,11 +204,57 @@ namespace EVEStandard.Models
             notificationTypeMoonminingExtractionStarted = 176
         }
 
+        #endregion Enums
+
+        #region Properties
+
+        /// <summary>
+        /// is_read boolean
+        /// </summary>
+        /// <value>is_read boolean</value>
+        [JsonProperty("is_read")]
+        public bool? IsRead { get; set; }
+
+        /// <summary>
+        /// notification_id integer
+        /// </summary>
+        /// <value>notification_id integer</value>
+        [JsonProperty("notification_id")]
+        public long NotificationId { get; set; }
+
+        /// <summary>
+        /// sender_id integer
+        /// </summary>
+        /// <value>sender_id integer</value>
+        [JsonProperty("sender_id")]
+        public int SenderId { get; set; }
+        /// <summary>
+        /// sender_type string
+        /// </summary>
+        /// <value>sender_type string</value>
+        [JsonProperty("sender_type")]
+        public SenderTypeEnum SenderType { get; set; }
+
+        /// <summary>
+        /// text string
+        /// </summary>
+        /// <value>text string</value>
+        [JsonProperty("text")]
+        public string Text { get; set; }
+
+        /// <summary>
+        /// timestamp string
+        /// </summary>
+        /// <value>timestamp string</value>
+        [JsonProperty("timestamp")]
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// type string
         /// </summary>
         /// <value>type string</value>
         [JsonProperty("type")]
-        public TypeEnum? Type { get; set; }
+        public TypeEnum Type { get; set; }
+
+        #endregion Properties
     }
 }

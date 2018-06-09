@@ -5,19 +5,14 @@ namespace EVEStandard.Models
 {
     public class OpportunitiesGroup : ModelBase<OpportunitiesGroup>
     {
-        /// <summary>
-        /// group_id integer
-        /// </summary>
-        /// <value>group_id integer</value>
-        [JsonProperty("group_id")]
-        public int? GroupId { get; set; }
+        #region Properties
 
         /// <summary>
-        /// name string
+        /// The groups that are connected to this group on the opportunities map
         /// </summary>
-        /// <value>name string</value>
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        /// <value>The groups that are connected to this group on the opportunities map</value>
+        [JsonProperty("connected_groups")]
+        public List<int> ConnectedGroups { get; set; }
 
         /// <summary>
         /// description string
@@ -25,6 +20,20 @@ namespace EVEStandard.Models
         /// <value>description string</value>
         [JsonProperty("description")]
         public string Description { get; set; }
+
+        /// <summary>
+        /// group_id integer
+        /// </summary>
+        /// <value>group_id integer</value>
+        [JsonProperty("group_id")]
+        public int GroupId { get; set; }
+
+        /// <summary>
+        /// name string
+        /// </summary>
+        /// <value>name string</value>
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// notification string
@@ -38,13 +47,8 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Tasks need to complete for this group</value>
         [JsonProperty("required_tasks")]
-        public List<int?> RequiredTasks { get; set; }
+        public List<int> RequiredTasks { get; set; }
 
-        /// <summary>
-        /// The groups that are connected to this group on the opportunities map
-        /// </summary>
-        /// <value>The groups that are connected to this group on the opportunities map</value>
-        [JsonProperty("connected_groups")]
-        public List<int?> ConnectedGroups { get; set; }
+        #endregion Properties
     }
 }

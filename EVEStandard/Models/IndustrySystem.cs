@@ -10,7 +10,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>solar_system_id integer</value>
         [JsonProperty("solar_system_id")]
-        public int? SolarSystemId { get; set; }
+        public int SolarSystemId { get; set; }
 
         /// <summary>
         /// cost_indices array
@@ -44,13 +44,14 @@ namespace EVEStandard.Models
         /// activity string
         /// </summary>
         /// <value>activity string</value>
-        [JsonProperty("activity")] public ActivityEnum? Activity { get; set; }
+        [JsonProperty("activity")]
+        public ActivityEnum Activity { get; set; }
 
         /// <summary>
         /// cost_index number
         /// </summary>
         /// <value>cost_index number</value>
         [JsonProperty("cost_index")]
-        public float? CostIndex { get; set; }
+        public float CostIndex { get; set; }
     }
 }

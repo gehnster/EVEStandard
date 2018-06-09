@@ -5,12 +5,7 @@ namespace EVEStandard.Models
 {
     public class CharacterOnline : ModelBase<CharacterOnline>
     {
-        /// <summary>
-        /// If the character is online
-        /// </summary>
-        /// <value>If the character is online</value>
-        [JsonProperty("online")]
-        public bool? Online { get; set; }
+        #region Properties
 
         /// <summary>
         /// Timestamp of the last login
@@ -32,5 +27,14 @@ namespace EVEStandard.Models
         /// <value>Total number of times the character has logged in</value>
         [JsonProperty("logins")]
         public int? Logins { get; set; }
+
+        /// <summary>
+        /// If the character is online
+        /// </summary>
+        /// <value>If the character is online</value>
+        [JsonProperty("online")]
+        public bool Online { get; set; }
+
+        #endregion Properties
     }
 }

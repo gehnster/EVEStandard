@@ -9,13 +9,13 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>division integer</value>
         [JsonProperty("division")]
-        public int? Division { get; set; }
+        public int Division { get; set; }
 
         /// <summary>
         /// balance number
         /// </summary>
         /// <value>balance number</value>
         [JsonProperty("balance")]
-        public double? Balance { get; set; }
+        public double Balance { get; set; }
     }
 }

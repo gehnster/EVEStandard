@@ -5,33 +5,8 @@ namespace EVEStandard.Models
 {
     public class Starbase : ModelBase<Starbase>
     {
-        /// <summary>
-        /// Unique ID for this starbase (POS)
-        /// </summary>
-        /// <value>Unique ID for this starbase (POS)</value>
-        [JsonProperty("starbase_id")]
-        public long? StarbaseId { get; set; }
+        #region Enums
 
-        /// <summary>
-        /// Starbase (POS) type
-        /// </summary>
-        /// <value>Starbase (POS) type</value>
-        [JsonProperty("type_id")]
-        public int? TypeId { get; set; }
-
-        /// <summary>
-        /// The solar system this starbase (POS) is in, unanchored POSes have this information
-        /// </summary>
-        /// <value>The solar system this starbase (POS) is in, unanchored POSes have this information</value>
-        [JsonProperty("system_id")]
-        public int? SystemId { get; set; }
-
-        /// <summary>
-        /// The moon this starbase (POS) is anchored on, unanchored POSes do not have this information
-        /// </summary>
-        /// <value>The moon this starbase (POS) is anchored on, unanchored POSes do not have this information</value>
-        [JsonProperty("moon_id")]
-        public int? MoonId { get; set; }
         /// <summary>
         /// state string
         /// </summary>
@@ -45,19 +20,23 @@ namespace EVEStandard.Models
             unanchoring = 5
         }
 
-        /// <summary>
-        /// state string
-        /// </summary>
-        /// <value>state string</value>
-        [JsonProperty("state")]
-        public StateEnum? State { get; set; }
+        #endregion Enums
+
+        #region Properties
 
         /// <summary>
-        /// When the POS started unanchoring, for starbases (POSes) in unanchoring state
+        /// The moon this starbase (POS) is anchored on, unanchored POSes do not have this information
         /// </summary>
-        /// <value>When the POS started unanchoring, for starbases (POSes) in unanchoring state</value>
-        [JsonProperty("unanchor_at")]
-        public DateTime? UnanchorAt { get; set; }
+        /// <value>The moon this starbase (POS) is anchored on, unanchored POSes do not have this information</value>
+        [JsonProperty("moon_id")]
+        public int? MoonId { get; set; }
+
+        /// <summary>
+        /// When the POS onlined, for starbases (POSes) in online state
+        /// </summary>
+        /// <value>When the POS onlined, for starbases (POSes) in online state</value>
+        [JsonProperty("onlined_since")]
+        public DateTime? OnlinedSince { get; set; }
 
         /// <summary>
         /// When the POS will be out of reinforcement, for starbases (POSes) in reinforced state
@@ -67,10 +46,39 @@ namespace EVEStandard.Models
         public DateTime? ReinforcedUntil { get; set; }
 
         /// <summary>
-        /// When the POS onlined, for starbases (POSes) in online state
+        /// Unique ID for this starbase (POS)
         /// </summary>
-        /// <value>When the POS onlined, for starbases (POSes) in online state</value>
-        [JsonProperty("onlined_since")]
-        public DateTime? OnlinedSince { get; set; }
+        /// <value>Unique ID for this starbase (POS)</value>
+        [JsonProperty("starbase_id")]
+        public long StarbaseId { get; set; }
+
+        /// <summary>
+        /// state string
+        /// </summary>
+        /// <value>state string</value>
+        [JsonProperty("state")]
+        public StateEnum? State { get; set; }
+
+        /// <summary>
+        /// The solar system this starbase (POS) is in, unanchored POSes have this information
+        /// </summary>
+        /// <value>The solar system this starbase (POS) is in, unanchored POSes have this information</value>
+        [JsonProperty("system_id")]
+        public int SystemId { get; set; }
+
+        /// <summary>
+        /// Starbase (POS) type
+        /// </summary>
+        /// <value>Starbase (POS) type</value>
+        [JsonProperty("type_id")]
+        public int TypeId { get; set; }
+        /// <summary>
+        /// When the POS started unanchoring, for starbases (POSes) in unanchoring state
+        /// </summary>
+        /// <value>When the POS started unanchoring, for starbases (POSes) in unanchoring state</value>
+        [JsonProperty("unanchor_at")]
+        public DateTime? UnanchorAt { get; set; }
+
+        #endregion Properties
     }
 }

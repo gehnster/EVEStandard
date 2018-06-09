@@ -24,13 +24,15 @@ namespace EVEStandard.Models
         /// Top 4 ranking of factions in the past day
         /// </summary>
         /// <value>Top 4 ranking of factions in the past day</value>
-        [JsonProperty("yesterday")] public List<FactionWarTopCorporation> Yesterday { get; set; }
+        [JsonProperty("yesterday")]
+        public List<FactionWarTopCorporation> Yesterday { get; set; }
 
         /// <summary>
         /// Top 4 ranking of factions in the past week
         /// </summary>
         /// <value>Top 4 ranking of factions in the past week</value>
-        [JsonProperty("last_week")] public List<FactionWarTopCorporation> LastWeek { get; set; }
+        [JsonProperty("last_week")]
+        public List<FactionWarTopCorporation> LastWeek { get; set; }
 
         /// <summary>
         /// Top 4 ranking of factions active in faction warfare. A faction is considered \&quot;active\&quot; if they have participated in faction warfare in the past 14 days.

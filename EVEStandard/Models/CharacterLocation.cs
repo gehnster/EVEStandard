@@ -4,12 +4,14 @@ namespace EVEStandard.Models
 {
     public class CharacterLocation : ModelBase<CharacterLocation>
     {
+        #region Properties
+
         /// <summary>
         /// solar_system_id integer
         /// </summary>
         /// <value>solar_system_id integer</value>
         [JsonProperty("solar_system_id")]
-        public int? SolarSystemId { get; set; }
+        public int SolarSystemId { get; set; }
 
         /// <summary>
         /// station_id integer
@@ -24,5 +26,7 @@ namespace EVEStandard.Models
         /// <value>structure_id integer</value>
         [JsonProperty("structure_id")]
         public long? StructureId { get; set; }
+
+        #endregion Properties
     }
 }

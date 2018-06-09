@@ -5,19 +5,14 @@ namespace EVEStandard.Models
 {
     public class CharacterCorporationHistory : ModelBase<CharacterCorporationHistory>
     {
-        /// <summary>
-        ///     start_date string
-        /// </summary>
-        /// <value>start_date string</value>
-        [JsonProperty("start_date")]
-        public DateTime? StartDate { get; set; }
+        #region Properties
 
         /// <summary>
         ///     corporation_id integer
         /// </summary>
         /// <value>corporation_id integer</value>
         [JsonProperty("corporation_id")]
-        public int? CorporationId { get; set; }
+        public int CorporationId { get; set; }
 
         /// <summary>
         ///     True if the corporation has been deleted
@@ -34,6 +29,15 @@ namespace EVEStandard.Models
         ///     ambiguous
         /// </value>
         [JsonProperty("record_id")]
-        public int? RecordId { get; set; }
+        public int RecordId { get; set; }
+
+        /// <summary>
+        ///     start_date string
+        /// </summary>
+        /// <value>start_date string</value>
+        [JsonProperty("start_date")]
+        public DateTime StartDate { get; set; }
+
+        #endregion Properties
     }
 }

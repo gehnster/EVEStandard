@@ -4,6 +4,8 @@ namespace EVEStandard.Models
 {
     public class MailRecipient : ModelBase<MailRecipient>
     {
+        #region Enums
+
         /// <summary>
         /// recipient_type string
         /// </summary>
@@ -16,18 +18,24 @@ namespace EVEStandard.Models
             mailing_list = 4
         }
 
-        /// <summary>
-        /// recipient_type string
-        /// </summary>
-        /// <value>recipient_type string</value>
-        [JsonProperty("recipient_type")]
-        public RecipientTypeEnum? RecipientType { get; set; }
+        #endregion Enums
+
+        #region Properties
 
         /// <summary>
         /// recipient_id integer
         /// </summary>
         /// <value>recipient_id integer</value>
         [JsonProperty("recipient_id")]
-        public int? RecipientId { get; set; }
+        public int RecipientId { get; set; }
+
+        /// <summary>
+        /// recipient_type string
+        /// </summary>
+        /// <value>recipient_type string</value>
+        [JsonProperty("recipient_type")]
+        public RecipientTypeEnum RecipientType { get; set; }
+
+        #endregion Properties
     }
 }

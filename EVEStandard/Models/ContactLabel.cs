@@ -9,7 +9,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>label_id integer</value>
         [JsonProperty("label_id")]
-        public long? LabelId { get; set; }
+        public long LabelId { get; set; }
 
         /// <summary>
         /// label_name string
