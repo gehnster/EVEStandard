@@ -117,7 +117,7 @@ namespace EVEStandard.API
 
         protected static void checkAuth(AuthDTO auth, string scope)
         {
-            if (auth.CharacterId == 0 || auth?.AccessToken.AccessToken == null)
+            if (auth?.CharacterId == 0 || auth?.AccessToken?.AccessToken == null)
             {
                 throw new ArgumentNullException();
             }
@@ -166,6 +166,12 @@ namespace EVEStandard.API
                 case HttpStatusCode.NotModified:
                     model.NotModified = true;
                     model = getExpiresAndLastModified(response, model);
+
+                    return model;
+                case (HttpStatusCode)422:
+                    model.Error = true;
+                    model.Message = $"Your request was invalid. Returned message: {await response.Content.ReadAsStringAsync()}";
+                    model.RemainingErrors = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
 
                     return model;
                 default:
