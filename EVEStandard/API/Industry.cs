@@ -42,7 +42,7 @@ namespace EVEStandard.API
                 { "include_completed", includeCompleted.ToString() }
             };
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/industry/jobs/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/industry/jobs/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("ListCharacterIndustryJobsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -58,7 +58,7 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mining/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/mining/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("CharacterMiningLedgerV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 

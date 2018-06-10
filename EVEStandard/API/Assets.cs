@@ -24,7 +24,7 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/assets/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/v3/characters/" + auth.CharacterId + "/assets/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("GetCharacterAssetsV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -51,7 +51,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_ASSETS_READ_ASSETS_1);
 
-            var responseModel = await PostAsync("/v1/characters/" + auth.Character.CharacterID + "/assets/names/", auth, itemIds);
+            var responseModel = await PostAsync("/v1/characters/" + auth.CharacterId + "/assets/names/", auth, itemIds);
 
             checkResponse("GetCharacterAssetNamesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -62,7 +62,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_ASSETS_READ_ASSETS_1);
 
-            var responseModel = await PostAsync("/v2/characters/" + auth.Character.CharacterID + "/assets/locations/", auth, itemIds);
+            var responseModel = await PostAsync("/v2/characters/" + auth.CharacterId + "/assets/locations/", auth, itemIds);
 
             checkResponse("GetCharacterAssetLocationsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 

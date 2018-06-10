@@ -22,6 +22,7 @@ namespace EVEStandard.API
     {
         private static HttpClient http;
         private readonly string dataSource;
+        private static readonly ILogger logger = LibraryLogging.CreateLogger<APIBase>();
 
         public static readonly string ESI_BASE = "https://esi.evetech.net";
 
@@ -89,7 +90,7 @@ namespace EVEStandard.API
                 }
                 if (auth?.AccessToken != null)
                 {
-                    if (auth.AccessToken.Expires > DateTime.UtcNow)
+                    if (auth.AccessToken.ExpiresUtc > DateTime.UtcNow)
                     {
                         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", auth.AccessToken.AccessToken);
                     }
@@ -116,12 +117,12 @@ namespace EVEStandard.API
 
         protected static void checkAuth(AuthDTO auth, string scope)
         {
-            if (auth?.Character == null || auth.AccessToken == null)
+            if (auth?.AccessToken?.AccessToken == null || auth.CharacterId == 0 || scope == null || auth.Scopes == null)
             {
                 throw new ArgumentNullException();
             }
 
-            if (!auth.Character.Scopes.Contains(scope))
+            if (!auth.Scopes.Contains(scope))
             {
                 throw new EVEStandardScopeNotAcquired("Missing scope: " + scope);
             }
@@ -137,7 +138,8 @@ namespace EVEStandard.API
             }
             if (response.IsSuccessStatusCode)
             {
-                throw new EVEStandardException("Success Status Code not handled in GetNoAuthAsync, StatusCode: " + response.StatusCode);
+                logger.LogWarning($"A success status code is being returned that wasn't expected. Trying to process the success. Status Code: {response.StatusCode}");
+                return await processSuccess(response, model);
             }
             switch (response.StatusCode)
             {
@@ -166,8 +168,19 @@ namespace EVEStandard.API
                     model = getExpiresAndLastModified(response, model);
 
                     return model;
+                case (HttpStatusCode)422:
+                    model.Error = true;
+                    model.Message = $"Your request was invalid. Returned message: {await response.Content.ReadAsStringAsync()}";
+                    model.RemainingErrors = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
+
+                    return model;
                 default:
-                    throw new EVEStandardException("API Response Issue. Status Code: " + response.StatusCode);
+                    logger.LogWarning($"API Response Issue. Status Code: {response.StatusCode}");
+                    model.Error = true;
+                    model.Message = $"An error code we didn't handle was returned. Status Code: {response.StatusCode}";
+                    model.RemainingErrors = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
+
+                    return model;
             }
         }
 

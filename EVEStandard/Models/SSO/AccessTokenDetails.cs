@@ -15,13 +15,13 @@ namespace EVEStandard.Models.SSO
             get => _expiresIn;
             set
             {
-                Expires = DateTime.UtcNow.AddSeconds(value);
+                ExpiresUtc = DateTime.UtcNow.AddSeconds(value);
                 _expiresIn = value;
             }
         }
         [JsonProperty("refresh_token")]
         public string RefreshToken { get; set; }
-        public DateTime Expires { get; set; }
+        public DateTime ExpiresUtc { get; set; }
 
         private int _expiresIn;
     }

@@ -25,7 +25,7 @@ namespace EVEStandard.API
                 { "last_mail_id", lastMailId.ToString() }
             };
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/mail/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("ReturnMailHeadersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -36,7 +36,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_MAIL_SEND_MAIL_1);
 
-            var responseModel = await PostAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/", auth, mail);
+            var responseModel = await PostAsync("/v1/characters/" + auth.CharacterId + "/mail/", auth, mail);
 
             checkResponse("SendNewMailV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -47,7 +47,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_MAIL_READ_MAIL_1);
 
-            var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/mail/labels/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v3/characters/" + auth.CharacterId + "/mail/labels/", auth, ifNoneMatch);
 
             checkResponse("GetMailLabelsAndUnreadCountsV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -64,7 +64,7 @@ namespace EVEStandard.API
                 color = labelHexColor
             };
 
-            var responseModel = await PostAsync("/v2/characters/" + auth.Character.CharacterID + "/mail/labels/", auth, body);
+            var responseModel = await PostAsync("/v2/characters/" + auth.CharacterId + "/mail/labels/", auth, body);
 
             checkResponse("CreateMailLabelV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -75,7 +75,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_MAIL_ORGANIZE_MAIL_1);
 
-            var responseModel = await DeleteAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/labels/" + labelId + "/", auth);
+            var responseModel = await DeleteAsync("/v1/characters/" + auth.CharacterId + "/mail/labels/" + labelId + "/", auth);
 
             checkResponse("DeleteMailLabelV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
@@ -84,7 +84,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_MAIL_READ_MAIL_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/lists/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/mail/lists/", auth, ifNoneMatch);
 
             checkResponse("ReturnMailingListSubscriptionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -95,7 +95,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_MAIL_ORGANIZE_MAIL_1);
 
-            var responseModel = await DeleteAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/" + mailId + "/", auth);
+            var responseModel = await DeleteAsync("/v1/characters/" + auth.CharacterId + "/mail/" + mailId + "/", auth);
 
             checkResponse("DeleteMailV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
@@ -104,7 +104,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_MAIL_READ_MAIL_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/" + mailId + "/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/mail/" + mailId + "/", auth, ifNoneMatch);
 
             checkResponse("ReturnMailV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -115,7 +115,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_MAIL_ORGANIZE_MAIL_1);
 
-            var responseModel = await PutAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/" + mailId + "/", auth, contents);
+            var responseModel = await PutAsync("/v1/characters/" + auth.CharacterId + "/mail/" + mailId + "/", auth, contents);
 
             checkResponse("ReturnMailV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }

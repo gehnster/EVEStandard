@@ -24,7 +24,7 @@ namespace EVEStandard.API
                 { "contact_ids", contactIds == null || contactIds.Count == 0 ? "" : string.Join(",", contactIds) }
             };
 
-            var responseModel = await DeleteAsync($"/v2/characters/{auth.Character.CharacterID}/contacts/", auth, queryParameters);
+            var responseModel = await DeleteAsync($"/v2/characters/{auth.CharacterId}/contacts/", auth, queryParameters);
 
             checkResponse("DeleteContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
@@ -33,7 +33,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_CONTACTS_1);
 
-            var responseModel = await GetAsync($"/v2/characters/{auth.Character.CharacterID}/contacts/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/contacts/", auth, ifNoneMatch);
 
             checkResponse("GetContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -51,7 +51,7 @@ namespace EVEStandard.API
                 { "watched", isWatched.ToString() }
             };
 
-            var responseModel = await PostAsync($"/v2/characters/{auth.Character.CharacterID}/contacts/", auth, contactIds, null, queryParameters);
+            var responseModel = await PostAsync($"/v2/characters/{auth.CharacterId}/contacts/", auth, contactIds, null, queryParameters);
 
             checkResponse("AddContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -69,7 +69,7 @@ namespace EVEStandard.API
                 { "watched", isWatched.ToString() }
             };
 
-            var responseModel = await PutAsync($"/v2/characters/{auth.Character.CharacterID}/contacts/", auth, contactIds, queryParameters);
+            var responseModel = await PutAsync($"/v2/characters/{auth.CharacterId}/contacts/", auth, contactIds, queryParameters);
 
             checkResponse("EditContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
@@ -100,7 +100,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_CONTACTS_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.Character.CharacterID}/contacts/labels/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/contacts/labels/", auth, ifNoneMatch);
 
             checkResponse("GetContactLabelsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 

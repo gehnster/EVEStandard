@@ -19,7 +19,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_FITTINGS_WRITE_FITTINGS_1);
 
-            var responseModel = await DeleteAsync("/v1/characters/" + auth.Character.CharacterID + "/fittings/" + fittingId + "/", auth);
+            var responseModel = await DeleteAsync("/v1/characters/" + auth.CharacterId + "/fittings/" + fittingId + "/", auth);
 
             checkResponse("DeleteFittingV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
@@ -28,7 +28,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_FITTINGS_READ_FITTINGS_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/fittings/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/fittings/", auth, ifNoneMatch);
 
             checkResponse("TrackCorporationMembersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -39,7 +39,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_FITTINGS_READ_FITTINGS_1);
 
-            var responseModel = await PostAsync("/v1/characters/" + auth.Character.CharacterID + "/fittings/", auth, fitting);
+            var responseModel = await PostAsync("/v1/characters/" + auth.CharacterId + "/fittings/", auth, fitting);
 
             checkResponse("TrackCorporationMembersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
