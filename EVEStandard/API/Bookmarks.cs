@@ -24,7 +24,7 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/bookmarks/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/v2/characters/" + auth.CharacterId + "/bookmarks/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("ListBookmarksV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -40,7 +40,7 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/bookmarks/folders/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/v2/characters/" + auth.CharacterId + "/bookmarks/folders/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("ListBookmarkFoldersV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

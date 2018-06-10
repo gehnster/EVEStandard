@@ -24,7 +24,7 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/stats/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/v2/characters/" + auth.CharacterId + "/stats/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("YearlyAggregateStatsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -53,7 +53,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_CONTACTS_1);
 
-            var responseModel = await PostAsync("/v4/characters/" + auth.Character.CharacterID + "/cspa/", auth, characterIds);
+            var responseModel = await PostAsync("/v4/characters/" + auth.CharacterId + "/cspa/", auth, characterIds);
 
             checkResponse("CalculationCSPAChargeCostV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -96,7 +96,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_MEDALS_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/medals/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/medals/", auth, ifNoneMatch);
 
             checkResponse("GetMedalsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -107,7 +107,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_STANDINGS_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/standings/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/standings/", auth, ifNoneMatch);
 
             checkResponse("GetStandingsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -118,7 +118,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_AGENTS_RESEARCH_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/agents_research/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/agents_research/", auth, ifNoneMatch);
 
             checkResponse("GetAgentsResearchV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -134,7 +134,7 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/blueprints/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/v2/characters/" + auth.CharacterId + "/blueprints/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("GetBlueprintsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -145,7 +145,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_FATIGUE_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/fatigue/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/fatigue/", auth, ifNoneMatch);
 
             checkResponse("GetJumpFatigueV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -161,7 +161,7 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/notifications/contacts/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/notifications/contacts/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("GetNewContactNotificationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -172,7 +172,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_NOTIFICATIONS_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/notifications/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/notifications/", auth, ifNoneMatch);
 
             checkResponse("GetCharacterNotificationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -183,7 +183,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_CORPORATION_ROLES_1);
 
-            var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/roles/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v2/characters/" + auth.CharacterId + "/roles/", auth, ifNoneMatch);
 
             checkResponse("GetCharacterCorporationRolesV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -194,7 +194,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_TITLES_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/titles/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/titles/", auth, ifNoneMatch);
 
             checkResponse("GetCharacterCorporationTitlesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

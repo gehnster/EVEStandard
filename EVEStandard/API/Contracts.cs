@@ -24,7 +24,7 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/contracts/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/contracts/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("GetContractsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -35,7 +35,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CHARACTER_CONTRACTS_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/contracts/" + contractId + "/items/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/contracts/" + contractId + "/items/", auth, ifNoneMatch);
 
             checkResponse("GetContractItemsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -46,7 +46,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CHARACTER_CONTRACTS_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/contracts/" + contractId + "/bids/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/contracts/" + contractId + "/bids/", auth, ifNoneMatch);
 
             checkResponse("GetContractBidsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -73,7 +73,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CORPORATION_CONTRACTS_1);
 
-            var responseModel = await GetAsync("/v1/corporations/" + auth.Character.CharacterID + "/contracts/" + contractId + "/items/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/corporations/" + auth.CharacterId + "/contracts/" + contractId + "/items/", auth, ifNoneMatch);
 
             checkResponse("GetCorporationContractItemsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -84,7 +84,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CORPORATION_CONTRACTS_1);
 
-            var responseModel = await GetAsync("/v1/corporations/" + auth.Character.CharacterID + "/contracts/" + contractId + "/bids/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/corporations/" + auth.CharacterId + "/contracts/" + contractId + "/bids/", auth, ifNoneMatch);
 
             checkResponse("GetCorporationContractBidsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

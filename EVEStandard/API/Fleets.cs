@@ -45,7 +45,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_FLEETS_READ_FLEET_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/fleet/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/fleet/", auth, ifNoneMatch);
 
             checkResponse("GetCharacterFleetInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

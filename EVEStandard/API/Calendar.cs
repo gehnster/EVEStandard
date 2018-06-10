@@ -29,7 +29,7 @@ namespace EVEStandard.API
                 };
             }
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/calendar/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/calendar/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("ListCalendarEventSummariesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -40,7 +40,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CALENDAR_READ_CALENDAR_EVENTS_1);
 
-            var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/calendar/" + eventId + "/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v3/characters/" + auth.CharacterId + "/calendar/" + eventId + "/", auth, ifNoneMatch);
 
             checkResponse("GetAnEventV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -54,7 +54,7 @@ namespace EVEStandard.API
             dynamic body = new JObject();
             body.response = response.ToString();
 
-            var responseModel = await this.PutAsync("/v3/characters/" + auth.Character.CharacterID + "/calendar/" + eventId + "/", auth, body);
+            var responseModel = await this.PutAsync("/v3/characters/" + auth.CharacterId + "/calendar/" + eventId + "/", auth, body);
 
             checkResponse("RespondToAnEventV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
         }
@@ -63,7 +63,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CALENDAR_READ_CALENDAR_EVENTS_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/calendar/" + eventId + "/attendees/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/calendar/" + eventId + "/attendees/", auth, ifNoneMatch);
 
             checkResponse("GetAttendeesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

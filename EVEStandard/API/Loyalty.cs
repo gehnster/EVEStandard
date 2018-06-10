@@ -29,7 +29,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_LOYALTY_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/loyalty/points/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/loyalty/points/", auth, ifNoneMatch);
 
             checkResponse("GetLoyaltyPointsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

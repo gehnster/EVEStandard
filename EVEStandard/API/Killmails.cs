@@ -33,7 +33,7 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/killmails/recent/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/killmails/recent/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("GetCharacterKillsAndLossesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

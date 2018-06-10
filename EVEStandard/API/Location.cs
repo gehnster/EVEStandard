@@ -18,7 +18,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_LOCATION_READ_LOCATION_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/location/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/location/", auth, ifNoneMatch);
 
             checkResponse("GetCharacterLocationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -29,7 +29,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_LOCATION_READ_SHIP_TYPE_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/ship/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/ship/", auth, ifNoneMatch);
 
             checkResponse("GetCurrentShipV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -40,7 +40,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_LOCATION_READ_ONLINE_1);
 
-            var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/online/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v2/characters/" + auth.CharacterId + "/online/", auth, ifNoneMatch);
 
             checkResponse("GetCharacterOnlineV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

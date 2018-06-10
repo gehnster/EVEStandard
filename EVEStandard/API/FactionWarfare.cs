@@ -94,7 +94,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_FW_STATS_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/fw/stats/", ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/fw/stats/", ifNoneMatch);
 
             checkResponse("CharacterOverviewInFactionWarsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 

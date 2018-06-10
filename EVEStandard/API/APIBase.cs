@@ -116,12 +116,12 @@ namespace EVEStandard.API
 
         protected static void checkAuth(AuthDTO auth, string scope)
         {
-            if (auth?.Character == null || auth.AccessToken == null)
+            if (auth.CharacterId == 0 || auth?.AccessToken.AccessToken == null)
             {
                 throw new ArgumentNullException();
             }
 
-            if (!auth.Character.Scopes.Contains(scope))
+            if (!auth.Scopes.Contains(scope))
             {
                 throw new EVEStandardScopeNotAcquired("Missing scope: " + scope);
             }
