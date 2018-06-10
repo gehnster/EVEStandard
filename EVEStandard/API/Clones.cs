@@ -18,7 +18,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CLONES_READ_CLONES_1);
 
-            var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/clones/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v3/characters/" + auth.CharacterId + "/clones/", auth, ifNoneMatch);
 
             checkResponse("GetClonesV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -29,7 +29,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CLONES_READ_IMPLANTS_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/implants/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/implants/", auth, ifNoneMatch);
 
             checkResponse("GetActiveImplantsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 

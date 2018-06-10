@@ -60,7 +60,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_OPPORTUNITIES_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/opportunities/", ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/opportunities/", ifNoneMatch);
 
             checkResponse("GetCharacterCompletedTaskV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 

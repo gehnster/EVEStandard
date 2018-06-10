@@ -19,7 +19,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_PLANETS_MANAGE_PLANETS_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.Character.CharacterID}/planets/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/planets/", auth, ifNoneMatch);
 
             checkResponse("GetColoniesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -30,7 +30,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_PLANETS_MANAGE_PLANETS_1);
 
-            var responseModel = await GetAsync($"/v3/characters/{auth.Character.CharacterID}/planets/" + planetId + "/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/v3/characters/{auth.CharacterId}/planets/" + planetId + "/", auth, ifNoneMatch);
 
             checkResponse("GetColonyLayoutV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 

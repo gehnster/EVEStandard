@@ -33,7 +33,7 @@ namespace EVEStandard.API
                 { "strict", strict.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v3/characters/{auth.Character.CharacterID}/search/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/v3/characters/{auth.CharacterId}/search/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("SearchCharacterV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 

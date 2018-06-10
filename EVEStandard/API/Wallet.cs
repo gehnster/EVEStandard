@@ -19,7 +19,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_WALLET_READ_CHARACTER_WALLET_1);
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/wallet/", auth, ifNoneMatch);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/wallet/", auth, ifNoneMatch);
 
             checkResponse("CalculationCSPAChargeCostV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -35,7 +35,7 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync("/v4/characters/" + auth.Character.CharacterID + "/wallet/journal/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/v4/characters/" + auth.CharacterId + "/wallet/journal/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("GetCharacterWalletJournalV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -51,7 +51,7 @@ namespace EVEStandard.API
                 { "from_id", fromId.ToString() }
             };
 
-            var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/wallet/transactions/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/v1/characters/" + auth.CharacterId + "/wallet/transactions/", auth, ifNoneMatch, queryParameters);
 
             checkResponse("GetCharacterWalletTransactionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 

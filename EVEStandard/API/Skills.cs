@@ -19,7 +19,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_SKILLS_READ_SKILLS_1);
 
-            var responseModel = await GetAsync($"/v4/characters/{auth.Character.CharacterID}/skills/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/v4/characters/{auth.CharacterId}/skills/", auth, ifNoneMatch);
 
             checkResponse("GetCharacterSkillsV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -30,7 +30,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_SKILLS_READ_SKILLS_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.Character.CharacterID}/attributes/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/attributes/", auth, ifNoneMatch);
 
             checkResponse("GetCharacterAttributesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -41,7 +41,7 @@ namespace EVEStandard.API
         {
             checkAuth(auth, Scopes.ESI_SKILLS_READ_SKILLQUEUE_1);
 
-            var responseModel = await GetAsync($"/v2/characters/{auth.Character.CharacterID}/skillqueue/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/skillqueue/", auth, ifNoneMatch);
 
             checkResponse("GetCharacterSkillQueueV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
