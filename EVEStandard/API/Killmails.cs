@@ -30,7 +30,7 @@ namespace EVEStandard.API
 
             var queryParameters = new Dictionary<string, string>
             {
-                { "page", page.ToString() },
+                { "page", page.ToString() }
             };
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/killmails/recent/", auth, ifNoneMatch, queryParameters);

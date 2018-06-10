@@ -24,16 +24,16 @@ namespace EVEStandard.API
 
         public async Task<ESIModelDTO<DogmaAttribute>> GetAttributeInfoV1Async(int attributeId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/dogma/attributes/" + attributeId + "/", ifNoneMatch);
+            var responseModel = await GetAsync($"/v1/dogma/attributes/{attributeId}", ifNoneMatch);
 
             checkResponse("GetAttributeInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
             return returnModelDTO<DogmaAttribute>(responseModel);
         }
 
-        public async Task<ESIModelDTO<DogmaDynamicItem>> GetDynamicItemInfoV1Async(long typeId, long itemId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<DogmaDynamicItem>> GetDynamicItemInfoV1Async(int typeId, long itemId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/dogma/dynamic/items/" + typeId + "/" + itemId, ifNoneMatch);
+            var responseModel = await GetAsync($"/v1/dogma/dynamic/items/{typeId}/{itemId}", ifNoneMatch);
 
             checkResponse("GetDynamicItemInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
@@ -51,7 +51,7 @@ namespace EVEStandard.API
 
         public async Task<ESIModelDTO<DogmaEffect>> GetEffectInfoV2Async(int effectId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v2/dogma/effects/" + effectId + "/", ifNoneMatch);
+            var responseModel = await GetAsync($"/v2/dogma/effects/{effectId}", ifNoneMatch);
 
             checkResponse("GetEffectInfoV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
 
