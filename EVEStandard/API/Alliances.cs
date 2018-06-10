@@ -9,7 +9,8 @@ namespace EVEStandard.API
 {
     public class Alliances : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Alliances>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<Alliances>();
+
         internal Alliances(string dataSource) : base(dataSource)
         {
         }
@@ -18,7 +19,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v3/alliances/" + allianceId + "/", ifNoneMatch);
 
-            checkResponse("GetAllianceInfoV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetAllianceInfoV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<Alliance>(responseModel);
         }
@@ -27,7 +28,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/alliances/" + allianceId + "/corporations/", ifNoneMatch);
 
-            checkResponse("ListAllianceCorporationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListAllianceCorporationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<int>>(responseModel);
         }
@@ -41,7 +42,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/alliances/names/", ifNoneMatch, queryParameters);
 
-            checkResponse("GetAllianceNamesV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetAllianceNamesV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<AllianceName>>(responseModel);
         }
@@ -50,7 +51,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/alliances/" + allianceId + "/icons/", ifNoneMatch);
 
-            checkResponse("GetAllianceIconV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetAllianceIconV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<AllianceIcons>(responseModel);
         }
@@ -59,7 +60,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/alliances/", ifNoneMatch);
 
-            checkResponse("ListAllAlliancesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListAllAlliancesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<int>>(responseModel);
         }

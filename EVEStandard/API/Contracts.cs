@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Enumerations;
+﻿using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
     public class Contracts : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Contracts>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<Contracts>();
+
         internal Contracts(string dataSource) : base(dataSource)
         {
         }
@@ -26,7 +26,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/contracts/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("GetContractsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetContractsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<Contract>>(responseModel);
         }
@@ -37,7 +37,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/contracts/" + contractId + "/items/", auth, ifNoneMatch);
 
-            checkResponse("GetContractItemsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetContractItemsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<ContractItem>>(responseModel);
         }
@@ -48,7 +48,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/contracts/" + contractId + "/bids/", auth, ifNoneMatch);
 
-            checkResponse("GetContractBidsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetContractBidsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<ContractBid>>(responseModel);
         }
@@ -64,7 +64,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/contracts/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("GetCorporationContractsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationContractsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<Contract>>(responseModel);
         }
@@ -75,7 +75,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + auth.Character.CharacterID + "/contracts/" + contractId + "/items/", auth, ifNoneMatch);
 
-            checkResponse("GetCorporationContractItemsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationContractItemsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<ContractItem>>(responseModel);
         }
@@ -86,7 +86,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + auth.Character.CharacterID + "/contracts/" + contractId + "/bids/", auth, ifNoneMatch);
 
-            checkResponse("GetCorporationContractBidsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationContractBidsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<ContractBid>>(responseModel);
         }

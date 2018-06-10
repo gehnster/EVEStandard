@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Enumerations;
+﻿using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
 
     public class Loyalty : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Loyalty>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<Loyalty>();
+
         internal Loyalty(string dataSource) : base(dataSource)
         {
         }
@@ -20,7 +20,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/loyalty/stores/" + corporationId + "/offers/", ifNoneMatch);
 
-            checkResponse("ListLoyaltyStoreOffersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListLoyaltyStoreOffersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<LoyaltyStoreOffer>>(responseModel);
         }
@@ -31,7 +31,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/loyalty/points/", auth, ifNoneMatch);
 
-            checkResponse("GetLoyaltyPointsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetLoyaltyPointsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<LoyaltyPoints>>(responseModel);
         }

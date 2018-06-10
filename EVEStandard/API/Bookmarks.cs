@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Enumerations;
+﻿using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
     public class Bookmarks : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Bookmarks>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<Bookmarks>();
+
         internal Bookmarks(string dataSource) : base(dataSource)
         {
         }
@@ -26,7 +26,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/bookmarks/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ListBookmarksV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListBookmarksV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<Bookmark>>(responseModel);
         }
@@ -42,7 +42,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/bookmarks/folders/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ListBookmarkFoldersV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListBookmarkFoldersV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<BookmarkFolder>>(responseModel);
         }
@@ -58,7 +58,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporation/" + corporationId + "/bookmarks/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ListCorporationBookmarksV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListCorporationBookmarksV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<Bookmark>>(responseModel);
         }
@@ -74,7 +74,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporation/" + corporationId + "/bookmarks/folders/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ListCorporationBookmarkFoldersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListCorporationBookmarkFoldersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<BookmarkFolder>>(responseModel);
         }

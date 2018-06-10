@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Enumerations;
+﻿using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
     public class PlanetaryInteraction : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<PlanetaryInteraction>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<PlanetaryInteraction>();
+
         internal PlanetaryInteraction(string dataSource) : base(dataSource)
         {
         }
@@ -21,7 +21,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/characters/{auth.Character.CharacterID}/planets/", auth, ifNoneMatch);
 
-            checkResponse("GetColoniesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetColoniesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<Colony>>(responseModel);
         }
@@ -32,7 +32,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v3/characters/{auth.Character.CharacterID}/planets/" + planetId + "/", auth, ifNoneMatch);
 
-            checkResponse("GetColonyLayoutV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetColonyLayoutV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<ColonyLayout>(responseModel);
         }
@@ -41,7 +41,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/universe/schematics/{schematicId}/", ifNoneMatch);
 
-            checkResponse("GetSchematicInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetSchematicInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<FactorySchematic>(responseModel);
         }
@@ -57,7 +57,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/customs_offices/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ListCorporationCustomsOfficesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListCorporationCustomsOfficesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CustomsOffice>>(responseModel);
         }

@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Enumerations;
+﻿using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
     public class Fleets : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Fleets>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<Fleets>();
+
         internal Fleets(string dataSource) : base(dataSource)
         {
         }
@@ -21,7 +21,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/fleets/" + fleetId + "/", auth, ifNoneMatch);
 
-            checkResponse("GetFleetInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetFleetInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<FleetInfo>(responseModel);
         }
@@ -38,7 +38,7 @@ namespace EVEStandard.API
 
             var responseModel = await PutAsync("/v1/fleets/" + fleetId + "/", auth, newSettings);
 
-            checkResponse("UpdateFleetV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("UpdateFleetV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         public async Task<ESIModelDTO<CharacterFleetInfo>> GetCharacterFleetInfoV1Async(AuthDTO auth, string ifNoneMatch = null)
@@ -47,7 +47,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/fleet/", auth, ifNoneMatch);
 
-            checkResponse("GetCharacterFleetInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterFleetInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<CharacterFleetInfo>(responseModel);
         }
@@ -63,7 +63,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/fleets/" + fleetId + "/members/", auth, ifNoneMatch);
 
-            checkResponse("GetFleetMembersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetFleetMembersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<FleetMember>>(responseModel);
         }
@@ -74,7 +74,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/fleets/" + fleetId + "/members/", auth, invite);
 
-            checkResponse("CreateFleetInvitationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("CreateFleetInvitationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         public async Task KickFleetMemberV1Async(AuthDTO auth, long fleetId, long memberId)
@@ -83,7 +83,7 @@ namespace EVEStandard.API
 
             var responseModel = await DeleteAsync("/v1/fleets/" + fleetId + "/members/" + memberId + "/", auth);
 
-            checkResponse("KickFleetMemberV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("KickFleetMemberV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         public async Task MoveFleetMemberV1Async(AuthDTO auth, long fleetId, long memberId, FleetMemberMove movement)
@@ -92,7 +92,7 @@ namespace EVEStandard.API
 
             var responseModel = await PutAsync("/v1/fleets/" + fleetId + "/members/" + memberId + "/", auth, movement);
 
-            checkResponse("MoveFleetMemberV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("MoveFleetMemberV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         public async Task<ESIModelDTO<List<FleetWing>>> GetFleetWingsV1Async(AuthDTO auth, long fleetId, string language = Language.English, string ifNoneMatch = null)
@@ -106,7 +106,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/fleets/" + fleetId + "/wings/", auth, ifNoneMatch);
 
-            checkResponse("GetFleetWingsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetFleetWingsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<FleetWing>>(responseModel);
         }
@@ -117,7 +117,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/fleets/" + fleetId + "/wings/", auth, null);
 
-            checkResponse("CreateFleetWingV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("CreateFleetWingV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<long>(responseModel);
         }
@@ -128,7 +128,7 @@ namespace EVEStandard.API
 
             var responseModel = await DeleteAsync("/v1/fleets/" + fleetId + "/wings/" + wingId + "/", auth);
 
-            checkResponse("DeleteFleetWingV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("DeleteFleetWingV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         public async Task RenameFleetWingV1Async(AuthDTO auth, long fleetId, long wingId, string name)
@@ -142,7 +142,7 @@ namespace EVEStandard.API
 
             var responseModel = await PutAsync("/v1/fleets/" + fleetId + "/wings/" + wingId + "/", auth, body);
 
-            checkResponse("RenameFleetWingV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("RenameFleetWingV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         public async Task<ESIModelDTO<long>> CreateFleetSquadV1Async(AuthDTO auth, long fleetId)
@@ -151,7 +151,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/fleets/" + fleetId + "/wings/squads/", auth, null);
 
-            checkResponse("CreateFleetSquadV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("CreateFleetSquadV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<long>(responseModel);
         }
@@ -162,7 +162,7 @@ namespace EVEStandard.API
 
             var responseModel = await DeleteAsync("/v1/fleets/" + fleetId + "/squads/" + squadId + "/", auth);
 
-            checkResponse("DeleteFleetSquadV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("DeleteFleetSquadV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         public async Task RenameFleetSquadV1Async(AuthDTO auth, long fleetId, long squadId, string name)
@@ -176,7 +176,7 @@ namespace EVEStandard.API
 
             var responseModel = await PutAsync("/v1/fleets/" + fleetId + "/squads/" + squadId + "/", auth, body);
 
-            checkResponse("RenameFleetSquadV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("RenameFleetSquadV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
     }
 }
