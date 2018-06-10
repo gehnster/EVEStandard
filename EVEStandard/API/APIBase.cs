@@ -117,7 +117,7 @@ namespace EVEStandard.API
 
         protected static void checkAuth(AuthDTO auth, string scope)
         {
-            if (auth?.CharacterId == 0 || auth?.AccessToken?.AccessToken == null)
+            if (auth?.AccessToken?.AccessToken == null || auth.CharacterId == 0 || scope == null || auth.Scopes == null)
             {
                 throw new ArgumentNullException();
             }
