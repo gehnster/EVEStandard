@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Models;
+﻿using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
     public class Insurance : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Insurance>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<Insurance>();
+
         internal Insurance(string dataSource) : base(dataSource)
         {
         }
@@ -18,7 +18,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/insurance/prices/", ifNoneMatch);
 
-            checkResponse("ListInsuranceLevelsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListInsuranceLevelsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<InsurancePrice>>(responseModel);
         }

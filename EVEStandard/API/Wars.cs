@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Models;
+﻿using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
     public class Wars : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Wars>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<Wars>();
+
         internal Wars(string dataSource) : base(dataSource)
         {
         }
@@ -23,7 +23,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/wars/", ifNoneMatch, queryParameters);
 
-            checkResponse("ListWarsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListWarsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<int>>(responseModel);
         }
@@ -32,7 +32,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/wars/" + warId + "/", ifNoneMatch);
 
-            checkResponse("GetWarInformationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetWarInformationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<War>(responseModel);
         }
@@ -46,7 +46,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/wars/" + warId + "/killmails/", ifNoneMatch, queryParameters);
 
-            checkResponse("ListKillsForWarV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListKillsForWarV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<KillmailIndex>>(responseModel);
         }

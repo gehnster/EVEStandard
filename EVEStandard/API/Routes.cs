@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Enumerations;
+﻿using EVEStandard.Enumerations;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
     public class Routes : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Routes>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<Routes>();
+
         internal Routes(string dataSource) : base(dataSource)
         {
         }
@@ -25,7 +25,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/route/{origin}/{destination}/", ifNoneMatch, queryParameters);
 
-            checkResponse("GetRouteV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetRouteV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<int>>(responseModel);
         }

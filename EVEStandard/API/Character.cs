@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Enumerations;
+﻿using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
     public class Character : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Character>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<Character>();
+
         internal Character(string dataSource) : base(dataSource)
         {
         }
@@ -26,7 +26,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/stats/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("YearlyAggregateStatsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("YearlyAggregateStatsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<AggregateStats>>(responseModel);
         }
@@ -35,7 +35,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v4/characters/" + characterId + "/", ifNoneMatch);
 
-            checkResponse("PublicInfoV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("PublicInfoV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<CharacterInfo>(responseModel);
         }
@@ -44,7 +44,7 @@ namespace EVEStandard.API
         {
             var responseModel = await PostAsync("/v1/characters/affiliation/", null, characterIds, ifNoneMatch);
 
-            checkResponse("AffiliationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("AffiliationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CharacterAffiliation>>(responseModel);
         }
@@ -55,7 +55,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v4/characters/" + auth.Character.CharacterID + "/cspa/", auth, characterIds);
 
-            checkResponse("CalculationCSPAChargeCostV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("CalculationCSPAChargeCostV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<float>(responseModel);
         }
@@ -69,7 +69,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/names/", ifNoneMatch, queryParameters);
 
-            checkResponse("GetCharacterNamesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterNamesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CharacterName>>(responseModel);
         }
@@ -78,7 +78,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v2/characters/" + characterId + "/portrait/", ifNoneMatch);
 
-            checkResponse("GetCharacterPortraitsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterPortraitsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<Icons>(responseModel);
         }
@@ -87,7 +87,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/characters/" + characterId + "/corporationhistory/", ifNoneMatch);
 
-            checkResponse("GetCorporationHistoryV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationHistoryV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CharacterCorporationHistory>>(responseModel);
         }
@@ -98,7 +98,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/medals/", auth, ifNoneMatch);
 
-            checkResponse("GetMedalsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetMedalsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CharacterMedals>>(responseModel);
         }
@@ -109,7 +109,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/standings/", auth, ifNoneMatch);
 
-            checkResponse("GetStandingsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetStandingsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<Standing>>(responseModel);
         }
@@ -120,7 +120,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/agents_research/", auth, ifNoneMatch);
 
-            checkResponse("GetAgentsResearchV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetAgentsResearchV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<AgentResearch>>(responseModel);
         }
@@ -136,7 +136,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/blueprints/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("GetBlueprintsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetBlueprintsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<Blueprint>>(responseModel);
         }
@@ -147,7 +147,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/fatigue/", auth, ifNoneMatch);
 
-            checkResponse("GetJumpFatigueV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetJumpFatigueV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<Fatigue>(responseModel);
         }
@@ -163,7 +163,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/notifications/contacts/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("GetNewContactNotificationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetNewContactNotificationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CharacterContactNotification>>(responseModel);
         }
@@ -174,7 +174,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/notifications/", auth, ifNoneMatch);
 
-            checkResponse("GetCharacterNotificationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterNotificationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<Notification>>(responseModel);
         }
@@ -185,7 +185,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/roles/", auth, ifNoneMatch);
 
-            checkResponse("GetCharacterCorporationRolesV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterCorporationRolesV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<CharacterCorporationRoles>(responseModel);
         }
@@ -196,7 +196,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/titles/", auth, ifNoneMatch);
 
-            checkResponse("GetCharacterCorporationTitlesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterCorporationTitlesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CharacterTitle>>(responseModel);
         }

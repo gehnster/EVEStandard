@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Enumerations;
+﻿using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
     public class Wallet : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Wallet>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<Wallet>();
+
         internal Wallet(string dataSource) : base(dataSource)
         {
         }
@@ -21,7 +21,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/wallet/", auth, ifNoneMatch);
 
-            checkResponse("CalculationCSPAChargeCostV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("CalculationCSPAChargeCostV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<double>(responseModel);
         }
@@ -37,7 +37,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v4/characters/" + auth.Character.CharacterID + "/wallet/journal/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("GetCharacterWalletJournalV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterWalletJournalV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CharacterWalletJournal>>(responseModel);
         }
@@ -53,7 +53,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/wallet/transactions/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("GetCharacterWalletTransactionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterWalletTransactionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<WalletTransaction>>(responseModel);
         }
@@ -64,7 +64,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corpId + "/wallet/", auth, ifNoneMatch);
 
-            checkResponse("ReturnCorporationWalletBalanceV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ReturnCorporationWalletBalanceV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CorporationWallet>>(responseModel);
         }
@@ -80,7 +80,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v3/corporations/" + corpId + "/wallet/" + division + "/journal/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("GetCorporationWalletJournalV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCorporationWalletJournalV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CorporationWalletJournal>>(responseModel);
         }
@@ -96,7 +96,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corpId + "/wallet/" + division + "/transactions/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("GetCharacterWalletTransactionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterWalletTransactionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<WalletTransaction>>(responseModel);
         }

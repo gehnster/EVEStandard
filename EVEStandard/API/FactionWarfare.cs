@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Enumerations;
+﻿using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
 
     public class FactionWarfare : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<FactionWarfare>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<FactionWarfare>();
+
         internal FactionWarfare(string dataSource) : base(dataSource)
         {
         }
@@ -20,7 +20,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/fw/wars/", ifNoneMatch);
 
-            checkResponse("DataAboutFactionWarsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("DataAboutFactionWarsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<FactionWarData>>(responseModel);
         }
@@ -29,7 +29,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/fw/stats/", ifNoneMatch);
 
-            checkResponse("StatsAboutFactionWarsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("StatsAboutFactionWarsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<FactionWarStats>>(responseModel);
         }
@@ -38,7 +38,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/fw/systems/", ifNoneMatch);
 
-            checkResponse("FactionWarSystemOwnershipV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("FactionWarSystemOwnershipV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<FactionWarSystem>>(responseModel);
         }
@@ -47,7 +47,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v2/fw/systems/", ifNoneMatch);
 
-            checkResponse("FactionWarSystemOwnershipV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("FactionWarSystemOwnershipV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<FactionWarSystem>>(responseModel);
         }
@@ -56,7 +56,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/fw/leaderboards/", ifNoneMatch);
 
-            checkResponse("TopFactionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("TopFactionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<FactionWarFactionLeaderboard>(responseModel);
         }
@@ -65,7 +65,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/fw/leaderboards/characters/", ifNoneMatch);
 
-            checkResponse("TopPilotsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("TopPilotsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<FactionWarPilotLeaderboard>(responseModel);
         }
@@ -74,7 +74,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/fw/leaderboards/corporations/", ifNoneMatch);
 
-            checkResponse("TopCorporationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("TopCorporationsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<FactionWarCorporationLeaderboard>(responseModel);
         }
@@ -85,7 +85,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/fw/stats/", ifNoneMatch);
 
-            checkResponse("CorporationOverviewInFactionWarsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("CorporationOverviewInFactionWarsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<FactionWarCorporationStats>(responseModel);
         }
@@ -96,7 +96,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/fw/stats/", ifNoneMatch);
 
-            checkResponse("CharacterOverviewInFactionWarsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("CharacterOverviewInFactionWarsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<FactionWarCharacterStats>(responseModel);
         }
