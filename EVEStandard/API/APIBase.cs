@@ -89,7 +89,7 @@ namespace EVEStandard.API
                 }
                 if (auth?.AccessToken != null)
                 {
-                    if (auth.AccessToken.Expires > DateTime.UtcNow)
+                    if (auth.AccessToken.ExpiresUtc > DateTime.UtcNow)
                     {
                         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", auth.AccessToken.AccessToken);
                     }
