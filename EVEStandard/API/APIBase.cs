@@ -22,6 +22,7 @@ namespace EVEStandard.API
     {
         private static HttpClient http;
         private readonly string dataSource;
+        private static readonly ILogger logger = LibraryLogging.CreateLogger<APIBase>();
 
         public static readonly string ESI_BASE = "https://esi.evetech.net";
 
@@ -137,7 +138,8 @@ namespace EVEStandard.API
             }
             if (response.IsSuccessStatusCode)
             {
-                throw new EVEStandardException("Success Status Code not handled in GetNoAuthAsync, StatusCode: " + response.StatusCode);
+                logger.LogWarning($"A success status code is being returned that wasn't expected. Trying to process the success. Status Code: {response.StatusCode}");
+                return await processSuccess(response, model);
             }
             switch (response.StatusCode)
             {
@@ -167,7 +169,12 @@ namespace EVEStandard.API
 
                     return model;
                 default:
-                    throw new EVEStandardException("API Response Issue. Status Code: " + response.StatusCode);
+                    logger.LogWarning($"API Response Issue. Status Code: {response.StatusCode}");
+                    model.Error = true;
+                    model.Message = $"An error code we didn't handle was returned. Status Code: {response.StatusCode}";
+                    model.RemainingErrors = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
+
+                    return model;
             }
         }
 
