@@ -1,27 +1,26 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Models;
+﻿using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
-    public class Alliances : APIBase
+    public class Alliance : APIBase
     {
-        private readonly ILogger logger = LibraryLogging.CreateLogger<Alliances>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<Alliance>();
 
-        internal Alliances(string dataSource) : base(dataSource)
+        internal Alliance(string dataSource) : base(dataSource)
         {
         }
 
-        public async Task<ESIModelDTO<Alliance>> GetAllianceInfoV3Async(int allianceId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Models.Alliance>> GetAllianceInfoV3Async(int allianceId, string ifNoneMatch = null)
         {
             var responseModel = await GetAsync("/v3/alliances/" + allianceId + "/", ifNoneMatch);
 
             checkResponse("GetAllianceInfoV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Alliance>(responseModel);
+            return returnModelDTO<Models.Alliance>(responseModel);
         }
 
         public async Task<ESIModelDTO<List<int>>> ListAllianceCorporationsV1Async(int allianceId, string ifNoneMatch = null)

@@ -123,7 +123,7 @@ namespace EVEStandard
         /// </summary>
         public SSO SSO { get; }
 
-        public Alliances Alliances { get; private set; }
+        public Alliance Alliance { get; private set; }
         public Assets Assets { get; private set; }
         public Bookmarks Bookmarks { get; private set; }
         public Calendar Calendar { get; private set; }
@@ -159,7 +159,7 @@ namespace EVEStandard
         // ReSharper disable once InconsistentNaming
         private void initializeAPI()
         {
-            Alliances = new Alliances(dataSource)
+            Alliance = new Alliance(dataSource)
             {
                 HTTP = http
             };
