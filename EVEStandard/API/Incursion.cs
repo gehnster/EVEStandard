@@ -8,7 +8,7 @@ namespace EVEStandard.API
 
     public class Incursion : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Incursion>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<Incursion>();
 
         internal Incursion(string dataSource) : base(dataSource)
         {
@@ -18,7 +18,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/incursions/", ifNoneMatch);
 
-            checkResponse("ListIncursionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListIncursionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<Models.Incursion>>(responseModel);
         }

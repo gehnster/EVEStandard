@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Enumerations;
+﻿using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
     public class Skills : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Skills>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<Skills>();
+
         internal Skills(string dataSource) : base(dataSource)
         {
         }
@@ -21,7 +21,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v4/characters/{auth.Character.CharacterID}/skills/", auth, ifNoneMatch);
 
-            checkResponse("GetCharacterSkillsV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterSkillsV4Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<CharacterSkills>(responseModel);
         }
@@ -32,7 +32,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/characters/{auth.Character.CharacterID}/attributes/", auth, ifNoneMatch);
 
-            checkResponse("GetCharacterAttributesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterAttributesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<CharacterAttributes>(responseModel);
         }
@@ -43,7 +43,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v2/characters/{auth.Character.CharacterID}/skillqueue/", auth, ifNoneMatch);
 
-            checkResponse("GetCharacterSkillQueueV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterSkillQueueV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<SkillQueue>>(responseModel);
         }

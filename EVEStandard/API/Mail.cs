@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Enumerations;
+﻿using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
     public class Mail : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Mail>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<Mail>();
+
         internal Mail(string dataSource) : base(dataSource)
         {
         }
@@ -27,7 +27,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ReturnMailHeadersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ReturnMailHeadersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<Mail>>(responseModel);
         }
@@ -38,7 +38,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/", auth, mail);
 
-            checkResponse("SendNewMailV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("SendNewMailV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<int>(responseModel);
         }
@@ -49,7 +49,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v3/characters/" + auth.Character.CharacterID + "/mail/labels/", auth, ifNoneMatch);
 
-            checkResponse("GetMailLabelsAndUnreadCountsV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetMailLabelsAndUnreadCountsV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<UnreadMail>(responseModel);
         }
@@ -66,7 +66,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v2/characters/" + auth.Character.CharacterID + "/mail/labels/", auth, body);
 
-            checkResponse("CreateMailLabelV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("CreateMailLabelV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<long>(responseModel);
         }
@@ -77,7 +77,7 @@ namespace EVEStandard.API
 
             var responseModel = await DeleteAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/labels/" + labelId + "/", auth);
 
-            checkResponse("DeleteMailLabelV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("DeleteMailLabelV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         public async Task<ESIModelDTO<List<MailList>>> ReturnMailingListSubscriptionsV1Async(AuthDTO auth, string ifNoneMatch = null)
@@ -86,7 +86,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/lists/", auth, ifNoneMatch);
 
-            checkResponse("ReturnMailingListSubscriptionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ReturnMailingListSubscriptionsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<MailList>>(responseModel);
         }
@@ -97,7 +97,7 @@ namespace EVEStandard.API
 
             var responseModel = await DeleteAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/" + mailId + "/", auth);
 
-            checkResponse("DeleteMailV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("DeleteMailV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         public async Task<ESIModelDTO<MailContent>> ReturnMailV1Async(AuthDTO auth, long mailId, string ifNoneMatch = null)
@@ -106,7 +106,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/" + mailId + "/", auth, ifNoneMatch);
 
-            checkResponse("ReturnMailV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ReturnMailV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<MailContent>(responseModel);
         }
@@ -117,7 +117,7 @@ namespace EVEStandard.API
 
             var responseModel = await PutAsync("/v1/characters/" + auth.Character.CharacterID + "/mail/" + mailId + "/", auth, contents);
 
-            checkResponse("ReturnMailV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ReturnMailV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
     }
 }
