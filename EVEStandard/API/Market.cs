@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Enumerations;
+﻿using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
 
     public class Market : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Market>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<Market>();
+
         internal Market(string dataSource) : base(dataSource)
         {
         }
@@ -20,7 +20,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/markets/prices/", ifNoneMatch);
 
-            checkResponse("ListMarketPricesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListMarketPricesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<MarketPrice>>(responseModel);
         }
@@ -40,7 +40,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/markets/" + regionId + "/orders/", ifNoneMatch, queryParameters);
 
-            checkResponse("ListOrdersInRegionV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListOrdersInRegionV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<MarketOrder>>(responseModel);
         }
@@ -54,7 +54,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/markets/" + regionId + "/history/", ifNoneMatch, queryParameters);
 
-            checkResponse("ListHistoricalMarketStatisticsInRegionV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListHistoricalMarketStatisticsInRegionV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<MarketRegionHistory>>(responseModel);
         }
@@ -70,7 +70,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/markets/structures/" + structureId + "/", ifNoneMatch, queryParameters);
 
-            checkResponse("ListOrdersInStructureV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListOrdersInStructureV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<MarketOrder>>(responseModel);
         }
@@ -79,7 +79,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/markets/groups/", ifNoneMatch);
 
-            checkResponse("GetItemGroupsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetItemGroupsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<int>(responseModel);
         }
@@ -93,7 +93,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/markets/groups/" + marketGroupId + "/", ifNoneMatch, queryParameters);
 
-            checkResponse("GetItemGroupInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetItemGroupInfoV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<MarketGroup>(responseModel);
         }
@@ -104,7 +104,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/characters/" + auth.Character.CharacterID + "/orders/", auth, ifNoneMatch);
 
-            checkResponse("ListOpenOrdersFromCharacterV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListOpenOrdersFromCharacterV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CharacterMarketOrder>>(responseModel);
         }
@@ -120,7 +120,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/orders/history/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ListHistoricalOrdersByCharacterV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListHistoricalOrdersByCharacterV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CharacterMarketOrderHistory>>(responseModel);
         }
@@ -134,7 +134,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/markets/" + regionId + "/types/", ifNoneMatch, queryParameters);
 
-            checkResponse("ListHistoricalOrdersByCharacterV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListHistoricalOrdersByCharacterV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<long>>(responseModel);
         }
@@ -145,7 +145,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/corporations/" + corporationId + "/orders/", ifNoneMatch);
 
-            checkResponse("ListOpenOrdersFromCorporationV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListOpenOrdersFromCorporationV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CorporationMarketOrder>>(responseModel);
         }
@@ -161,7 +161,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporations/" + corporationId + "/orders/history/", ifNoneMatch, queryParameters);
 
-            checkResponse("ListHistoricalOrdersByCorporationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListHistoricalOrdersByCorporationV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CorporationMarketOrderHistory>>(responseModel);
         }

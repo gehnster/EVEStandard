@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Enumerations;
+﻿using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
     public class Search : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Search>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<Search>();
+
         internal Search(string dataSource) : base(dataSource)
         {
         }
@@ -35,7 +35,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v3/characters/{auth.Character.CharacterID}/search/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("SearchCharacterV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("SearchCharacterV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<CharacterSearch>(responseModel);
         }
@@ -57,7 +57,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/search/", ifNoneMatch, queryParameters);
 
-            checkResponse("SearchV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("SearchV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<Search>(responseModel);
         }

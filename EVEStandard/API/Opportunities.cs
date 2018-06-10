@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Enumerations;
+﻿using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
     public class Opportunities : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Opportunities>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<Opportunities>();
+
         internal Opportunities(string dataSource) : base(dataSource)
         {
         }
@@ -19,7 +19,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/opportunities/groups/", ifNoneMatch);
 
-            checkResponse("GetOpportunitiesGroupsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetOpportunitiesGroupsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<int>>(responseModel);
         }
@@ -33,7 +33,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/opportunities/groups/" + groupId + "/", ifNoneMatch, queryParameters);
 
-            checkResponse("GetOpportunitiesGroupV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetOpportunitiesGroupV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<OpportunitiesGroup>(responseModel);
         }
@@ -42,7 +42,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/opportunities/tasks/", ifNoneMatch);
 
-            checkResponse("GetOpportunitiesTasksV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetOpportunitiesTasksV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<int>>(responseModel);
         }
@@ -51,7 +51,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/opportunities/tasks/" + taskId + "/", ifNoneMatch);
 
-            checkResponse("GetOpportunitiesTaskV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetOpportunitiesTaskV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<OpportunitiesTask>(responseModel);
         }
@@ -62,7 +62,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/opportunities/", ifNoneMatch);
 
-            checkResponse("GetCharacterCompletedTaskV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetCharacterCompletedTaskV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CharacterTask>>(responseModel);
         }

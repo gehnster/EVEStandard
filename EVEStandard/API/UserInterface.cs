@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Enumerations;
+﻿using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
     public class UserInterface : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<UserInterface>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<UserInterface>();
+
         internal UserInterface(string dataSource) : base(dataSource)
         {
         }
@@ -27,7 +28,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v2/ui/autopilot/waypoint/", auth, null, null, queryParameters);
 
-            checkResponse("SetAutopilotWaypointV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("SetAutopilotWaypointV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         public async Task OpenContractWindowV1Async(AuthDTO auth, long contractId)
@@ -41,7 +42,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/ui/openwindow/contract/", auth, null, null, queryParameters);
 
-            checkResponse("OpenContractWindowV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("OpenContractWindowV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         public async Task OpenInformationWindowV1Async(AuthDTO auth, long targetId)
@@ -55,7 +56,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/ui/openwindow/information/", auth, null, null, queryParameters);
 
-            checkResponse("OpenInformationWindowV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("OpenInformationWindowV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         public async Task OpenMarketDetailsV1Async(AuthDTO auth, long typeId)
@@ -69,7 +70,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/ui/openwindow/marketdetails/", auth, null, null, queryParameters);
 
-            checkResponse("OpenMarketDetailsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("OpenMarketDetailsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         public async Task OpenNewMailWindowV1Async(AuthDTO auth, UiNewMail mail)
@@ -78,7 +79,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/ui/openwindow/newmail/", auth, mail);
 
-            checkResponse("OpenNewMailWindowV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("OpenNewMailWindowV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
     }
 }

@@ -1,13 +1,13 @@
-﻿using System.Threading.Tasks;
-using EVEStandard.Models.API;
+﻿using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
     public class Status : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Status>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<Status>();
+
         internal Status(string dataSource) : base(dataSource)
         {
         }
@@ -16,7 +16,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/status/", ifNoneMatch);
 
-            checkResponse("GetStatusV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("GetStatusV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<Models.Status>(responseModel);
         }

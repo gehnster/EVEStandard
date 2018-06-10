@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EVEStandard.Enumerations;
+﻿using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
     public class Industry : APIBase
     {
-        private ILogger Logger { get; } = LibraryLogging.CreateLogger<Industry>();
+        private readonly ILogger logger = LibraryLogging.CreateLogger<Industry>();
+
         internal Industry(string dataSource) : base(dataSource)
         {
         }
@@ -19,7 +19,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/industry/facilities/", ifNoneMatch);
 
-            checkResponse("ListIndustryFacilitiesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListIndustryFacilitiesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<IndustryFacility>>(responseModel);
         }
@@ -28,7 +28,7 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/industry/systems/", ifNoneMatch);
 
-            checkResponse("ListSolarSystemCostIndiciesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListSolarSystemCostIndiciesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<IndustrySystem>>(responseModel);
         }
@@ -44,7 +44,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/industry/jobs/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ListCharacterIndustryJobsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListCharacterIndustryJobsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<IndustryJob>>(responseModel);
         }
@@ -60,7 +60,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/" + auth.Character.CharacterID + "/mining/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("CharacterMiningLedgerV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("CharacterMiningLedgerV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CharacterMining>>(responseModel);
         }
@@ -76,7 +76,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporation/" + corporationId + "/mining/observers/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("CorporationMiningObserversV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("CorporationMiningObserversV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CorporationMiningObserver>>(responseModel);
         }
@@ -92,7 +92,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporation/" + corporationId + "/mining/observers/" + observerId + "/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ObservedCorporationMiningV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ObservedCorporationMiningV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CorporationObservedMining>>(responseModel);
         }
@@ -109,7 +109,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporation/" + corporationId + "/industry/jobs/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ListCorporationIndustryJobsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("ListCorporationIndustryJobsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<IndustryJob>>(responseModel);
         }
@@ -126,7 +126,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/corporation/" + corporationId + "/industry/jobs/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("MoonExtractionTimersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, Logger);
+            checkResponse("MoonExtractionTimersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<MiningExtraction>>(responseModel);
         }
