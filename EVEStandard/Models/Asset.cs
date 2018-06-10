@@ -8,6 +8,15 @@ namespace EVEStandard.Models
         #region Properties
 
         /// <summary>
+        /// Gets or sets the is blueprint copy.
+        /// </summary>
+        /// <value>
+        /// The is blueprint copy.
+        /// </value>
+        [JsonProperty("is_blueprint_copy")]
+        public bool? IsBlueprintCopy { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether this instance is singleton.
         /// </summary>
         /// <value>
