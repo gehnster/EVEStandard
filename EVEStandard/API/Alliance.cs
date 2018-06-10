@@ -22,7 +22,7 @@ namespace EVEStandard.API
         /// Public information about an alliance.
         /// <para>GET /alliances/{alliance_id}/</para>
         /// </summary>
-        /// <param name="allianceId">An EVE alliance ID</param>
+        /// <param name="allianceId">An EVE alliance ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing public data about an alliance.</returns>
         public async Task<ESIModelDTO<Models.Alliance>> GetAllianceInfoV3Async(int allianceId, string ifNoneMatch = null)
