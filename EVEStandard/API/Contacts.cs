@@ -3,10 +3,15 @@ using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Threading.Tasks;
 
 namespace EVEStandard.API
 {
+    /// <summary>
+    /// Contacts API
+    /// </summary>
+    /// <seealso cref="EVEStandard.API.APIBase" />
     public class Contacts : APIBase
     {
         private readonly ILogger logger = LibraryLogging.CreateLogger<Contacts>();
@@ -15,6 +20,13 @@ namespace EVEStandard.API
         {
         }
 
+        /// <summary>
+        /// Bulk delete contacts.
+        /// <para>DELETE /characters/{character_id}/contacts/</para>
+        /// </summary>
+        /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
+        /// <param name="contactIds">A list of contacts to delete.</param>
+        /// <returns></returns>
         public async Task DeleteContactsV2Async(AuthDTO auth, List<int> contactIds)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_WRITE_CONTACTS_1);
@@ -26,20 +38,43 @@ namespace EVEStandard.API
 
             var responseModel = await DeleteAsync($"/v2/characters/{auth.CharacterId}/contacts/", auth, queryParameters);
 
-            checkResponse("DeleteContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(DeleteContactsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
-        public async Task<ESIModelDTO<List<CharacterContact>>> GetContactsV2Async(AuthDTO auth, int page=1, string ifNoneMatch = null)
+        /// <summary>
+        /// Return contacts of a character.
+        /// <para>GET /characters/{character_id}/contacts/</para>
+        /// </summary>
+        /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
+        /// <param name="page">Which page of results to return. Default value: 1.</param>
+        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing a list of contacts.</returns>
+        public async Task<ESIModelDTO<List<CharacterContact>>> GetContactsV2Async(AuthDTO auth, int page = 1, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_CONTACTS_1);
 
-            var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/contacts/", auth, ifNoneMatch);
+            var queryParameters = new Dictionary<string, string>
+            {
+                { "page", page.ToString() }
+            };
 
-            checkResponse("GetContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/contacts/", auth, ifNoneMatch, queryParameters);
+
+            checkResponse(nameof(GetContactsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CharacterContact>>(responseModel);
         }
 
+        /// <summary>
+        /// Bulk add contacts with same settings.
+        /// <para>POST /characters/{character_id}/contacts/</para>
+        /// </summary>
+        /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
+        /// <param name="contactIds">A list of contacts.</param>
+        /// <param name="labelIds">Add custom labels to the new contact.</param>
+        /// <param name="standing">Standing for the contact.</param>
+        /// <param name="isWatched">Whether the contact should be watched, note this is only effective on characters Default value: false.</param>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing a list of contact ids that successfully created.</returns>
         public async Task<ESIModelDTO<List<int>>> AddContactsV2Async(AuthDTO auth, List<int> contactIds, List<long> labelIds, float standing, bool isWatched=false)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_WRITE_CONTACTS_1);
@@ -53,11 +88,21 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync($"/v2/characters/{auth.CharacterId}/contacts/", auth, contactIds, null, queryParameters);
 
-            checkResponse("AddContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(AddContactsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<int>>(responseModel);
         }
 
+        /// <summary>
+        /// Bulk edit contacts with same settings.
+        /// <para>PUT /characters/{character_id}/contacts/</para>
+        /// </summary>
+        /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
+        /// <param name="contactIds">A list of contacts.</param>
+        /// <param name="labelIds">Add custom labels to the new contact.</param>
+        /// <param name="standing">Standing for the contact.</param>
+        /// <param name="isWatched">Whether the contact should be watched, note this is only effective on characters Default value: false.</param>
+        /// <returns></returns>
         public async Task EditContactsV2Async(AuthDTO auth, List<int> contactIds, List<long> labelIds, float standing, bool isWatched=false)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_WRITE_CONTACTS_1);
@@ -71,60 +116,109 @@ namespace EVEStandard.API
 
             var responseModel = await PutAsync($"/v2/characters/{auth.CharacterId}/contacts/", auth, contactIds, queryParameters);
 
-            checkResponse("EditContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(EditContactsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
-        public async Task<ESIModelDTO<List<CorporationContact>>> GetCorporationContactsV2Async(AuthDTO auth, int page, int corporationId, string ifNoneMatch = null)
+        /// <summary>
+        /// Return contacts of a corporation.
+        /// <para>GET /corporations/{corporation_id}/contacts/</para>
+        /// </summary>
+        /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
+        /// <param name="corporationId">An EVE corporation ID.</param>
+        /// <param name="page">Which page of results to return. Default value: 1.</param>
+        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing a list of contacts.</returns>
+        public async Task<ESIModelDTO<List<CorporationContact>>> GetCorporationContactsV2Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_CONTACTS_1);
 
-            var responseModel = await GetAsync($"/v2/corporations/{corporationId}/contacts/", auth, ifNoneMatch);
+            var queryParameters = new Dictionary<string, string>
+            {
+                { "page", page.ToString() }
+            };
 
-            checkResponse("GetCorporationContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            var responseModel = await GetAsync($"/v2/corporations/{corporationId}/contacts/", auth, ifNoneMatch, queryParameters);
+
+            checkResponse(nameof(GetCorporationContactsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<CorporationContact>>(responseModel);
         }
 
-        public async Task<ESIModelDTO<List<AllianceContact>>> GetAllianceContactsV2Async(AuthDTO auth, int page, int allianceId, string ifNoneMatch = null)
+        /// <summary>
+        /// Return contacts of an alliance.
+        /// <para>/alliances/{alliance_id}/contacts/</para>
+        /// </summary>
+        /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
+        /// <param name="allianceId">An EVE alliance ID.</param>
+        /// <param name="page">Which page of results to return. Default value: 1.</param>
+        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing a list of contacts.</returns>
+        public async Task<ESIModelDTO<List<AllianceContact>>> GetAllianceContactsV2Async(AuthDTO auth, int allianceId, int page = 1, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_ALLIANCE_READ_CONTACTS_1);
 
-            var responseModel = await GetAsync($"/v2/alliances/{allianceId}/contacts/", auth, ifNoneMatch);
+            var queryParameters = new Dictionary<string, string>
+            {
+                { "page", page.ToString() }
+            };
 
-            checkResponse("GetAllianceContactsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            var responseModel = await GetAsync($"/v2/alliances/{allianceId}/contacts/", auth, ifNoneMatch, queryParameters);
+
+            checkResponse(nameof(GetAllianceContactsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<AllianceContact>>(responseModel);
         }
 
+        /// <summary>
+        /// Return custom labels for a character’s contacts.
+        /// <para>GET /characters/{character_id}/contacts/labels/</para>
+        /// </summary>
+        /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
+        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing a list of contact labels.</returns>
         public async Task<ESIModelDTO<List<ContactLabel>>> GetContactLabelsV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_CHARACTERS_READ_CONTACTS_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/contacts/labels/", auth, ifNoneMatch);
 
-            checkResponse("GetContactLabelsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(GetContactLabelsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<ContactLabel>>(responseModel);
         }
 
+        /// <summary>
+        /// Return custom labels for an alliance’s contacts.
+        /// <para>GET /alliances/{alliance_id}/contacts/labels/</para>
+        /// </summary>
+        /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
+        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing a list of alliance contact labels.</returns>
         public async Task<ESIModelDTO<List<ContactLabel>>> GetAllianceContactLabelsV1Async(AuthDTO auth, int allianceId, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_ALLIANCE_READ_CONTACTS_1);
 
             var responseModel = await GetAsync($"/v1/alliances/{allianceId}/contacts/labels/", auth, ifNoneMatch);
 
-            checkResponse("GetAllianceContactLabelsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(GetAllianceContactLabelsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<ContactLabel>>(responseModel);
         }
 
+        /// <summary>
+        /// Return custom labels for a corporation’s contacts.
+        /// <para>GET /corporations/{corporation_id}/contacts/labels/</para>
+        /// </summary>
+        /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
+        /// <param name="corporationId">An EVE corporation ID.</param>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing a list of corporation contact labels.</returns>
         public async Task<ESIModelDTO<List<ContactLabel>>> GetCorporationContactLabelsV1Async(AuthDTO auth, int corporationId)
         {
             checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_CONTACTS_1);
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/contacts/labels/", auth);
 
-            checkResponse("GetCorporationContactLabelsV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(GetCorporationContactLabelsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<ContactLabel>>(responseModel);
         }
