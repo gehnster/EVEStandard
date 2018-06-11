@@ -41,7 +41,7 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
-        /// <returns><see cref="ESIModelDTO{T}"/> containing a list fittings.</returns>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing a list of fittings.</returns>
         public async Task<ESIModelDTO<List<CharacterFitting>>> GetFittingsV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
             checkAuth(auth, Scopes.ESI_FITTINGS_READ_FITTINGS_1);
@@ -59,7 +59,7 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="fitting">Details about the new fitting.</param>
-        /// <returns><see cref="ESIModelDTO{T}"/> containing a list fittings.</returns>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing a list of fittings.</returns>
         public async Task<ESIModelDTO<long>> CreateFittingV1Async(AuthDTO auth, ShipFitting fitting)
         {
             checkAuth(auth, Scopes.ESI_FITTINGS_READ_FITTINGS_1);
