@@ -23,7 +23,7 @@ namespace EVEStandard.API
         /// <para>GET /insurance/prices/</para>
         /// </summary>
         /// <param name="ifNoneMatch">If none match.</param>
-        /// <returns></returns>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing a list of insurance levels for all ship types.</returns>
         public async Task<ESIModelDTO<List<InsurancePrice>>> ListInsuranceLevelsV1Async(string ifNoneMatch = null)
         {
             var responseModel = await GetAsync("/v1/insurance/prices/", ifNoneMatch);
