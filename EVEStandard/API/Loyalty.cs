@@ -21,6 +21,7 @@ namespace EVEStandard.API
 
         /// <summary>
         /// Return a list of offers from a specific corporation’s loyalty store.
+        /// <para>GET /loyalty/stores/{corporation_id}/offers/</para>
         /// </summary>
         /// <param name="corporationId">An EVE corporation ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
