@@ -32,7 +32,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a collection of event summaries.</returns>
         public async Task<ESIModelDTO<List<EventSummary>>> ListCalendarEventSummariesV1Async(AuthDTO auth, long? fromEventId = null, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CALENDAR_READ_CALENDAR_EVENTS_1);
+            CheckAuth(auth, Scopes.ESI_CALENDAR_READ_CALENDAR_EVENTS_1);
 
             Dictionary<string, string> queryParameters = null;
             if (fromEventId != null)
@@ -45,9 +45,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/calendar/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ListCalendarEventSummariesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListCalendarEventSummariesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<EventSummary>>(responseModel);
+            return ReturnModelDTO<List<EventSummary>>(responseModel);
         }
 
         /// <summary>
@@ -60,13 +60,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing full details of a specific event.</returns>
         public async Task<ESIModelDTO<Event>> GetAnEventV3Async(AuthDTO auth, long eventId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CALENDAR_READ_CALENDAR_EVENTS_1);
+            CheckAuth(auth, Scopes.ESI_CALENDAR_READ_CALENDAR_EVENTS_1);
 
             var responseModel = await GetAsync($"/v3/characters/{auth.CharacterId}/calendar/" + eventId + "/", auth, ifNoneMatch);
 
-            checkResponse("GetAnEventV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetAnEventV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Event>(responseModel);
+            return ReturnModelDTO<Event>(responseModel);
         }
 
         /// <summary>
@@ -79,14 +79,14 @@ namespace EVEStandard.API
         /// <returns></returns>
         public async Task RespondToAnEventV3Async(AuthDTO auth, long eventId, EventResponse response)
         {
-            checkAuth(auth, Scopes.ESI_CALENDAR_RESPOND_CALENDAR_EVENTS_1);
+            CheckAuth(auth, Scopes.ESI_CALENDAR_RESPOND_CALENDAR_EVENTS_1);
 
             dynamic body = new JObject();
             body.response = response.ToString();
 
             var responseModel = await this.PutAsync($"/v3/characters/{auth.CharacterId}/calendar/" + eventId + "/", auth, body);
 
-            checkResponse("RespondToAnEventV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(RespondToAnEventV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         /// <summary>
@@ -99,13 +99,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of attendees.</returns>
         public async Task<ESIModelDTO<List<EventAttendee>>> GetAttendeesV1Async(AuthDTO auth, long eventId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CALENDAR_READ_CALENDAR_EVENTS_1);
+            CheckAuth(auth, Scopes.ESI_CALENDAR_READ_CALENDAR_EVENTS_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/calendar/" + eventId + "/attendees/", auth, ifNoneMatch);
 
-            checkResponse("GetAttendeesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetAttendeesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<EventAttendee>>(responseModel);
+            return ReturnModelDTO<List<EventAttendee>>(responseModel);
         }
     }
 }

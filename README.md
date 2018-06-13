@@ -16,8 +16,8 @@ Patch will be incremented for things like fixing bugs that don't impact the usag
 New features will likely fall under minor unless it changes the design.
 
 ## Example of how the library works
-### Just using non-authorized API
-### Using Authorized API and getting authorized
+You can find examples of how to use the library [here](https://github.com/gehnster/EVEStandard-Examples)
+
 ## Explanation of design decisions made for SSO and API routes
 ## NuGet
 The package is now on NuGet! You can find it here: [EVEStandard NuGet Page](https://www.nuget.org/packages/PointyHatGames.EVEStandard)

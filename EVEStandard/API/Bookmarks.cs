@@ -29,7 +29,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of bookmarks.</returns>
         public async Task<ESIModelDTO<List<Bookmark>>> ListBookmarksV2Async(AuthDTO auth, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_BOOKMARKS_READ_CHARACTER_BOOKMARKS_1);
+            CheckAuth(auth, Scopes.ESI_BOOKMARKS_READ_CHARACTER_BOOKMARKS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -38,9 +38,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/bookmarks/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ListBookmarksV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListBookmarksV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Bookmark>>(responseModel);
+            return ReturnModelDTO<List<Bookmark>>(responseModel);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of bookmark folders.</returns>
         public async Task<ESIModelDTO<List<BookmarkFolder>>> ListBookmarkFoldersV2Async(AuthDTO auth, int page=1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_BOOKMARKS_READ_CHARACTER_BOOKMARKS_1);
+            CheckAuth(auth, Scopes.ESI_BOOKMARKS_READ_CHARACTER_BOOKMARKS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -62,9 +62,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/bookmarks/folders/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ListBookmarkFoldersV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListBookmarkFoldersV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<BookmarkFolder>>(responseModel);
+            return ReturnModelDTO<List<BookmarkFolder>>(responseModel);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of corporation owned bookmarks.</returns>
         public async Task<ESIModelDTO<List<Bookmark>>> ListCorporationBookmarksV1Async(AuthDTO auth, int corporationId, int page=1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_BOOKMARKS_READ_CORPORATION_BOOKMARKS_1);
+            CheckAuth(auth, Scopes.ESI_BOOKMARKS_READ_CORPORATION_BOOKMARKS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -87,9 +87,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporation/{corporationId}/bookmarks/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ListCorporationBookmarksV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListCorporationBookmarksV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Bookmark>>(responseModel);
+            return ReturnModelDTO<List<Bookmark>>(responseModel);
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of corporation owned bookmark folders.</returns>
         public async Task<ESIModelDTO<List<BookmarkFolder>>> ListCorporationBookmarkFoldersV1Async(AuthDTO auth, int corporationId, int page=1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_BOOKMARKS_READ_CORPORATION_BOOKMARKS_1);
+            CheckAuth(auth, Scopes.ESI_BOOKMARKS_READ_CORPORATION_BOOKMARKS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -112,9 +112,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporation/{corporationId}/bookmarks/folders/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ListCorporationBookmarkFoldersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListCorporationBookmarkFoldersV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<BookmarkFolder>>(responseModel);
+            return ReturnModelDTO<List<BookmarkFolder>>(responseModel);
         }
     }
 }

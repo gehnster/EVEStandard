@@ -30,7 +30,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of contracts.</returns>
         public async Task<ESIModelDTO<List<Contract>>> GetContractsV1Async(AuthDTO auth, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CHARACTER_CONTRACTS_1);
+            CheckAuth(auth, Scopes.ESI_CONTRACTS_READ_CHARACTER_CONTRACTS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -39,9 +39,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/contracts/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetContractsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetContractsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Contract>>(responseModel);
+            return ReturnModelDTO<List<Contract>>(responseModel);
         }
 
         /// <summary>
@@ -54,13 +54,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of items in this contract.</returns>
         public async Task<ESIModelDTO<List<ContractItem>>> GetContractItemsV1Async(AuthDTO auth, int contractId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CHARACTER_CONTRACTS_1);
+            CheckAuth(auth, Scopes.ESI_CONTRACTS_READ_CHARACTER_CONTRACTS_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/contracts/{contractId}/items/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetContractItemsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetContractItemsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<ContractItem>>(responseModel);
+            return ReturnModelDTO<List<ContractItem>>(responseModel);
         }
 
         /// <summary>
@@ -73,13 +73,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of bids.</returns>
         public async Task<ESIModelDTO<List<ContractBid>>> GetContractBidsV1Async(AuthDTO auth, int contractId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CHARACTER_CONTRACTS_1);
+            CheckAuth(auth, Scopes.ESI_CONTRACTS_READ_CHARACTER_CONTRACTS_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/contracts/{contractId}/bids/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetContractBidsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetContractBidsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<ContractBid>>(responseModel);
+            return ReturnModelDTO<List<ContractBid>>(responseModel);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of contracts.</returns>
         public async Task<ESIModelDTO<List<Contract>>> GetCorporationContractsV1Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CORPORATION_CONTRACTS_1);
+            CheckAuth(auth, Scopes.ESI_CONTRACTS_READ_CORPORATION_CONTRACTS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -103,9 +103,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/contracts/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetCorporationContractsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationContractsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Contract>>(responseModel);
+            return ReturnModelDTO<List<Contract>>(responseModel);
         }
 
         /// <summary>
@@ -119,13 +119,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of items in this contract.</returns>
         public async Task<ESIModelDTO<List<ContractItem>>> GetCorporationContractItemsV1Async(AuthDTO auth, int contractId, int corporationId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CORPORATION_CONTRACTS_1);
+            CheckAuth(auth, Scopes.ESI_CONTRACTS_READ_CORPORATION_CONTRACTS_1);
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/contracts/{contractId}/items/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCorporationContractItemsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationContractItemsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<ContractItem>>(responseModel);
+            return ReturnModelDTO<List<ContractItem>>(responseModel);
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of bids.</returns>
         public async Task<ESIModelDTO<List<ContractBid>>> GetCorporationContractBidsV1Async(AuthDTO auth, int contractId, int corporationId, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CONTRACTS_READ_CORPORATION_CONTRACTS_1);
+            CheckAuth(auth, Scopes.ESI_CONTRACTS_READ_CORPORATION_CONTRACTS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -149,9 +149,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/contracts/{contractId}/bids/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCorporationContractBidsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationContractBidsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<ContractBid>>(responseModel);
+            return ReturnModelDTO<List<ContractBid>>(responseModel);
         }
     }
 }
