@@ -195,7 +195,7 @@ namespace EVEStandard.API
             if (response.Headers.Contains("warning"))
             {
                 model.LegacyWarning = true;
-                model.Message = response.Headers.Warning.Count == 1 ? response.Headers.Warning.ToString() : throw new EVEStandardException("Expected one warning header, but got " + response.Headers.Warning.Count + " instead");
+                model.Message = String.Join(", ", response.Headers.GetValues("warning"));
             }
             try
             {
