@@ -29,9 +29,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/industry/facilities/", ifNoneMatch);
 
-            checkResponse(nameof(ListIndustryFacilitiesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListIndustryFacilitiesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<IndustryFacility>>(responseModel);
+            return ReturnModelDTO<List<IndustryFacility>>(responseModel);
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/industry/systems/", ifNoneMatch);
 
-            checkResponse(nameof(ListSolarSystemCostIndiciesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListSolarSystemCostIndiciesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<IndustrySystem>>(responseModel);
+            return ReturnModelDTO<List<IndustrySystem>>(responseModel);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing industry jobs placed by a character.</returns>
         public async Task<ESIModelDTO<List<IndustryJob>>> ListCharacterIndustryJobsV1Async(AuthDTO auth, bool includeCompleted, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_INDUSTRY_READ_CHARACTER_JOBS_1);
+            CheckAuth(auth, Scopes.ESI_INDUSTRY_READ_CHARACTER_JOBS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -68,9 +68,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/industry/jobs/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(ListCharacterIndustryJobsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListCharacterIndustryJobsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<IndustryJob>>(responseModel);
+            return ReturnModelDTO<List<IndustryJob>>(responseModel);
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing mining ledger of a character.</returns>
         public async Task<ESIModelDTO<List<CharacterMining>>> CharacterMiningLedgerV1Async(AuthDTO auth, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_INDUSTRY_READ_CHARACTER_MINING_1);
+            CheckAuth(auth, Scopes.ESI_INDUSTRY_READ_CHARACTER_MINING_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -92,9 +92,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/mining/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(CharacterMiningLedgerV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(CharacterMiningLedgerV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CharacterMining>>(responseModel);
+            return ReturnModelDTO<List<CharacterMining>>(responseModel);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing observer list of a corporation.</returns>
         public async Task<ESIModelDTO<List<CorporationMiningObserver>>> CorporationMiningObserversV1Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_INDUSTRY_READ_CORPORATION_MINING_1);
+            CheckAuth(auth, Scopes.ESI_INDUSTRY_READ_CORPORATION_MINING_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -118,9 +118,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporation/{corporationId}/mining/observers/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(CorporationMiningObserversV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(CorporationMiningObserversV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CorporationMiningObserver>>(responseModel);
+            return ReturnModelDTO<List<CorporationMiningObserver>>(responseModel);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing mining ledger of an observer.</returns>
         public async Task<ESIModelDTO<List<CorporationObservedMining>>> ObservedCorporationMiningV1Async(AuthDTO auth, int corporationId, long observerId, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_INDUSTRY_READ_CORPORATION_MINING_1);
+            CheckAuth(auth, Scopes.ESI_INDUSTRY_READ_CORPORATION_MINING_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -145,9 +145,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporation/{corporationId}/mining/observers/{observerId}/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(ObservedCorporationMiningV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ObservedCorporationMiningV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CorporationObservedMining>>(responseModel);
+            return ReturnModelDTO<List<CorporationObservedMining>>(responseModel);
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of corporation industry jobs.</returns>
         public async Task<ESIModelDTO<List<IndustryJob>>> ListCorporationIndustryJobsV1Async(AuthDTO auth, int corporationId, int page = 1, bool includeCompleted = false, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_INDUSTRY_READ_CORPORATION_JOBS_1);
+            CheckAuth(auth, Scopes.ESI_INDUSTRY_READ_CORPORATION_JOBS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -173,9 +173,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporation/{corporationId}/industry/jobs/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(ListCorporationIndustryJobsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListCorporationIndustryJobsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<IndustryJob>>(responseModel);
+            return ReturnModelDTO<List<IndustryJob>>(responseModel);
         }
 
         /// <summary>
@@ -191,7 +191,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of chunk timers.</returns>
         public async Task<ESIModelDTO<List<MiningExtraction>>> MoonExtractionTimersV1Async(AuthDTO auth, int corporationId, int page = 1, bool includeCompleted = false, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_INDUSTRY_READ_CORPORATION_MINING_1);
+            CheckAuth(auth, Scopes.ESI_INDUSTRY_READ_CORPORATION_MINING_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -201,9 +201,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporation/{corporationId}/industry/jobs/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(MoonExtractionTimersV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(MoonExtractionTimersV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<MiningExtraction>>(responseModel);
+            return ReturnModelDTO<List<MiningExtraction>>(responseModel);
         }
     }
 }

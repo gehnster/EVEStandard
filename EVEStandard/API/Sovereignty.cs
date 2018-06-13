@@ -28,9 +28,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/sovereignty/structures/", ifNoneMatch);
 
-            checkResponse(nameof(ListSovereigntyStructuresV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListSovereigntyStructuresV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<SovereigntyStructure>>(responseModel);
+            return ReturnModelDTO<List<SovereigntyStructure>>(responseModel);
         }
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/sovereignty/campaigns/", ifNoneMatch);
 
-            checkResponse(nameof(ListSovereigntyCampaignsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListSovereigntyCampaignsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<SovereigntyCampaign>>(responseModel);
+            return ReturnModelDTO<List<SovereigntyCampaign>>(responseModel);
         }
 
         /// <summary>
@@ -58,9 +58,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/sovereignty/map/", ifNoneMatch);
 
-            checkResponse(nameof(ListSovereigntyOfSystemsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListSovereigntyOfSystemsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<SovereigntyMap>>(responseModel);
+            return ReturnModelDTO<List<SovereigntyMap>>(responseModel);
         }
     }
 }

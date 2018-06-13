@@ -36,9 +36,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/universe/ancestries/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetAncestriesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetAncestriesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Ancestry>>(responseModel);
+            return ReturnModelDTO<List<Ancestry>>(responseModel);
         }
 
         /// <summary>
@@ -52,9 +52,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/universe/asteroid_belts/{asteroidBeltId}/", ifNoneMatch);
 
-            checkResponse(nameof(GetAsteroidBeltV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetAsteroidBeltV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<AsteroidBelt>(responseModel);
+            return ReturnModelDTO<AsteroidBelt>(responseModel);
         }
 
         /// <summary>
@@ -73,9 +73,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/universe/bloodlines/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetBloodlinesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetBloodlinesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Bloodline>>(responseModel);
+            return ReturnModelDTO<List<Bloodline>>(responseModel);
         }
 
         /// <summary>
@@ -88,9 +88,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/universe/categories/", ifNoneMatch);
 
-            checkResponse(nameof(GetItemCategoriesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetItemCategoriesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<int>>(responseModel);
         }
 
         /// <summary>
@@ -110,9 +110,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/universe/categories/{categoryId}/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetItemCategoryInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetItemCategoryInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Category>(responseModel);
+            return ReturnModelDTO<Category>(responseModel);
         }
 
         /// <summary>
@@ -125,9 +125,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/universe/constellations/", ifNoneMatch);
 
-            checkResponse(nameof(GetConstellationsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetConstellationsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<int>>(responseModel);
         }
 
         /// <summary>
@@ -147,9 +147,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/universe/constellations/{constellationId}/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetConstellationV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetConstellationV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Constellation>(responseModel);
+            return ReturnModelDTO<Constellation>(responseModel);
         }
 
         /// <summary>
@@ -168,9 +168,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync(" /v2/universe/factions/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetFactionsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetFactionsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Faction>>(responseModel);
+            return ReturnModelDTO<List<Faction>>(responseModel);
         }
 
         /// <summary>
@@ -183,9 +183,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/universe/graphics/", ifNoneMatch);
 
-            checkResponse(nameof(GetGraphicsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetGraphicsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<int>>(responseModel);
         }
 
         /// <summary>
@@ -199,9 +199,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/universe/graphics/{graphicId}/", ifNoneMatch);
 
-            checkResponse(nameof(GetGraphicV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetGraphicV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Graphic>(responseModel);
+            return ReturnModelDTO<Graphic>(responseModel);
         }
 
         /// <summary>
@@ -220,9 +220,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/universe/groups/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetItemGroupsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetItemGroupsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<int>>(responseModel);
         }
 
         /// <summary>
@@ -242,9 +242,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/universe/groups/{groupId}/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetItemGroupV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetItemGroupV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Group>(responseModel);
+            return ReturnModelDTO<Group>(responseModel);
         }
 
         /// <summary>
@@ -264,9 +264,9 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/universe/ids/", null, names, null, queryParameters);
 
-            checkResponse(nameof(BulkNamesToIdsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(BulkNamesToIdsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Models.Universe>(responseModel);
+            return ReturnModelDTO<Models.Universe>(responseModel);
         }
 
         /// <summary>
@@ -280,9 +280,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/universe/moons/{moonId}/", ifNoneMatch);
 
-            checkResponse(nameof(GetItemGroupsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetItemGroupsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Moon>(responseModel);
+            return ReturnModelDTO<Moon>(responseModel);
         }
 
         /// <summary>
@@ -295,9 +295,9 @@ namespace EVEStandard.API
         {
             var responseModel = await PostAsync("/v2/universe/names/", null, ids);
 
-            checkResponse(nameof(GetNamesAndCategoriesFromIdsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetNamesAndCategoriesFromIdsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<UniverseIdsToNames>(responseModel);
+            return ReturnModelDTO<UniverseIdsToNames>(responseModel);
         }
 
         /// <summary>
@@ -311,9 +311,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/universe/planets/{planetId}/", ifNoneMatch);
 
-            checkResponse(nameof(GetPlanetInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetPlanetInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Planet>(responseModel);
+            return ReturnModelDTO<Planet>(responseModel);
         }
 
         /// <summary>
@@ -332,9 +332,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/universe/races/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetCharacterRacesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterRacesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Race>>(responseModel);
+            return ReturnModelDTO<List<Race>>(responseModel);
         }
 
         /// <summary>
@@ -347,9 +347,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/universe/regions/", ifNoneMatch);
 
-            checkResponse(nameof(GetRegionsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetRegionsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<int>>(responseModel);
         }
 
         /// <summary>
@@ -369,9 +369,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/universe/regions/{regionId}/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetRegionInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetRegionInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Region>(responseModel);
+            return ReturnModelDTO<Region>(responseModel);
         }
 
         /// <summary>
@@ -385,9 +385,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/universe/stargates/{stargateId}/", ifNoneMatch);
 
-            checkResponse(nameof(GetStargateInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetStargateInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Stargate>(responseModel);
+            return ReturnModelDTO<Stargate>(responseModel);
         }
 
         /// <summary>
@@ -401,9 +401,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/universe/stars/{starId}/", ifNoneMatch);
 
-            checkResponse(nameof(GetStarInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetStarInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Star>(responseModel);
+            return ReturnModelDTO<Star>(responseModel);
         }
 
         /// <summary>
@@ -417,9 +417,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v2/universe/stations/{stationId}/", ifNoneMatch);
 
-            checkResponse(nameof(GetStationInfoV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetStationInfoV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Station>(responseModel);
+            return ReturnModelDTO<Station>(responseModel);
         }
 
         /// <summary>
@@ -432,9 +432,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/universe/structures/", ifNoneMatch);
 
-            checkResponse(nameof(ListAllPublicStructuresV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListAllPublicStructuresV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<long>>(responseModel);
+            return ReturnModelDTO<List<long>>(responseModel);
         }
 
         /// <summary>
@@ -447,13 +447,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing data about a structure.</returns>
         public async Task<ESIModelDTO<Structure>> GetStructureInfoV1Async(AuthDTO auth, long structureId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_UNIVERSE_READ_STRUCTURES_1);
+            CheckAuth(auth, Scopes.ESI_UNIVERSE_READ_STRUCTURES_1);
 
             var responseModel = await GetAsync($"/v1/universe/structures/{structureId}/", ifNoneMatch);
 
-            checkResponse(nameof(GetStructureInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetStructureInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Structure>(responseModel);
+            return ReturnModelDTO<Structure>(responseModel);
         }
 
         /// <summary>
@@ -466,9 +466,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/universe/system_jumps/", ifNoneMatch);
 
-            checkResponse(nameof(GetSystemJumpsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetSystemJumpsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<SystemJumps>>(responseModel);
+            return ReturnModelDTO<List<SystemJumps>>(responseModel);
         }
 
         /// <summary>
@@ -481,9 +481,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v2/universe/system_kills/", ifNoneMatch);
 
-            checkResponse(nameof(GetSystemKillsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetSystemKillsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<SystemKills>>(responseModel);
+            return ReturnModelDTO<List<SystemKills>>(responseModel);
         }
 
         /// <summary>
@@ -496,9 +496,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/universe/systems/", ifNoneMatch);
 
-            checkResponse(nameof(GetSolarSystemsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetSolarSystemsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<int>>(responseModel);
         }
 
         /// <summary>
@@ -518,9 +518,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v3/universe/systems/{systemId}/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetSolarSystemInfoV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetSolarSystemInfoV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Models.System>(responseModel);
+            return ReturnModelDTO<Models.System>(responseModel);
         }
 
         /// <summary>
@@ -539,9 +539,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/universe/types/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetTypesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetTypesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<int>>(responseModel);
         }
 
         /// <summary>
@@ -561,9 +561,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v3/universe/types/{typeId}/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetTypeInfoV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetTypeInfoV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Type>(responseModel);
+            return ReturnModelDTO<Type>(responseModel);
         }
     }
 }

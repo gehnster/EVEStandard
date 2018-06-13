@@ -33,7 +33,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of search results.</returns>
         public async Task<ESIModelDTO<CharacterSearch>> SearchCharacterV3Async(AuthDTO auth, List<string> categories, string search, bool strict = false, string language = Language.English, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_SEARCH_SEARCH_STRUCTURES_1);
+            CheckAuth(auth, Scopes.ESI_SEARCH_SEARCH_STRUCTURES_1);
 
             if (categories == null || categories.Count == 0 || search == null)
             {
@@ -50,9 +50,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v3/characters/{auth.CharacterId}/search/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(SearchCharacterV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(SearchCharacterV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<CharacterSearch>(responseModel);
+            return ReturnModelDTO<CharacterSearch>(responseModel);
         }
 
         /// <summary>
@@ -81,9 +81,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/search/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(SearchV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(SearchV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Search>(responseModel);
+            return ReturnModelDTO<Search>(responseModel);
         }
     }
 }

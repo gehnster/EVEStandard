@@ -28,9 +28,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/dogma/attributes/", ifNoneMatch);
 
-            checkResponse(nameof(GetAttributesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetAttributesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<int>>(responseModel);
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/dogma/attributes/{attributeId}", ifNoneMatch);
 
-            checkResponse(nameof(GetAttributeInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetAttributeInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<DogmaAttribute>(responseModel);
+            return ReturnModelDTO<DogmaAttribute>(responseModel);
         }
 
         /// <summary>
@@ -61,9 +61,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/dogma/dynamic/items/{typeId}/{itemId}", ifNoneMatch);
 
-            checkResponse(nameof(GetDynamicItemInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetDynamicItemInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<DogmaDynamicItem>(responseModel);
+            return ReturnModelDTO<DogmaDynamicItem>(responseModel);
         }
 
         /// <summary>
@@ -76,9 +76,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/dogma/effects/", ifNoneMatch);
 
-            checkResponse(nameof(GetEffectsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetEffectsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<int>>(responseModel);
         }
 
         /// <summary>
@@ -92,9 +92,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v2/dogma/effects/{effectId}", ifNoneMatch);
 
-            checkResponse(nameof(GetEffectInfoV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetEffectInfoV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<DogmaEffect>(responseModel);
+            return ReturnModelDTO<DogmaEffect>(responseModel);
         }
     }
 }

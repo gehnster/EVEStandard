@@ -30,9 +30,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/loyalty/stores/{corporationId}/offers/", ifNoneMatch);
 
-            checkResponse(nameof(ListLoyaltyStoreOffersV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListLoyaltyStoreOffersV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<LoyaltyStoreOffer>>(responseModel);
+            return ReturnModelDTO<List<LoyaltyStoreOffer>>(responseModel);
         }
 
         /// <summary>
@@ -44,13 +44,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of loyalty points.</returns>
         public async Task<ESIModelDTO<List<LoyaltyPoints>>> GetLoyaltyPointsV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CHARACTERS_READ_LOYALTY_1);
+            CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_LOYALTY_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/loyalty/points/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetLoyaltyPointsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetLoyaltyPointsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<LoyaltyPoints>>(responseModel);
+            return ReturnModelDTO<List<LoyaltyPoints>>(responseModel);
         }
     }
 }

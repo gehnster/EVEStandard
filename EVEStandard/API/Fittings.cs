@@ -28,11 +28,11 @@ namespace EVEStandard.API
         /// <returns></returns>
         public async Task DeleteFittingV1Async(AuthDTO auth, long fittingId)
         {
-            checkAuth(auth, Scopes.ESI_FITTINGS_WRITE_FITTINGS_1);
+            CheckAuth(auth, Scopes.ESI_FITTINGS_WRITE_FITTINGS_1);
 
             var responseModel = await DeleteAsync($"/v1/characters/{auth.CharacterId}/fittings/{fittingId}/", auth);
 
-            checkResponse("DeleteFittingV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse("DeleteFittingV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         /// <summary>
@@ -44,13 +44,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of fittings.</returns>
         public async Task<ESIModelDTO<List<CharacterFitting>>> GetFittingsV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_FITTINGS_READ_FITTINGS_1);
+            CheckAuth(auth, Scopes.ESI_FITTINGS_READ_FITTINGS_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/fittings/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetFittingsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetFittingsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CharacterFitting>>(responseModel);
+            return ReturnModelDTO<List<CharacterFitting>>(responseModel);
         }
 
         /// <summary>
@@ -62,13 +62,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of fittings.</returns>
         public async Task<ESIModelDTO<long>> CreateFittingV1Async(AuthDTO auth, ShipFitting fitting)
         {
-            checkAuth(auth, Scopes.ESI_FITTINGS_READ_FITTINGS_1);
+            CheckAuth(auth, Scopes.ESI_FITTINGS_READ_FITTINGS_1);
 
             var responseModel = await PostAsync($"/v1/characters/{auth.CharacterId}/fittings/", auth, fitting);
 
-            checkResponse(nameof(CreateFittingV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(CreateFittingV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<long>(responseModel);
+            return ReturnModelDTO<long>(responseModel);
         }
     }
 }

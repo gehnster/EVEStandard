@@ -28,13 +28,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing wallet balance.</returns>
         public async Task<ESIModelDTO<double>> GetCharacterWalletBalanceV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_WALLET_READ_CHARACTER_WALLET_1);
+            CheckAuth(auth, Scopes.ESI_WALLET_READ_CHARACTER_WALLET_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/wallet/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCharacterWalletBalanceV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterWalletBalanceV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<double>(responseModel);
+            return ReturnModelDTO<double>(responseModel);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing journal entries.</returns>
         public async Task<ESIModelDTO<List<CharacterWalletJournal>>> GetCharacterWalletJournalV4Async(AuthDTO auth, int page, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_WALLET_READ_CHARACTER_WALLET_1);
+            CheckAuth(auth, Scopes.ESI_WALLET_READ_CHARACTER_WALLET_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -56,9 +56,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v4/characters/{auth.CharacterId}/wallet/journal/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetCharacterWalletJournalV4Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterWalletJournalV4Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CharacterWalletJournal>>(responseModel);
+            return ReturnModelDTO<List<CharacterWalletJournal>>(responseModel);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing wallet transactions.</returns>
         public async Task<ESIModelDTO<List<WalletTransaction>>> GetCharacterWalletTransactionsV1Async(AuthDTO auth, long fromId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_WALLET_READ_CHARACTER_WALLET_1);
+            CheckAuth(auth, Scopes.ESI_WALLET_READ_CHARACTER_WALLET_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -80,9 +80,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/wallet/transactions/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetCharacterWalletTransactionsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterWalletTransactionsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<WalletTransaction>>(responseModel);
+            return ReturnModelDTO<List<WalletTransaction>>(responseModel);
         }
 
         /// <summary>
@@ -95,13 +95,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing list of corporation wallets.</returns>
         public async Task<ESIModelDTO<List<CorporationWallet>>> ReturnCorporationWalletBalanceV1Async(AuthDTO auth, int corpId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_WALLET_READ_CORPORATION_WALLETS_1);
+            CheckAuth(auth, Scopes.ESI_WALLET_READ_CORPORATION_WALLETS_1);
 
             var responseModel = await GetAsync($"/v1/corporations/{corpId}/wallet/", auth, ifNoneMatch);
 
-            checkResponse(nameof(ReturnCorporationWalletBalanceV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ReturnCorporationWalletBalanceV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CorporationWallet>>(responseModel);
+            return ReturnModelDTO<List<CorporationWallet>>(responseModel);
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing journal entries.</returns>
         public async Task<ESIModelDTO<List<CorporationWalletJournal>>> GetCorporationWalletJournalV3Async(AuthDTO auth, int corpId, int division, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_WALLET_READ_CORPORATION_WALLETS_1);
+            CheckAuth(auth, Scopes.ESI_WALLET_READ_CORPORATION_WALLETS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -125,9 +125,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v3/corporations/{corpId}/wallet/{division}/journal/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetCorporationWalletJournalV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationWalletJournalV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CorporationWalletJournal>>(responseModel);
+            return ReturnModelDTO<List<CorporationWalletJournal>>(responseModel);
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing wallet transactions.</returns>
         public async Task<ESIModelDTO<List<WalletTransaction>>> GetCorporationWalletTransactionsV1Async(AuthDTO auth, int corpId, int division, long fromId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_WALLET_READ_CORPORATION_WALLETS_1);
+            CheckAuth(auth, Scopes.ESI_WALLET_READ_CORPORATION_WALLETS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -151,9 +151,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporations/{corpId}/wallet/{division}/transactions/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetCorporationWalletTransactionsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationWalletTransactionsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<WalletTransaction>>(responseModel);
+            return ReturnModelDTO<List<WalletTransaction>>(responseModel);
         }
     }
 }

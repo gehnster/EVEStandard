@@ -30,7 +30,7 @@ namespace EVEStandard.API
         /// <returns></returns>
         public async Task SetAutopilotWaypointV2Async(AuthDTO auth, bool addToBeginning, bool clearOtherWaypoints, long destinationId)
         {
-            checkAuth(auth, Scopes.ESI_UI_WRITE_WAYPOINT_1);
+            CheckAuth(auth, Scopes.ESI_UI_WRITE_WAYPOINT_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -41,7 +41,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v2/ui/autopilot/waypoint/", auth, null, null, queryParameters);
 
-            checkResponse(nameof(SetAutopilotWaypointV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(SetAutopilotWaypointV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace EVEStandard.API
         /// <returns></returns>
         public async Task OpenContractWindowV1Async(AuthDTO auth, long contractId)
         {
-            checkAuth(auth, Scopes.ESI_UI_OPEN_WINDOW_1);
+            CheckAuth(auth, Scopes.ESI_UI_OPEN_WINDOW_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -62,7 +62,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/ui/openwindow/contract/", auth, null, null, queryParameters);
 
-            checkResponse(nameof(OpenContractWindowV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(OpenContractWindowV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace EVEStandard.API
         /// <returns></returns>
         public async Task OpenInformationWindowV1Async(AuthDTO auth, long targetId)
         {
-            checkAuth(auth, Scopes.ESI_UI_OPEN_WINDOW_1);
+            CheckAuth(auth, Scopes.ESI_UI_OPEN_WINDOW_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -83,7 +83,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/ui/openwindow/information/", auth, null, null, queryParameters);
 
-            checkResponse(nameof(OpenInformationWindowV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(OpenInformationWindowV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace EVEStandard.API
         /// <returns></returns>
         public async Task OpenMarketDetailsV1Async(AuthDTO auth, long typeId)
         {
-            checkAuth(auth, Scopes.ESI_UI_OPEN_WINDOW_1);
+            CheckAuth(auth, Scopes.ESI_UI_OPEN_WINDOW_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -104,7 +104,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync("/v1/ui/openwindow/marketdetails/", auth, null, null, queryParameters);
 
-            checkResponse(nameof(OpenMarketDetailsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(OpenMarketDetailsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         /// <summary>
@@ -116,11 +116,11 @@ namespace EVEStandard.API
         /// <returns></returns>
         public async Task OpenNewMailWindowV1Async(AuthDTO auth, UiNewMail mail)
         {
-            checkAuth(auth, Scopes.ESI_UI_OPEN_WINDOW_1);
+            CheckAuth(auth, Scopes.ESI_UI_OPEN_WINDOW_1);
 
             var responseModel = await PostAsync("/v1/ui/openwindow/newmail/", auth, mail);
 
-            checkResponse(nameof(OpenNewMailWindowV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(OpenNewMailWindowV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
     }
 }

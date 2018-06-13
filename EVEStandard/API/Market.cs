@@ -29,9 +29,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/markets/prices/", ifNoneMatch);
 
-            checkResponse(nameof(ListMarketPricesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListMarketPricesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<MarketPrice>>(responseModel);
+            return ReturnModelDTO<List<MarketPrice>>(responseModel);
         }
 
         /// <summary>
@@ -59,9 +59,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/markets/{regionId}/orders/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(ListOrdersInRegionV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListOrdersInRegionV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<MarketOrder>>(responseModel);
+            return ReturnModelDTO<List<MarketOrder>>(responseModel);
         }
 
         /// <summary>
@@ -81,9 +81,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/markets/{regionId}/history/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(ListHistoricalMarketStatisticsInRegionV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListHistoricalMarketStatisticsInRegionV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<MarketRegionHistory>>(responseModel);
+            return ReturnModelDTO<List<MarketRegionHistory>>(responseModel);
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of orders.</returns>
         public async Task<ESIModelDTO<List<MarketOrder>>> ListOrdersInStructureV1Async(AuthDTO auth, long structureId, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_MARKETS_STRUCTURE_MARKETS_1);
+            CheckAuth(auth, Scopes.ESI_MARKETS_STRUCTURE_MARKETS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -106,9 +106,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/markets/structures/{structureId}/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(ListOrdersInStructureV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListOrdersInStructureV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<MarketOrder>>(responseModel);
+            return ReturnModelDTO<List<MarketOrder>>(responseModel);
         }
 
         /// <summary>
@@ -121,9 +121,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/markets/groups/", ifNoneMatch);
 
-            checkResponse(nameof(GetItemGroupsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetItemGroupsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<int>(responseModel);
+            return ReturnModelDTO<int>(responseModel);
         }
 
         /// <summary>
@@ -142,9 +142,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/markets/groups/{marketGroupId}/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetItemGroupInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetItemGroupInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<MarketGroup>(responseModel);
+            return ReturnModelDTO<MarketGroup>(responseModel);
         }
 
         /// <summary>
@@ -156,13 +156,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing open market orders placed by a character.</returns>
         public async Task<ESIModelDTO<List<CharacterMarketOrder>>> ListOpenOrdersFromCharacterV2Async(AuthDTO auth, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_MARKETS_READ_CHARACTER_ORDERS_1);
+            CheckAuth(auth, Scopes.ESI_MARKETS_READ_CHARACTER_ORDERS_1);
 
             var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/orders/", auth, ifNoneMatch);
 
-            checkResponse(nameof(ListOpenOrdersFromCharacterV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListOpenOrdersFromCharacterV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CharacterMarketOrder>>(responseModel);
+            return ReturnModelDTO<List<CharacterMarketOrder>>(responseModel);
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing expired and cancelled market orders placed by a character.</returns>
         public async Task<ESIModelDTO<List<CharacterMarketOrderHistory>>> ListHistoricalOrdersByCharacterV1Async(AuthDTO auth, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_MARKETS_READ_CHARACTER_ORDERS_1);
+            CheckAuth(auth, Scopes.ESI_MARKETS_READ_CHARACTER_ORDERS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -184,9 +184,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/orders/history/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(ListHistoricalOrdersByCharacterV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListHistoricalOrdersByCharacterV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CharacterMarketOrderHistory>>(responseModel);
+            return ReturnModelDTO<List<CharacterMarketOrderHistory>>(responseModel);
         }
 
         /// <summary>
@@ -206,9 +206,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/markets/{regionId}/types/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(ListHistoricalOrdersByCharacterV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListHistoricalOrdersByCharacterV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<long>>(responseModel);
+            return ReturnModelDTO<List<long>>(responseModel);
         }
 
         /// <summary>
@@ -222,13 +222,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of open market orders.</returns>
         public async Task<ESIModelDTO<List<CorporationMarketOrder>>> ListOpenOrdersFromCorporationV2Async(AuthDTO auth, int corporationId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_MARKETS_READ_CORPORATION_ORDERS_1);
+            CheckAuth(auth, Scopes.ESI_MARKETS_READ_CORPORATION_ORDERS_1);
 
             var responseModel = await GetAsync($"/v2/corporations/{corporationId}/orders/", ifNoneMatch);
 
-            checkResponse(nameof(ListOpenOrdersFromCorporationV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListOpenOrdersFromCorporationV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CorporationMarketOrder>>(responseModel);
+            return ReturnModelDTO<List<CorporationMarketOrder>>(responseModel);
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing expired and cancelled market orders placed on behalf of a corporation.</returns>
         public async Task<ESIModelDTO<List<CorporationMarketOrderHistory>>> ListHistoricalOrdersByCorporationV1Async(AuthDTO auth, int corporationId, int page = 1,  string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_MARKETS_READ_CHARACTER_ORDERS_1);
+            CheckAuth(auth, Scopes.ESI_MARKETS_READ_CHARACTER_ORDERS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -252,9 +252,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/orders/history/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(ListHistoricalOrdersByCorporationV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListHistoricalOrdersByCorporationV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CorporationMarketOrderHistory>>(responseModel);
+            return ReturnModelDTO<List<CorporationMarketOrderHistory>>(responseModel);
         }
     }
 }

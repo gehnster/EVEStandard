@@ -31,7 +31,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of shareholders.</returns>
         public async Task<ESIModelDTO<List<Shareholder>>> GetCorporationShareholdersV1Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_WALLET_READ_CORPORATION_WALLETS_1);
+            CheckAuth(auth, Scopes.ESI_WALLET_READ_CORPORATION_WALLETS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -40,9 +40,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/shareholders/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetCorporationShareholdersV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationShareholdersV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Shareholder>>(responseModel);
+            return ReturnModelDTO<List<Shareholder>>(responseModel);
         }
 
         /// <summary>
@@ -56,9 +56,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v4/corporations/{corporationId}/", ifNoneMatch);
 
-            checkResponse(nameof(GetCorporationInfoV4Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationInfoV4Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<CorporationInfo>(responseModel);
+            return ReturnModelDTO<CorporationInfo>(responseModel);
         }
 
         /// <summary>
@@ -72,9 +72,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v2/corporations/{corporationId}/alliancehistory/", ifNoneMatch);
 
-            checkResponse(nameof(GetAllianceHistoryV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetAllianceHistoryV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<AllianceHistory>>(responseModel);
+            return ReturnModelDTO<List<AllianceHistory>>(responseModel);
         }
 
         /// <summary>
@@ -93,9 +93,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v2/corporations/names/", ifNoneMatch);            
 
-            checkResponse(nameof(GetCorporationNamesV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationNamesV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CorporationName>>(responseModel);
+            return ReturnModelDTO<List<CorporationName>>(responseModel);
         }
 
         /// <summary>
@@ -108,13 +108,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing list of member character IDs.</returns>
         public async Task<ESIModelDTO<List<int>>> GetCorporationMembersV3Async(AuthDTO auth, int corporationId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_CORPORATION_MEMBERSHIP_1);
+            CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_CORPORATION_MEMBERSHIP_1);
 
             var responseModel = await GetAsync($"/v3/corporations/{corporationId}/members/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCorporationMembersV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationMembersV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<int>>(responseModel);
         }
 
         /// <summary>
@@ -127,13 +127,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing list of member character ID’s and roles.</returns>
         public async Task<ESIModelDTO<List<CorporationRoles>>> GetCorporationMemberRolesV1Async(AuthDTO auth, int corporationId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_CORPORATION_MEMBERSHIP_1);
+            CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_CORPORATION_MEMBERSHIP_1);
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/roles/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCorporationMemberRolesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationMemberRolesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CorporationRoles>>(responseModel);
+            return ReturnModelDTO<List<CorporationRoles>>(responseModel);
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of role changes.</returns>
         public async Task<ESIModelDTO<List<CorporationRoleHistory>>> GetCorporationMemberRolesHistoryV1Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_CORPORATION_MEMBERSHIP_1);
+            CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_CORPORATION_MEMBERSHIP_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -156,9 +156,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/roles/history/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetCorporationMemberRolesHistoryV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationMemberRolesHistoryV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CorporationRoleHistory>>(responseModel);
+            return ReturnModelDTO<List<CorporationRoleHistory>>(responseModel);
         }
 
         /// <summary>
@@ -172,9 +172,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/icons/", ifNoneMatch);
 
-            checkResponse(nameof(GetCorporationIconV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationIconV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Icons>(responseModel);
+            return ReturnModelDTO<Icons>(responseModel);
         }
 
         /// <summary>
@@ -187,9 +187,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/corporations/npccorps/", ifNoneMatch);
 
-            checkResponse(nameof(GetNPCCorporationsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetNPCCorporationsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<int>>(responseModel);
         }
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of corporation structures’ information.</returns>
         public async Task<ESIModelDTO<List<CorporationStructure>>> GetCorporationStructuresV2Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_STRUCTURES_1);
+            CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_STRUCTURES_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -213,9 +213,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v2/corporations/{corporationId}/structures/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetCorporationStructuresV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationStructuresV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CorporationStructure>>(responseModel);
+            return ReturnModelDTO<List<CorporationStructure>>(responseModel);
         }
 
         /// <summary>
@@ -229,13 +229,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing list of member character IDs.</returns>
         public async Task<ESIModelDTO<List<CorporationMemberTracking>>> TrackCorporationMembersV1Async(AuthDTO auth, int corporationId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CORPORATIONS_TRACK_MEMBERS_1);
+            CheckAuth(auth, Scopes.ESI_CORPORATIONS_TRACK_MEMBERS_1);
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/membertracking/", auth, ifNoneMatch);
 
-            checkResponse(nameof(TrackCorporationMembersV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(TrackCorporationMembersV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CorporationMemberTracking>>(responseModel);
+            return ReturnModelDTO<List<CorporationMemberTracking>>(responseModel);
         }
 
         /// <summary>
@@ -249,13 +249,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of corporation division names.</returns>
         public async Task<ESIModelDTO<CorporationDivision>> GetCorporationDivisionsV1Async(AuthDTO auth, int corporationId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CORPORATIONS_TRACK_MEMBERS_1);
+            CheckAuth(auth, Scopes.ESI_CORPORATIONS_TRACK_MEMBERS_1);
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/divisions/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCorporationDivisionsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationDivisionsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<CorporationDivision>(responseModel);
+            return ReturnModelDTO<CorporationDivision>(responseModel);
         }
 
         /// <summary>
@@ -269,13 +269,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing the corporation’s member limit.</returns>
         public async Task<ESIModelDTO<int>> GetCorporationMemberLimitV1Async(AuthDTO auth, int corporationId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CORPORATIONS_TRACK_MEMBERS_1);
+            CheckAuth(auth, Scopes.ESI_CORPORATIONS_TRACK_MEMBERS_1);
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/members/limit/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCorporationMemberLimitV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationMemberLimitV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<int>(responseModel);
+            return ReturnModelDTO<int>(responseModel);
         }
 
         /// <summary>
@@ -289,13 +289,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of titles.</returns>
         public async Task<ESIModelDTO<List<CorporationTitle>>> GetCorporationTitlesV1Async(AuthDTO auth, int corporationId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_TITLES_1);
+            CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_TITLES_1);
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/titles/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCorporationTitlesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationTitlesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CorporationTitle>>(responseModel);
+            return ReturnModelDTO<List<CorporationTitle>>(responseModel);
         }
 
         /// <summary>
@@ -309,13 +309,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of members and theirs titles.</returns>
         public async Task<ESIModelDTO<List<CorporationMemberTitles>>> GetCorporationsMembersTitlesV1Async(AuthDTO auth, int corporationId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_TITLES_1);
+            CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_TITLES_1);
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/members/titles/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCorporationsMembersTitlesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationsMembersTitlesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CorporationMemberTitles>>(responseModel);
+            return ReturnModelDTO<List<CorporationMemberTitles>>(responseModel);
         }
 
         /// <summary>
@@ -330,7 +330,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of corporation blueprints.</returns>
         public async Task<ESIModelDTO<List<Blueprint>>> GetCorporationBlueprintsV2Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_BLUEPRINTS_1);
+            CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_BLUEPRINTS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -339,9 +339,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v2/corporations/{corporationId}/blueprints/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetCorporationBlueprintsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationBlueprintsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Blueprint>>(responseModel);
+            return ReturnModelDTO<List<Blueprint>>(responseModel);
         }
 
         /// <summary>
@@ -355,7 +355,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of standings.</returns>
         public async Task<ESIModelDTO<List<Standing>>> GetStandingsV1Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_STANDINGS_1);
+            CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_STANDINGS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -364,9 +364,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/standings/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetStandingsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetStandingsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Standing>>(responseModel);
+            return ReturnModelDTO<List<Standing>>(responseModel);
         }
 
         /// <summary>
@@ -381,7 +381,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of starbases (POSes).</returns>
         public async Task<ESIModelDTO<List<Starbase>>> GetCorporationStarbasesV1Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_STARBASES_1);
+            CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_STARBASES_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -390,9 +390,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/starbases/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCorporationStarbasesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationStarbasesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Starbase>>(responseModel);
+            return ReturnModelDTO<List<Starbase>>(responseModel);
         }
 
         /// <summary>
@@ -408,7 +408,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of starbases (POSes).</returns>
         public async Task<ESIModelDTO<StarbaseDetail>> GetStarbaseDetailV1Async(AuthDTO auth, int corporationId, long starbaseId, long systemId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_STARBASES_1);
+            CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_STARBASES_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -417,9 +417,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/starbases/{starbaseId}/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetStarbaseDetailV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetStarbaseDetailV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<StarbaseDetail>(responseModel);
+            return ReturnModelDTO<StarbaseDetail>(responseModel);
         }
 
         /// <summary>
@@ -434,7 +434,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of corporation ALSC logs.</returns>
         public async Task<ESIModelDTO<List<ContainerLogs>>> GetAllCorporationALSCLogsV2Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_CONTAINER_LOGS_1);
+            CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_CONTAINER_LOGS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -443,9 +443,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v2/corporations/{corporationId}/containers/logs/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetAllCorporationALSCLogsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetAllCorporationALSCLogsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<ContainerLogs>>(responseModel);
+            return ReturnModelDTO<List<ContainerLogs>>(responseModel);
         }
 
         /// <summary>
@@ -459,13 +459,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of corporation facilities.</returns>
         public async Task<ESIModelDTO<List<Facility>>> GetCorporationFacilitiesV1Async(AuthDTO auth, int corporationId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_FACILITIES_1);
+            CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_FACILITIES_1);
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/facilities/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCorporationFacilitiesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationFacilitiesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Facility>>(responseModel);
+            return ReturnModelDTO<List<Facility>>(responseModel);
         }
 
         /// <summary>
@@ -479,7 +479,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of medals.</returns>
         public async Task<ESIModelDTO<List<CorporationMedal>>> GetCorporationMedalsV1Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_MEDALS_1);
+            CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_MEDALS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -488,9 +488,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/medals/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetCorporationMedalsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationMedalsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CorporationMedal>>(responseModel);
+            return ReturnModelDTO<List<CorporationMedal>>(responseModel);
         }
 
         /// <summary>
@@ -505,7 +505,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of issued medals.</returns>
         public async Task<ESIModelDTO<List<CorporationMedalIssued>>> GetCorporationIssuedMedalsV1Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CORPORATIONS_READ_MEDALS_1);
+            CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_MEDALS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -514,9 +514,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/medals/issued/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetCorporationIssuedMedalsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationIssuedMedalsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CorporationMedalIssued>>(responseModel);
+            return ReturnModelDTO<List<CorporationMedalIssued>>(responseModel);
         }
     }
 }

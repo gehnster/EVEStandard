@@ -40,9 +40,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/route/{origin}/{destination}/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetRouteV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetRouteV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<int>>(responseModel);
         }
     }
 }

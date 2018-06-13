@@ -1,4 +1,7 @@
-﻿using System;
+﻿using EVEStandard.Models.API;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -7,13 +10,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using EVEStandard.Models.API;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace EVEStandard.API
 {
@@ -107,7 +106,7 @@ namespace EVEStandard.API
 
                 var authResponse = await HTTP.SendAsync(request).ConfigureAwait(false);
 
-                return await processResponse(authResponse);
+                return await ProcessResponse(authResponse);
             }
             catch (Exception)
             {
@@ -115,7 +114,7 @@ namespace EVEStandard.API
             }
         }
 
-        protected static void checkAuth(AuthDTO auth, string scope)
+        protected static void CheckAuth(AuthDTO auth, string scope)
         {
             if (auth?.AccessToken?.AccessToken == null || auth.CharacterId == 0 || scope == null || auth.Scopes == null)
             {
@@ -128,18 +127,18 @@ namespace EVEStandard.API
             }
         }
 
-        private static async Task<APIResponse> processResponse(HttpResponseMessage response)
+        private static async Task<APIResponse> ProcessResponse(HttpResponseMessage response)
         {
             var model = new APIResponse();
 
             if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.Created)
             {
-                return await processSuccess(response, model);
+                return await ProcessSuccess(response, model);
             }
             if (response.IsSuccessStatusCode)
             {
                 logger.LogWarning($"A success status code is being returned that wasn't expected. Trying to process the success. Status Code: {response.StatusCode}");
-                return await processSuccess(response, model);
+                return await ProcessSuccess(response, model);
             }
             switch (response.StatusCode)
             {
@@ -172,7 +171,7 @@ namespace EVEStandard.API
                     throw new EVEStandardScopeNotAcquired(await response.Content.ReadAsStringAsync());
                 case HttpStatusCode.NotModified:
                     model.NotModified = true;
-                    model = getExpiresAndLastModified(response, model);
+                    model = GetExpiresAndLastModified(response, model);
 
                     return model;
                 case (HttpStatusCode)422:
@@ -191,7 +190,7 @@ namespace EVEStandard.API
             }
         }
 
-        private static async Task<APIResponse> processSuccess(HttpResponseMessage response, APIResponse model)
+        private static async Task<APIResponse> ProcessSuccess(HttpResponseMessage response, APIResponse model)
         {
             if (response.Headers.Contains("warning"))
             {
@@ -200,7 +199,7 @@ namespace EVEStandard.API
             }
             try
             {
-                model = getExpiresAndLastModified(response, model);
+                model = GetExpiresAndLastModified(response, model);
 
                 if (response.Headers.TryGetValues("X-Pages", out var xPagesEnumerable))
                 {
@@ -248,7 +247,7 @@ namespace EVEStandard.API
             }
         }
 
-        private static APIResponse getExpiresAndLastModified(HttpResponseMessage response, APIResponse model)
+        private static APIResponse GetExpiresAndLastModified(HttpResponseMessage response, APIResponse model)
         {
             model.Expires = response.Content.Headers.Expires;
             model.LastModified = response.Content.Headers.LastModified;
@@ -256,20 +255,20 @@ namespace EVEStandard.API
             return model;
         }
 
-        internal static void checkResponse(string functionName, bool error, string errorMessage, bool legacyWarning, ILogger logger)
+        internal static void CheckResponse(string functionName, bool error, string errorMessage, bool legacyWarning, ILogger _logger)
         {
             if (error)
             {
-                logger.LogError("{0} returned with this error: {1}", functionName, errorMessage);
+                _logger.LogError("{0} returned with this error: {1}", functionName, errorMessage);
                 throw new EVEStandardException($"Unhandled error: {errorMessage}");
             }
             if (legacyWarning)
             {
-                logger.LogWarning("{0} is a legacy end-point and could disappear soon, considering moving to a newer end-point.", functionName);
+                _logger.LogWarning("{0} is a legacy end-point and could disappear soon, considering moving to a newer end-point.", functionName);
             }
         }
 
-        protected ESIModelDTO<T> returnModelDTO<T>(APIResponse response)
+        protected ESIModelDTO<T> ReturnModelDTO<T>(APIResponse response)
         {
             return new ESIModelDTO<T>()
             {

@@ -28,13 +28,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing known skills for the character.</returns>
         public async Task<ESIModelDTO<CharacterSkills>> GetCharacterSkillsV4Async(AuthDTO auth, string ifNoneMatch=null)
         {
-            checkAuth(auth, Scopes.ESI_SKILLS_READ_SKILLS_1);
+            CheckAuth(auth, Scopes.ESI_SKILLS_READ_SKILLS_1);
 
             var responseModel = await GetAsync($"/v4/characters/{auth.CharacterId}/skills/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCharacterSkillsV4Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterSkillsV4Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<CharacterSkills>(responseModel);
+            return ReturnModelDTO<CharacterSkills>(responseModel);
         }
 
         /// <summary>
@@ -46,13 +46,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing attributes of a character.</returns>
         public async Task<ESIModelDTO<CharacterAttributes>> GetCharacterAttributesV1Async(AuthDTO auth, string ifNoneMatch=null)
         {
-            checkAuth(auth, Scopes.ESI_SKILLS_READ_SKILLS_1);
+            CheckAuth(auth, Scopes.ESI_SKILLS_READ_SKILLS_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/attributes/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCharacterAttributesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterAttributesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<CharacterAttributes>(responseModel);
+            return ReturnModelDTO<CharacterAttributes>(responseModel);
         }
 
         /// <summary>
@@ -64,13 +64,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing the current skill queue, sorted ascending by finishing time.</returns>
         public async Task<ESIModelDTO<List<SkillQueue>>> GetCharacterSkillQueueV2Async(AuthDTO auth, string ifNoneMatch=null)
         {
-            checkAuth(auth, Scopes.ESI_SKILLS_READ_SKILLQUEUE_1);
+            CheckAuth(auth, Scopes.ESI_SKILLS_READ_SKILLQUEUE_1);
 
             var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/skillqueue/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCharacterSkillQueueV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterSkillQueueV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<SkillQueue>>(responseModel);
+            return ReturnModelDTO<List<SkillQueue>>(responseModel);
         }
     }
 }

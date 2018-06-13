@@ -29,9 +29,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/opportunities/groups/", ifNoneMatch);
 
-            checkResponse(nameof(GetOpportunitiesGroupsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetOpportunitiesGroupsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<int>>(responseModel);
         }
 
         /// <summary>
@@ -51,9 +51,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/opportunities/groups/{groupId}/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetOpportunitiesGroupV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetOpportunitiesGroupV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<OpportunitiesGroup>(responseModel);
+            return ReturnModelDTO<OpportunitiesGroup>(responseModel);
         }
 
         /// <summary>
@@ -66,9 +66,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/opportunities/tasks/", ifNoneMatch);
 
-            checkResponse(nameof(GetOpportunitiesTasksV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetOpportunitiesTasksV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<int>>(responseModel);
         }
 
         /// <summary>
@@ -81,9 +81,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/opportunities/tasks/{taskId}/", ifNoneMatch);
 
-            checkResponse(nameof(GetOpportunitiesTaskV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetOpportunitiesTaskV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<OpportunitiesTask>(responseModel);
+            return ReturnModelDTO<OpportunitiesTask>(responseModel);
         }
 
         /// <summary>
@@ -95,13 +95,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of opportunities task ids.</returns>
         public async Task<ESIModelDTO<List<CharacterTask>>> GetCharacterCompletedTaskV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CHARACTERS_READ_OPPORTUNITIES_1);
+            CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_OPPORTUNITIES_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/opportunities/", ifNoneMatch);
 
-            checkResponse(nameof(GetCharacterCompletedTaskV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterCompletedTaskV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CharacterTask>>(responseModel);
+            return ReturnModelDTO<List<CharacterTask>>(responseModel);
         }
     }
 }

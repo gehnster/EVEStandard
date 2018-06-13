@@ -27,9 +27,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/incursions/", ifNoneMatch);
 
-            checkResponse(nameof(ListIncursionsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListIncursionsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Models.Incursion>>(responseModel);
+            return ReturnModelDTO<List<Models.Incursion>>(responseModel);
         }
     }
 }

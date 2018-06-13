@@ -27,13 +27,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing information about the characters current location. Returns the current solar system id, and also the current station or structure ID if applicable.</returns>
         public async Task<ESIModelDTO<CharacterLocation>> GetCharacterLocationV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_LOCATION_READ_LOCATION_1);
+            CheckAuth(auth, Scopes.ESI_LOCATION_READ_LOCATION_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/location/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCharacterLocationV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterLocationV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<CharacterLocation>(responseModel);
+            return ReturnModelDTO<CharacterLocation>(responseModel);
         }
 
         /// <summary>
@@ -45,13 +45,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing the current ship type, name and id.</returns>
         public async Task<ESIModelDTO<CharacterShip>> GetCurrentShipV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_LOCATION_READ_SHIP_TYPE_1);
+            CheckAuth(auth, Scopes.ESI_LOCATION_READ_SHIP_TYPE_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/ship/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCurrentShipV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCurrentShipV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<CharacterShip>(responseModel);
+            return ReturnModelDTO<CharacterShip>(responseModel);
         }
 
         /// <summary>
@@ -63,13 +63,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing object describing the character’s online status.</returns>
         public async Task<ESIModelDTO<CharacterOnline>> GetCharacterOnlineV2Async(AuthDTO auth, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_LOCATION_READ_ONLINE_1);
+            CheckAuth(auth, Scopes.ESI_LOCATION_READ_ONLINE_1);
 
             var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/online/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCharacterOnlineV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterOnlineV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<CharacterOnline>(responseModel);
+            return ReturnModelDTO<CharacterOnline>(responseModel);
         }
     }
 }
