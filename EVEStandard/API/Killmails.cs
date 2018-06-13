@@ -31,9 +31,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/killmails/{killmailId}/{killmailHash}/", ifNoneMatch);
 
-            checkResponse(nameof(GetKillmailV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetKillmailV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Killmail>(responseModel);
+            return ReturnModelDTO<Killmail>(responseModel);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of killmail IDs and hashes.</returns>
         public async Task<ESIModelDTO<List<KillmailIndex>>> GetCharacterKillsAndLossesV1Async(AuthDTO auth, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_KILLMAILS_READ_KILLMAILS_1);
+            CheckAuth(auth, Scopes.ESI_KILLMAILS_READ_KILLMAILS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -55,9 +55,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/killmails/recent/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetCharacterKillsAndLossesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterKillsAndLossesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<KillmailIndex>>(responseModel);
+            return ReturnModelDTO<List<KillmailIndex>>(responseModel);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of killmail IDs and hashes.</returns>
         public async Task<ESIModelDTO<List<KillmailIndex>>> GetCorporationKillsAndLossesV1Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_KILLMAILS_READ_CORPORATION_KILLMAILS_1);
+            CheckAuth(auth, Scopes.ESI_KILLMAILS_READ_CORPORATION_KILLMAILS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -81,9 +81,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/killmails/recent/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetCorporationKillsAndLossesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationKillsAndLossesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<KillmailIndex>>(responseModel);
+            return ReturnModelDTO<List<KillmailIndex>>(responseModel);
         }
     }
 }

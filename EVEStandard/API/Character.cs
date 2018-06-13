@@ -28,13 +28,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing character stats.</returns>
         public async Task<ESIModelDTO<List<AggregateStats>>> YearlyAggregateStatsV2Async(AuthDTO auth, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CHARACTERSTATS_READ_1);           
+            CheckAuth(auth, Scopes.ESI_CHARACTERSTATS_READ_1);           
 
             var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/stats/", auth, ifNoneMatch);
 
-            checkResponse(nameof(YearlyAggregateStatsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(YearlyAggregateStatsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<AggregateStats>>(responseModel);
+            return ReturnModelDTO<List<AggregateStats>>(responseModel);
         }
 
         /// <summary>
@@ -48,9 +48,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v4/characters/{characterId}/", ifNoneMatch);
 
-            checkResponse(nameof(GetCharacterPublicInfoV4Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterPublicInfoV4Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<CharacterInfo>(responseModel);
+            return ReturnModelDTO<CharacterInfo>(responseModel);
         }
 
         /// <summary>
@@ -63,9 +63,9 @@ namespace EVEStandard.API
         {
             var responseModel = await PostAsync("/v1/characters/affiliation/", null, characterIds);
 
-            checkResponse(nameof(AffiliationV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(AffiliationV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CharacterAffiliation>>(responseModel);
+            return ReturnModelDTO<List<CharacterAffiliation>>(responseModel);
         }
 
         /// <summary>
@@ -77,13 +77,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing aggregate cost of sending a mail from the source character to the target characters, in ISK.</returns>
         public async Task<ESIModelDTO<float>> CalculateCSPAChargeCostV4Async(AuthDTO auth, List<int> characterIds)
         {
-            checkAuth(auth, Scopes.ESI_CHARACTERS_READ_CONTACTS_1);
+            CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_CONTACTS_1);
 
             var responseModel = await PostAsync($"/v4/characters/{auth.CharacterId}/cspa/", auth, characterIds);
 
-            checkResponse(nameof(CalculateCSPAChargeCostV4Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(CalculateCSPAChargeCostV4Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<float>(responseModel);
+            return ReturnModelDTO<float>(responseModel);
         }
 
         /// <summary>
@@ -102,9 +102,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/characters/names/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetCharacterNamesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterNamesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CharacterName>>(responseModel);
+            return ReturnModelDTO<List<CharacterName>>(responseModel);
         }
 
         /// <summary>
@@ -118,9 +118,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v2/characters/{characterId}/portrait/", ifNoneMatch);
 
-            checkResponse(nameof(GetCharacterPortraitsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterPortraitsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Icons>(responseModel);
+            return ReturnModelDTO<Icons>(responseModel);
         }
 
         /// <summary>
@@ -134,9 +134,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/characters/{characterId}/corporationhistory/", ifNoneMatch);
 
-            checkResponse(nameof(GetCorporationHistoryV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationHistoryV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CharacterCorporationHistory>>(responseModel);
+            return ReturnModelDTO<List<CharacterCorporationHistory>>(responseModel);
         }
 
         /// <summary>
@@ -148,13 +148,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of medals.</returns>
         public async Task<ESIModelDTO<List<CharacterMedals>>> GetMedalsV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CHARACTERS_READ_MEDALS_1);
+            CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_MEDALS_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/medals/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetMedalsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetMedalsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CharacterMedals>>(responseModel);
+            return ReturnModelDTO<List<CharacterMedals>>(responseModel);
         }
 
         /// <summary>
@@ -166,13 +166,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of standings.</returns>
         public async Task<ESIModelDTO<List<Standing>>> GetStandingsV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CHARACTERS_READ_STANDINGS_1);
+            CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_STANDINGS_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/standings/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetStandingsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetStandingsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Standing>>(responseModel);
+            return ReturnModelDTO<List<Standing>>(responseModel);
         }
 
         /// <summary>
@@ -186,13 +186,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of agents research information.</returns>
         public async Task<ESIModelDTO<List<AgentResearch>>> GetAgentsResearchV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CHARACTERS_READ_AGENTS_RESEARCH_1);
+            CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_AGENTS_RESEARCH_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/agents_research/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetAgentsResearchV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetAgentsResearchV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<AgentResearch>>(responseModel);
+            return ReturnModelDTO<List<AgentResearch>>(responseModel);
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of blueprints.</returns>
         public async Task<ESIModelDTO<List<Blueprint>>> GetBlueprintsV2Async(AuthDTO auth, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CHARACTERS_READ_BLUEPRINTS_1);
+            CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_BLUEPRINTS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -214,9 +214,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/blueprints/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetBlueprintsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetBlueprintsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Blueprint>>(responseModel);
+            return ReturnModelDTO<List<Blueprint>>(responseModel);
         }
 
         /// <summary>
@@ -228,13 +228,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing jump activation and fatigue information.</returns>
         public async Task<ESIModelDTO<Fatigue>> GetJumpFatigueV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CHARACTERS_READ_FATIGUE_1);
+            CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_FATIGUE_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/fatigue/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetJumpFatigueV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetJumpFatigueV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Fatigue>(responseModel);
+            return ReturnModelDTO<Fatigue>(responseModel);
         }
 
         /// <summary>
@@ -246,13 +246,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of contact notifications.</returns>
         public async Task<ESIModelDTO<List<CharacterContactNotification>>> GetNewContactNotificationsV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CHARACTERSTATS_READ_1);
+            CheckAuth(auth, Scopes.ESI_CHARACTERSTATS_READ_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/notifications/contacts/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetNewContactNotificationsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetNewContactNotificationsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CharacterContactNotification>>(responseModel);
+            return ReturnModelDTO<List<CharacterContactNotification>>(responseModel);
         }
 
         /// <summary>
@@ -264,13 +264,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing your recent notifications.</returns>
         public async Task<ESIModelDTO<List<Notification>>> GetCharacterNotificationsV2Async(AuthDTO auth, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CHARACTERS_READ_NOTIFICATIONS_1);
+            CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_NOTIFICATIONS_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/notifications/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCharacterNotificationsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterNotificationsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Notification>>(responseModel);
+            return ReturnModelDTO<List<Notification>>(responseModel);
         }
 
         /// <summary>
@@ -282,13 +282,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing the character’s roles in thier corporation.</returns>
         public async Task<ESIModelDTO<CharacterCorporationRoles>> GetCharacterCorporationRolesV2Async(AuthDTO auth, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CHARACTERS_READ_CORPORATION_ROLES_1);
+            CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_CORPORATION_ROLES_1);
 
             var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/roles/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCharacterCorporationRolesV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterCorporationRolesV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<CharacterCorporationRoles>(responseModel);
+            return ReturnModelDTO<CharacterCorporationRoles>(responseModel);
         }
 
         /// <summary>
@@ -300,13 +300,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of titles.</returns>
         public async Task<ESIModelDTO<List<CharacterTitle>>> GetCharacterCorporationTitlesV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CHARACTERS_READ_TITLES_1);
+            CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_TITLES_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/titles/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetCharacterCorporationTitlesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterCorporationTitlesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CharacterTitle>>(responseModel);
+            return ReturnModelDTO<List<CharacterTitle>>(responseModel);
         }
     }
 }

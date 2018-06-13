@@ -29,7 +29,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a flat list of the user's assets.</returns>
         public async Task<ESIModelDTO<List<Asset>>> GetCharacterAssetsV3Async(AuthDTO auth, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_ASSETS_READ_ASSETS_1);
+            CheckAuth(auth, Scopes.ESI_ASSETS_READ_ASSETS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -38,9 +38,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v3/characters/{auth.CharacterId}/assets/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetCharacterAssetsV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterAssetsV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Asset>>(responseModel);
+            return ReturnModelDTO<List<Asset>>(responseModel);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of assets.</returns>
         public async Task<ESIModelDTO<List<Asset>>> GetCorporationAssetsV3Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
+            CheckAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -64,9 +64,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v3/corporations/{corporationId}/assets/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(GetCorporationAssetsV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationAssetsV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Asset>>(responseModel);
+            return ReturnModelDTO<List<Asset>>(responseModel);
         }
 
         /// <summary>
@@ -79,13 +79,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of asset names.</returns>
         public async Task<ESIModelDTO<List<AssetName>>> GetCharacterAssetNamesV1Async(AuthDTO auth, List<long> itemIds)
         {
-            checkAuth(auth, Scopes.ESI_ASSETS_READ_ASSETS_1);
+            CheckAuth(auth, Scopes.ESI_ASSETS_READ_ASSETS_1);
 
             var responseModel = await PostAsync($"/v1/characters/{auth.CharacterId}/assets/names/", auth, itemIds);
 
-            checkResponse(nameof(GetCharacterAssetNamesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterAssetNamesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<AssetName>>(responseModel);
+            return ReturnModelDTO<List<AssetName>>(responseModel);
         }
 
         /// <summary>
@@ -98,13 +98,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of asset locations.</returns>
         public async Task<ESIModelDTO<List<AssetLocation>>> GetCharacterAssetLocationsV2Async(AuthDTO auth, List<long> itemIds)
         {
-            checkAuth(auth, Scopes.ESI_ASSETS_READ_ASSETS_1);
+            CheckAuth(auth, Scopes.ESI_ASSETS_READ_ASSETS_1);
 
             var responseModel = await PostAsync($"/v2/characters/{auth.CharacterId}/assets/locations/", auth, itemIds);
 
-            checkResponse(nameof(GetCharacterAssetLocationsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterAssetLocationsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<AssetLocation>>(responseModel);
+            return ReturnModelDTO<List<AssetLocation>>(responseModel);
         }
 
         /// <summary>
@@ -119,13 +119,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of asset names.</returns>
         public async Task<ESIModelDTO<List<AssetName>>> GetCorporationAssetNamesV1Async(AuthDTO auth, int corpId, List<long> itemIds)
         {
-            checkAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
+            CheckAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
 
             var responseModel = await PostAsync($"/v1/corporations/{corpId}/assets/names/", auth, itemIds);
 
-            checkResponse(nameof(GetCorporationAssetNamesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationAssetNamesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<AssetName>>(responseModel);
+            return ReturnModelDTO<List<AssetName>>(responseModel);
         }
 
         /// <summary>
@@ -140,13 +140,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of asset locations.</returns>
         public async Task<ESIModelDTO<List<AssetLocation>>> GetCorporationAssetLocationsV2Async(AuthDTO auth, int corpId, List<long> itemIds)
         {
-            checkAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
+            CheckAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
 
             var responseModel = await PostAsync($"/v2/corporations/{corpId}/assets/locations/", auth, itemIds);
 
-            checkResponse(nameof(GetCorporationAssetLocationsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationAssetLocationsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<AssetLocation>>(responseModel);
+            return ReturnModelDTO<List<AssetLocation>>(responseModel);
         }
     }
 }

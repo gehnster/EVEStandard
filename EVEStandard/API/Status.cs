@@ -26,9 +26,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/status/", ifNoneMatch);
 
-            checkResponse(nameof(GetStatusV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetStatusV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Models.Status>(responseModel);
+            return ReturnModelDTO<Models.Status>(responseModel);
         }
     }
 }

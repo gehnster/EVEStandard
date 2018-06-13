@@ -27,13 +27,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing clone information for the given character.</returns>
         public async Task<ESIModelDTO<Clones>> GetClonesV3Async(AuthDTO auth, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CLONES_READ_CLONES_1);
+            CheckAuth(auth, Scopes.ESI_CLONES_READ_CLONES_1);
 
             var responseModel = await GetAsync($"/v3/characters/{auth.CharacterId}/clones/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetClonesV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetClonesV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<Clones>(responseModel);
+            return ReturnModelDTO<Clones>(responseModel);
         }
 
         /// <summary>
@@ -45,13 +45,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of implant type ids.</returns>
         public async Task<ESIModelDTO<List<int>>> GetActiveImplantsV1Async(AuthDTO auth, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_CLONES_READ_IMPLANTS_1);
+            CheckAuth(auth, Scopes.ESI_CLONES_READ_IMPLANTS_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/implants/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetActiveImplantsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetActiveImplantsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<int>>(responseModel);
         }
     }
 }

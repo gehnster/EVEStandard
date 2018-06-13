@@ -28,9 +28,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync("/v1/insurance/prices/", ifNoneMatch);
 
-            checkResponse(nameof(ListInsuranceLevelsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListInsuranceLevelsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<InsurancePrice>>(responseModel);
+            return ReturnModelDTO<List<InsurancePrice>>(responseModel);
         }
     }
 }

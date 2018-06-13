@@ -34,9 +34,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync("/v1/wars/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(ListWarsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListWarsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<int>>(responseModel);
         }
 
         /// <summary>
@@ -50,9 +50,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/wars/{warId}/", ifNoneMatch);
 
-            checkResponse(nameof(GetWarInformationV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetWarInformationV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<War>(responseModel);
+            return ReturnModelDTO<War>(responseModel);
         }
 
         /// <summary>
@@ -72,9 +72,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/wars/{warId}/killmails/", ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(ListKillsForWarV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListKillsForWarV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<KillmailIndex>>(responseModel);
+            return ReturnModelDTO<List<KillmailIndex>>(responseModel);
         }
     }
 }

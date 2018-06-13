@@ -28,13 +28,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of colonies.</returns>
         public async Task<ESIModelDTO<List<Colony>>> GetColoniesV1Async(AuthDTO auth, string ifNoneMatch=null)
         {
-            checkAuth(auth, Scopes.ESI_PLANETS_MANAGE_PLANETS_1);
+            CheckAuth(auth, Scopes.ESI_PLANETS_MANAGE_PLANETS_1);
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/planets/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetColoniesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetColoniesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<Colony>>(responseModel);
+            return ReturnModelDTO<List<Colony>>(responseModel);
         }
 
         /// <summary>
@@ -48,13 +48,13 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a colony layout.</returns>
         public async Task<ESIModelDTO<ColonyLayout>> GetColonyLayoutV3Async(AuthDTO auth, int planetId, string ifNoneMatch = null)
         {
-            checkAuth(auth, Scopes.ESI_PLANETS_MANAGE_PLANETS_1);
+            CheckAuth(auth, Scopes.ESI_PLANETS_MANAGE_PLANETS_1);
 
             var responseModel = await GetAsync($"/v3/characters/{auth.CharacterId}/planets/{planetId}/", auth, ifNoneMatch);
 
-            checkResponse(nameof(GetColonyLayoutV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetColonyLayoutV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<ColonyLayout>(responseModel);
+            return ReturnModelDTO<ColonyLayout>(responseModel);
         }
 
         /// <summary>
@@ -68,9 +68,9 @@ namespace EVEStandard.API
         {
             var responseModel = await GetAsync($"/v1/universe/schematics/{schematicId}/", ifNoneMatch);
 
-            checkResponse(nameof(GetSchematicInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetSchematicInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<FactorySchematic>(responseModel);
+            return ReturnModelDTO<FactorySchematic>(responseModel);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of customs offices and their settings.</returns>
         public async Task<ESIModelDTO<List<CustomsOffice>>> ListCorporationCustomsOfficesV1Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch=null)
         {
-            checkAuth(auth, Scopes.ESI_PLANETS_READ_CUSTOMS_OFFICES_1);
+            CheckAuth(auth, Scopes.ESI_PLANETS_READ_CUSTOMS_OFFICES_1);
 
             var queryParameters = new Dictionary<string, string>
             {
@@ -94,9 +94,9 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporations/{corporationId}/customs_offices/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse(nameof(ListCorporationCustomsOfficesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListCorporationCustomsOfficesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return returnModelDTO<List<CustomsOffice>>(responseModel);
+            return ReturnModelDTO<List<CustomsOffice>>(responseModel);
         }
     }
 }
