@@ -150,7 +150,7 @@ namespace EVEStandard
                 request.Headers.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
 
                 var response = await http.SendAsync(request).ConfigureAwait(false);
-                return JsonConvert.DeserializeObject<AccessTokenDetails>(response.Content.ReadAsStringAsync().Result);
+                return JsonConvert.DeserializeObject<AccessTokenDetails>(await response.Content.ReadAsStringAsync());
             }
             catch (Exception inner)
             {
@@ -184,7 +184,7 @@ namespace EVEStandard
                 request.Headers.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
 
                 var response = await http.SendAsync(request).ConfigureAwait(false);
-                return JsonConvert.DeserializeObject<AccessTokenDetails>(response.Content.ReadAsStringAsync().Result);
+                return JsonConvert.DeserializeObject<AccessTokenDetails>(await response.Content.ReadAsStringAsync());
             }
             catch (Exception inner)
             {

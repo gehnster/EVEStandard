@@ -59,24 +59,31 @@ namespace EVEStandard.API
 
         private async Task<APIResponse> RequestAsync(HttpMethod method, string uri, AuthDTO auth, string ifNoneMatch=null, Dictionary<string, string> queryParameters = null, object body = null)
         {
-            var queryParams = "?datasource=" + dataSource;
+            var queryParams = HttpUtility.ParseQueryString(String.Empty);
+            queryParams.Add("datasource", dataSource);
 
             if (queryParameters != null && queryParameters.Count > 0)
             {
                 foreach (var query in queryParameters)
                 {
-                        queryParams += "&" + query.Key + "=" + HttpUtility.UrlEncode(query.Value);
+                    queryParams.Add(query.Key, query.Value);
                 }
             }
             
             try
             {
+                var builder = new UriBuilder(ESI_BASE)
+                {
+                    Path = uri,
+                    Query = queryParams.ToString()
+                };
+
                 var request = new HttpRequestMessage
                 {
-                    RequestUri = new Uri(ESI_BASE + uri + queryParams),
+                    RequestUri = builder.Uri,
                     Method = method
                 };
-                if((method == HttpMethod.Post || method == HttpMethod.Put) && body != null)
+                if ((method == HttpMethod.Post || method == HttpMethod.Put) && body != null)
                 {
                     request.Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
                 }
