@@ -3,7 +3,7 @@
 
 ## [Discord Server](https://discord.gg/SVyVze5)
 
-This library is meant to access the EVE Online ESI API through a C# library. This library was built using .NET Standard so as to be compatible with as many .NET frameworks as possible.
+This library is meant to access the EVE Online ESI API through a C# library. This library was built using .NET Standard so as to be compatible with as many recent .NET frameworks as possible.
 
 ## Version scheme
 Versions released on NuGet will follow this structure:
