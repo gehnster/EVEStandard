@@ -38,7 +38,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v3/characters/{auth.CharacterId}/assets/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("GetCharacterAssetsV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(GetCharacterAssetsV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<Asset>>(responseModel);
         }
@@ -64,7 +64,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v3/corporations/{corporationId}/assets/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("GetCorporationAssetsV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(GetCorporationAssetsV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<Asset>>(responseModel);
         }
@@ -83,7 +83,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync($"/v1/characters/{auth.CharacterId}/assets/names/", auth, itemIds);
 
-            checkResponse("GetCharacterAssetNamesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(GetCharacterAssetNamesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<AssetName>>(responseModel);
         }
@@ -102,7 +102,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync($"/v2/characters/{auth.CharacterId}/assets/locations/", auth, itemIds);
 
-            checkResponse("GetCharacterAssetLocationsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(GetCharacterAssetLocationsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<AssetLocation>>(responseModel);
         }
@@ -123,7 +123,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync($"/v1/corporations/{corpId}/assets/names/", auth, itemIds);
 
-            checkResponse("GetCorporationAssetNamesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(GetCorporationAssetNamesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<AssetName>>(responseModel);
         }
@@ -144,7 +144,7 @@ namespace EVEStandard.API
 
             var responseModel = await PostAsync($"/v2/corporations/{corpId}/assets/locations/", auth, itemIds);
 
-            checkResponse("GetCorporationAssetLocationsV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(GetCorporationAssetLocationsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<AssetLocation>>(responseModel);
         }

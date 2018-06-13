@@ -38,7 +38,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/bookmarks/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ListBookmarksV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(ListBookmarksV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<Bookmark>>(responseModel);
         }
@@ -62,7 +62,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/bookmarks/folders/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ListBookmarkFoldersV2Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(ListBookmarkFoldersV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<BookmarkFolder>>(responseModel);
         }
@@ -87,7 +87,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporation/{corporationId}/bookmarks/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ListCorporationBookmarksV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(ListCorporationBookmarksV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<Bookmark>>(responseModel);
         }
@@ -112,7 +112,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/corporation/{corporationId}/bookmarks/folders/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ListCorporationBookmarkFoldersV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(ListCorporationBookmarkFoldersV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<BookmarkFolder>>(responseModel);
         }

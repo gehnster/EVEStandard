@@ -45,7 +45,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/calendar/", auth, ifNoneMatch, queryParameters);
 
-            checkResponse("ListCalendarEventSummariesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(ListCalendarEventSummariesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<EventSummary>>(responseModel);
         }
@@ -64,7 +64,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v3/characters/{auth.CharacterId}/calendar/" + eventId + "/", auth, ifNoneMatch);
 
-            checkResponse("GetAnEventV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(GetAnEventV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<Event>(responseModel);
         }
@@ -86,7 +86,7 @@ namespace EVEStandard.API
 
             var responseModel = await this.PutAsync($"/v3/characters/{auth.CharacterId}/calendar/" + eventId + "/", auth, body);
 
-            checkResponse("RespondToAnEventV3Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(RespondToAnEventV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace EVEStandard.API
 
             var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/calendar/" + eventId + "/attendees/", auth, ifNoneMatch);
 
-            checkResponse("GetAttendeesV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            checkResponse(nameof(GetAttendeesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return returnModelDTO<List<EventAttendee>>(responseModel);
         }
