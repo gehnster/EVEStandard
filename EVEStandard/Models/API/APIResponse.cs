@@ -14,6 +14,6 @@ namespace EVEStandard.Models.API
         public DateTimeOffset? LastModified { get; set; }
         public string ETag { get; set; }
         public bool NotModified { get; set; }
-        public int RemainingErrors { get; set; }
+        public int ErrorsTimeRemaining { get; set; }
     }
 }

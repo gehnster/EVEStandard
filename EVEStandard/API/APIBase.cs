@@ -148,17 +148,24 @@ namespace EVEStandard.API
                 case HttpStatusCode.BadGateway:
                 case HttpStatusCode.ServiceUnavailable:
                 case HttpStatusCode.BadRequest:
+                case HttpStatusCode.GatewayTimeout:
                     model.Error = true;
                     model.Message = await response.Content.ReadAsStringAsync();
-                    model.RemainingErrors = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
+                    model.ErrorsTimeRemaining = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
 
                     return model;
                 case HttpStatusCode.Unauthorized:
                     throw new EVEStandardUnauthorizedException();
-                case HttpStatusCode.Conflict:
+                case (HttpStatusCode)420:
                     model.Error = true;
                     model.Message = "Too many requests made to ESI in a short period of time";
-                    model.RemainingErrors = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
+                    model.ErrorsTimeRemaining = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
+
+                    return model;
+                case (HttpStatusCode)520:
+                    model.Error = true;
+                    model.Message = "Internal error thrown by EVE server. Most of the time this means you have hit an EVE server rate limit.";
+                    model.ErrorsTimeRemaining = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
 
                     return model;
                 case HttpStatusCode.Forbidden:
@@ -171,14 +178,14 @@ namespace EVEStandard.API
                 case (HttpStatusCode)422:
                     model.Error = true;
                     model.Message = $"Your request was invalid. Returned message: {await response.Content.ReadAsStringAsync()}";
-                    model.RemainingErrors = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
+                    model.ErrorsTimeRemaining = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
 
                     return model;
                 default:
                     logger.LogWarning($"API Response Issue. Status Code: {response.StatusCode}");
                     model.Error = true;
                     model.Message = $"An error code we didn't handle was returned. Status Code: {response.StatusCode}";
-                    model.RemainingErrors = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
+                    model.ErrorsTimeRemaining = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
 
                     return model;
             }
