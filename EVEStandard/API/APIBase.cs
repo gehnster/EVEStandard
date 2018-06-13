@@ -66,14 +66,7 @@ namespace EVEStandard.API
             {
                 foreach (var query in queryParameters)
                 {
-                    if (query.Key == "page")
-                    {
-                        queryParams += "&page=" + HttpUtility.UrlEncode(query.Value);
-                    }
-                    else
-                    {
-                        throw new EVEStandardException("Query parameter not handled: " + query.Key + " value: " + query.Value);
-                    }
+                        queryParams += "&" + query.Key + "=" + HttpUtility.UrlEncode(query.Value);
                 }
             }
             
