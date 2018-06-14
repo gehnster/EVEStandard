@@ -62,7 +62,7 @@ namespace EVEStandard.API
             var queryParams = HttpUtility.ParseQueryString(String.Empty);
             queryParams.Add("datasource", dataSource);
 
-            if (queryParameters.Any())
+            if (queryParameters != null)
             {
                 foreach (var query in queryParameters)
                 {
