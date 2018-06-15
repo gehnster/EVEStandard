@@ -6,7 +6,7 @@ namespace EVEStandard.Models.SSO
     public class CharacterDetails
     {
         [JsonProperty("CharacterID")]
-        public int CharacterID { get; set; }
+        public int CharacterId { get; set; }
         [JsonProperty("CharacterName")]
         public string CharacterName { get; set; }
         [JsonProperty("ExpiresOn")]

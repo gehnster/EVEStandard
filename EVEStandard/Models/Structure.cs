@@ -14,6 +14,13 @@ namespace EVEStandard.Models
         public string Name { get; set; }
 
         /// <summary>
+        /// The ID of the corporation who owns this particular structure
+        /// </summary>
+        /// <value>The ID of the corporation who owns this particular structure</value>
+        [JsonProperty("owner_id")]
+        public int OwnerId { get; set; }
+
+        /// <summary>
         /// Gets or Sets Position
         /// </summary>
         [JsonProperty("position")]

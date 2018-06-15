@@ -50,6 +50,13 @@ namespace EVEStandard.Models
         public DateTime Issued { get; set; }
 
         /// <summary>
+        /// The character who issued this order 
+        /// </summary>
+        /// <value>The character who issued this order </value>
+        [JsonProperty("issued_by")]
+        public int IssuedBy { get; set; }
+
+        /// <summary>
         /// ID of the location where order was placed
         /// </summary>
         /// <value>ID of the location where order was placed</value>
