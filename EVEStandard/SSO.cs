@@ -80,7 +80,7 @@ namespace EVEStandard
         /// <exception cref="EVEStandardException" ><paramref name="scopes"/> parameter was empty or null</exception>
         public Authorization AuthorizeToEVEUri(List<string> scopes)
         {
-            return AuthorizeToEVEUri(scopes, Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Replace("+", ""));  // Bug fix: Web API has an issue with returning + signs so we are removing them from the state string.
+            return AuthorizeToEVEUri(scopes, Guid.NewGuid().ToString());
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace EVEStandard
             };
 
             model.SignInURI = GetBaseURL() + SSO_AUTHORIZE + "response_type=code&redirect_uri=" + HttpUtility.UrlEncode(CallbackUri) +
-                "&client_id=" + ClientId + "&scope=" + HttpUtility.UrlEncode(String.Join(" ", scopes)) + "&state=" + model.ExpectedState;
+                "&client_id=" + ClientId + "&scope=" + HttpUtility.UrlEncode(String.Join(" ", scopes)) + "&state=" + HttpUtility.UrlEncode(model.ExpectedState);
 
             return model;
         }
@@ -120,6 +120,10 @@ namespace EVEStandard
             if (model.ReturnedState == null)
             {
                 model.ReturnedState = "";
+            }
+            else
+            {
+                model.ReturnedState = HttpUtility.UrlDecode(model.ReturnedState);
             }
 
             if (model.ExpectedState == null)
