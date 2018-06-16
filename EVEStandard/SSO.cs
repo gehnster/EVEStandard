@@ -121,10 +121,6 @@ namespace EVEStandard
             {
                 model.ReturnedState = "";
             }
-            else
-            {
-                model.ReturnedState = HttpUtility.UrlDecode(model.ReturnedState);
-            }
 
             if (model.ExpectedState == null)
             {
