@@ -267,8 +267,6 @@ namespace EVEStandard.API
             {
                 _logger.LogWarning("{0} is a legacy end-point and could disappear soon, considering moving to a newer end-point.", functionName);
             }
-
-            _logger.LogWarning("Logger Test: {0}", functionName);
         }
 
         protected ESIModelDTO<T> ReturnModelDTO<T>(APIResponse response)
