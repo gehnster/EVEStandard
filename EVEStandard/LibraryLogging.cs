@@ -2,10 +2,10 @@
 
 namespace EVEStandard
 {
-    public static class LibraryLogging
+    internal static class LibraryLogging
     {
-        public static ILoggerFactory LoggerFactory { get; } = new LoggerFactory();
-        public static ILogger CreateLogger<T>() =>
+        internal static ILoggerFactory LoggerFactory { get; set; } = new LoggerFactory();
+        internal static ILogger CreateLogger<T>() =>
           LoggerFactory.CreateLogger<T>();
     }
 }

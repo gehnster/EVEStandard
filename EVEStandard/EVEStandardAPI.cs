@@ -7,6 +7,7 @@ using System.Web;
 using EVEStandard.API;
 using EVEStandard.Enumerations;
 using EVEStandard.Models.API;
+using Microsoft.Extensions.Logging;
 
 namespace EVEStandard
 {
@@ -35,6 +36,12 @@ namespace EVEStandard
             this.userAgent = userAgent ?? "EVEStandard-default";
             this.dataSource = dataSource == DataSource.Tranquility ? "tranquility" : "singularity";
 
+            initializeAPI();
+        }
+
+        public void AddLogging(ILoggerFactory factory)
+        {
+            LibraryLogging.LoggerFactory = factory;
             initializeAPI();
         }
 
