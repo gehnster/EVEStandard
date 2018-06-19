@@ -87,27 +87,6 @@ namespace EVEStandard.API
         }
 
         /// <summary>
-        /// Resolve a set of character IDs to character names.
-        /// <para>GET /characters/names/</para>
-        /// </summary>
-        /// <param name="characterIds">A comma separated list of character IDs.</param>
-        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
-        /// <returns><see cref="ESIModelDTO{T}"/> containing a list of id/name associations.</returns>
-        public async Task<ESIModelDTO<List<CharacterName>>> GetCharacterNamesV1Async(List<int> characterIds, string ifNoneMatch = null)
-        {
-            var queryParameters = new Dictionary<string, string>
-            {
-                { "character_ids", characterIds == null || characterIds.Count == 0 ? "" : string.Join(",", characterIds) }
-            };
-
-            var responseModel = await GetAsync("/v1/characters/names/", ifNoneMatch, queryParameters);
-
-            CheckResponse(nameof(GetCharacterNamesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
-
-            return ReturnModelDTO<List<CharacterName>>(responseModel);
-        }
-
-        /// <summary>
         /// Get portrait urls for a character.
         /// <para>GET /characters/{character_id}/portrait/</para>
         /// </summary>

@@ -51,27 +51,6 @@ namespace EVEStandard.API
         }
 
         /// <summary>
-        /// Resolve a set of alliance IDs to alliance names.
-        /// <para>GET /alliances/names/</para>
-        /// </summary>
-        /// <param name="allianceIds">List of alliance IDs.</param>
-        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
-        /// <returns><see cref="ESIModelDTO{T}"/> containing a list of id/name associations.</returns>
-        public async Task<ESIModelDTO<List<AllianceName>>> GetAllianceNamesV2Async(List<int> allianceIds, string ifNoneMatch = null)
-        {
-            var queryParameters = new Dictionary<string, string>
-            {
-                { "alliance_ids", allianceIds == null || allianceIds.Count == 0 ? "" : string.Join(",", allianceIds) }
-            };
-
-            var responseModel = await GetAsync("/v2/alliances/names/", ifNoneMatch, queryParameters);
-
-            CheckResponse(nameof(GetAllianceNamesV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
-
-            return ReturnModelDTO<List<AllianceName>>(responseModel);
-        }
-
-        /// <summary>
         /// Get the icon urls for a alliance.
         /// <para>GET /alliances/{alliance_id}/icons/</para>
         /// </summary>

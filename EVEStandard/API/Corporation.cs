@@ -78,27 +78,6 @@ namespace EVEStandard.API
         }
 
         /// <summary>
-        /// Resolve a set of corporation IDs to corporation names.
-        /// <para>GET /corporations/names/</para>
-        /// </summary>
-        /// <param name="corporationIds">A comma separated list of corporation IDs.</param>
-        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
-        /// <returns><see cref="ESIModelDTO{T}"/> containing a list of id/name associations.</returns>
-        public async Task<ESIModelDTO<List<CorporationName>>> GetCorporationNamesV2Async(List<int> corporationIds, string ifNoneMatch = null)
-        {
-            var queryParameters = new Dictionary<string, string>
-            {
-                { "corporation_ids", corporationIds == null || corporationIds.Count == 0 ? "" : string.Join(",", corporationIds) }
-            };
-
-            var responseModel = await GetAsync("/v2/corporations/names/", ifNoneMatch);            
-
-            CheckResponse(nameof(GetCorporationNamesV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
-
-            return ReturnModelDTO<List<CorporationName>>(responseModel);
-        }
-
-        /// <summary>
         /// Return the current member list of a corporation, the token’s character need to be a member of the corporation.
         /// <para>GET /corporations/{corporation_id}/members/</para>
         /// </summary>
