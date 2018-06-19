@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.0.0-RC</Version>
+    <Version>2.0.0</Version>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -15,7 +15,7 @@
     <Copyright>Copyright ©2018 Pointy Hat Games, LLC</Copyright>
     <PackageTags>eveonline esi api csharp</PackageTags>
     <Company>Pointy Hat Games, LLC</Company>
-    <PackageReleaseNotes>Alpha release of some breaking changes. Added the ability of the library user to support caching themselves and decided to not try to support it myself. Adding additional features to the library as well and will include .NET Standard 2.1 or .NET Core 2.1 if standard doesn't support what I need.</PackageReleaseNotes>
+    <PackageReleaseNotes>Many breaking changes to the API, but it should all be improvements! Lots of bug fixes and readability changes as well.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
