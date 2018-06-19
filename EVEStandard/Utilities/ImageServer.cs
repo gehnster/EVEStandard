@@ -24,32 +24,32 @@ namespace EVEStandard.Utilities
 
         public static string AllianceImageURL(int allianceId, AllianceWidth width)
         {
-            return BASE_URL + $"/Alliance/{allianceId}_{width.ToString()}.png";
+            return BASE_URL + $"/Alliance/{allianceId}_{((int)width).ToString()}.png";
         }
 
         public static string CorporationImageURL(int corpId, CorporationWidth width)
         {
-            return BASE_URL + $"/Corporation/{corpId}_{width.ToString()}.png";
+            return BASE_URL + $"/Corporation/{corpId}_{((int)width).ToString()}.png";
         }
 
         public static string CharacterImageURL(int characterId, CharacterWidth width)
         {
-            return BASE_URL + $"/Character/{characterId}_{width.ToString()}.jpg";
+            return BASE_URL + $"/Character/{characterId}_{((int)width).ToString()}.jpg";
         }
 
         public static string FactionImageURL(int factionId, FactionWidth width)
         {
-            return BASE_URL + $"/Alliance/{factionId}_{width.ToString()}.png";
+            return BASE_URL + $"/Alliance/{factionId}_{((int)width).ToString()}.png";
         }
 
         public static string InventoryImageURL(int typeId, InventoryTypesWidth width)
         {
-            return BASE_URL + $"/Type/{typeId}_{width.ToString()}.png";
+            return BASE_URL + $"/Type/{typeId}_{((int)width).ToString()}.png";
         }
 
         public static string ShipAndDroneRenderImageURL(int typeId, ShipAndDroneRendersWidth width)
         {
-            return BASE_URL + $"/Render/{typeId}_{width.ToString()}.png";
+            return BASE_URL + $"/Render/{typeId}_{((int)width).ToString()}.png";
         }
     }
 }
