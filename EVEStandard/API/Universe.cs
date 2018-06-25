@@ -449,7 +449,7 @@ namespace EVEStandard.API
         {
             CheckAuth(auth, Scopes.ESI_UNIVERSE_READ_STRUCTURES_1);
 
-            var responseModel = await GetAsync($"/v1/universe/structures/{structureId}/", ifNoneMatch);
+            var responseModel = await GetAsync($"/v1/universe/structures/{structureId}/", auth, ifNoneMatch);
 
             CheckResponse(nameof(GetStructureInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -468,7 +468,7 @@ namespace EVEStandard.API
         {
             CheckAuth(auth, Scopes.ESI_UNIVERSE_READ_STRUCTURES_1);
 
-            var responseModel = await GetAsync($"/v2/universe/structures/{structureId}/", ifNoneMatch);
+            var responseModel = await GetAsync($"/v2/universe/structures/{structureId}/", auth, ifNoneMatch);
 
             CheckResponse(nameof(GetStructureInfoV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
