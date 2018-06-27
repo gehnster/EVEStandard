@@ -55,21 +55,6 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing all faction warfare solar systems.</returns>
-        public async Task<ESIModelDTO<List<FactionWarSystem>>> FactionWarSystemOwnershipV1Async(string ifNoneMatch = null)
-        {
-            var responseModel = await GetAsync("/v1/fw/systems/", ifNoneMatch);
-
-            CheckResponse(nameof(FactionWarSystemOwnershipV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
-
-            return ReturnModelDTO<List<FactionWarSystem>>(responseModel);
-        }
-
-        /// <summary>
-        /// An overview of the current ownership of faction warfare solar systems.
-        /// <para>GET /fw/systems/</para>
-        /// </summary>
-        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
-        /// <returns><see cref="ESIModelDTO{T}"/> containing all faction warfare solar systems.</returns>
         public async Task<ESIModelDTO<List<FactionWarSystem>>> FactionWarSystemOwnershipV2Async(string ifNoneMatch = null)
         {
             var responseModel = await GetAsync("/v2/fw/systems/", ifNoneMatch);
