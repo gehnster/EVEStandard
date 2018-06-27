@@ -65,6 +65,21 @@ namespace EVEStandard.API
         }
 
         /// <summary>
+        /// An overview of the current ownership of faction warfare solar systems.
+        /// <para>GET /fw/systems/</para>
+        /// </summary>
+        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing all faction warfare solar systems.</returns>
+        public async Task<ESIModelDTO<List<FactionWarSystem>>> FactionWarSystemOwnershipV2Async(string ifNoneMatch = null)
+        {
+            var responseModel = await GetAsync("/v2/fw/systems/", ifNoneMatch);
+
+            CheckResponse(nameof(FactionWarSystemOwnershipV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+
+            return ReturnModelDTO<List<FactionWarSystem>>(responseModel);
+        }
+
+        /// <summary>
         /// Top 4 leaderboard of factions for kills and victory points separated by total, last week and yesterday.
         /// <para>GET /fw/leaderboards/</para>
         /// </summary>
