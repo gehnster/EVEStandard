@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using EVEStandard.Enumerations;
+using Newtonsoft.Json;
 
 namespace EVEStandard.Models
 {
@@ -7,7 +8,7 @@ namespace EVEStandard.Models
         #region Properties
 
         [JsonProperty("contested")]
-        public string Contested { get; set; }
+        public FactionWarfareContested Contested { get; set; }
 
         /// <summary>
         /// occupier_faction_id integer
