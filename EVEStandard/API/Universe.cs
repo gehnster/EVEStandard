@@ -445,25 +445,6 @@ namespace EVEStandard.API
         /// <param name="structureId">An Eve structure ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing data about a structure.</returns>
-        public async Task<ESIModelDTO<Structure>> GetStructureInfoV1Async(AuthDTO auth, long structureId, string ifNoneMatch = null)
-        {
-            CheckAuth(auth, Scopes.ESI_UNIVERSE_READ_STRUCTURES_1);
-
-            var responseModel = await GetAsync($"/v1/universe/structures/{structureId}/", auth, ifNoneMatch);
-
-            CheckResponse(nameof(GetStructureInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
-
-            return ReturnModelDTO<Structure>(responseModel);
-        }
-
-        /// <summary>
-        /// Returns information on requested structure, if you are on the ACL. Otherwise, returns “Forbidden” for all inputs.
-        /// <para>GET /universe/structures/{structure_id}/</para>
-        /// </summary>
-        /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
-        /// <param name="structureId">An Eve structure ID.</param>
-        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
-        /// <returns><see cref="ESIModelDTO{T}"/> containing data about a structure.</returns>
         public async Task<ESIModelDTO<Structure>> GetStructureInfoV2Async(AuthDTO auth, long structureId, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_UNIVERSE_READ_STRUCTURES_1);
@@ -518,28 +499,6 @@ namespace EVEStandard.API
             CheckResponse(nameof(GetSolarSystemsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<int>>(responseModel);
-        }
-
-        /// <summary>
-        /// Get information on a solar system. NOTE: This route does not work with abyssal systems.
-        /// <para>GET /universe/systems/{system_id}/</para>
-        /// </summary>
-        /// <param name="systemId">The system identifier.</param>
-        /// <param name="language">Language to use in the response, takes precedence over Accept-Language. Available values : de, en-us, fr, ja, ru, zh. Default value : en-us.</param>
-        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
-        /// <returns><see cref="ESIModelDTO{T}"/> containing information about a solar system.</returns>
-        public async Task<ESIModelDTO<Models.System>> GetSolarSystemInfoV3Async(int systemId, string language = Language.English, string ifNoneMatch = null)
-        {
-            var queryParameters = new Dictionary<string, string>
-            {
-                {"language", language}
-            };
-
-            var responseModel = await GetAsync($"/v3/universe/systems/{systemId}/", ifNoneMatch, queryParameters);
-
-            CheckResponse(nameof(GetSolarSystemInfoV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
-
-            return ReturnModelDTO<Models.System>(responseModel);
         }
 
         /// <summary>

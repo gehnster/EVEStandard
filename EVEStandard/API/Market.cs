@@ -220,26 +220,6 @@ namespace EVEStandard.API
         /// <param name="corporationId">An EVE corporation ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of open market orders.</returns>
-        public async Task<ESIModelDTO<List<CorporationMarketOrder>>> ListOpenOrdersFromCorporationV2Async(AuthDTO auth, int corporationId, string ifNoneMatch = null)
-        {
-            CheckAuth(auth, Scopes.ESI_MARKETS_READ_CORPORATION_ORDERS_1);
-
-            var responseModel = await GetAsync($"/v2/corporations/{corporationId}/orders/", ifNoneMatch);
-
-            CheckResponse(nameof(ListOpenOrdersFromCorporationV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
-
-            return ReturnModelDTO<List<CorporationMarketOrder>>(responseModel);
-        }
-
-        /// <summary>
-        /// List open market orders placed on behalf of a corporation.
-        /// <para>GET /corporations/{corporation_id}/orders/</para>
-        /// <para>Requires one of the following EVE corporation role(s): Accountant, Trader</para>
-        /// </summary>
-        /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
-        /// <param name="corporationId">An EVE corporation ID.</param>
-        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
-        /// <returns><see cref="ESIModelDTO{T}"/> containing a list of open market orders.</returns>
         public async Task<ESIModelDTO<List<CorporationMarketOrder>>> ListOpenOrdersFromCorporationV3Async(AuthDTO auth, int corporationId, int page  = 1, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_MARKETS_READ_CORPORATION_ORDERS_1);
@@ -254,32 +234,6 @@ namespace EVEStandard.API
             CheckResponse(nameof(ListOpenOrdersFromCorporationV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<CorporationMarketOrder>>(responseModel);
-        }
-
-        /// <summary>
-        /// List cancelled and expired market orders placed on behalf of a corporation up to 90 days in the past.
-        /// <para>GET /corporations/{corporation_id}/orders/history/</para>
-        /// <para>Requires one of the following EVE corporation role(s): Accountant, Trader</para>
-        /// </summary>
-        /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
-        /// <param name="corporationId">An EVE corporation ID.</param>
-        /// <param name="page">Which page of results to return. Default value: 1.</param>
-        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
-        /// <returns><see cref="ESIModelDTO{T}"/> containing expired and cancelled market orders placed on behalf of a corporation.</returns>
-        public async Task<ESIModelDTO<List<CorporationMarketOrderHistory>>> ListHistoricalOrdersByCorporationV1Async(AuthDTO auth, int corporationId, int page = 1,  string ifNoneMatch = null)
-        {
-            CheckAuth(auth, Scopes.ESI_MARKETS_READ_CHARACTER_ORDERS_1);
-
-            var queryParameters = new Dictionary<string, string>
-            {
-                { "page", page.ToString() }
-            };
-
-            var responseModel = await GetAsync($"/v1/corporations/{corporationId}/orders/history/", ifNoneMatch, queryParameters);
-
-            CheckResponse(nameof(ListHistoricalOrdersByCorporationV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
-
-            return ReturnModelDTO<List<CorporationMarketOrderHistory>>(responseModel);
         }
 
         /// <summary>
