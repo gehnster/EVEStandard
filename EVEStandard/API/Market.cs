@@ -104,7 +104,7 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v1/markets/structures/{structureId}/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/v1/markets/structures/{structureId}/", auth, ifNoneMatch, queryParameters);
 
             CheckResponse(nameof(ListOrdersInStructureV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -229,7 +229,7 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v3/corporations/{corporationId}/orders/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/v3/corporations/{corporationId}/orders/", auth, ifNoneMatch, queryParameters);
 
             CheckResponse(nameof(ListOpenOrdersFromCorporationV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -255,7 +255,7 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v2/corporations/{corporationId}/orders/history/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/v2/corporations/{corporationId}/orders/history/", auth, ifNoneMatch, queryParameters);
 
             CheckResponse(nameof(ListHistoricalOrdersByCorporationV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
