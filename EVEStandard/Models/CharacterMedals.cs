@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace EVEStandard.Models
 {
@@ -12,11 +14,12 @@ namespace EVEStandard.Models
         /// status string
         /// </summary>
         /// <value>status string</value>
+        [JsonConverter(typeof(StringEnumConverter))]
         public enum StatusEnum
         {
-            [JsonProperty("public")]
+            [EnumMember(Value = "public")]
             publicEnum = 1,
-            [JsonProperty("private")]
+            [EnumMember(Value = "private")]
             privateEnum = 2
         }
 
