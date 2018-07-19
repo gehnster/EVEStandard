@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace EVEStandard.Models
 {
@@ -11,9 +13,10 @@ namespace EVEStandard.Models
         /// To whom the contract is available
         /// </summary>
         /// <value>To whom the contract is available</value>
+        [JsonConverter(typeof(StringEnumConverter))]
         public enum AvailabilityEnum
         {
-            [JsonProperty("public")]
+            [EnumMember(Value = "public")]
             publicEnum = 1,
             personal = 2,
             corporation = 3,
