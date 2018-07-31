@@ -97,7 +97,7 @@ namespace EVEStandard.API
         {
             CheckAuth(auth, Scopes.ESI_WALLET_READ_CORPORATION_WALLETS_1);
 
-            var responseModel = await GetAsync($"/v1/corporations/{corpId}/wallet/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/v1/corporations/{corpId}/wallets/", auth, ifNoneMatch);
 
             CheckResponse(nameof(ReturnCorporationWalletBalanceV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -123,7 +123,7 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v3/corporations/{corpId}/wallet/{division}/journal/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/v3/corporations/{corpId}/wallets/{division}/journal/", auth, ifNoneMatch, queryParameters);
 
             CheckResponse(nameof(GetCorporationWalletJournalV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -149,7 +149,7 @@ namespace EVEStandard.API
                 { "from_id", fromId.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v1/corporations/{corpId}/wallet/{division}/transactions/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/v1/corporations/{corpId}/wallets/{division}/transactions/", auth, ifNoneMatch, queryParameters);
 
             CheckResponse(nameof(GetCorporationWalletTransactionsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
