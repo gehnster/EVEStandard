@@ -83,6 +83,71 @@ namespace EVEStandard.API
         }
 
         /// <summary>
+        /// Returns a paginated list of all public contracts in the given region.
+        /// <para>GET /v1/contracts/public/{region_id}/</para>
+        /// </summary>
+        /// <param name="regionId">An EVE region id.</param>
+        /// <param name="page">Which page of results to return. Default value: 1.</param>
+        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing a list of contracts.</returns>
+        public async Task<ESIModelDTO<List<Contract>>> GetPublicContractsV1Async(int regionId, int page = 1, string ifNoneMatch = null)
+        {
+            var queryParameters = new Dictionary<string, string>
+            {
+                { "page", page.ToString() }
+            };
+
+            var responseModel = await GetAsync($"/v1/contracts/public/{regionId}/", ifNoneMatch, queryParameters);
+
+            CheckResponse(nameof(GetPublicContractsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+
+            return ReturnModelDTO<List<Contract>>(responseModel);
+        }
+
+        /// <summary>
+        /// Lists bids on a public auction contract.
+        /// <para>GET /v1/contracts/public/bids/{contract_id}/</para>
+        /// </summary>
+        /// <param name="contractId">ID of a contract.</param>
+        /// <param name="page">Which page of results to return. Default value: 1.</param>
+        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing a list of bids.</returns>
+        public async Task<ESIModelDTO<List<ContractBid>>> GetPublicContractBidsV1Async(int contractId, int page = 1, string ifNoneMatch = null)
+        {
+            var queryParameters = new Dictionary<string, string>
+            {
+                { "page", page.ToString() }
+            };
+
+            var responseModel = await GetAsync($"/v1/contracts/public/bids/{contractId}/", ifNoneMatch, queryParameters);
+
+            CheckResponse(nameof(GetPublicContractBidsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+
+            return ReturnModelDTO<List<ContractBid>>(responseModel);
+        }
+
+        /// <summary>
+        /// Lists items of a public contract.
+        /// </summary>
+        /// <param name="contractId">ID of a contract.</param>
+        /// <param name="page">Which page of results to return. Default value: 1.</param>
+        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing a list of items in this contract.</returns>
+        public async Task<ESIModelDTO<List<ContractItem>>> GetPublicContractItemsV1Async(int contractId, int page = 1, string ifNoneMatch = null)
+        {
+            var queryParameters = new Dictionary<string, string>
+            {
+                { "page", page.ToString() }
+            };
+
+            var responseModel = await GetAsync($"/v1/contracts/public/items/{contractId}/", ifNoneMatch, queryParameters);
+
+            CheckResponse(nameof(GetPublicContractItemsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+
+            return ReturnModelDTO<List<ContractItem>>(responseModel);
+        }
+
+        /// <summary>
         /// Returns contracts available to a corporation, only if the corporation is issuer, acceptor or assignee. 
         /// Only returns contracts no older than 30 days, or if the status is "in_progress".
         /// <para>GET /corporations/{corporation_id}/contracts/</para>

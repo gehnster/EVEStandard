@@ -189,6 +189,8 @@ namespace EVEStandard.Models
             StructureFuelAlert,
             StructureItemsDelivered,
             StructureItemsMovedToSafety,
+            StructuresJobsCancelled,
+            StructuresJobsPaused,
             StructureLostArmor,
             StructureLostShields,
             StructureOnline,
