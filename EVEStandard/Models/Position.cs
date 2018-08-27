@@ -8,7 +8,7 @@
         /// <value>
         /// The x.
         /// </value>
-        public long X { get; set; }
+        public double X { get; set; }
 
         /// <summary>
         /// Gets or sets the y.
@@ -16,7 +16,7 @@
         /// <value>
         /// The y.
         /// </value>
-        public long Y { get; set; }
+        public double Y { get; set; }
 
         /// <summary>
         /// Gets or sets the z.
@@ -24,6 +24,6 @@
         /// <value>
         /// The z.
         /// </value>
-        public long Z { get; set; }
+        public double Z { get; set; }
     }
 }
