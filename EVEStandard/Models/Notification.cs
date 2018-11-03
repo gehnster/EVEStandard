@@ -236,6 +236,7 @@ namespace EVEStandard.Models
         /// <value>sender_id integer</value>
         [JsonProperty("sender_id")]
         public int SenderId { get; set; }
+
         /// <summary>
         /// sender_type string
         /// </summary>
@@ -256,6 +257,7 @@ namespace EVEStandard.Models
         /// <value>timestamp string</value>
         [JsonProperty("timestamp")]
         public DateTime Timestamp { get; set; }
+        
         /// <summary>
         /// type string
         /// </summary>
