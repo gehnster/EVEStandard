@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.0.9</Version>
+    <Version>2.0.11</Version>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -15,7 +15,7 @@
     <Copyright>Copyright ©2018 Pointy Hat Games, LLC</Copyright>
     <PackageTags>eveonline esi api csharp</PackageTags>
     <Company>Pointy Hat Games, LLC</Company>
-    <PackageReleaseNotes>Fixed model for GetStationInfoV2Async</PackageReleaseNotes>
+    <PackageReleaseNotes></PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

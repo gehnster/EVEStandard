@@ -426,11 +426,25 @@ namespace EVEStandard.API
         /// List all public structures.
         /// <para>GET /universe/structures</para>
         /// </summary>
+        /// <param name="filter">Optional param to return structures that only have a market or basic manufacturing.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing list of public structure IDs.</returns>
-        public async Task<ESIModelDTO<List<long>>> ListAllPublicStructuresV1Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<long>>> ListAllPublicStructuresV1Async(StructureHas filter, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/universe/structures/", ifNoneMatch);
+            APIResponse responseModel;
+            if (filter == StructureHas.NoFilter)
+            {
+                responseModel = await GetAsync("/v1/universe/structures/", ifNoneMatch);
+            }
+            else
+            {
+                var queryParameters = new Dictionary<string, string>
+                {
+                    {"filter", filter == StructureHas.Market ? "market" : "manufacturing_basic" }
+                };
+
+                responseModel = await GetAsync("/v1/universe/structures/", ifNoneMatch, queryParameters);
+            }
 
             CheckResponse(nameof(ListAllPublicStructuresV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -564,6 +578,13 @@ namespace EVEStandard.API
             CheckResponse(nameof(GetTypeInfoV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Type>(responseModel);
+        }
+
+        public enum StructureHas
+        {
+            NoFilter,
+            Market,
+            ManufacturingBasic
         }
     }
 }

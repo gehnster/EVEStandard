@@ -64,6 +64,7 @@ namespace EVEStandard.Models
             CloneMovedMsg,
             CloneRevokedMsg1,
             CloneRevokedMsg2,
+            CombatOperationFinished,
             ContactAdd,
             ContactEdit,
             ContainerPasswordMsg,
@@ -121,6 +122,7 @@ namespace EVEStandard.Models
             GiftReceived,
             IHubDestroyedByBillFailure,
             IncursionCompletedMsg,
+            IndustryOperationFinished,
             IndustryTeamAuctionLost,
             IndustryTeamAuctionWon,
             InfrastructureHubBillAboutToExpire,
@@ -148,7 +150,8 @@ namespace EVEStandard.Models
             MoonminingExtractionCancelled,
             MoonminingExtractionFinished,
             MoonminingExtractionStarted,
-            MoonminingLaserFired, NPCStandingsGained,
+            MoonminingLaserFired,
+            NPCStandingsGained,
             NPCStandingsLost,
             OfferedSurrender,
             OfferedToAlly,
@@ -189,8 +192,6 @@ namespace EVEStandard.Models
             StructureFuelAlert,
             StructureItemsDelivered,
             StructureItemsMovedToSafety,
-            StructuresJobsCancelled,
-            StructuresJobsPaused,
             StructureLostArmor,
             StructureLostShields,
             StructureOnline,
@@ -199,6 +200,8 @@ namespace EVEStandard.Models
             StructureUnderAttack,
             StructureWentHighPower,
             StructureWentLowPower,
+            StructuresJobsCancelled,
+            StructuresJobsPaused,
             StructuresReinforcementChanged,
             TowerAlertMsg,
             TowerResourceAlertMsg,
@@ -233,6 +236,7 @@ namespace EVEStandard.Models
         /// <value>sender_id integer</value>
         [JsonProperty("sender_id")]
         public int SenderId { get; set; }
+
         /// <summary>
         /// sender_type string
         /// </summary>
@@ -253,6 +257,7 @@ namespace EVEStandard.Models
         /// <value>timestamp string</value>
         [JsonProperty("timestamp")]
         public DateTime Timestamp { get; set; }
+        
         /// <summary>
         /// type string
         /// </summary>

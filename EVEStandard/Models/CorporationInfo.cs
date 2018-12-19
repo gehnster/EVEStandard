@@ -96,6 +96,12 @@ namespace EVEStandard.Models
         /// <value>url string</value>
         [JsonProperty("url")]
         public string Url { get; set; }
+        /// <summary>
+        /// war_eligible boolean
+        /// </summary>
+        /// <value>war_eligible boolean</value>
+        [JsonProperty("war_eligible")]
+        public bool WarEligible { get; set; }
 
         #endregion Properties
     }
