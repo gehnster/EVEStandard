@@ -29,7 +29,7 @@ namespace EVEStandard.Models
         /// The context identifier.
         /// </value>
         [JsonProperty("context_id")]
-        public int ContextId { get; set; }
+        public long ContextId { get; set; }
 
         /// <summary>
         /// Gets or sets the type of the context identifier.
