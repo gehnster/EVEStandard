@@ -2,6 +2,8 @@
 {
     public static class Scopes
     {
+        public const string PUBLIC_DATA = "publicData";
+
         public const string ESI_ALLIANCE_READ_CONTACTS_1 = "esi-alliances.read_contacts.v1";
         public const string ESI_ASSETS_READ_ASSETS_1 = "esi-assets.read_assets.v1";
         public const string ESI_ASSETS_READ_CORP_ASSETS_1 = "esi-assets.read_corporation_assets.v1";
