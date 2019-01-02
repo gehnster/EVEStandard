@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -8,7 +7,6 @@ using System.Web;
 using EVEStandard.API;
 using EVEStandard.Enumerations;
 using EVEStandard.Models.API;
-using EVEStandard.Models.SSO;
 using Microsoft.Extensions.Logging;
 
 namespace EVEStandard
@@ -28,12 +26,7 @@ namespace EVEStandard
         /// <param name="timeOut"></param>
         public EVEStandardAPI(string userAgent, DataSource dataSource, TimeSpan timeOut)
         {
-            var handler = new HttpClientHandler()
-            {
-                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
-            };
-
-            http = new HttpClient(handler);
+            http = new HttpClient();
             http.DefaultRequestHeaders.Add("User-Agent", HttpUtility.UrlEncode(userAgent));
             http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             http.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
@@ -62,18 +55,10 @@ namespace EVEStandard
         /// <param name="callbackUri"></param>
         /// <param name="clientId"></param>
         /// <param name="secretKey"></param>
-        public EVEStandardAPI(string userAgent, DataSource dataSource, TimeSpan timeOut, string callbackUri, string clientId, string secretKey, SSOVersion ssoVersion = SSOVersion.v1, SSOMode ssoMode = SSOMode.Web) : this(userAgent, dataSource, timeOut)
+        public EVEStandardAPI(string userAgent, DataSource dataSource, TimeSpan timeOut, string callbackUri, string clientId, string secretKey) : this(userAgent, dataSource, timeOut)
         {
-            if (ssoVersion == SSOVersion.v1)
-            {
-                SSO.HTTP = http;
-                SSO = new SSO(callbackUri, clientId, secretKey, dataSource);
-            }
-            else
-            {
-                SSOv2.HTTP = http;
-                SSOv2 = new SSOv2(callbackUri, clientId, secretKey, dataSource, ssoMode);
-            }
+            SSO.HTTP = http;
+            SSO = new SSO(callbackUri, clientId, secretKey, dataSource);
         }
 
         /// <summary>
@@ -144,7 +129,6 @@ namespace EVEStandard
         /// Perform SSO Authentication operations
         /// </summary>
         public SSO SSO { get; }
-        public SSOv2 SSOv2 { get; }
 
         public Alliance Alliance { get; private set; }
         public Assets Assets { get; private set; }
