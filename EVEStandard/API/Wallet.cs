@@ -45,7 +45,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing journal entries.</returns>
-        public async Task<ESIModelDTO<List<CharacterWalletJournal>>> GetCharacterWalletJournalV5Async(AuthDTO auth, int page, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<CharacterWalletJournal>>> GetCharacterWalletJournalV6Async(AuthDTO auth, int page, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_WALLET_READ_CHARACTER_WALLET_1);
 
@@ -54,9 +54,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v5/characters/{auth.CharacterId}/wallet/journal/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/v6/characters/{auth.CharacterId}/wallet/journal/", auth, ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetCharacterWalletJournalV5Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterWalletJournalV6Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<CharacterWalletJournal>>(responseModel);
         }
