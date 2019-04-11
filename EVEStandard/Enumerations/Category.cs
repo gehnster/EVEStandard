@@ -9,6 +9,7 @@
         inventory_type = 5,
         region = 6,
         solar_system = 7,
-        station = 8
+        station = 8,
+        faction = 9
     }
 }
