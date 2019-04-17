@@ -83,6 +83,12 @@ namespace EVEStandard.Models
         [JsonProperty("security_status")]
         public float? SecurityStatus { get; set; }
 
+        /// <summary>
+        /// The individual title of the character
+        /// </summary>
+        [JsonProperty("title")]
+        public string Title { get; set; }
+
         #endregion Properties
     }
 }

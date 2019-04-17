@@ -8,7 +8,13 @@ namespace EVEStandard.Models
         #region Properties
 
         /// <summary>
-        /// The character&#39;s current fleet ID
+        /// Character ID of the current fleet boss
+        /// </summary>
+        [JsonProperty("fleet_boss_id")]
+        public long FleetBossId { get; set; }
+
+        /// <summary>
+        /// The character’s current fleet ID
         /// </summary>
         /// <value>The character&#39;s current fleet ID</value>
         [JsonProperty("fleet_id")]
