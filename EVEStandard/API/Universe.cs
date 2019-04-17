@@ -286,16 +286,16 @@ namespace EVEStandard.API
         }
 
         /// <summary>
-        /// Resolve a set of IDs to names and categories. Supported ID’s for resolving are: Characters, Corporations, Alliances, Stations, Solar Systems, Constellations, Regions, Types.
+        /// Resolve a set of IDs to names and categories. Supported ID’s for resolving are: Characters, Corporations, Alliances, Stations, Solar Systems, Constellations, Regions, Types, Factions.
         /// <para>POST /universe/names/</para>
         /// </summary>
         /// <param name="ids">The ids to resolve.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing list of id/name associations for a set of ID’s. All ID’s must resolve to a name, or nothing will be returned.</returns>
-        public async Task<ESIModelDTO<List<UniverseIdsToNames>>> GetNamesAndCategoriesFromIdsV2Async(List<int> ids)
+        public async Task<ESIModelDTO<List<UniverseIdsToNames>>> GetNamesAndCategoriesFromIdsV3Async(List<int> ids)
         {
-            var responseModel = await PostAsync("/v2/universe/names/", null, ids);
+            var responseModel = await PostAsync("/v3/universe/names/", null, ids);
 
-            CheckResponse(nameof(GetNamesAndCategoriesFromIdsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetNamesAndCategoriesFromIdsV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<UniverseIdsToNames>>(responseModel);
         }

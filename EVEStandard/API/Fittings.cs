@@ -42,15 +42,15 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of fittings.</returns>
-        public async Task<ESIModelDTO<List<CharacterFitting>>> GetFittingsV1Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<ShipFitting>>> GetFittingsV2Async(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_FITTINGS_READ_FITTINGS_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/fittings/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/fittings/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetFittingsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetFittingsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return ReturnModelDTO<List<CharacterFitting>>(responseModel);
+            return ReturnModelDTO<List<ShipFitting>>(responseModel);
         }
 
         /// <summary>
@@ -60,15 +60,15 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="fitting">Details about the new fitting.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of fittings.</returns>
-        public async Task<ESIModelDTO<long>> CreateFittingV1Async(AuthDTO auth, ShipFitting fitting)
+        public async Task<ESIModelDTO<ShipFittingCreated>> CreateFittingV2Async(AuthDTO auth, ShipFitting fitting)
         {
             CheckAuth(auth, Scopes.ESI_FITTINGS_READ_FITTINGS_1);
 
-            var responseModel = await PostAsync($"/v1/characters/{auth.CharacterId}/fittings/", auth, fitting);
+            var responseModel = await PostAsync($"/v2/characters/{auth.CharacterId}/fittings/", auth, fitting);
 
-            CheckResponse(nameof(CreateFittingV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(CreateFittingV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return ReturnModelDTO<long>(responseModel);
+            return ReturnModelDTO<ShipFittingCreated>(responseModel);
         }
     }
 }

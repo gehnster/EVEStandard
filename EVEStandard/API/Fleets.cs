@@ -69,13 +69,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing details about the character’s fleet.</returns>
-        public async Task<ESIModelDTO<CharacterFleetInfo>> GetCharacterFleetInfoV1Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<CharacterFleetInfo>> GetCharacterFleetInfoV2Async(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_FLEETS_READ_FLEET_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/fleet/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/fleet/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetCharacterFleetInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterFleetInfoV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<CharacterFleetInfo>(responseModel);
         }
