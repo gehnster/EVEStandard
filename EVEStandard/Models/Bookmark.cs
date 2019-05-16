@@ -14,7 +14,7 @@ namespace EVEStandard.Models
         /// The bookmark identifier.
         /// </value>
         [JsonProperty("bookmark_id")]
-        public long BookmarkId { get; set; }
+        public int BookmarkId { get; set; }
 
         /// <summary>
         /// Gets or sets the coordinates.
@@ -41,7 +41,7 @@ namespace EVEStandard.Models
         /// The creator identifier.
         /// </value>
         [JsonProperty("creator_id")]
-        public long CreatorId { get; set; }
+        public int CreatorId { get; set; }
 
         /// <summary>
         /// Gets or sets the folder identifier.
@@ -50,7 +50,7 @@ namespace EVEStandard.Models
         /// The folder identifier.
         /// </value>
         [JsonProperty("folder_id")]
-        public long? FolderId { get; set; }
+        public int? FolderId { get; set; }
 
         /// <summary>
         /// Gets or sets the item.
@@ -77,7 +77,7 @@ namespace EVEStandard.Models
         /// The location identifier.
         /// </value>
         [JsonProperty("location_id")]
-        public long LocationId { get; set; }
+        public int LocationId { get; set; }
         /// <summary>
         /// Gets or sets the notes.
         /// </summary>
