@@ -85,7 +85,7 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v1/corporation/{corporationId}/bookmarks/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/v1/corporations/{corporationId}/bookmarks/", auth, ifNoneMatch, queryParameters);
 
             CheckResponse(nameof(ListCorporationBookmarksV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -110,7 +110,7 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v1/corporation/{corporationId}/bookmarks/folders/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/v1/corporations/{corporationId}/bookmarks/folders/", auth, ifNoneMatch, queryParameters);
 
             CheckResponse(nameof(ListCorporationBookmarkFoldersV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
