@@ -8,7 +8,7 @@ namespace EVEStandard.Models
         #region Properties
 
         /// <summary>
-        /// finish_date string
+        /// Date on which training of the skill will complete. Omitted if the skill queue is paused.
         /// </summary>
         /// <value>finish_date string</value>
         [JsonProperty("finish_date")]
