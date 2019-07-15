@@ -253,6 +253,24 @@ namespace EVEStandard.API
         }
 
         /// <summary>
+        /// Return character notifications.
+        /// <para>GET /characters/{character_id}/notifications/</para>
+        /// </summary>
+        /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
+        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing your recent notifications.</returns>
+        public async Task<ESIModelDTO<List<Notification>>> GetCharacterNotificationsV5Async(AuthDTO auth, string ifNoneMatch = null)
+        {
+            CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_NOTIFICATIONS_1);
+
+            var responseModel = await GetAsync($"/v5/characters/{auth.CharacterId}/notifications/", auth, ifNoneMatch);
+
+            CheckResponse(nameof(GetCharacterNotificationsV5Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+
+            return ReturnModelDTO<List<Notification>>(responseModel);
+        }
+
+        /// <summary>
         /// Returns a character’s corporation roles.
         /// <para>GET /characters/{character_id}/roles/</para>
         /// </summary>
