@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace EVEStandard
 {
     public class EVEStandardAPI
     {
-        
+
         private static HttpClient http;
         private string userAgent;
         private readonly string dataSource;
@@ -24,9 +25,18 @@ namespace EVEStandard
         /// <param name="userAgent"></param>
         /// <param name="dataSource"></param>
         /// <param name="timeOut"></param>
-        public EVEStandardAPI(string userAgent, DataSource dataSource, TimeSpan timeOut)
+        /// <param name="clientHandler"></param>
+        public EVEStandardAPI(string userAgent, DataSource dataSource, TimeSpan timeOut, HttpClientHandler clientHandler = null)
         {
-            http = new HttpClient();
+            if(clientHandler == null)
+            { 
+                clientHandler = new HttpClientHandler
+                {
+                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+                };
+            }
+
+            http = new HttpClient(clientHandler);
             http.DefaultRequestHeaders.Add("User-Agent", HttpUtility.UrlEncode(userAgent));
             http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             http.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
@@ -55,7 +65,8 @@ namespace EVEStandard
         /// <param name="callbackUri"></param>
         /// <param name="clientId"></param>
         /// <param name="secretKey"></param>
-        public EVEStandardAPI(string userAgent, DataSource dataSource, TimeSpan timeOut, string callbackUri, string clientId, string secretKey) : this(userAgent, dataSource, timeOut)
+        /// <param name="handler"></param>
+        public EVEStandardAPI(string userAgent, DataSource dataSource, TimeSpan timeOut, string callbackUri, string clientId, string secretKey, HttpClientHandler handler = null) : this(userAgent, dataSource, timeOut, handler)
         {
             SSO.HTTP = http;
             SSO = new SSO(callbackUri, clientId, secretKey, dataSource);
