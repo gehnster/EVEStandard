@@ -133,7 +133,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of items in this contract.</returns>
-        public async Task<ESIModelDTO<List<ContractItem>>> GetPublicContractItemsV1Async(int contractId, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<PublicContractItem>>> GetPublicContractItemsV1Async(int contractId, int page = 1, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -144,7 +144,7 @@ namespace EVEStandard.API
 
             CheckResponse(nameof(GetPublicContractItemsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return ReturnModelDTO<List<ContractItem>>(responseModel);
+            return ReturnModelDTO<List<PublicContractItem>>(responseModel);
         }
 
         /// <summary>
