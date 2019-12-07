@@ -27,6 +27,7 @@ namespace EVEStandard
 
         private const string TRANQUILITY_SSO_BASE_URL = "https://login.eveonline.com";
         private const string SINGULARITY_SSO_BASE_URL = "https://sisilogin.testeveonline.com";
+        private const string SERENITY_SSO_BASE_URL = "https://login.evepc.163.com";
         private const string SSO_AUTHORIZE = "/oauth/authorize/?";
         private const string SSO_TOKEN = "/oauth/token";
         private const string SSO_VERIFY = "/oauth/verify";
@@ -257,7 +258,17 @@ namespace EVEStandard
         // ReSharper disable once InconsistentNaming
         private string GetBaseURL()
         {
-            return dataSource == DataSource.Singularity ? SINGULARITY_SSO_BASE_URL : TRANQUILITY_SSO_BASE_URL;
+            switch (dataSource)
+            {
+                case DataSource.Tranquility:
+                    return TRANQUILITY_SSO_BASE_URL;
+                case DataSource.Singularity:
+                    return SINGULARITY_SSO_BASE_URL;
+                case DataSource.Serenity:
+                    return SERENITY_SSO_BASE_URL;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

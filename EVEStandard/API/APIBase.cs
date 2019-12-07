@@ -20,16 +20,18 @@ namespace EVEStandard.API
     public class APIBase
     {
         private static HttpClient http;
-        private readonly string dataSource;
         private static readonly ILogger logger = LibraryLogging.CreateLogger<APIBase>();
+        private static string TRANQUILITY_ESI_BASE = "https://esi.evetech.net";
+        private static string SERENITY_ESI_BASE = "https://esi.evepc.163.com";
 
-        public static readonly string ESI_BASE = "https://esi.evetech.net";
-
+        public readonly string ESI_BASE;
+        private readonly string dataSource;
         internal HttpClient HTTP { get => http; set => http = value; }
 
         internal APIBase(string dataSource)
         {
             this.dataSource = dataSource ?? "tranquility";
+            this.ESI_BASE = this.dataSource == "serenity" ? SERENITY_ESI_BASE : TRANQUILITY_ESI_BASE;
         }
 
         internal async Task<APIResponse> GetAsync(string uri, string ifNoneMatch=null, Dictionary<string, string> queryParameters = null)
