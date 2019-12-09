@@ -117,13 +117,13 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of item group ids.</returns>
-        public async Task<ESIModelDTO<int>> GetItemGroupsV1Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<int>>> GetItemGroupsV1Async(string ifNoneMatch = null)
         {
             var responseModel = await GetAsync("/v1/markets/groups/", ifNoneMatch);
 
             CheckResponse(nameof(GetItemGroupsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return ReturnModelDTO<int>(responseModel);
+            return ReturnModelDTO<List<int>>(responseModel);
         }
 
         /// <summary>
