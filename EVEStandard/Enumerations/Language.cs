@@ -8,5 +8,6 @@
         public const string Japanese = "ja";
         public const string Russian = "ru";
         public const string Chinese = "zh";
+        public const string Korean = "ko";
     }
 }

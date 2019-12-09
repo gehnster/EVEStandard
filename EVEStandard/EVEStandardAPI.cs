@@ -44,7 +44,7 @@ namespace EVEStandard
             http.Timeout = timeOut;
 
             this.userAgent = userAgent ?? "EVEStandard-default";
-            this.dataSource = dataSource == DataSource.Tranquility ? "tranquility" : "singularity";
+            this.dataSource = Enum.GetName(typeof(DataSource), dataSource)?.ToLower();
 
             initializeAPI();
         }
