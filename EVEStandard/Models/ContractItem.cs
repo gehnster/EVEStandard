@@ -39,7 +39,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Unique ID for the item</value>
         [JsonProperty("record_id")]
-        public int RecordId { get; set; }
+        public long RecordId { get; set; }
 
         /// <summary>
         /// Type ID for item

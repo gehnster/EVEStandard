@@ -3,6 +3,7 @@
     public enum DataSource
     {
         Tranquility,
-        Singularity
+        Singularity,
+        Serenity
     }
 }
