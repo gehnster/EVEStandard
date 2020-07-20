@@ -11,6 +11,7 @@ namespace EVEStandard.API
     /// Bookmarks API
     /// </summary>
     /// <seealso cref="EVEStandard.API.APIBase" />
+    [System.Obsolete("Bookmark endpoints are currently not working correctly due to recent changes to the bookmark system. Use of this endpoint may return unexpected results.")]
     public class Bookmarks : APIBase
     {
         private readonly ILogger logger = LibraryLogging.CreateLogger<Bookmarks>();
