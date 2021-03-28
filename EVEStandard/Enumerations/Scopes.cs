@@ -11,7 +11,6 @@
         public const string ESI_CALENDAR_RESPOND_CALENDAR_EVENTS_1 = "esi-calendar.respond_calendar_events.v1";
         public const string ESI_CHARACTERS_READ_AGENTS_RESEARCH_1 = "esi-characters.read_agents_research.v1";
         public const string ESI_CHARACTERS_READ_BLUEPRINTS_1 = "esi-characters.read_blueprints.v1";
-        public const string ESI_CHARACTERS_READ_CHAT_CHANNELS_1 = "esi-characters.read_chat_channels.v1";
         public const string ESI_CHARACTERS_READ_CONTACTS_1 = "esi-characters.read_contacts.v1";
         public const string ESI_CHARACTERS_READ_CORPORATION_ROLES_1 = "esi-characters.read_corporation_roles.v1";
         public const string ESI_CHARACTERS_READ_FATIGUE_1 = "esi-characters.read_fatigue.v1";
@@ -31,21 +30,15 @@
         public const string ESI_CORPORATIONS_READ_BLUEPRINTS_1 = "esi-corporations.read_blueprints.v1";
         public const string ESI_CORPORATIONS_READ_CONTACTS_1 = "esi-corporations.read_contacts.v1";
         public const string ESI_CORPORATIONS_READ_CONTAINER_LOGS_1 = "esi-corporations.read_container_logs.v1";
-
-        public const string ESI_CORPORATIONS_READ_CORPORATION_MEMBERSHIP_1 =
-            "esi-corporations.read_corporation_membership.v1";
-
-        public const string ESI_CORPORATIONS_READ_DIVISIONS_1 = "esi-corporations.read_divisions.v1";
+        public const string ESI_CORPORATIONS_READ_CORPORATION_MEMBERSHIP_1 = "esi-corporations.read_corporation_membership.v1";
         public const string ESI_CORPORATIONS_READ_FACILITIES_1 = "esi-corporations.read_facilities.v1";
         public const string ESI_CORPORATIONS_READ_FW_STATS_1 = "esi-corporations.read_fw_stats.v1";
         public const string ESI_CORPORATIONS_READ_MEDALS_1 = "esi-corporations.read_medals.v1";
-        public const string ESI_CORPORATIONS_READ_OUTPOSTS_1 = "esi-corporations.read_outposts.v1";
         public const string ESI_CORPORATIONS_READ_STANDINGS_1 = "esi-corporations.read_standings.v1";
         public const string ESI_CORPORATIONS_READ_STARBASES_1 = "esi-corporations.read_starbases.v1";
         public const string ESI_CORPORATIONS_READ_STRUCTURES_1 = "esi-corporations.read_structures.v1";
         public const string ESI_CORPORATIONS_READ_TITLES_1 = "esi-corporations.read_titles.v1";
         public const string ESI_CORPORATIONS_TRACK_MEMBERS_1 = "esi-corporations.track_members.v1";
-        public const string ESI_CORPORATIONS_WRITE_STRUCTURES_1 = "esi-corporations.write_structures.v1";
         public const string ESI_FITTINGS_READ_FITTINGS_1 = "esi-fittings.read_fittings.v1";
         public const string ESI_FITTINGS_WRITE_FITTINGS_1 = "esi-fittings.write_fittings.v1";
         public const string ESI_FLEETS_READ_FLEET_1 = "esi-fleets.read_fleet.v1";
