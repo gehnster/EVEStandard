@@ -12,13 +12,14 @@
     <PackageProjectUrl>https://github.com/gehnster/EVEStandard</PackageProjectUrl>
     <RepositoryUrl>https://github.com/gehnster/EVEStandard</RepositoryUrl>
     <Description>A C# Library to access the EVE Online ESI API</Description>
-    <Copyright>Copyright ©2020 Pointy Hat Games, LLC</Copyright>
+    <Copyright>Copyright ©2021 Matthew Park</Copyright>
     <PackageTags>eveonline esi api csharp</PackageTags>
-    <Company>Pointy Hat Games, LLC</Company>
+    <Company>Matthew Park</Company>
     <PackageReleaseNotes></PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageVersion>2.0.21</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>

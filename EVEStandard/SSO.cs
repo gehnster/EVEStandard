@@ -26,7 +26,6 @@ namespace EVEStandard
         private static HttpClient http;
 
         private const string TRANQUILITY_SSO_BASE_URL = "https://login.eveonline.com";
-        private const string SINGULARITY_SSO_BASE_URL = "https://sisilogin.testeveonline.com";
         private const string SERENITY_SSO_BASE_URL = "https://login.evepc.163.com";
         private const string SSO_AUTHORIZE = "/oauth/authorize/?";
         private const string SSO_TOKEN = "/oauth/token";
@@ -262,8 +261,6 @@ namespace EVEStandard
             {
                 case DataSource.Tranquility:
                     return TRANQUILITY_SSO_BASE_URL;
-                case DataSource.Singularity:
-                    return SINGULARITY_SSO_BASE_URL;
                 case DataSource.Serenity:
                     return SERENITY_SSO_BASE_URL;
                 default:
