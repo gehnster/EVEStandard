@@ -186,7 +186,6 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="corporationId">An EVE corporation ID.</param>
         /// <param name="page">Which page of results to return. Default value: 1.</param>
-        /// <param name="includeCompleted">Whether retrieve completed character industry jobs as well.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of chunk timers.</returns>
         public async Task<ESIModelDTO<List<MiningExtraction>>> MoonExtractionTimersV1Async(AuthDTO auth, int corporationId, int page = 1, bool includeCompleted = false, string ifNoneMatch = null)
@@ -195,11 +194,10 @@ namespace EVEStandard.API
 
             var queryParameters = new Dictionary<string, string>
             {
-                { "page", page.ToString() },
-                { "include_completed", includeCompleted.ToString() }
+                { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v1/corporation/{corporationId}/industry/jobs/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/v1/corporation/{corporationId}/mining/extractions/", auth, ifNoneMatch, queryParameters);
 
             CheckResponse(nameof(MoonExtractionTimersV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 

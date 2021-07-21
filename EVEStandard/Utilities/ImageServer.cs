@@ -13,7 +13,7 @@ namespace EVEStandard.Utilities
     */
     public static class ImageServer
     {
-        private const string BASE_URL = "https://imageserver.eveonline.com";
+        private const string BASE_URL = "https://images.evetech.net";
 
         public enum AllianceWidth { x32 = 32, x64 = 64, x128 = 128 }
         public enum CorporationWidth { x32 = 32, x64 = 64, x128 = 128, x256 = 256 }
@@ -24,32 +24,32 @@ namespace EVEStandard.Utilities
 
         public static string AllianceImageURL(int allianceId, AllianceWidth width)
         {
-            return BASE_URL + $"/Alliance/{allianceId}_{((int)width).ToString()}.png";
+            return $"{BASE_URL}/alliances/{allianceId}/logo?size={(int)width}";
         }
 
         public static string CorporationImageURL(int corpId, CorporationWidth width)
         {
-            return BASE_URL + $"/Corporation/{corpId}_{((int)width).ToString()}.png";
+            return $"{BASE_URL}/corporations/{corpId}/logo?size={(int)width}";
         }
 
         public static string CharacterImageURL(int characterId, CharacterWidth width)
         {
-            return BASE_URL + $"/Character/{characterId}_{((int)width).ToString()}.jpg";
+            return $"{BASE_URL}/characters/{characterId}/portrait?size={(int)width}";
         }
 
         public static string FactionImageURL(int factionId, FactionWidth width)
         {
-            return BASE_URL + $"/Alliance/{factionId}_{((int)width).ToString()}.png";
+            return $"{BASE_URL}/alliances/{factionId}/logo?size={(int)width}";
         }
 
         public static string InventoryImageURL(int typeId, InventoryTypesWidth width)
         {
-            return BASE_URL + $"/Type/{typeId}_{((int)width).ToString()}.png";
+            return $"{BASE_URL}/types/{typeId}/icon?size={(int)width}";
         }
 
         public static string ShipAndDroneRenderImageURL(int typeId, ShipAndDroneRendersWidth width)
         {
-            return BASE_URL + $"/Render/{typeId}_{((int)width).ToString()}.png";
+            return $"{BASE_URL}/types/{typeId}/render?size={(int)width}";
         }
     }
 }
