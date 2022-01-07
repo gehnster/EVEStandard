@@ -16,13 +16,6 @@ namespace EVEStandard.Models
         public int? AllianceId { get; set; }
 
         /// <summary>
-        ///     ancestry_id integer
-        /// </summary>
-        /// <value>ancestry_id integer</value>
-        [JsonProperty("ancestry_id")]
-        public int? AncestryId { get; set; }
-
-        /// <summary>
         ///     Creation date of the character
         /// </summary>
         /// <value>Creation date of the character</value>
