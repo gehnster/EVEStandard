@@ -1,4 +1,5 @@
-﻿using EVEStandard.Enumerations;
+﻿using System;
+using EVEStandard.Enumerations;
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
@@ -44,11 +45,28 @@ namespace EVEStandard.API
         /// <param name="characterId">An EVE character ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing public data for the given character.</returns>
+        [Obsolete("Version 4 of this endpoint is no longer available. Please use " + nameof(GetCharacterPublicInfoV5Async) + " instead.", true)]
         public async Task<ESIModelDTO<CharacterInfo>> GetCharacterPublicInfoV4Async(int characterId, string ifNoneMatch = null)
         {
             var responseModel = await GetAsync($"/v4/characters/{characterId}/", ifNoneMatch);
 
             CheckResponse(nameof(GetCharacterPublicInfoV4Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+
+            return ReturnModelDTO<CharacterInfo>(responseModel);
+        }
+
+        /// <summary>
+        /// Public information about a character.
+        /// <para>GET /characters/{character_id}/</para>
+        /// </summary>
+        /// <param name="characterId">An EVE character ID.</param>
+        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing public data for the given character.</returns>
+        public async Task<ESIModelDTO<CharacterInfo>> GetCharacterPublicInfoV5Async(int characterId, string ifNoneMatch = null)
+        {
+            var responseModel = await GetAsync($"/v5/characters/{characterId}/", ifNoneMatch);
+
+            CheckResponse(nameof(GetCharacterPublicInfoV5Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<CharacterInfo>(responseModel);
         }
