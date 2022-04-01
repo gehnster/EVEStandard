@@ -12,6 +12,7 @@ jobs:
   publish:
     name: build, pack & publish
     runs-on: ubuntu-latest
+    environment: nuget
     steps:
       - uses: actions/checkout@v2
 
