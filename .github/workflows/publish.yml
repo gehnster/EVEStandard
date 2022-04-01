@@ -1,8 +1,13 @@
-name: publish to nuget
+name: NuGet Deployment
+
+concurrency:
+  group: nuget
+  cancel-in-progress: true
+
 on:
   push:
     branches:
-      - nuget # Default release branch
+      - master # Default release branch
 jobs:
   publish:
     name: build, pack & publish
@@ -13,12 +18,12 @@ jobs:
       # - name: Setup dotnet
       #   uses: actions/setup-dotnet@v1
       #   with:
-      #     dotnet-version: 3.1.301
+      #     dotnet-version: 3.1.200
 
       # Publish
       - name: publish on version change
         id: publish_nuget
-        uses: rohith/publish-nuget@v2
+        uses: laget-se/publish-nuget@v2
         with:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: EVEStandard/EVEStandard.csproj
@@ -46,6 +51,9 @@ jobs:
 
           # NuGet server uri hosting the packages, defaults to https://api.nuget.org
           # NUGET_SOURCE: https://api.nuget.org
+          
+          # Filepath of the nuspec to be used, relative to root of repository
+          # NUSPEC_FILE: Sdk/Sdk.nuspec
 
           # Flag to toggle pushing symbols along with nuget package to the server, disabled by default
           INCLUDE_SYMBOLS: true
