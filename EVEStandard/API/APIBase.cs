@@ -282,7 +282,7 @@ namespace EVEStandard.API
                 LastModified = response.LastModified,
                 MaxPages = response.MaxPages,
                 Model = JsonConvert.DeserializeObject<T>(response.JSONString ?? "")
-        };
+            };
         }
     }
 }
