@@ -8,6 +8,5 @@ This library is meant to access the EVE Online ESI API through a C# library. Thi
 ## Example of how the library works
 You can find examples of how to use the library [here](https://github.com/gehnster/EVEStandard-Examples)
 
-## Explanation of design decisions made for SSO and API routes
 ## NuGet
 The package is now on NuGet! You can find it here: [EVEStandard NuGet Page](https://www.nuget.org/packages/PointyHatGames.EVEStandard)
