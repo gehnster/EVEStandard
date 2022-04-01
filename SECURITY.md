@@ -9,7 +9,5 @@ If it is an issue with EVE SSO and something you think we can mitigate, feel fre
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
-
 Honestly I'd say the best way to report would be to a contributor in Discord, preferably to myself (Gehnster).
 If you want to share a PR then feel free! We can work to make sure its released as quickly as possible from PR to finish.
