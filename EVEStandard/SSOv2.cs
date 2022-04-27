@@ -134,26 +134,11 @@ namespace EVEStandard
         /// <summary>
         /// Once your application receives the callback from SSO, you call this to verify the state is the expected one to be returned and to request an access code with the authenication code you were given.
         /// </summary>
-        /// <param name="model">The <c>Authorization</c> POCO with at least, ExpectedState, ReturnedState, and AuthorizationCode properties set.</param>
+        /// <param name="authorizationCode">The authorizationCode to use to get the access/refresh tokens.</param>
         /// <returns><c>AccessTokenDetails</c></returns>
         /// <exception cref="EVEStandardException" ></exception>
-        public async Task<AccessTokenDetails> VerifyAuthorizationForBasicAuthAsync(Authorization model)
+        public async Task<AccessTokenDetails> VerifyAuthorizationForBasicAuthAsync(string authorizationCode)
         {
-            if (model.ReturnedState == null)
-            {
-                model.ReturnedState = "";
-            }
-
-            if (model.ExpectedState == null)
-            {
-                model.ExpectedState = "";
-            }
-
-            if (model.ExpectedState != model.ReturnedState)
-            {
-                throw new EVEStandardException("Expected the ExpectedState to match the ReturnedState, they are actually set as: ExpectedState: " + model.ExpectedState + " ReturnedState: " + model.ReturnedState);
-            }
-
             try
             {
                 var byteArray = Encoding.ASCII.GetBytes(_clientId + ":" + _clientSecret);
@@ -161,7 +146,7 @@ namespace EVEStandard
                 var stringContent = new FormUrlEncodedContent(new[]
                 {
                     new KeyValuePair<string, string>("grant_type", "authorization_code"),
-                    new KeyValuePair<string, string>("code", model.AuthorizationCode)
+                    new KeyValuePair<string, string>("code", authorizationCode)
                 });
                 var request = new HttpRequestMessage
                 {
@@ -184,33 +169,18 @@ namespace EVEStandard
         /// <summary>
         /// Once your application receives the callback from SSO, you call this to verify the state is the expected one to be returned and to request an access code with the authenication code you were given.
         /// </summary>
-        /// <param name="model">The <c>Authorization</c> POCO with at least, ExpectedState, ReturnedState, and AuthorizationCode properties set.</param>
+        /// <param name="authorizationCode">The authorizationCode to use to get the access/refresh tokens.</param>
         /// <param name="challengeCode">This is the same challengeCode you passed to <see cref="AuthorizeToSSOPKCEUri"/></param>
         /// <returns><c>AccessTokenDetails</c></returns>
         /// <exception cref="EVEStandardException" ></exception>
-        public async Task<AccessTokenDetails> VerifyAuthorizationForPKCEAuthAsync(Authorization model, string challengeCode)
+        public async Task<AccessTokenDetails> VerifyAuthorizationForPKCEAuthAsync(string authorizationCode, string challengeCode)
         {
-            if (model.ReturnedState == null)
-            {
-                model.ReturnedState = "";
-            }
-
-            if (model.ExpectedState == null)
-            {
-                model.ExpectedState = "";
-            }
-
-            if (model.ExpectedState != model.ReturnedState)
-            {
-                throw new EVEStandardException("Expected the ExpectedState to match the ReturnedState, they are actually set as: ExpectedState: " + model.ExpectedState + " ReturnedState: " + model.ReturnedState);
-            }
-
             try
             {
                 var stringContent = new FormUrlEncodedContent(new[]
                 {
                     new KeyValuePair<string, string>("grant_type", "authorization_code"),
-                    new KeyValuePair<string, string>("code", model.AuthorizationCode),
+                    new KeyValuePair<string, string>("code", authorizationCode),
                     new KeyValuePair<string, string>("client_id", _clientId),
                     new KeyValuePair<string, string>("code_verifier", challengeCode)
                 });
