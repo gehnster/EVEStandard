@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -9,14 +9,14 @@ namespace EVEStandard.Models
         /// type_id integer
         /// </summary>
         /// <value>type_id integer</value>
-        [JsonProperty("type_id")]
+        [JsonPropertyName("type_id")]
         public int TypeId { get; set; }
 
         /// <summary>
         /// A list of a available insurance levels for this ship type
         /// </summary>
         /// <value>A list of a available insurance levels for this ship type</value>
-        [JsonProperty("levels")]
+        [JsonPropertyName("levels")]
         public List<InsurancePricesLevel> Levels { get; set; }
     }
 
@@ -26,21 +26,21 @@ namespace EVEStandard.Models
         /// cost number
         /// </summary>
         /// <value>cost number</value>
-        [JsonProperty("cost")]
+        [JsonPropertyName("cost")]
         public float Cost { get; set; }
 
         /// <summary>
         /// payout number
         /// </summary>
         /// <value>payout number</value>
-        [JsonProperty("payout")]
+        [JsonPropertyName("payout")]
         public float Payout { get; set; }
 
         /// <summary>
         /// Localized insurance level
         /// </summary>
         /// <value>Localized insurance level</value>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -10,14 +10,14 @@ namespace EVEStandard.Models
         /// The faction ID of the enemy faction.
         /// </summary>
         /// <value>The faction ID of the enemy faction.</value>
-        [JsonProperty("against_id")]
+        [JsonPropertyName("against_id")]
         public int AgainstId { get; set; }
 
         /// <summary>
         /// faction_id integer
         /// </summary>
         /// <value>faction_id integer</value>
-        [JsonProperty("faction_id")]
+        [JsonPropertyName("faction_id")]
         public int FactionId { get; set; }
 
         #endregion Properties

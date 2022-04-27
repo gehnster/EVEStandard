@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -25,40 +25,40 @@ namespace EVEStandard.Models
         /// ID of the character who was rewarded this medal
         /// </summary>
         /// <value>ID of the character who was rewarded this medal</value>
-        [JsonProperty("character_id")]
+        [JsonPropertyName("character_id")]
         public int CharacterId { get; set; }
 
         /// <summary>
         /// issued_at string
         /// </summary>
         /// <value>issued_at string</value>
-        [JsonProperty("issued_at")]
+        [JsonPropertyName("issued_at")]
         public DateTime IssuedAt { get; set; }
 
         /// <summary>
         /// ID of the character who issued the medal
         /// </summary>
         /// <value>ID of the character who issued the medal</value>
-        [JsonProperty("issuer_id")]
+        [JsonPropertyName("issuer_id")]
         public int IssuerId { get; set; }
 
         /// <summary>
         /// medal_id integer
         /// </summary>
         /// <value>medal_id integer</value>
-        [JsonProperty("medal_id")]
+        [JsonPropertyName("medal_id")]
         public int MedalId { get; set; }
         /// <summary>
         /// reason string
         /// </summary>
         /// <value>reason string</value>
-        [JsonProperty("reason")]
+        [JsonPropertyName("reason")]
         public string Reason { get; set; }
         /// <summary>
         /// status string
         /// </summary>
         /// <value>status string</value>
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public StatusEnum Status { get; set; }
 
         #endregion Properties

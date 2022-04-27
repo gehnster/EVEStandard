@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -10,14 +10,14 @@ namespace EVEStandard.Models
         /// A hash of this killmail
         /// </summary>
         /// <value>A hash of this killmail</value>
-        [JsonProperty("killmail_hash")]
+        [JsonPropertyName("killmail_hash")]
         public string KillmailHash { get; set; }
 
         /// <summary>
         /// ID of this killmail
         /// </summary>
         /// <value>ID of this killmail</value>
-        [JsonProperty("killmail_id")]
+        [JsonPropertyName("killmail_id")]
         public int KillmailId { get; set; }
 
         #endregion Properties

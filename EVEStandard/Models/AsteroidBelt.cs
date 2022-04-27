@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -12,7 +12,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The name.
         /// </value>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The position.
         /// </value>
-        [JsonProperty("position")]
+        [JsonPropertyName("position")]
         public Position Position { get; set; }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The system identifier.
         /// </value>
-        [JsonProperty("system_id")]
+        [JsonPropertyName("system_id")]
         public int SystemId { get; set; }
 
         #endregion Properties

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -11,20 +11,20 @@ namespace EVEStandard.Models
         /// id integer
         /// </summary>
         /// <value>id integer</value>
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public long Id { get; set; }
 
         /// <summary>
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
         /// <summary>
         /// squads array
         /// </summary>
         /// <value>squads array</value>
-        [JsonProperty("squads")]
+        [JsonPropertyName("squads")]
         public List<FleetSquad> Squads { get; set; }
 
         #endregion Properties
@@ -38,13 +38,13 @@ namespace EVEStandard.Models
         /// id integer
         /// </summary>
         /// <value>id integer</value>
-        [JsonProperty("id")] public long Id { get; set; }
+        [JsonPropertyName("id")] public long Id { get; set; }
 
         /// <summary>
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [JsonProperty("name")] public string Name { get; set; }
+        [JsonPropertyName("name")] public string Name { get; set; }
 
         #endregion Properties
     }

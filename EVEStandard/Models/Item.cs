@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -6,10 +6,10 @@ namespace EVEStandard.Models
     {
         #region Properties
 
-        [JsonProperty("item_id")]
+        [JsonPropertyName("item_id")]
         public long ItemId { get; set; }
 
-        [JsonProperty("type_id")]
+        [JsonPropertyName("type_id")]
         public int TypeId { get; set; }
 
         #endregion Properties

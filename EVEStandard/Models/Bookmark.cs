@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -13,7 +13,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The bookmark identifier.
         /// </value>
-        [JsonProperty("bookmark_id")]
+        [JsonPropertyName("bookmark_id")]
         public int BookmarkId { get; set; }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The coordinates.
         /// </value>
-        [JsonProperty("coordinates")]
+        [JsonPropertyName("coordinates")]
         public Position Coordinates { get; set; }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The created.
         /// </value>
-        [JsonProperty("created")]
+        [JsonPropertyName("created")]
         public DateTime Created { get; set; }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The creator identifier.
         /// </value>
-        [JsonProperty("creator_id")]
+        [JsonPropertyName("creator_id")]
         public int CreatorId { get; set; }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The folder identifier.
         /// </value>
-        [JsonProperty("folder_id")]
+        [JsonPropertyName("folder_id")]
         public int? FolderId { get; set; }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The item.
         /// </value>
-        [JsonProperty("item")]
+        [JsonPropertyName("item")]
         public Item Item { get; set; }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The label.
         /// </value>
-        [JsonProperty("label")]
+        [JsonPropertyName("label")]
         public string Label { get; set; }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The location identifier.
         /// </value>
-        [JsonProperty("location_id")]
+        [JsonPropertyName("location_id")]
         public int LocationId { get; set; }
         /// <summary>
         /// Gets or sets the notes.
@@ -84,7 +84,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The notes.
         /// </value>
-        [JsonProperty("notes")]
+        [JsonPropertyName("notes")]
         public string Notes { get; set; }
 
         #endregion Properties

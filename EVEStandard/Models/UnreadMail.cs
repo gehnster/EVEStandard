@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -11,28 +11,28 @@ namespace EVEStandard.Models
         /// color string
         /// </summary>
         /// <value>color string</value>
-        [JsonProperty("color")]
+        [JsonPropertyName("color")]
         public string Color { get; set; }
 
         /// <summary>
         /// label_id integer
         /// </summary>
         /// <value>label_id integer</value>
-        [JsonProperty("label_id")]
+        [JsonPropertyName("label_id")]
         public int? LabelId { get; set; }
 
         /// <summary>
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// unread_count integer
         /// </summary>
         /// <value>unread_count integer</value>
-        [JsonProperty("unread_count")]
+        [JsonPropertyName("unread_count")]
         public int? UnreadCount { get; set; }
 
         #endregion Properties
@@ -46,14 +46,14 @@ namespace EVEStandard.Models
         /// labels array
         /// </summary>
         /// <value>labels array</value>
-        [JsonProperty("labels")]
+        [JsonPropertyName("labels")]
         public List<MailLabel> Labels { get; set; }
 
         /// <summary>
         /// total_unread_count integer
         /// </summary>
         /// <value>total_unread_count integer</value>
-        [JsonProperty("total_unread_count")]
+        [JsonPropertyName("total_unread_count")]
         public int? TotalUnreadCount { get; set; }
 
         #endregion Properties

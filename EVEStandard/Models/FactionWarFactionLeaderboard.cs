@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -8,13 +8,13 @@ namespace EVEStandard.Models
         /// <summary>
         /// Gets or Sets Kills
         /// </summary>
-        [JsonProperty("kills")]
+        [JsonPropertyName("kills")]
         public FactionWarFactionTimeframe Kills { get; set; }
 
         /// <summary>
         /// Gets or Sets VictoryPoints
         /// </summary>
-        [JsonProperty("victory_points")]
+        [JsonPropertyName("victory_points")]
         public FactionWarFactionTimeframe VictoryPoints { get; set; }
     }
 
@@ -24,21 +24,21 @@ namespace EVEStandard.Models
         /// Top 4 ranking of factions in the past day
         /// </summary>
         /// <value>Top 4 ranking of factions in the past day</value>
-        [JsonProperty("yesterday")]
+        [JsonPropertyName("yesterday")]
         public List<FactionWarTopFaction> Yesterday { get; set; }
 
         /// <summary>
         /// Top 4 ranking of factions in the past week
         /// </summary>
         /// <value>Top 4 ranking of factions in the past week</value>
-        [JsonProperty("last_week")]
+        [JsonPropertyName("last_week")]
         public List<FactionWarTopFaction> LastWeek { get; set; }
 
         /// <summary>
         /// Top 4 ranking of factions active in faction warfare. A faction is considered \&quot;active\&quot; if they have participated in faction warfare in the past 14 days.
         /// </summary>
         /// <value>Top 4 ranking of factions active in faction warfare. A faction is considered \&quot;active\&quot; if they have participated in faction warfare in the past 14 days.</value>
-        [JsonProperty("active_total")]
+        [JsonPropertyName("active_total")]
         public List<FactionWarTopFaction> ActiveTotal { get; set; }
     }
 
@@ -48,14 +48,14 @@ namespace EVEStandard.Models
         /// faction_id integer
         /// </summary>
         /// <value>faction_id integer</value>
-        [JsonProperty("faction_id")]
+        [JsonPropertyName("faction_id")]
         public int? FactionId { get; set; }
 
         /// <summary>
         /// Amount of kills
         /// </summary>
         /// <value>Amount of kills</value>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public int? Amount { get; set; }
     }
 }

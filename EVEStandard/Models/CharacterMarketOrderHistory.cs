@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -25,104 +25,104 @@ namespace EVEStandard.Models
         /// Number of days the order was valid for (starting from the issued date). An order expires at time issued + duration
         /// </summary>
         /// <value>Number of days the order was valid for (starting from the issued date). An order expires at time issued + duration</value>
-        [JsonProperty("duration")]
+        [JsonPropertyName("duration")]
         public int Duration { get; set; }
 
         /// <summary>
         /// For buy orders, the amount of ISK in escrow
         /// </summary>
         /// <value>For buy orders, the amount of ISK in escrow</value>
-        [JsonProperty("escrow")]
+        [JsonPropertyName("escrow")]
         public double? Escrow { get; set; }
 
         /// <summary>
         /// True if the order is a bid (buy) order
         /// </summary>
         /// <value>True if the order is a bid (buy) order</value>
-        [JsonProperty("is_buy_order")]
+        [JsonPropertyName("is_buy_order")]
         public bool? IsBuyOrder { get; set; }
 
         /// <summary>
         /// Signifies whether the buy/sell order was placed on behalf of a corporation.
         /// </summary>
         /// <value>Signifies whether the buy/sell order was placed on behalf of a corporation.</value>
-        [JsonProperty("is_corporation")]
+        [JsonPropertyName("is_corporation")]
         public bool IsCorporation { get; set; }
 
         /// <summary>
         /// Date and time when this order was issued
         /// </summary>
         /// <value>Date and time when this order was issued</value>
-        [JsonProperty("issued")]
+        [JsonPropertyName("issued")]
         public DateTime Issued { get; set; }
 
         /// <summary>
         /// ID of the location where order was placed
         /// </summary>
         /// <value>ID of the location where order was placed</value>
-        [JsonProperty("location_id")]
+        [JsonPropertyName("location_id")]
         public long LocationId { get; set; }
 
         /// <summary>
         /// For buy orders, the minimum quantity that will be accepted in a matching sell order
         /// </summary>
         /// <value>For buy orders, the minimum quantity that will be accepted in a matching sell order</value>
-        [JsonProperty("min_volume")]
+        [JsonPropertyName("min_volume")]
         public int? MinVolume { get; set; }
 
         /// <summary>
         /// Unique order ID
         /// </summary>
         /// <value>Unique order ID</value>
-        [JsonProperty("order_id")]
+        [JsonPropertyName("order_id")]
         public long OrderId { get; set; }
 
         /// <summary>
         /// Cost per unit for this order
         /// </summary>
         /// <value>Cost per unit for this order</value>
-        [JsonProperty("price")]
+        [JsonPropertyName("price")]
         public double Price { get; set; }
 
         /// <summary>
         /// Valid order range, numbers are ranges in jumps
         /// </summary>
         /// <value>Valid order range, numbers are ranges in jumps</value>
-        [JsonProperty("range")]
+        [JsonPropertyName("range")]
         public string Range { get; set; }
 
         /// <summary>
         /// ID of the region where order was placed
         /// </summary>
         /// <value>ID of the region where order was placed</value>
-        [JsonProperty("region_id")]
+        [JsonPropertyName("region_id")]
         public int RegionId { get; set; }
 
         /// <summary>
         /// Current order state
         /// </summary>
         /// <value>Current order state</value>
-        [JsonProperty("state")]
+        [JsonPropertyName("state")]
         public StateEnum State { get; set; }
 
         /// <summary>
         /// The type ID of the item transacted in this order
         /// </summary>
         /// <value>The type ID of the item transacted in this order</value>
-        [JsonProperty("type_id")]
+        [JsonPropertyName("type_id")]
         public int TypeId { get; set; }
         /// <summary>
         /// Quantity of items still required or offered
         /// </summary>
         /// <value>Quantity of items still required or offered</value>
-        [JsonProperty("volume_remain")]
+        [JsonPropertyName("volume_remain")]
         public int VolumeRemain { get; set; }
 
         /// <summary>
         /// Quantity of items required or offered at time order was placed
         /// </summary>
         /// <value>Quantity of items required or offered at time order was placed</value>
-        [JsonProperty("volume_total")]
+        [JsonPropertyName("volume_total")]
         public int VolumeTotal { get; set; }
 
         #endregion Properties

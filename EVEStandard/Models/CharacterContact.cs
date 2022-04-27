@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -11,42 +11,42 @@ namespace EVEStandard.Models
         /// contact_id integer
         /// </summary>
         /// <value>contact_id integer</value>
-        [JsonProperty("contact_id")]
+        [JsonPropertyName("contact_id")]
         public int ContactId { get; set; }
 
         /// <summary>
         /// contact_type string
         /// </summary>
         /// <value>contact_type string</value>
-        [JsonProperty("contact_type")]
+        [JsonPropertyName("contact_type")]
         public string ContactType { get; set; }
 
         /// <summary>
         /// Whether this contact is in the blocked list. Note a missing value denotes unknown, not true or false
         /// </summary>
         /// <value>Whether this contact is in the blocked list. Note a missing value denotes unknown, not true or false</value>
-        [JsonProperty("is_blocked")]
+        [JsonPropertyName("is_blocked")]
         public bool? IsBlocked { get; set; }
 
         /// <summary>
         /// Whether this contact is being watched
         /// </summary>
         /// <value>Whether this contact is being watched</value>
-        [JsonProperty("is_watched")]
+        [JsonPropertyName("is_watched")]
         public bool? IsWatched { get; set; }
 
         /// <summary>
         /// Custom label of the contact
         /// </summary>
         /// <value>Custom label of the contact</value>
-        [JsonProperty("label_ids")]
+        [JsonPropertyName("label_ids")]
         public List<long> LabelIds { get; set; }
 
         /// <summary>
         /// Standing of the contact
         /// </summary>
         /// <value>Standing of the contact</value>
-        [JsonProperty("standing")]
+        [JsonPropertyName("standing")]
         public float Standing { get; set; }
 
         #endregion Properties

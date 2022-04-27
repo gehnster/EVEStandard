@@ -55,23 +55,6 @@ namespace EVEStandard
             initializeAPI();
         }
 
-        /// <inheritdoc />
-        /// <summary>
-        /// Initialize the EVE Standard Library with Single Sign On support.
-        /// </summary>
-        /// <param name="userAgent"></param>
-        /// <param name="dataSource"></param>
-        /// <param name="timeOut"></param>
-        /// <param name="callbackUri"></param>
-        /// <param name="clientId"></param>
-        /// <param name="secretKey"></param>
-        /// <param name="handler"></param>
-        public EVEStandardAPI(string userAgent, DataSource dataSource, TimeSpan timeOut, string callbackUri, string clientId, string secretKey, HttpClientHandler handler = null) : this(userAgent, dataSource, timeOut, handler)
-        {
-            SSO.HTTP = http;
-            SSO = new SSO(callbackUri, clientId, secretKey, dataSource);
-        }
-
         /// <summary>
         /// Test a route that is still in development.
         /// </summary>
@@ -136,14 +119,8 @@ namespace EVEStandard
             return responseModel.JSONString;
         }
 
-        /// <summary>
-        /// Perform SSO Authentication operations
-        /// </summary>
-        public SSO SSO { get; }
-
         public Alliance Alliance { get; private set; }
         public Assets Assets { get; private set; }
-        public Bookmarks Bookmarks { get; private set; }
         public Calendar Calendar { get; private set; }
         public Character Character { get; private set; }
         public Clones Clones { get; private set; }
@@ -182,10 +159,6 @@ namespace EVEStandard
                 HTTP = http
             };
             Assets = new Assets(dataSource)
-            {
-                HTTP = http
-            };
-            Bookmarks = new Bookmarks(dataSource)
             {
                 HTTP = http
             };

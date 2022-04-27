@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -12,7 +12,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The folder identifier.
         /// </value>
-        [JsonProperty("folder_id")]
+        [JsonPropertyName("folder_id")]
         public long FolderId { get; set; }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The name.
         /// </value>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         #endregion Properties

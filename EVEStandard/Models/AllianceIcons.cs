@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -12,7 +12,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The PX128X128.
         /// </value>
-        [JsonProperty("px128x128")]
+        [JsonPropertyName("px128x128")]
         public string Px128x128 { get; set; }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The PX64X64.
         /// </value>
-        [JsonProperty("px64x64")]
+        [JsonPropertyName("px64x64")]
         public string Px64x64 { get; set; }
 
         #endregion Properties

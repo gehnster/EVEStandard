@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -12,7 +12,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The identifier.
         /// </value>
-        [JsonProperty("character_id")]
+        [JsonPropertyName("character_id")]
         public long Id { get; set; }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The name.
         /// </value>
-        [JsonProperty("character_name")]
+        [JsonPropertyName("character_name")]
         public string Name { get; set; }
 
         #endregion Properties

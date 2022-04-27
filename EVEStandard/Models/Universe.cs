@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -13,7 +13,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The identifier.
         /// </value>
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public long Id { get; set; }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The name.
         /// </value>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         #endregion Properties
@@ -36,70 +36,70 @@ namespace EVEStandard.Models
         /// agents array
         /// </summary>
         /// <value>agents array</value>
-        [JsonProperty("agents")]
+        [JsonPropertyName("agents")]
         public List<NameToId> Agents { get; set; }
 
         /// <summary>
         /// alliances array
         /// </summary>
         /// <value>alliances array</value>
-        [JsonProperty("alliances")]
+        [JsonPropertyName("alliances")]
         public List<NameToId> Alliances { get; set; }
 
         /// <summary>
         /// characters array
         /// </summary>
         /// <value>characters array</value>
-        [JsonProperty("characters")]
+        [JsonPropertyName("characters")]
         public List<NameToId> Characters { get; set; }
 
         /// <summary>
         /// constellations array
         /// </summary>
         /// <value>constellations array</value>
-        [JsonProperty("constellations")]
+        [JsonPropertyName("constellations")]
         public List<NameToId> Constellations { get; set; }
 
         /// <summary>
         /// corporations array
         /// </summary>
         /// <value>corporations array</value>
-        [JsonProperty("corporations")]
+        [JsonPropertyName("corporations")]
         public List<NameToId> Corporations { get; set; }
 
         /// <summary>
         /// factions array
         /// </summary>
         /// <value>factions array</value>
-        [JsonProperty("factions")]
+        [JsonPropertyName("factions")]
         public List<NameToId> Factions { get; set; }
 
         /// <summary>
         /// inventory_types array
         /// </summary>
         /// <value>inventory_types array</value>
-        [JsonProperty("inventory_types")]
+        [JsonPropertyName("inventory_types")]
         public List<NameToId> InventoryTypes { get; set; }
 
         /// <summary>
         /// regions array
         /// </summary>
         /// <value>regions array</value>
-        [JsonProperty("regions")]
+        [JsonPropertyName("regions")]
         public List<NameToId> Regions { get; set; }
 
         /// <summary>
         /// stations array
         /// </summary>
         /// <value>stations array</value>
-        [JsonProperty("stations")]
+        [JsonPropertyName("stations")]
         public List<NameToId> Stations { get; set; }
 
         /// <summary>
         /// systems array
         /// </summary>
         /// <value>systems array</value>
-        [JsonProperty("systems")]
+        [JsonPropertyName("systems")]
         public List<NameToId> Systems { get; set; }
 
         #endregion Properties

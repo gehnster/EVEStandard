@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using EVEStandard.Enumerations;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -12,35 +12,35 @@ namespace EVEStandard.Models
         /// implants array
         /// </summary>
         /// <value>implants array</value>
-        [JsonProperty("implants")]
+        [JsonPropertyName("implants")]
         public List<int> Implants { get; set; }
 
         /// <summary>
         /// jump_clone_id integer
         /// </summary>
         /// <value>jump_clone_id integer</value>
-        [JsonProperty("jump_clone_id")]
+        [JsonPropertyName("jump_clone_id")]
         public int JumpCloneId { get; set; }
 
         /// <summary>
         /// location_id integer
         /// </summary>
         /// <value>location_id integer</value>
-        [JsonProperty("location_id")]
+        [JsonPropertyName("location_id")]
         public long LocationId { get; set; }
 
         /// <summary>
         /// location_type string
         /// </summary>
         /// <value>location_type string</value>
-        [JsonProperty("location_type")]
+        [JsonPropertyName("location_type")]
         public LocationType LocationType { get; set; }
 
         /// <summary>
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         #endregion Properties

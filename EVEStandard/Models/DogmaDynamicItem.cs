@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace EVEStandard.Models
@@ -13,7 +13,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The created by.
         /// </value>
-        [JsonProperty("created_by")]
+        [JsonPropertyName("created_by")]
         public int CreatedBy { get; set; }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The dogma attributes.
         /// </value>
-        [JsonProperty("dogma_attributes")]
+        [JsonPropertyName("dogma_attributes")]
         public List<DynamicItemDogmaAttribute> DogmaAttributes { get; set; }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The dogma effects.
         /// </value>
-        [JsonProperty("dogma_effects")]
+        [JsonPropertyName("dogma_effects")]
         public List<DynamicItemDogmaEffect> DogmaEffects { get; set; }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The mutator type identifier.
         /// </value>
-        [JsonProperty("mutator_type_id")]
+        [JsonPropertyName("mutator_type_id")]
         public int MutatorTypeId { get; set; }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The source type identifier.
         /// </value>
-        [JsonProperty("source_type_id")]
+        [JsonPropertyName("source_type_id")]
         public int SourceTypeId { get; set; }
 
         #endregion
@@ -63,14 +63,14 @@ namespace EVEStandard.Models
         /// attribute_id integer
         /// </summary>
         /// <value>attribute_id integer</value>
-        [JsonProperty("attribute_id")]
+        [JsonPropertyName("attribute_id")]
         public int AttributeId { get; set; }
 
         /// <summary>
         /// value number
         /// </summary>
         /// <value>value number</value>
-        [JsonProperty("value")]
+        [JsonPropertyName("value")]
         public float Value { get; set; }
 
         #endregion Properties
@@ -84,14 +84,14 @@ namespace EVEStandard.Models
         /// effect_id integer
         /// </summary>
         /// <value>effect_id integer</value>
-        [JsonProperty("effect_id")]
+        [JsonPropertyName("effect_id")]
         public int EffectId { get; set; }
 
         /// <summary>
         /// is_default boolean
         /// </summary>
         /// <value>is_default boolean</value>
-        [JsonProperty("is_default")]
+        [JsonPropertyName("is_default")]
         public bool IsDefault { get; set; }
 
         #endregion Properties}

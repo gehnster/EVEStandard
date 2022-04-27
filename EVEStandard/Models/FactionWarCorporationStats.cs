@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -11,31 +11,31 @@ namespace EVEStandard.Models
         /// The enlistment date of the given corporation into faction warfare. Will not be included if corporation is not enlisted in faction warfare
         /// </summary>
         /// <value>The enlistment date of the given corporation into faction warfare. Will not be included if corporation is not enlisted in faction warfare</value>
-        [JsonProperty("enlisted_on")]
+        [JsonPropertyName("enlisted_on")]
         public DateTime? EnlistedOn { get; set; }
 
         /// <summary>
         /// The faction the given corporation is enlisted to fight for. Will not be included if corporation is not enlisted in faction warfare
         /// </summary>
         /// <value>The faction the given corporation is enlisted to fight for. Will not be included if corporation is not enlisted in faction warfare</value>
-        [JsonProperty("faction_id")]
+        [JsonPropertyName("faction_id")]
         public int? FactionId { get; set; }
         /// <summary>
         /// Gets or Sets Kills
         /// </summary>
-        [JsonProperty("kills")]
+        [JsonPropertyName("kills")]
         public FactionWarCorporationStatsTimeframe Kills { get; set; }
 
         /// <summary>
         /// How many pilots the enlisted corporation has. Will not be included if corporation is not enlisted in faction warfare
         /// </summary>
         /// <value>How many pilots the enlisted corporation has. Will not be included if corporation is not enlisted in faction warfare</value>
-        [JsonProperty("pilots")]
+        [JsonPropertyName("pilots")]
         public int? Pilots { get; set; }
         /// <summary>
         /// Gets or Sets VictoryPoints
         /// </summary>
-        [JsonProperty("victory_points")]
+        [JsonPropertyName("victory_points")]
         public FactionWarCorporationStatsTimeframe VictoryPoints { get; set; }
 
         #endregion Properties
@@ -49,19 +49,19 @@ namespace EVEStandard.Models
         /// Last week&#39;s total number of kills by members of the given corporation against enemy factions
         /// </summary>
         /// <value>Last week&#39;s total number of kills by members of the given corporation against enemy factions</value>
-        [JsonProperty("last_week")] public int LastWeek { get; set; }
+        [JsonPropertyName("last_week")] public int LastWeek { get; set; }
 
         /// <summary>
         /// Total number of kills by members of the given corporation against enemy factions since the corporation enlisted
         /// </summary>
         /// <value>Total number of kills by members of the given corporation against enemy factions since the corporation enlisted</value>
-        [JsonProperty("total")] public int Total { get; set; }
+        [JsonPropertyName("total")] public int Total { get; set; }
 
         /// <summary>
         /// Yesterday&#39;s total number of kills by members of the given corporation against enemy factions
         /// </summary>
         /// <value>Yesterday&#39;s total number of kills by members of the given corporation against enemy factions</value>
-        [JsonProperty("yesterday")] public int Yesterday { get; set; }
+        [JsonPropertyName("yesterday")] public int Yesterday { get; set; }
 
         #endregion Properties
     }

@@ -1,8 +1,11 @@
-﻿namespace EVEStandard.Enumerations
+﻿using System.Text.Json.Serialization;
+
+namespace EVEStandard.Enumerations
 {
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum GenderEnum
     {
-        female = 1,
-        male = 2
+        female,
+        male
     }
 }

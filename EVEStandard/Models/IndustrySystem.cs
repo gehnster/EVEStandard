@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -9,14 +9,14 @@ namespace EVEStandard.Models
         /// solar_system_id integer
         /// </summary>
         /// <value>solar_system_id integer</value>
-        [JsonProperty("solar_system_id")]
+        [JsonPropertyName("solar_system_id")]
         public int SolarSystemId { get; set; }
 
         /// <summary>
         /// cost_indices array
         /// </summary>
         /// <value>cost_indices array</value>
-        [JsonProperty("cost_indices")]
+        [JsonPropertyName("cost_indices")]
         public List<IndustrySystemCostIndice> CostIndices { get; set; }
     }
 
@@ -44,14 +44,14 @@ namespace EVEStandard.Models
         /// activity string
         /// </summary>
         /// <value>activity string</value>
-        [JsonProperty("activity")]
+        [JsonPropertyName("activity")]
         public ActivityEnum Activity { get; set; }
 
         /// <summary>
         /// cost_index number
         /// </summary>
         /// <value>cost_index number</value>
-        [JsonProperty("cost_index")]
+        [JsonPropertyName("cost_index")]
         public float CostIndex { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -25,21 +25,21 @@ namespace EVEStandard.Models
         /// from_id integer
         /// </summary>
         /// <value>from_id integer</value>
-        [JsonProperty("from_id")]
+        [JsonPropertyName("from_id")]
         public int FromId { get; set; }
 
         /// <summary>
         /// from_type string
         /// </summary>
         /// <value>from_type string</value>
-        [JsonProperty("from_type")]
+        [JsonPropertyName("from_type")]
         public FromTypeEnum FromType { get; set; }
 
         /// <summary>
         /// standing number
         /// </summary>
         /// <value>standing number</value>
-        [JsonProperty("standing")]
+        [JsonPropertyName("standing")]
         public float StandingValue { get; set; }
 
         #endregion Properties

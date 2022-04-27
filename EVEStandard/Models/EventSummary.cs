@@ -1,5 +1,5 @@
 ﻿using EVEStandard.Enumerations;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System;
 
 namespace EVEStandard.Models
@@ -14,7 +14,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The event date.
         /// </value>
-        [JsonProperty("event_date")]
+        [JsonPropertyName("event_date")]
         public DateTime EventDate { get; set; }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The event identifier.
         /// </value>
-        [JsonProperty("event_id")]
+        [JsonPropertyName("event_id")]
         public long EventId { get; set; }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The event response.
         /// </value>
-        [JsonProperty("event_response")]
+        [JsonPropertyName("event_response")]
         public EventResponse EventResponse { get; set; }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The importance.
         /// </value>
-        [JsonProperty("importance")]
+        [JsonPropertyName("importance")]
         public int Importance { get; set; }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The title.
         /// </value>
-        [JsonProperty("title")]
+        [JsonPropertyName("title")]
         public string Title { get; set; }
 
         #endregion Properties

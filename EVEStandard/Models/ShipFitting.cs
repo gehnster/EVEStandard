@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using EVEStandard.Enumerations;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum FittingItemFlag
     {
         Cargo,
@@ -61,21 +60,21 @@ namespace EVEStandard.Models
         /// flag integer
         /// </summary>
         /// <value>flag integer</value>
-        [JsonProperty("flag")]
+        [JsonPropertyName("flag")]
         public FittingItemFlag Flag { get; set; }
 
         /// <summary>
         /// quantity integer
         /// </summary>
         /// <value>quantity integer</value>
-        [JsonProperty("quantity")]
+        [JsonPropertyName("quantity")]
         public int Quantity { get; set; }
 
         /// <summary>
         /// type_id integer
         /// </summary>
         /// <value>type_id integer</value>
-        [JsonProperty("type_id")]
+        [JsonPropertyName("type_id")]
         public int TypeId { get; set; }
 
         #endregion Properties
@@ -89,27 +88,27 @@ namespace EVEStandard.Models
         /// description string
         /// </summary>
         /// <value>description string</value>
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
         /// <summary>
         /// items array
         /// </summary>
         /// <value>items array</value>
-        [JsonProperty("items")]
+        [JsonPropertyName("items")]
         public List<FittingItem> Items { get; set; }
 
         /// <summary>
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
         /// <summary>
         /// ship_type_id integer
         /// </summary>
         /// <value>ship_type_id integer</value>
-        [JsonProperty("ship_type_id")]
+        [JsonPropertyName("ship_type_id")]
         public int ShipTypeId { get; set; }
 
         #endregion Properties
@@ -117,7 +116,7 @@ namespace EVEStandard.Models
 
     public class ShipFittingCreated
     {
-        [JsonProperty("fitting_id")]
+        [JsonPropertyName("fitting_id")]
         public int FittingId { get; set; }
     }
 }

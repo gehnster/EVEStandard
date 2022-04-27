@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -9,40 +9,40 @@ namespace EVEStandard.Models
         /// <summary>
         /// Gets or Sets Destination
         /// </summary>
-        [JsonProperty("destination")]
+        [JsonPropertyName("destination")]
         public StargateDestination Destination { get; set; }
 
         /// <summary>
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Position
         /// </summary>
-        [JsonProperty("position")]
+        [JsonPropertyName("position")]
         public Position Position { get; set; }
 
         /// <summary>
         /// stargate_id integer
         /// </summary>
         /// <value>stargate_id integer</value>
-        [JsonProperty("stargate_id")]
+        [JsonPropertyName("stargate_id")]
         public int StargateId { get; set; }
         /// <summary>
         /// The solar system this stargate is in
         /// </summary>
         /// <value>The solar system this stargate is in</value>
-        [JsonProperty("system_id")]
+        [JsonPropertyName("system_id")]
         public int SystemId { get; set; }
 
         /// <summary>
         /// type_id integer
         /// </summary>
         /// <value>type_id integer</value>
-        [JsonProperty("type_id")]
+        [JsonPropertyName("type_id")]
         public int TypeId { get; set; }
 
         #endregion Properties
@@ -56,14 +56,14 @@ namespace EVEStandard.Models
         /// The stargate this stargate connects to
         /// </summary>
         /// <value>The stargate this stargate connects to</value>
-        [JsonProperty("stargate_id")]
+        [JsonPropertyName("stargate_id")]
         public int StargateId { get; set; }
 
         /// <summary>
         /// The solar system this stargate connects to
         /// </summary>
         /// <value>The solar system this stargate connects to</value>
-        [JsonProperty("system_id")]
+        [JsonPropertyName("system_id")]
         public int SystemId { get; set; }
 
         #endregion Properties

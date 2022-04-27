@@ -1,5 +1,5 @@
 ﻿using EVEStandard.Enumerations;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -11,21 +11,21 @@ namespace EVEStandard.Models
         /// category string
         /// </summary>
         /// <value>category string</value>
-        [JsonProperty("category")]
+        [JsonPropertyName("category")]
         public CategoryEnum Category { get; set; }
 
         /// <summary>
         /// id integer
         /// </summary>
         /// <value>id integer</value>
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
         /// <summary>
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         #endregion Properties

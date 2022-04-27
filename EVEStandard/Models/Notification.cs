@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -238,49 +238,49 @@ namespace EVEStandard.Models
         /// is_read boolean
         /// </summary>
         /// <value>is_read boolean</value>
-        [JsonProperty("is_read")]
+        [JsonPropertyName("is_read")]
         public bool? IsRead { get; set; }
 
         /// <summary>
         /// notification_id integer
         /// </summary>
         /// <value>notification_id integer</value>
-        [JsonProperty("notification_id")]
+        [JsonPropertyName("notification_id")]
         public long NotificationId { get; set; }
 
         /// <summary>
         /// sender_id integer
         /// </summary>
         /// <value>sender_id integer</value>
-        [JsonProperty("sender_id")]
+        [JsonPropertyName("sender_id")]
         public int SenderId { get; set; }
 
         /// <summary>
         /// sender_type string
         /// </summary>
         /// <value>sender_type string</value>
-        [JsonProperty("sender_type")]
+        [JsonPropertyName("sender_type")]
         public SenderTypeEnum SenderType { get; set; }
 
         /// <summary>
         /// text string
         /// </summary>
         /// <value>text string</value>
-        [JsonProperty("text")]
+        [JsonPropertyName("text")]
         public string Text { get; set; }
 
         /// <summary>
         /// timestamp string
         /// </summary>
         /// <value>timestamp string</value>
-        [JsonProperty("timestamp")]
+        [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
         
         /// <summary>
         /// type string
         /// </summary>
         /// <value>type string</value>
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public TypeEnum Type { get; set; }
 
         #endregion Properties

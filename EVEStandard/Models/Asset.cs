@@ -1,5 +1,5 @@
 ﻿using EVEStandard.Enumerations;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -13,7 +13,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The is blueprint copy.
         /// </value>
-        [JsonProperty("is_blueprint_copy")]
+        [JsonPropertyName("is_blueprint_copy")]
         public bool? IsBlueprintCopy { get; set; }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace EVEStandard.Models
         /// <value>
         ///   <c>true</c> if this instance is singleton; otherwise, <c>false</c>.
         /// </value>
-        [JsonProperty("is_singleton")]
+        [JsonPropertyName("is_singleton")]
         public bool IsSingleton { get; set; }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The item identifier.
         /// </value>
-        [JsonProperty("item_id")]
+        [JsonPropertyName("item_id")]
         public long ItemId { get; set; }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The location flag.
         /// </value>
-        [JsonProperty("location_flag")]
+        [JsonPropertyName("location_flag")]
         public LocationFlag LocationFlag { get; set; }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The location identifier.
         /// </value>
-        [JsonProperty("location_id")]
+        [JsonPropertyName("location_id")]
         public long LocationId { get; set; }
         /// <summary>
         /// Gets or sets the type of the location.
@@ -57,7 +57,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The type of the location.
         /// </value>
-        [JsonProperty("location_type")]
+        [JsonPropertyName("location_type")]
         public LocationTypeEnum LocationType { get; set; }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The quantity.
         /// </value>
-        [JsonProperty("quantity")]
+        [JsonPropertyName("quantity")]
         public long Quantity { get; set; }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The type identifier.
         /// </value>
-        [JsonProperty("type_id")]
+        [JsonPropertyName("type_id")]
         public int TypeId { get; set; }
 
         #endregion Properties
