@@ -1,15 +1,15 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models.SSO
 {
     public class AccessTokenDetails
     {
-        [JsonProperty("access_token")]
+        [JsonPropertyName("access_token")]
         public string AccessToken { get; set; }
-        [JsonProperty("token_type")]
+        [JsonPropertyName("token_type")]
         public string TokenType { get; set; }
-        [JsonProperty("expires_in")]
+        [JsonPropertyName("expires_in")]
         public int ExpiresIn
         {
             get => _expiresIn;
@@ -19,7 +19,7 @@ namespace EVEStandard.Models.SSO
                 _expiresIn = value;
             }
         }
-        [JsonProperty("refresh_token")]
+        [JsonPropertyName("refresh_token")]
         public string RefreshToken { get; set; }
         public DateTime ExpiresUtc { get; set; }
 

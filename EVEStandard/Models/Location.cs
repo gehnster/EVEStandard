@@ -1,5 +1,5 @@
 ﻿using EVEStandard.Enumerations;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -11,14 +11,14 @@ namespace EVEStandard.Models
         /// location_id integer
         /// </summary>
         /// <value>location_id integer</value>
-        [JsonProperty("location_id")]
+        [JsonPropertyName("location_id")]
         public long? LocationId { get; set; }
 
         /// <summary>
         /// location_type string
         /// </summary>
         /// <value>location_type string</value>
-        [JsonProperty("location_type")]
+        [JsonPropertyName("location_type")]
         public LocationType? LocationType { get; set; }
 
         #endregion Properties

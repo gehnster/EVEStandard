@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -11,28 +11,28 @@ namespace EVEStandard.Models
         /// approved_cost integer
         /// </summary>
         /// <value>approved_cost integer</value>
-        [JsonProperty("approved_cost")]
+        [JsonPropertyName("approved_cost")]
         public long? ApprovedCost { get; set; }
 
         /// <summary>
         /// body string
         /// </summary>
         /// <value>body string</value>
-        [JsonProperty("body")]
+        [JsonPropertyName("body")]
         public string Body { get; set; }
 
         /// <summary>
         /// recipients array
         /// </summary>
         /// <value>recipients array</value>
-        [JsonProperty("recipients")]
+        [JsonPropertyName("recipients")]
         public List<MailRecipient> Recipients { get; set; }
 
         /// <summary>
         /// subject string
         /// </summary>
         /// <value>subject string</value>
-        [JsonProperty("subject")]
+        [JsonPropertyName("subject")]
         public string Subject { get; set; }
 
         #endregion Properties

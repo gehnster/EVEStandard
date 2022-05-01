@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -9,14 +9,14 @@ namespace EVEStandard.Models
         /// character_id integer
         /// </summary>
         /// <value>character_id integer</value>
-        [JsonProperty("character_id")]
+        [JsonPropertyName("character_id")]
         public int CharacterId { get; set; }
 
         /// <summary>
         /// A list of title_id
         /// </summary>
         /// <value>A list of title_id</value>
-        [JsonProperty("titles")]
+        [JsonPropertyName("titles")]
         public List<int> Titles { get; set; }
     }
 }

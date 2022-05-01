@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -11,27 +11,27 @@ namespace EVEStandard.Models
         /// The amount bid, in ISK
         /// </summary>
         /// <value>The amount bid, in ISK</value>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public float Amount { get; set; }
 
         /// <summary>
         /// Character ID of the bidder
         /// </summary>
         /// <value>Character ID of the bidder</value>
-        [JsonProperty("bidder_id")]
+        [JsonPropertyName("bidder_id")]
         public int BidderId { get; set; }
 
         /// <summary>
         /// Unique ID for the bid
         /// </summary>
         /// <value>Unique ID for the bid</value>
-        [JsonProperty("bid_id")]
+        [JsonPropertyName("bid_id")]
         public int BidId { get; set; }
         /// <summary>
         /// Datetime when the bid was placed
         /// </summary>
         /// <value>Datetime when the bid was placed</value>
-        [JsonProperty("date_bid")]
+        [JsonPropertyName("date_bid")]
         public DateTime DateBid { get; set; }
 
         #endregion Properties

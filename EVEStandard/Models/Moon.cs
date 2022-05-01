@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -10,27 +10,27 @@ namespace EVEStandard.Models
         /// moon_id integer
         /// </summary>
         /// <value>moon_id integer</value>
-        [JsonProperty("moon_id")]
+        [JsonPropertyName("moon_id")]
         public int MoonId { get; set; }
 
         /// <summary>
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Position
         /// </summary>
-        [JsonProperty("position")]
+        [JsonPropertyName("position")]
         public Position Position { get; set; }
 
         /// <summary>
         /// The solar system this moon is in
         /// </summary>
         /// <value>The solar system this moon is in</value>
-        [JsonProperty("system_id")]
+        [JsonPropertyName("system_id")]
         public int SystemId { get; set; }
 
         #endregion Properties

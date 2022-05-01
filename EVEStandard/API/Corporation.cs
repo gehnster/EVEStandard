@@ -52,11 +52,11 @@ namespace EVEStandard.API
         /// <param name="corporationId">An EVE corporation ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing public information about a corporation.</returns>
-        public async Task<ESIModelDTO<CorporationInfo>> GetCorporationInfoV4Async(int corporationId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<CorporationInfo>> GetCorporationInfoV5Async(int corporationId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync($"/v4/corporations/{corporationId}/", ifNoneMatch);
+            var responseModel = await GetAsync($"/v5/corporations/{corporationId}/", ifNoneMatch);
 
-            CheckResponse(nameof(GetCorporationInfoV4Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationInfoV5Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<CorporationInfo>(responseModel);
         }

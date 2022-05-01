@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -10,41 +10,41 @@ namespace EVEStandard.Models
         /// The bloodline associated with this ancestry
         /// </summary>
         /// <value>The bloodline associated with this ancestry</value>
-        [JsonProperty("bloodline_id")]
+        [JsonPropertyName("bloodline_id")]
         public int BloodlineId { get; set; }
 
         /// <summary>
         /// description string
         /// </summary>
         /// <value>description string</value>
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
         /// <summary>
         /// icon_id integer
         /// </summary>
         /// <value>icon_id integer</value>
-        [JsonProperty("icon_id")]
+        [JsonPropertyName("icon_id")]
         public int? IconId { get; set; }
 
         /// <summary>
         /// id integer
         /// </summary>
         /// <value>id integer</value>
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
         /// <summary>
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
         /// <summary>
         /// short_description string
         /// </summary>
         /// <value>short_description string</value>
-        [JsonProperty("short_description")]
+        [JsonPropertyName("short_description")]
         public string ShortDescription { get; set; }
 
         #endregion Properties

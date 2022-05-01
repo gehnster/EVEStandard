@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -8,14 +8,14 @@ namespace EVEStandard.Models
         /// division integer
         /// </summary>
         /// <value>division integer</value>
-        [JsonProperty("division")]
+        [JsonPropertyName("division")]
         public int Division { get; set; }
 
         /// <summary>
         /// balance number
         /// </summary>
         /// <value>balance number</value>
-        [JsonProperty("balance")]
+        [JsonPropertyName("balance")]
         public double Balance { get; set; }
     }
 }

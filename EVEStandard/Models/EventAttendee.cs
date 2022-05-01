@@ -1,5 +1,5 @@
 ﻿using EVEStandard.Enumerations;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -11,7 +11,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The character identifier.
         /// </value>
-        [JsonProperty("character_id")]
+        [JsonPropertyName("character_id")]
         public long CharacterId { get; set; }
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The event response.
         /// </value>
-        [JsonProperty("event_response")]
+        [JsonPropertyName("event_response")]
         public EventResponse EventResponse { get; set; }
     }
 }

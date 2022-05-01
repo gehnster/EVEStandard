@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -11,56 +11,56 @@ namespace EVEStandard.Models
         /// duration integer
         /// </summary>
         /// <value>duration integer</value>
-        [JsonProperty("duration")]
+        [JsonPropertyName("duration")]
         public int Duration { get; set; }
 
         /// <summary>
         /// is_buy_order boolean
         /// </summary>
         /// <value>is_buy_order boolean</value>
-        [JsonProperty("is_buy_order")]
+        [JsonPropertyName("is_buy_order")]
         public bool IsBuyOrder { get; set; }
 
         /// <summary>
         /// issued string
         /// </summary>
         /// <value>issued string</value>
-        [JsonProperty("issued")]
+        [JsonPropertyName("issued")]
         public DateTime Issued { get; set; }
 
         /// <summary>
         /// location_id integer
         /// </summary>
         /// <value>location_id integer</value>
-        [JsonProperty("location_id")]
+        [JsonPropertyName("location_id")]
         public long LocationId { get; set; }
 
         /// <summary>
         /// min_volume integer
         /// </summary>
         /// <value>min_volume integer</value>
-        [JsonProperty("min_volume")]
+        [JsonPropertyName("min_volume")]
         public int MinVolume { get; set; }
 
         /// <summary>
         /// order_id integer
         /// </summary>
         /// <value>order_id integer</value>
-        [JsonProperty("order_id")]
+        [JsonPropertyName("order_id")]
         public long OrderId { get; set; }
 
         /// <summary>
         /// price number
         /// </summary>
         /// <value>price number</value>
-        [JsonProperty("price")]
+        [JsonPropertyName("price")]
         public double Price { get; set; }
 
         /// <summary>
         /// range string
         /// </summary>
         /// <value>range string</value>
-        [JsonProperty("range")]
+        [JsonPropertyName("range")]
         public string Range { get; set; }
 
         /// <summary>
@@ -69,28 +69,28 @@ namespace EVEStandard.Models
         /// <value>
         /// The system identifier.
         /// </value>
-        [JsonProperty("system_id")]
+        [JsonPropertyName("system_id")]
         public int SystemId { get; set; }
 
         /// <summary>
         /// type_id integer
         /// </summary>
         /// <value>type_id integer</value>
-        [JsonProperty("type_id")]
+        [JsonPropertyName("type_id")]
         public int TypeId { get; set; }
 
         /// <summary>
         /// volume_remain integer
         /// </summary>
         /// <value>volume_remain integer</value>
-        [JsonProperty("volume_remain")]
+        [JsonPropertyName("volume_remain")]
         public int VolumeRemain { get; set; }
 
         /// <summary>
         /// volume_total integer
         /// </summary>
         /// <value>volume_total integer</value>
-        [JsonProperty("volume_total")]
+        [JsonPropertyName("volume_total")]
         public int VolumeTotal { get; set; }
 
         #endregion Properties

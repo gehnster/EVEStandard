@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -11,14 +11,14 @@ namespace EVEStandard.Models
         /// hangar array
         /// </summary>
         /// <value>hangar array</value>
-        [JsonProperty("hangar")]
+        [JsonPropertyName("hangar")]
         public List<DivisionHanger> Hangar { get; set; }
 
         /// <summary>
         /// wallet array
         /// </summary>
         /// <value>wallet array</value>
-        [JsonProperty("wallet")]
+        [JsonPropertyName("wallet")]
         public List<DivisionWallet> Wallet { get; set; }
 
         #endregion Properties
@@ -32,14 +32,14 @@ namespace EVEStandard.Models
         /// division integer
         /// </summary>
         /// <value>division integer</value>
-        [JsonProperty("division")]
+        [JsonPropertyName("division")]
         public int? Division { get; set; }
 
         /// <summary>
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         #endregion Properties
@@ -53,14 +53,14 @@ namespace EVEStandard.Models
         /// division integer
         /// </summary>
         /// <value>division integer</value>
-        [JsonProperty("division")]
+        [JsonPropertyName("division")]
         public int? Division { get; set; }
 
         /// <summary>
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         #endregion Properties

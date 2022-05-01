@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -10,34 +10,34 @@ namespace EVEStandard.Models
         /// The full name of the structure
         /// </summary>
         /// <value>The full name of the structure</value>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// The ID of the corporation who owns this particular structure
         /// </summary>
         /// <value>The ID of the corporation who owns this particular structure</value>
-        [JsonProperty("owner_id")]
+        [JsonPropertyName("owner_id")]
         public int OwnerId { get; set; }
 
         /// <summary>
         /// Gets or Sets Position
         /// </summary>
-        [JsonProperty("position")]
+        [JsonPropertyName("position")]
         public Position Position { get; set; }
 
         /// <summary>
         /// solar_system_id integer
         /// </summary>
         /// <value>solar_system_id integer</value>
-        [JsonProperty("solar_system_id")]
+        [JsonPropertyName("solar_system_id")]
         public int SolarSystemId { get; set; }
 
         /// <summary>
         /// type_id integer
         /// </summary>
         /// <value>type_id integer</value>
-        [JsonProperty("type_id")]
+        [JsonPropertyName("type_id")]
         public int? TypeId { get; set; }
 
         #endregion Properties

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -26,14 +26,14 @@ namespace EVEStandard.Models
         /// recipient_id integer
         /// </summary>
         /// <value>recipient_id integer</value>
-        [JsonProperty("recipient_id")]
+        [JsonPropertyName("recipient_id")]
         public int RecipientId { get; set; }
 
         /// <summary>
         /// recipient_type string
         /// </summary>
         /// <value>recipient_type string</value>
-        [JsonProperty("recipient_type")]
+        [JsonPropertyName("recipient_type")]
         public RecipientTypeEnum RecipientType { get; set; }
 
         #endregion Properties

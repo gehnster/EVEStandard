@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -11,28 +11,28 @@ namespace EVEStandard.Models
         /// date string
         /// </summary>
         /// <value>date string</value>
-        [JsonProperty("date")]
+        [JsonPropertyName("date")]
         public DateTime Date { get; set; }
 
         /// <summary>
         /// quantity integer
         /// </summary>
         /// <value>quantity integer</value>
-        [JsonProperty("quantity")]
+        [JsonPropertyName("quantity")]
         public long Quantity { get; set; }
 
         /// <summary>
         /// solar_system_id integer
         /// </summary>
         /// <value>solar_system_id integer</value>
-        [JsonProperty("solar_system_id")]
+        [JsonPropertyName("solar_system_id")]
         public int SolarSystemId { get; set; }
 
         /// <summary>
         /// type_id integer
         /// </summary>
         /// <value>type_id integer</value>
-        [JsonProperty("type_id")]
+        [JsonPropertyName("type_id")]
         public int TypeId { get; set; }
 
         #endregion Properties

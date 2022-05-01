@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -14,7 +13,7 @@ namespace EVEStandard.Models
         /// status string
         /// </summary>
         /// <value>status string</value>
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum StatusEnum
         {
             [EnumMember(Value = "public")]
@@ -31,62 +30,62 @@ namespace EVEStandard.Models
         /// corporation_id integer
         /// </summary>
         /// <value>corporation_id integer</value>
-        [JsonProperty("corporation_id")]
+        [JsonPropertyName("corporation_id")]
         public int CorporationId { get; set; }
 
         /// <summary>
         /// date string
         /// </summary>
         /// <value>date string</value>
-        [JsonProperty("date")]
+        [JsonPropertyName("date")]
         public DateTime Date { get; set; }
 
         /// <summary>
         /// description string
         /// </summary>
         /// <value>description string</value>
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
         /// <summary>
         /// graphics array
         /// </summary>
         /// <value>graphics array</value>
-        [JsonProperty("graphics")]
+        [JsonPropertyName("graphics")]
         public List<MedalGraphics> Graphics { get; set; }
 
         /// <summary>
         /// issuer_id integer
         /// </summary>
         /// <value>issuer_id integer</value>
-        [JsonProperty("issuer_id")] public int IssuerId { get; set; }
+        [JsonPropertyName("issuer_id")] public int IssuerId { get; set; }
 
         /// <summary>
         /// medal_id integer
         /// </summary>
         /// <value>medal_id integer</value>
-        [JsonProperty("medal_id")]
+        [JsonPropertyName("medal_id")]
         public int MedalId { get; set; }
 
         /// <summary>
         /// reason string
         /// </summary>
         /// <value>reason string</value>
-        [JsonProperty("reason")]
+        [JsonPropertyName("reason")]
         public string Reason { get; set; }
 
         /// <summary>
         /// status string
         /// </summary>
         /// <value>status string</value>
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public StatusEnum Status { get; set; }
 
         /// <summary>
         /// title string
         /// </summary>
         /// <value>title string</value>
-        [JsonProperty("title")]
+        [JsonPropertyName("title")]
         public string Title { get; set; }
 
         #endregion Properties
@@ -100,28 +99,28 @@ namespace EVEStandard.Models
         /// color integer
         /// </summary>
         /// <value>color integer</value>
-        [JsonProperty("color")]
+        [JsonPropertyName("color")]
         public int? Color { get; set; }
 
         /// <summary>
         /// graphic string
         /// </summary>
         /// <value>graphic string</value>
-        [JsonProperty("graphic")]
+        [JsonPropertyName("graphic")]
         public string Graphic { get; set; }
 
         /// <summary>
         /// layer integer
         /// </summary>
         /// <value>layer integer</value>
-        [JsonProperty("layer")]
+        [JsonPropertyName("layer")]
         public int Layer { get; set; }
 
         /// <summary>
         /// part integer
         /// </summary>
         /// <value>part integer</value>
-        [JsonProperty("part")]
+        [JsonPropertyName("part")]
         public int Part { get; set; }
 
         #endregion Properties

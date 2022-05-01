@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -12,49 +12,49 @@ namespace EVEStandard.Models
         /// From whom the mail was sent
         /// </summary>
         /// <value>From whom the mail was sent</value>
-        [JsonProperty("from")]
+        [JsonPropertyName("from")]
         public int? From { get; set; }
 
         /// <summary>
         /// is_read boolean
         /// </summary>
         /// <value>is_read boolean</value>
-        [JsonProperty("is_read")]
+        [JsonPropertyName("is_read")]
         public bool? IsRead { get; set; }
 
         /// <summary>
         /// labels array
         /// </summary>
         /// <value>labels array</value>
-        [JsonProperty("labels")]
+        [JsonPropertyName("labels")]
         public List<long?> Labels { get; set; }
 
         /// <summary>
         /// mail_id integer
         /// </summary>
         /// <value>mail_id integer</value>
-        [JsonProperty("mail_id")]
+        [JsonPropertyName("mail_id")]
         public long? MailId { get; set; }
 
         /// <summary>
         /// Recipients of the mail
         /// </summary>
         /// <value>Recipients of the mail</value>
-        [JsonProperty("recipients")]
+        [JsonPropertyName("recipients")]
         public List<MailRecipient> Recipients { get; set; }
 
         /// <summary>
         /// Mail subject
         /// </summary>
         /// <value>Mail subject</value>
-        [JsonProperty("subject")]
+        [JsonPropertyName("subject")]
         public string Subject { get; set; }
 
         /// <summary>
         /// When the mail was sent
         /// </summary>
         /// <value>When the mail was sent</value>
-        [JsonProperty("timestamp")]
+        [JsonPropertyName("timestamp")]
         public DateTime? Timestamp { get; set; }
 
         #endregion Properties

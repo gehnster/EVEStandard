@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -8,14 +8,14 @@ namespace EVEStandard.Models
         /// corporation_id integer
         /// </summary>
         /// <value>corporation_id integer</value>
-        [JsonProperty("corporation_id")]
+        [JsonPropertyName("corporation_id")]
         public int CorporationId { get; set; }
 
         /// <summary>
         /// corporation_name string
         /// </summary>
         /// <value>corporation_name string</value>
-        [JsonProperty("corporation_name")]
+        [JsonPropertyName("corporation_name")]
         public string Name { get; set; }
     }
 }

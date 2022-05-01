@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -9,14 +9,14 @@ namespace EVEStandard.Models
         /// last_updated string
         /// </summary>
         /// <value>last_updated string</value>
-        [JsonProperty("last_updated")]
+        [JsonPropertyName("last_updated")]
         public DateTime LastUpdated { get; set; }
 
         /// <summary>
         /// The entity that was observing the asteroid field when it was mined. 
         /// </summary>
         /// <value>The entity that was observing the asteroid field when it was mined. </value>
-        [JsonProperty("observer_id")]
+        [JsonPropertyName("observer_id")]
         public long ObserverId { get; set; }
         /// <summary>
         /// The category of the observing entity
@@ -31,7 +31,7 @@ namespace EVEStandard.Models
         /// The category of the observing entity
         /// </summary>
         /// <value>The category of the observing entity</value>
-        [JsonProperty("observer_type")]
+        [JsonPropertyName("observer_type")]
         public ObserverTypeEnum ObserverType { get; set; }
     }
 }

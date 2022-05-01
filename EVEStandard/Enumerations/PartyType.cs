@@ -1,5 +1,8 @@
-﻿namespace EVEStandard.Enumerations
+﻿using System.Text.Json.Serialization;
+
+namespace EVEStandard.Enumerations
 {
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum PartyType
     {
         character = 1,

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -11,27 +11,27 @@ namespace EVEStandard.Models
         /// roles array
         /// </summary>
         /// <value>roles array</value>
-        [JsonProperty("roles")]
+        [JsonPropertyName("roles")]
         public List<string> Roles { get; set; }
 
         /// <summary>
         /// roles_at_base array
         /// </summary>
         /// <value>roles_at_base array</value>
-        [JsonProperty("roles_at_base")]
+        [JsonPropertyName("roles_at_base")]
         public List<string> RolesAtBase { get; set; }
 
         /// <summary>
         /// roles_at_hq array
         /// </summary>
         /// <value>roles_at_hq array</value>
-        [JsonProperty("roles_at_hq")]
+        [JsonPropertyName("roles_at_hq")]
         public List<string> RolesAtHq { get; set; }
         /// <summary>
         /// roles_at_other array
         /// </summary>
         /// <value>roles_at_other array</value>
-        [JsonProperty("roles_at_other")]
+        [JsonPropertyName("roles_at_other")]
         public List<string> RolesAtOther { get; set; }
 
         #endregion Properties

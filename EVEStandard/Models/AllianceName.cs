@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -12,7 +12,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The identifier.
         /// </value>
-        [JsonProperty("alliance_id")]
+        [JsonPropertyName("alliance_id")]
         public int Id { get; set; }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The name.
         /// </value>
-        [JsonProperty("alliance_name")]
+        [JsonPropertyName("alliance_name")]
         public string Name { get; set; }
 
         #endregion Properties

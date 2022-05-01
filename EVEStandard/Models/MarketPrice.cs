@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -10,21 +10,21 @@ namespace EVEStandard.Models
         /// adjusted_price number
         /// </summary>
         /// <value>adjusted_price number</value>
-        [JsonProperty("adjusted_price")]
+        [JsonPropertyName("adjusted_price")]
         public double? AdjustedPrice { get; set; }
 
         /// <summary>
         /// average_price number
         /// </summary>
         /// <value>average_price number</value>
-        [JsonProperty("average_price")]
+        [JsonPropertyName("average_price")]
         public double? AveragePrice { get; set; }
 
         /// <summary>
         /// type_id integer
         /// </summary>
         /// <value>type_id integer</value>
-        [JsonProperty("type_id")]
+        [JsonPropertyName("type_id")]
         public int TypeId { get; set; }
 
         #endregion Properties

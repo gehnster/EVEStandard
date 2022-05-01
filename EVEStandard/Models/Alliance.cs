@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -13,7 +13,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The creator corporation identifier.
         /// </value>
-        [JsonProperty("creator_corporation_id")]
+        [JsonPropertyName("creator_corporation_id")]
         public int CreatorCorporationId { get; set; }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The creator identifier.
         /// </value>
-        [JsonProperty("creator_id")]
+        [JsonPropertyName("creator_id")]
         public int CreatorId { get; set; }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The date founded.
         /// </value>
-        [JsonProperty("date_founded")]
+        [JsonPropertyName("date_founded")]
         public DateTime DateFounded { get; set; }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The executor corporation identifier.
         /// </value>
-        [JsonProperty("executor_corporation_id")]
+        [JsonPropertyName("executor_corporation_id")]
         public int? ExecutorCorporationId { get; set; }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The faction identifier.
         /// </value>
-        [JsonProperty("faction_id")]
+        [JsonPropertyName("faction_id")]
         public int? FactionId { get; set; }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The name.
         /// </value>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace EVEStandard.Models
         /// <value>
         /// The ticker.
         /// </value>
-        [JsonProperty("ticker")]
+        [JsonPropertyName("ticker")]
         public string Ticker { get; set; }
 
         #endregion Properties

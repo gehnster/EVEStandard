@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -11,34 +11,34 @@ namespace EVEStandard.Models
         /// constellation_id integer
         /// </summary>
         /// <value>constellation_id integer</value>
-        [JsonProperty("constellation_id")]
+        [JsonPropertyName("constellation_id")]
         public int ConstellationId { get; set; }
 
         /// <summary>
         /// name string
         /// </summary>
         /// <value>name string</value>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Position
         /// </summary>
-        [JsonProperty("position")]
+        [JsonPropertyName("position")]
         public Position Position { get; set; }
 
         /// <summary>
         /// The region this constellation is in
         /// </summary>
         /// <value>The region this constellation is in</value>
-        [JsonProperty("region_id")]
+        [JsonPropertyName("region_id")]
         public int RegionId { get; set; }
 
         /// <summary>
         /// systems array
         /// </summary>
         /// <value>systems array</value>
-        [JsonProperty("systems")]
+        [JsonPropertyName("systems")]
         public List<int> Systems { get; set; }
 
         #endregion Properties

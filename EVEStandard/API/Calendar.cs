@@ -2,8 +2,8 @@
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 
 namespace EVEStandard.API
@@ -81,8 +81,10 @@ namespace EVEStandard.API
         {
             CheckAuth(auth, Scopes.ESI_CALENDAR_RESPOND_CALENDAR_EVENTS_1);
 
-            dynamic body = new JObject();
-            body.response = response.ToString();
+            var body = new JsonObject
+            {
+                ["response"] = response.ToString()
+            };
 
             var responseModel = await this.PutAsync($"/v3/characters/{auth.CharacterId}/calendar/" + eventId + "/", auth, body);
 
