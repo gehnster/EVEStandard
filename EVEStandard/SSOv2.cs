@@ -322,7 +322,7 @@ namespace EVEStandard
 
                 return new CharacterDetails
                 {
-                    CharacterId = int.Parse(token.Subject.Split(":")[2]),
+                    CharacterId = int.Parse(token.Subject.Split(':')[2]),
                     CharacterName = token.Claims.ToList().Single(x => x.Type == "name").Value,
                     ExpiresOn = token.ValidTo,
                     Scopes = token.Claims.ToList().Where(x => x.Type == "scp").Select(x => x.Value).ToList(),
@@ -333,16 +333,16 @@ namespace EVEStandard
             }
             catch (HttpRequestException e)
             {
-                throw new EVEStandardException("An error occured trying to get the SSO key needed to validate access tokens.", e);
+                throw new EVEStandardException("An error occurred trying to get the SSO key needed to validate access tokens.", e);
             }
             catch(KeyNotFoundException e)
             {
-                throw new EVEStandardException("An error occured trying to get the SSO jwks_uri needed to validate access tokens.", e);
+                throw new EVEStandardException("An error occurred trying to get the SSO jwks_uri needed to validate access tokens.", e);
             }
             catch (Exception inner)
             {
 
-                throw new EVEStandardException("An error occured trying to get keys for access token verification.", inner);
+                throw new EVEStandardException("An error occurred trying to get keys for access token verification.", inner);
             }
         }
 
