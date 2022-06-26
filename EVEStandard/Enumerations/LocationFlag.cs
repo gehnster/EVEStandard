@@ -80,6 +80,9 @@ namespace EVEStandard.Enumerations
         FighterTube2 = 73,
         FighterTube3 = 74,
         FighterTube4 = 75,
-        Module = 76
+        Module = 76,
+        StructureDeedBay = 77,
+        SpecializedIceHold = 78,
+        SpecializedAsteroidHold = 79
     }
 }
