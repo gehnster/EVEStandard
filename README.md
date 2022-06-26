@@ -10,3 +10,6 @@ You can find examples of how to use the library [here](https://github.com/gehnst
 
 ## NuGet
 The package is now on NuGet! You can find it here: [EVEStandard NuGet Page](https://www.nuget.org/packages/PointyHatGames.EVEStandard)
+
+## Donate
+Feel like donating to show appreciation for the time and effort I've put into creating and maintaining this library? Consider either becoming a GitHub Sponsor or donating ISK to ```Gehnster```
