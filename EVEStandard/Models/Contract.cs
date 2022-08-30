@@ -44,6 +44,7 @@ namespace EVEStandard.Models
         /// Type of the contract
         /// </summary>
         /// <value>Type of the contract</value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum TypeEnum
         {
             unknown = 1,
