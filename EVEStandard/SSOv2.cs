@@ -92,7 +92,7 @@ namespace EVEStandard
             var url = GetBaseURL() + SSO_AUTHORIZE + "/?response_type=code&redirect_uri=" + HttpUtility.UrlEncode(_callbackUri) +
                 "&client_id=" + _clientId + "&state=" + HttpUtility.UrlEncode(state);
 
-            if (scopes.Any())
+            if (scopes != null && scopes.Any())
             {
                 url += "&scope=" + HttpUtility.UrlEncode(String.Join(" ", scopes));
             }
@@ -123,7 +123,7 @@ namespace EVEStandard
             var url = GetBaseURL() + SSO_AUTHORIZE + "/?response_type=code&redirect_uri=" + HttpUtility.UrlEncode(_callbackUri) +
                 "&client_id=" + _clientId + "&state=" + HttpUtility.UrlEncode(state) + "&code_challenge=" + challengeCode + "&code_challenge_method=S256";
 
-            if (scopes.Any())
+            if (scopes != null && scopes.Any())
             {
                 url += "&scope=" + HttpUtility.UrlEncode(String.Join(" ", scopes));
             }
@@ -132,7 +132,7 @@ namespace EVEStandard
         }
 
         /// <summary>
-        /// Once your application receives the callback from SSO, you call this to verify the state is the expected one to be returned and to request an access code with the authenication code you were given.
+        /// Once your application receives the callback from SSO, you call this to verify the state is the expected one to be returned and to request an access code with the authentication code you were given.
         /// </summary>
         /// <param name="authorizationCode">The authorizationCode to use to get the access/refresh tokens.</param>
         /// <returns><c>AccessTokenDetails</c></returns>
@@ -167,7 +167,7 @@ namespace EVEStandard
         }
 
         /// <summary>
-        /// Once your application receives the callback from SSO, you call this to verify the state is the expected one to be returned and to request an access code with the authenication code you were given.
+        /// Once your application receives the callback from SSO, you call this to verify the state is the expected one to be returned and to request an access code with the authentication code you were given.
         /// </summary>
         /// <param name="authorizationCode">The authorizationCode to use to get the access/refresh tokens.</param>
         /// <param name="challengeCode">This is the same challengeCode you passed to <see cref="AuthorizeToSSOPKCEUri"/></param>
@@ -202,7 +202,7 @@ namespace EVEStandard
         }
 
         /// <summary>
-        /// If your access token has expired and you need a new one you can pass the <c>AccessTokenDetails</c> POCO here, with a valid refresh token, to retrieve a new access token and a new refresh token.
+        /// If your access token has expired and you need a new one.
         /// </summary>
         /// <param name="refreshToken">The refresh token you want to use to get a new access token.</param>
         /// <param name="scopes">A subset of the original scopes assigned to the authorization and refresh token. If omitted, all original scopes will be assigned to the new access token.</param>
@@ -220,7 +220,7 @@ namespace EVEStandard
                     new KeyValuePair<string, string>("refresh_token", refreshToken)
                 };
 
-                if (scopes.Any())
+                if (scopes != null && scopes.Any())
                 {
                     urlEncodedContent.Add(new KeyValuePair<string, string>("scope", HttpUtility.UrlEncode(String.Join(" ", scopes))));
                 }
@@ -246,7 +246,7 @@ namespace EVEStandard
         }
 
         /// <summary>
-        /// If your access token has expired and you need a new one you can pass the <c>AccessTokenDetails</c> POCO here, with a valid refresh token, to retrieve a new access token and a new refresh token.
+        /// If your access token has expired and you need a new one.
         /// </summary>
         /// <param name="refreshToken">The refresh token you want to use to get a new access token.</param>
         /// <param name="scopes">A subset of the original scopes assigned to the authorization and refresh token. If omitted, all original scopes will be assigned to the new access token.</param>
@@ -263,7 +263,7 @@ namespace EVEStandard
                     new KeyValuePair<string, string>("client_id", _clientId)
                 };
 
-                if (scopes.Any())
+                if (scopes != null && scopes.Any())
                 {
                     urlEncodedContent.Add(new KeyValuePair<string, string>("scope", HttpUtility.UrlEncode(String.Join(" ", scopes))));
                 }
