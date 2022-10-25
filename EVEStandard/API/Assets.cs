@@ -53,7 +53,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of assets.</returns>
-        public async Task<ESIModelDTO<List<Asset>>> GetCorporationAssetsV3Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<Asset>>> GetCorporationAssetsV5Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
 
@@ -62,9 +62,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v3/corporations/{corporationId}/assets/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/v5/corporations/{corporationId}/assets/", auth, ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetCorporationAssetsV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationAssetsV5Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<Asset>>(responseModel);
         }
