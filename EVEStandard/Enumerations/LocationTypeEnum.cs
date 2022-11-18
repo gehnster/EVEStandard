@@ -7,6 +7,7 @@ namespace EVEStandard.Enumerations
     {
         station,
         solar_system,
-        other
+        other,
+        item
     }
 }

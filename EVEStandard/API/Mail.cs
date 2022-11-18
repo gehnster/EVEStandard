@@ -29,7 +29,7 @@ namespace EVEStandard.API
         /// <param name="lastMailId">List only mail with an ID lower than the given ID, if present.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing the requested mail.</returns>
-        public async Task<ESIModelDTO<List<Mail>>> ReturnMailHeadersV1Async(AuthDTO auth, List<long> labels, long lastMailId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<Models.Mail>>> ReturnMailHeadersV1Async(AuthDTO auth, List<long> labels, long lastMailId, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_MAIL_READ_MAIL_1);
 
@@ -43,7 +43,7 @@ namespace EVEStandard.API
 
             CheckResponse(nameof(ReturnMailHeadersV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return ReturnModelDTO<List<Mail>>(responseModel);
+            return ReturnModelDTO<List<Models.Mail>>(responseModel);
         }
 
         /// <summary>

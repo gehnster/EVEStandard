@@ -10,6 +10,7 @@ namespace EVEStandard.Models
         /// recipient_type string
         /// </summary>
         /// <value>recipient_type string</value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum RecipientTypeEnum
         {
             alliance = 1,
