@@ -71,7 +71,7 @@ namespace EVEStandard.Models
         {
             unchecked // Overflow is fine, just wrap
             {
-                return GetType().GetProperties().Where(propertyInfo => propertyInfo.CanRead).Aggregate(41, (current, propertyInfo) => current * 59 + propertyInfo.GetValue(this).GetHashCode());
+                return GetType().GetProperties().Where(propertyInfo => propertyInfo.CanRead).Aggregate(41, (current, propertyInfo) => current * 59 + propertyInfo.GetValue(this)?.GetHashCode() ?? base.GetHashCode());
             }
         }
 
