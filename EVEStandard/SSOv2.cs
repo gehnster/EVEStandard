@@ -47,7 +47,7 @@ namespace EVEStandard
         /// </summary>
         /// <param name="callbackUri">The Callback URL that you provided in your ESI application. If this doesn't match with what ESI has then SSO auth will fail.</param>
         /// <param name="clientId">The Client Id you were assigned in your ESI application.</param>
-        /// <param name="clientSecret">The Secret Key you were assigned in your ESI application, this should NEVER be human-readable in your application.</param>
+        /// <param name="clientSecret">The Secret Key you were assigned in your ESI application, this should NEVER be human-readable in your application. You don't need a client secret for PKCE.</param>
         /// <param name="dataSource"></param>
         /// <exception cref="EVEStandardException" >Called when any of the parameters is null or empty.</exception>
         /// <remarks>
@@ -56,11 +56,11 @@ namespace EVEStandard
         ///     </see>
         ///     You will probably want to create at least two applications, one for local development and one for production since the <paramref name="callbackUri"/> requires to match in the callback.
         /// </remarks>
-        public SSOv2(DataSource dataSource, string callbackUri, string clientId, string clientSecret, HttpClient httpClient = null)
+        public SSOv2(DataSource dataSource, string callbackUri, string clientId, string clientSecret = null, HttpClient httpClient = null)
         {
-            if (string.IsNullOrEmpty(callbackUri) || string.IsNullOrEmpty(clientId) || string.IsNullOrEmpty(clientSecret))
+            if (string.IsNullOrEmpty(callbackUri) || string.IsNullOrEmpty(clientId))
             {
-                throw new ArgumentNullException($"SSOv2 should be initialized with non-null and non-empty strings. callbackUriEmpty?: {string.IsNullOrEmpty(callbackUri)} clientIdEmpty?: {string.IsNullOrEmpty(clientId)} secretKeyEmpty?: {string.IsNullOrEmpty(clientSecret)}");
+                throw new ArgumentNullException($"SSOv2 should be initialized with non-null and non-empty strings. callbackUriEmpty?: {string.IsNullOrEmpty(callbackUri)} clientIdEmpty?: {string.IsNullOrEmpty(clientId)}");
             }
 
             _callbackUri = callbackUri;
@@ -139,6 +139,11 @@ namespace EVEStandard
         /// <exception cref="EVEStandardException" ></exception>
         public async Task<AccessTokenDetails> VerifyAuthorizationForBasicAuthAsync(string authorizationCode)
         {
+            if(string.IsNullOrWhiteSpace(_clientSecret))
+            {
+                throw new ArgumentNullException("You didn't provide a client secret when initalizing the SSOv2 class, one is required to utilize Basic Auth methods.");
+            }
+
             try
             {
                 var byteArray = Encoding.ASCII.GetBytes(_clientId + ":" + _clientSecret);
@@ -210,6 +215,11 @@ namespace EVEStandard
         /// <exception cref="EVEStandardException" ></exception>
         public async Task<AccessTokenDetails> GetNewBasicAuthAccessAndRefreshTokenAsync(string refreshToken, List<string> scopes = null)
         {
+            if (string.IsNullOrWhiteSpace(_clientSecret))
+            {
+                throw new ArgumentNullException("You didn't provide a client secret when initalizing the SSOv2 class, one is required to utilize Basic Auth methods.");
+            }
+
             try
             {
                 var byteArray = Encoding.ASCII.GetBytes(_clientId + ":" + _clientSecret);
@@ -354,6 +364,11 @@ namespace EVEStandard
         /// <returns>True if the token was revoked.</returns>
         public async Task<bool> RevokeTokenAsync(RevokeType type, string token)
         {
+            if (string.IsNullOrWhiteSpace(_clientSecret))
+            {
+                throw new ArgumentNullException("You didn't provide a client secret when initalizing the SSOv2 class, one is required to utilize Basic Auth methods.");
+            }
+
             try
             {
                 var byteArray = Encoding.ASCII.GetBytes(_clientId + ":" + _clientSecret);
