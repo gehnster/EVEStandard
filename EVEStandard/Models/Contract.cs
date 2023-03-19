@@ -26,6 +26,7 @@ namespace EVEStandard.Models
         /// Status of the the contract
         /// </summary>
         /// <value>Status of the the contract</value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum StatusEnum
         {
             outstanding = 1,
