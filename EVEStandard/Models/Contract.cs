@@ -15,8 +15,7 @@ namespace EVEStandard.Models
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum AvailabilityEnum
         {
-            [EnumMember(Value = "public")]
-            publicEnum = 1,
+            @public = 1,
             personal = 2,
             corporation = 3,
             alliance = 4

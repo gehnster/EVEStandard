@@ -16,10 +16,8 @@ namespace EVEStandard.Models
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum StatusEnum
         {
-            [EnumMember(Value = "public")]
-            publicEnum = 1,
-            [EnumMember(Value = "private")]
-            privateEnum = 2
+            @public = 1,
+            @private = 2
         }
 
         #endregion Enums
