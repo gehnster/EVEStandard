@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace EVEStandard.Enumerations
 {
-    [JsonConverter(typeof(JsonStringEnumConverter))]
+    [JsonConverter(typeof(JsonStringEnumMemberConverter))]
     public enum ServicesEnum
     {
         [EnumMember(Value = "bounty-missions")]
