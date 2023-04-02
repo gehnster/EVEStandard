@@ -128,6 +128,19 @@ namespace EVEStandard.Enumerations
         upkeep_adjustment_fee,
         war_ally_contract,
         war_fee,
-        war_fee_surrender
+        war_fee_surrender,
+        daily_challenge_reward,
+        ess_escrow_transfer,
+        external_trade_delivery,
+        external_trade_freeze,
+        external_trade_thaw,
+        flux_payout,
+        flux_tax,
+        flux_ticket_repayment,
+        flux_ticket_sale,
+        market_provider_tax,
+        milestone_reward_payment,
+        redeemed_isk_token,
+        season_challenge_reward
     }
 }
