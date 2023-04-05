@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;netstandard2.0</TargetFrameworks>
-    <Version>3.1.1</Version>
+    <Version>3.1.2</Version>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -12,7 +12,7 @@
     <PackageProjectUrl>https://github.com/gehnster/EVEStandard</PackageProjectUrl>
     <RepositoryUrl>https://github.com/gehnster/EVEStandard</RepositoryUrl>
     <Description>A C# Library to access the EVE Online ESI API</Description>
-    <Copyright>Copyright ©2022 Matthew Park</Copyright>
+    <Copyright>Copyright ©2023 Matthew Park</Copyright>
     <PackageTags>eveonline esi api csharp</PackageTags>
     <Company>Matthew Park</Company>
     <PackageReleaseNotes></PackageReleaseNotes>
