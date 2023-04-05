@@ -1,4 +1,6 @@
-﻿namespace EVEStandard.Models
+﻿using System.Text.Json.Serialization;
+
+namespace EVEStandard.Models
 {
     public class Position : ModelBase<Position>
     {
@@ -8,6 +10,7 @@
         /// <value>
         /// The x.
         /// </value>
+        [JsonPropertyName("x")]
         public double X { get; set; }
 
         /// <summary>
@@ -16,6 +19,7 @@
         /// <value>
         /// The y.
         /// </value>
+        [JsonPropertyName("y")]
         public double Y { get; set; }
 
         /// <summary>
@@ -24,6 +28,7 @@
         /// <value>
         /// The z.
         /// </value>
+        [JsonPropertyName("z")]
         public double Z { get; set; }
     }
 }
