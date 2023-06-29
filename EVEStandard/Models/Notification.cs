@@ -227,7 +227,27 @@ namespace EVEStandard.Models
             WarRetracted,
             WarRetractedByConcord,
             WarSurrenderDeclinedMsg,
-            WarSurrenderOfferMsg
+            WarSurrenderOfferMsg,
+            AgentRetiredTrigravian,
+            ContractRegionChangedToPochven,
+            CorporationGoalClosed,
+            CorporationGoalCompleted,
+            CorporationGoalCreated,
+            ESSMainBankLink,
+            ExpertSystemExpired,
+            ExpertSystemExpiryImminent,
+            InvasionCompletedMsg,
+            InvasionSystemStart,
+            MercOfferRetractedMsg,
+            MissionCanceledTriglavian,
+            OfferToAllyRetracted,
+            OfficeLeaseCanceledInsufficientStandings,
+            RaffleCreated,
+            RaffleExpired,
+            RaffleFinished,
+            StructureImpendingAbandonmentAssetsAtRisk,
+            StructurePaintPurchased,
+            WarEndedHqSecurityDrop,
         }
 
         #endregion Enums
