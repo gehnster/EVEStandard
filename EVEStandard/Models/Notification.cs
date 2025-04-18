@@ -250,6 +250,14 @@ namespace EVEStandard.Models
             WarEndedHqSecurityDrop,
             CorporationGoalNameChange,
             CorporationLeft,
+            LPAutoRedeemed,
+            SPAutoRedeemed,
+            SkinSequencingCompleted,
+            SkyhookOnline,
+            SkyhookLostShields,
+            SkyhookUnderAttack,
+            SkyhookDestroyed,
+            SkyhookDeployed,
         }
 
         #endregion Enums
