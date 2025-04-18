@@ -19,7 +19,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>notification_id integer</value>
         [JsonPropertyName("notification_id")]
-        public int NotificationId { get; set; }
+        public long NotificationId { get; set; }
 
         /// <summary>
         /// send_date string

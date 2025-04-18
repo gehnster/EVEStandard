@@ -126,6 +126,8 @@ namespace EVEStandard.Enumerations
         StructureOffline = 119,
         SubSystemBay = 120,
         Wallet = 121,
-        Wardrobe = 122
+        Wardrobe = 122,
+        InfrastructureHangar = 123,
+        MoonMaterialBay = 124,
     }
 }

@@ -248,6 +248,18 @@ namespace EVEStandard.Models
             StructureImpendingAbandonmentAssetsAtRisk,
             StructurePaintPurchased,
             WarEndedHqSecurityDrop,
+            CorporationGoalNameChange,
+            CorporationLeft,
+            LPAutoRedeemed,
+            SPAutoRedeemed,
+            SkinSequencingCompleted,
+            SkyhookOnline,
+            SkyhookLostShields,
+            SkyhookUnderAttack,
+            SkyhookDestroyed,
+            SkyhookDeployed,
+            StructureLowReagentsAlert,
+            StructureNoReagentsAlert,
         }
 
         #endregion Enums

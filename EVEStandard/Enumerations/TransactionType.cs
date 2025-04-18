@@ -141,6 +141,19 @@ namespace EVEStandard.Enumerations
         market_provider_tax,
         milestone_reward_payment,
         redeemed_isk_token,
-        season_challenge_reward
+        season_challenge_reward,
+        under_construction,
+        allignment_based_gate_toll,
+        project_payouts,
+        insurgency_corruption_contribution_reward,
+        insurgency_suppression_contribution_reward,
+        daily_goal_payouts,
+        daily_goal_payouts_tax,
+        cosmetic_market_component_item_purchase,
+        cosmetic_market_skin_sale_broker_fee,
+        cosmetic_market_skin_purchase,
+        cosmetic_market_skin_sale,
+        cosmetic_market_skin_sale_tax,
+        cosmetic_market_skin_transaction,
     }
 }
