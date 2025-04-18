@@ -258,6 +258,8 @@ namespace EVEStandard.Models
             SkyhookUnderAttack,
             SkyhookDestroyed,
             SkyhookDeployed,
+            StructureLowReagentsAlert,
+            StructureNoReagentsAlert,
         }
 
         #endregion Enums
