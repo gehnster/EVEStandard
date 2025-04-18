@@ -248,6 +248,8 @@ namespace EVEStandard.Models
             StructureImpendingAbandonmentAssetsAtRisk,
             StructurePaintPurchased,
             WarEndedHqSecurityDrop,
+            CorporationGoalNameChange,
+            CorporationLeft,
         }
 
         #endregion Enums
