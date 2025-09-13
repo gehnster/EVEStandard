@@ -22,6 +22,7 @@ namespace EVEStandard.Models
         /// The category of the observing entity
         /// </summary>
         /// <value>The category of the observing entity</value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum ObserverTypeEnum
         {
             structure = 1

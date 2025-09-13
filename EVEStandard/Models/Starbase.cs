@@ -11,6 +11,7 @@ namespace EVEStandard.Models
         /// state string
         /// </summary>
         /// <value>state string</value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum StateEnum
         {
             offline = 1,

@@ -8,9 +8,10 @@ namespace EVEStandard.Models
         #region Enums
 
         /// <summary>
-        /// Who can view the starbase (POS)'s fule bay. Characters either need to have required role or belong to the starbase (POS) owner's corporation or alliance, as described by the enum, all other access settings follows the same scheme
+        /// Who can view the starbase (POS)'s fuel bay. Characters either need to have required role or belong to the starbase (POS) owner's corporation or alliance, as described by the enum, all other access settings follows the same scheme
         /// </summary>
-        /// <value>Who can view the starbase (POS)'s fule bay. Characters either need to have required role or belong to the starbase (POS) owner's corporation or alliance, as described by the enum, all other access settings follows the same scheme</value>
+        /// <value>Who can view the starbase (POS)'s fuel bay. Characters either need to have required role or belong to the starbase (POS) owner's corporation or alliance, as described by the enum, all other access settings follows the same scheme</value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum PermissionEnum
         {
             alliance_member = 1,

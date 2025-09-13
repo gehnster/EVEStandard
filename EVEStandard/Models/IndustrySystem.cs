@@ -26,6 +26,7 @@ namespace EVEStandard.Models
         /// activity string
         /// </summary>
         /// <value>activity string</value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum ActivityEnum
         {
             copying = 1,

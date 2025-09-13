@@ -10,6 +10,7 @@ namespace EVEStandard.Models
         /// from_type string
         /// </summary>
         /// <value>from_type string</value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum FromTypeEnum
         {
             agent = 1,
