@@ -10,6 +10,7 @@ namespace EVEStandard.Models
         /// Access is allowed only for entities with this level of standing or better
         /// </summary>
         /// <value>Access is allowed only for entities with this level of standing or better</value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum StandingLevelEnum
         {
             bad = 1,

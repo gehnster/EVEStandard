@@ -11,6 +11,7 @@ namespace EVEStandard.Models
         /// Current order state
         /// </summary>
         /// <value>Current order state</value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum StateEnum
         {
             cancelled = 1,

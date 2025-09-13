@@ -12,6 +12,7 @@ namespace EVEStandard.Models
         /// Type of event this campaign is for. tcu_defense, ihub_defense and station_defense are referred to as \"Defense Events\", station_freeport as \"Freeport Events\". 
         /// </summary>
         /// <value>Type of event this campaign is for. tcu_defense, ihub_defense and station_defense are referred to as \"Defense Events\", station_freeport as \"Freeport Events\". </value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum EventTypeEnum
         {
             tcu_defense = 1,

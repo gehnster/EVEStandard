@@ -12,6 +12,7 @@ namespace EVEStandard.Models
         /// state string
         /// </summary>
         /// <value>state string</value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum StateEnum
         {
             anchor_vulnerable = 1,
@@ -155,6 +156,7 @@ namespace EVEStandard.Models
         /// state string
         /// </summary>
         /// <value>state string</value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum StateEnum
         {
             online = 1,

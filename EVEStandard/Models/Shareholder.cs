@@ -10,6 +10,7 @@ namespace EVEStandard.Models
         /// shareholder_type string
         /// </summary>
         /// <value>shareholder_type string</value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum ShareholderTypeEnum
         {
             character = 1,

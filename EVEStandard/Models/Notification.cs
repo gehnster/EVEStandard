@@ -11,6 +11,7 @@ namespace EVEStandard.Models
         /// sender_type string
         /// </summary>
         /// <value>sender_type string</value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum SenderTypeEnum
         {
             character = 1,
@@ -24,6 +25,7 @@ namespace EVEStandard.Models
         /// type string
         /// </summary>
         /// <value>type string</value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum TypeEnum
         {
             AcceptedAlly,

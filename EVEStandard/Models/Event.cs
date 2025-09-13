@@ -7,6 +7,7 @@ namespace EVEStandard.Models
     {
         #region Enums
 
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum OwnerTypeEnum
         {
             eve_server,

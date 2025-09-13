@@ -11,6 +11,7 @@ namespace EVEStandard.Models
         /// status string
         /// </summary>
         /// <value>status string</value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum StatusEnum
         {
             Private = 1,

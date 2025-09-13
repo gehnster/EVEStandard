@@ -12,6 +12,7 @@ namespace EVEStandard.Models
         /// Type of password set if action is of type SetPassword or EnterPassword
         /// </summary>
         /// <value>Type of password set if action is of type SetPassword or EnterPassword</value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum PasswordTypeEnum
         {
             config = 1,
