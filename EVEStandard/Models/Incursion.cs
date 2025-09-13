@@ -11,6 +11,7 @@ namespace EVEStandard.Models
         /// The state of this incursion
         /// </summary>
         /// <value>The state of this incursion</value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum StateEnum
         {
             withdrawing = 1,
