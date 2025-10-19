@@ -14,5 +14,6 @@ namespace EVEStandard.Models.API
         public DateTimeOffset? LastModified { get; set; }
         public int MaxPages { get; set; }
         public int RemainingErrors { get; set; }
+        public int ErrorsTimeRemainingInWindowsInSeconds { get; set; }
     }
 }

@@ -153,7 +153,8 @@ namespace EVEStandard.API
                 case HttpStatusCode.RequestTimeout:
                     model.Error = true;
                     model.Message = await response.Content.ReadAsStringAsync();
-                    model.ErrorsTimeRemaining = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
+                    model.RemainingErrors = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
+                    model.ErrorsTimeRemainingInWindowInSeconds = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Reset").FirstOrDefault() ?? "0");
 
                     return model;
                 case HttpStatusCode.Unauthorized:
@@ -161,13 +162,15 @@ namespace EVEStandard.API
                 case (HttpStatusCode)429:
                     model.Error = true;
                     model.Message = "Too many requests made to ESI in a short period of time";
-                    model.ErrorsTimeRemaining = int.Parse(response.Headers.GetValues("Retry-After").FirstOrDefault() ?? "0");
+                    model.RemainingErrors = int.Parse(response.Headers.GetValues("Retry-After").FirstOrDefault() ?? "0");
+                    model.ErrorsTimeRemainingInWindowInSeconds = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Reset").FirstOrDefault() ?? "0");
 
                     return model;
                 case (HttpStatusCode)520:
                     model.Error = true;
                     model.Message = "Internal error thrown by EVE server. Most of the time this means you have hit an EVE server rate limit.";
-                    model.ErrorsTimeRemaining = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
+                    model.RemainingErrors = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
+                    model.ErrorsTimeRemainingInWindowInSeconds = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Reset").FirstOrDefault() ?? "0");
 
                     return model;
                 case HttpStatusCode.Forbidden:
@@ -180,14 +183,16 @@ namespace EVEStandard.API
                 case (HttpStatusCode)422:
                     model.Error = true;
                     model.Message = $"Your request was invalid. Returned message: {await response.Content.ReadAsStringAsync()}";
-                    model.ErrorsTimeRemaining = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
+                    model.RemainingErrors = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
+                    model.ErrorsTimeRemainingInWindowInSeconds = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Reset").FirstOrDefault() ?? "0");
 
                     return model;
                 default:
                     logger.LogWarning($"API Response Issue. Status Code: {response.StatusCode}");
                     model.Error = true;
                     model.Message = $"An error code we didn't handle was returned. Status Code: {response.StatusCode}";
-                    model.ErrorsTimeRemaining = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
+                    model.RemainingErrors = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
+                    model.ErrorsTimeRemainingInWindowInSeconds = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Reset").FirstOrDefault() ?? "0");
 
                     return model;
             }
@@ -273,6 +278,33 @@ namespace EVEStandard.API
 
         protected ESIModelDTO<T> ReturnModelDTO<T>(APIResponse response)
         {
+            // Build a sensible empty instance for T when response.JSONString is null/empty.
+            // Attempt deserializing an empty object first (fills defaults), then fall back to Activator,
+            // and finally to default(T).
+            T modelInstance;
+            if (string.IsNullOrEmpty(response.JSONString))
+            {
+                try
+                {
+                    modelInstance = JsonSerializer.Deserialize<T>("{}");
+                }
+                catch
+                {
+                    try
+                    {
+                        modelInstance = Activator.CreateInstance<T>();
+                    }
+                    catch
+                    {
+                        modelInstance = default(T);
+                    }
+                }
+            }
+            else
+            {
+                modelInstance = JsonSerializer.Deserialize<T>(response.JSONString);
+            }
+
             return new ESIModelDTO<T>()
             {
                 NotModified = response.NotModified,
@@ -281,7 +313,7 @@ namespace EVEStandard.API
                 Expires = response.Expires,
                 LastModified = response.LastModified,
                 MaxPages = response.MaxPages,
-                Model = JsonSerializer.Deserialize<T>(response.JSONString ?? "")
+                Model = modelInstance
             };
         }
     }

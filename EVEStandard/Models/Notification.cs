@@ -262,6 +262,7 @@ namespace EVEStandard.Models
             SkyhookDeployed,
             StructureLowReagentsAlert,
             StructureNoReagentsAlert,
+            CorporationGoalExpired
         }
 
         #endregion Enums
@@ -309,13 +310,24 @@ namespace EVEStandard.Models
         /// <value>timestamp string</value>
         [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
-        
+
+        [JsonIgnore]
+        public TypeEnum? Type
+        {
+            get
+            {
+                if (Enum.TryParse<TypeEnum>(TypeAsString, true, out var result))
+                    return result;
+                return null;
+            }
+        }
+
         /// <summary>
         /// type string
         /// </summary>
         /// <value>type string</value>
         [JsonPropertyName("type")]
-        public TypeEnum Type { get; set; }
+        public string TypeAsString { get; set; }
 
         #endregion Properties
     }
