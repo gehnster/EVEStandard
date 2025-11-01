@@ -22,7 +22,7 @@ namespace EVEStandard
         /// <summary>
         /// Initialize the EVEStandard Library
         /// </summary>
-        /// <param name="userAgent"></param>
+        /// <param name="userAgent">Please follow the user agent guidelines that CCP has provided. https://developers.eveonline.com/docs/services/esi/best-practices/#user-agents</param>
         /// <param name="dataSource"></param>
         /// <param name="timeOut"></param>
         /// <param name="clientHandler"></param>
@@ -36,6 +36,11 @@ namespace EVEStandard
                 };
             }
 
+            if(string.IsNullOrWhiteSpace(userAgent))
+            {
+                throw new EVEStandardException("Please follow the user agent guidelines that CCP has provided. https://developers.eveonline.com/docs/services/esi/best-practices/#user-agents", new ArgumentException(nameof(userAgent)));
+            }
+
             http = new HttpClient(clientHandler);
             http.DefaultRequestHeaders.UserAgent.ParseAdd(userAgent);
             http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -43,7 +48,7 @@ namespace EVEStandard
             http.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
             http.Timeout = timeOut;
 
-            this.userAgent = userAgent ?? "EVEStandard-default";
+            this.userAgent = userAgent;
             this.dataSource = Enum.GetName(typeof(DataSource), dataSource)?.ToLower();
 
             initializeAPI();
