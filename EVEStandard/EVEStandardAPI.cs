@@ -38,7 +38,7 @@ namespace EVEStandard
 
             if(string.IsNullOrWhiteSpace(userAgent))
             {
-                throw new EVEStandardException("Please follow the user agent guidelines that CCP has provided. https://developers.eveonline.com/docs/services/esi/best-practices/#user-agents", new ArgumentException(nameof(userAgent)));
+                throw new EVEStandardException("Please follow the user agent guidelines that CCP has provided. https://developers.eveonline.com/docs/services/esi/best-practices/#user-agents");
             }
 
             http = new HttpClient(clientHandler);
