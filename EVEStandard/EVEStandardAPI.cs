@@ -37,7 +37,7 @@ namespace EVEStandard
             }
 
             http = new HttpClient(clientHandler);
-            http.DefaultRequestHeaders.Add("User-Agent", HttpUtility.UrlEncode(userAgent));
+            http.DefaultRequestHeaders.UserAgent.ParseAdd(userAgent);
             http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             http.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
             http.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
