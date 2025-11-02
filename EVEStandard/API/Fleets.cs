@@ -15,7 +15,7 @@ namespace EVEStandard.API
     {
         private readonly ILogger logger = LibraryLogging.CreateLogger<Fleets>();
 
-        internal Fleets(string dataSource) : base(dataSource)
+        internal Fleets(string dataSource, CompatibilityDate compatibilityDate) : base(dataSource, compatibilityDate)
         {
         }
 
@@ -193,7 +193,7 @@ namespace EVEStandard.API
         {
             CheckAuth(auth, Scopes.ESI_FLEETS_WRITE_FLEET_1);
 
-            var responseModel = await PostAsync($"/v1/fleets/{fleetId}/wings/", auth, null);
+            var responseModel = await PostAsync($"/v1/fleets/{fleetId}/wings/", auth, null, null, null);
 
             CheckResponse(nameof(CreateFleetWingV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
@@ -251,7 +251,7 @@ namespace EVEStandard.API
         {
             CheckAuth(auth, Scopes.ESI_FLEETS_WRITE_FLEET_1);
 
-            var responseModel = await PostAsync($"/v1/fleets/{fleetId}/wings/{wingId}/squads/", auth, null);
+            var responseModel = await PostAsync($"/v1/fleets/{fleetId}/wings/{wingId}/squads/", auth, null, null, null);
 
             CheckResponse(nameof(CreateFleetSquadV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 

@@ -16,7 +16,7 @@ namespace EVEStandard.API
     {
         private readonly ILogger logger = LibraryLogging.CreateLogger<Contacts>();
 
-        internal Contacts(string dataSource) : base(dataSource)
+        internal Contacts(string dataSource, CompatibilityDate compatibilityDate) : base(dataSource, compatibilityDate)
         {
         }
 

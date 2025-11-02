@@ -15,7 +15,7 @@ namespace EVEStandard.API
     {
         private readonly ILogger logger = LibraryLogging.CreateLogger<Loyalty>();
 
-        internal Loyalty(string dataSource) : base(dataSource)
+        internal Loyalty(string dataSource, CompatibilityDate compatibilityDate) : base(dataSource, compatibilityDate)
         {
         }
 

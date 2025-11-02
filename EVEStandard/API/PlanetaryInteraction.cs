@@ -15,7 +15,7 @@ namespace EVEStandard.API
     {
         private readonly ILogger logger = LibraryLogging.CreateLogger<PlanetaryInteraction>();
 
-        internal PlanetaryInteraction(string dataSource) : base(dataSource)
+        internal PlanetaryInteraction(string dataSource, CompatibilityDate compatibilityDate) : base(dataSource, compatibilityDate)
         {
         }
 

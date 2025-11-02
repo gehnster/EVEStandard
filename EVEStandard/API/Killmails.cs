@@ -15,7 +15,7 @@ namespace EVEStandard.API
     {
         private readonly ILogger logger = LibraryLogging.CreateLogger<Killmails>();
 
-        internal Killmails(string dataSource) : base(dataSource)
+        internal Killmails(string dataSource, CompatibilityDate compatibilityDate) : base(dataSource, compatibilityDate)
         {
         }
 

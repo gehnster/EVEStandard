@@ -16,17 +16,19 @@ namespace EVEStandard
     {
 
         private static HttpClient http;
-        private string userAgent;
+        private readonly string userAgent;
         private readonly string dataSource;
+        private readonly CompatibilityDate compatibilityDate;
 
         /// <summary>
         /// Initialize the EVEStandard Library
         /// </summary>
         /// <param name="userAgent">Please follow the user agent guidelines that CCP has provided. https://developers.eveonline.com/docs/services/esi/best-practices/#user-agents</param>
         /// <param name="dataSource"></param>
+        /// <param name="compatabilityDate">The compatiblity date you want to target.</param>
         /// <param name="timeOut"></param>
         /// <param name="clientHandler"></param>
-        public EVEStandardAPI(string userAgent, DataSource dataSource, TimeSpan timeOut, HttpClientHandler clientHandler = null)
+        public EVEStandardAPI(string userAgent, DataSource dataSource, CompatibilityDate compatabilityDate, TimeSpan timeOut, HttpClientHandler clientHandler = null)
         {
             if (clientHandler == null)
             { 
@@ -50,6 +52,7 @@ namespace EVEStandard
 
             this.userAgent = userAgent;
             this.dataSource = Enum.GetName(typeof(DataSource), dataSource)?.ToLower();
+            this.compatibilityDate = compatabilityDate;
 
             initializeAPI();
         }
@@ -144,6 +147,7 @@ namespace EVEStandard
         public Loyalty Loyalty { get; private set; }
         public Mail Mail { get; private set; }
         public Market Market { get; private set; }
+        public Meta Meta { get; private set; }
         public PlanetaryInteraction PlanetaryInteraction { get; private set; }
         public Routes Routes { get; private set; }
         public Search Search { get; private set; }
@@ -158,123 +162,127 @@ namespace EVEStandard
         // ReSharper disable once InconsistentNaming
         private void initializeAPI()
         {
-            Alliance = new Alliance(dataSource)
+            Alliance = new Alliance(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Assets = new Assets(dataSource)
+            Assets = new Assets(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Calendar = new Calendar(dataSource)
+            Calendar = new Calendar(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Character = new Character(dataSource)
+            Character = new Character(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Clones = new Clones(dataSource)
+            Clones = new Clones(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Contacts = new Contacts(dataSource)
+            Contacts = new Contacts(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Contracts = new Contracts(dataSource)
+            Contracts = new Contracts(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Corporation = new Corporation(dataSource)
+            Corporation = new Corporation(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Dogma = new Dogma(dataSource)
+            Dogma = new Dogma(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            FactionWarfare = new FactionWarfare(dataSource)
+            FactionWarfare = new FactionWarfare(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Fittings = new Fittings(dataSource)
+            Fittings = new Fittings(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Fleets = new Fleets(dataSource)
+            Fleets = new Fleets(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Incursion = new Incursions(dataSource)
+            Incursion = new Incursions(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Industry = new Industry(dataSource)
+            Industry = new Industry(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Insurance = new Insurance(dataSource)
+            Insurance = new Insurance(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Killmails = new Killmails(dataSource)
+            Killmails = new Killmails(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Location = new Location(dataSource)
+            Location = new Location(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Loyalty = new Loyalty(dataSource)
+            Loyalty = new Loyalty(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Mail = new Mail(dataSource)
+            Mail = new Mail(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Market = new Market(dataSource)
+            Market = new Market(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            PlanetaryInteraction = new PlanetaryInteraction(dataSource)
+            Meta = new Meta(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Routes = new Routes(dataSource)
+            PlanetaryInteraction = new PlanetaryInteraction(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Search = new Search(dataSource)
+            Routes = new Routes(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Skills = new Skills(dataSource)
+            Search = new Search(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Sovereignty = new Sovereignty(dataSource)
+            Skills = new Skills(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Status = new Status(dataSource)
+            Sovereignty = new Sovereignty(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Universe = new Universe(dataSource)
+            Status = new Status(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            UserInterface = new UserInterface(dataSource)
+            Universe = new Universe(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Wallet = new Wallet(dataSource)
+            UserInterface = new UserInterface(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
-            Wars = new Wars(dataSource)
+            Wallet = new Wallet(dataSource, compatibilityDate)
+            {
+                HTTP = http
+            };
+            Wars = new Wars(dataSource, compatibilityDate)
             {
                 HTTP = http
             };

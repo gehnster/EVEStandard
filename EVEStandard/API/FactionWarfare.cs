@@ -15,7 +15,7 @@ namespace EVEStandard.API
     {
         private readonly ILogger logger = LibraryLogging.CreateLogger<FactionWarfare>();
 
-        internal FactionWarfare(string dataSource) : base(dataSource)
+        internal FactionWarfare(string dataSource, CompatibilityDate compatibilityDate) : base(dataSource, compatibilityDate)
         {
         }
 

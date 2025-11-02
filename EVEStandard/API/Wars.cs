@@ -1,4 +1,5 @@
-﻿using EVEStandard.Models;
+﻿using EVEStandard.Enumerations;
+using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace EVEStandard.API
     {
         private readonly ILogger logger = LibraryLogging.CreateLogger<Wars>();
 
-        internal Wars(string dataSource) : base(dataSource)
+        internal Wars(string dataSource, CompatibilityDate compatibilityDate) : base(dataSource, compatibilityDate)
         {
         }
 

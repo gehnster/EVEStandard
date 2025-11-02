@@ -16,7 +16,7 @@ namespace EVEStandard.API
     {
         private readonly ILogger logger = LibraryLogging.CreateLogger<Calendar>();
 
-        internal Calendar(string dataSource) : base(dataSource)
+        internal Calendar(string dataSource, CompatibilityDate compatibilityDate) : base(dataSource, compatibilityDate)
         {
         }
 

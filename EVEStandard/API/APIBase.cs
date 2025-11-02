@@ -1,4 +1,5 @@
-﻿using EVEStandard.Models.API;
+﻿using EVEStandard.Enumerations;
+using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -26,12 +27,32 @@ namespace EVEStandard.API
 
         public readonly string ESI_BASE;
         private readonly string dataSource;
+        private readonly string compatibilityDate;
         internal HttpClient HTTP { get => http; set => http = value; }
 
-        internal APIBase(string dataSource)
+        internal APIBase(string dataSource, CompatibilityDate compatibilityDate)
         {
             this.dataSource = dataSource ?? "tranquility";
             this.ESI_BASE = this.dataSource == "serenity" ? SERENITY_ESI_BASE : TRANQUILITY_ESI_BASE;
+
+            // Convert the CompatibilityDate enum to a string.
+            // This uses the enum member name and replaces underscores with hyphens so
+            // members like `v2018_07_18` -> "v2018-07-18" or `2018_07_18` -> "2018-07-18".
+            // If you need a different mapping (e.g. drop a leading 'v' or use explicit values),
+            // replace this with an explicit switch mapping.
+            var enumName = Enum.GetName(typeof(CompatibilityDate), compatibilityDate);
+            if (string.IsNullOrEmpty(enumName))
+            {
+                throw new ArgumentOutOfRangeException(nameof(compatibilityDate), "Invalid CompatibilityDate value");
+            }
+
+            // Remove leading 'v' or 'V'
+            if ((enumName.Length > 0) && (enumName[0] == 'v' || enumName[0] == 'V'))
+            {
+                enumName = enumName.Substring(1);
+            }
+
+            this.compatibilityDate = enumName.Replace('_', '-');
         }
 
         internal async Task<APIResponse> GetAsync(string uri, string ifNoneMatch=null, Dictionary<string, string> queryParameters = null)
@@ -42,6 +63,11 @@ namespace EVEStandard.API
         internal async Task<APIResponse> GetAsync(string uri, AuthDTO auth, string ifNoneMatch=null, Dictionary<string, string> queryParameters = null)
         {
             return await RequestAsync(HttpMethod.Get, uri, auth, ifNoneMatch, queryParameters);
+        }
+
+        internal async Task<APIResponse> PostAsync(string uri, object body, string ifNoneMatch = null, Dictionary<string, string> queryParameters = null)
+        {
+            return await PostAsync(uri, null, body, ifNoneMatch, queryParameters);
         }
 
         internal async Task<APIResponse> PostAsync(string uri, AuthDTO auth, object body, string ifNoneMatch=null, Dictionary<string, string> queryParameters = null)
@@ -62,7 +88,6 @@ namespace EVEStandard.API
         private async Task<APIResponse> RequestAsync(HttpMethod method, string uri, AuthDTO auth, string ifNoneMatch=null, Dictionary<string, string> queryParameters = null, object body = null)
         {
             var queryParams = HttpUtility.ParseQueryString(String.Empty);
-            queryParams.Add("datasource", dataSource);
 
             if (queryParameters != null)
             {
@@ -105,6 +130,9 @@ namespace EVEStandard.API
                 {
                     request.Headers.Add("If-None-Match", ifNoneMatch);
                 }
+
+                request.Headers.Add("X-Tenant", dataSource);
+                request.Headers.Add("X-Compatibility-Date", compatibilityDate);
 
                 var authResponse = await HTTP.SendAsync(request).ConfigureAwait(false);
 

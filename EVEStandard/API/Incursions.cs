@@ -1,4 +1,5 @@
-﻿using EVEStandard.Models.API;
+﻿using EVEStandard.Enumerations;
+using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace EVEStandard.API
     {
         private readonly ILogger logger = LibraryLogging.CreateLogger<Incursions>();
 
-        internal Incursions(string dataSource) : base(dataSource)
+        internal Incursions(string dataSource, CompatibilityDate compatibilityDate) : base(dataSource, compatibilityDate)
         {
         }
 

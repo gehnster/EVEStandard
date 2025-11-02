@@ -1,4 +1,5 @@
-﻿using EVEStandard.Models.API;
+﻿using EVEStandard.Enumerations;
+using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace EVEStandard.API
     {
         private readonly ILogger logger = LibraryLogging.CreateLogger<Status>();
 
-        internal Status(string dataSource) : base(dataSource)
+        internal Status(string dataSource, CompatibilityDate compatibilityDate) : base(dataSource, compatibilityDate)
         {
         }
 

@@ -16,7 +16,7 @@ namespace EVEStandard.API
     {
         private readonly ILogger logger = LibraryLogging.CreateLogger<Universe>();
 
-        internal Universe(string dataSource) : base(dataSource)
+        internal Universe(string dataSource, CompatibilityDate compatibilityDate) : base(dataSource, compatibilityDate)
         {
         }
 

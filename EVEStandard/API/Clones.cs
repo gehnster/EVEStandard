@@ -14,7 +14,7 @@ namespace EVEStandard.API
     {
         private readonly ILogger logger = LibraryLogging.CreateLogger<Clones>();
 
-        internal Clones(string dataSource) : base(dataSource)
+        internal Clones(string dataSource, CompatibilityDate compatibilityDate) : base(dataSource, compatibilityDate)
         {
         }
 
