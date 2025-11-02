@@ -1,6 +1,5 @@
-EVEStandard\Models\MetaCompatibilityDates.cs
-using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace EVEStandard.Models
 {
@@ -10,6 +9,6 @@ namespace EVEStandard.Models
         /// Array of compatibility dates in YYYY-MM-DD format.
         /// </summary>
         [JsonPropertyName("compatibility_dates")]
-        public List<string> CompatibilityDates { get; set; }
+        public List<string> Dates { get; set; }
     }
 }
