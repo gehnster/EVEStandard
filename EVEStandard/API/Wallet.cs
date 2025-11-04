@@ -26,13 +26,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing wallet balance.</returns>
-        public async Task<ESIModelDTO<double>> GetCharacterWalletBalanceV1Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<double>> GetCharacterWalletBalanceAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_WALLET_READ_CHARACTER_WALLET_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/wallet/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/wallet/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetCharacterWalletBalanceV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterWalletBalanceAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<double>(responseModel);
         }
@@ -45,7 +45,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing journal entries.</returns>
-        public async Task<ESIModelDTO<List<CharacterWalletJournal>>> GetCharacterWalletJournalV6Async(AuthDTO auth, int page, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<CharacterWalletJournal>>> GetCharacterWalletJournalAsync(AuthDTO auth, int page, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_WALLET_READ_CHARACTER_WALLET_1);
 
@@ -54,9 +54,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v6/characters/{auth.CharacterId}/wallet/journal/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/wallet/journal/", auth, ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetCharacterWalletJournalV6Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterWalletJournalAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<CharacterWalletJournal>>(responseModel);
         }
@@ -69,7 +69,7 @@ namespace EVEStandard.API
         /// <param name="fromId">Only show transactions happened before the one referenced by this id.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing wallet transactions.</returns>
-        public async Task<ESIModelDTO<List<WalletTransaction>>> GetCharacterWalletTransactionsV1Async(AuthDTO auth, long fromId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<WalletTransaction>>> GetCharacterWalletTransactionsAsync(AuthDTO auth, long fromId, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_WALLET_READ_CHARACTER_WALLET_1);
 
@@ -78,9 +78,9 @@ namespace EVEStandard.API
                 { "from_id", fromId.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/wallet/transactions/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/wallet/transactions/", auth, ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetCharacterWalletTransactionsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterWalletTransactionsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<WalletTransaction>>(responseModel);
         }
@@ -93,13 +93,13 @@ namespace EVEStandard.API
         /// <param name="corpId">An EVE corporation ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing list of corporation wallets.</returns>
-        public async Task<ESIModelDTO<List<CorporationWallet>>> ReturnCorporationWalletBalanceV1Async(AuthDTO auth, int corpId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<CorporationWallet>>> ReturnCorporationWalletBalanceAsync(AuthDTO auth, int corpId, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_WALLET_READ_CORPORATION_WALLETS_1);
 
-            var responseModel = await GetAsync($"/v1/corporations/{corpId}/wallets/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/corporations/{corpId}/wallets/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(ReturnCorporationWalletBalanceV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ReturnCorporationWalletBalanceAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<CorporationWallet>>(responseModel);
         }
@@ -114,7 +114,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing journal entries.</returns>
-        public async Task<ESIModelDTO<List<CorporationWalletJournal>>> GetCorporationWalletJournalV4Async(AuthDTO auth, int corpId, int division, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<CorporationWalletJournal>>> GetCorporationWalletJournalAsync(AuthDTO auth, int corpId, int division, int page = 1, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_WALLET_READ_CORPORATION_WALLETS_1);
 
@@ -123,9 +123,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v4/corporations/{corpId}/wallets/{division}/journal/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/corporations/{corpId}/wallets/{division}/journal/", auth, ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetCorporationWalletJournalV4Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationWalletJournalAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<CorporationWalletJournal>>(responseModel);
         }
@@ -140,7 +140,7 @@ namespace EVEStandard.API
         /// <param name="fromId">Only show transactions happened before the one referenced by this id.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing wallet transactions.</returns>
-        public async Task<ESIModelDTO<List<WalletTransaction>>> GetCorporationWalletTransactionsV1Async(AuthDTO auth, int corpId, int division, long fromId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<WalletTransaction>>> GetCorporationWalletTransactionsAsync(AuthDTO auth, int corpId, int division, long fromId, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_WALLET_READ_CORPORATION_WALLETS_1);
 
@@ -149,9 +149,9 @@ namespace EVEStandard.API
                 { "from_id", fromId.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v1/corporations/{corpId}/wallets/{division}/transactions/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/corporations/{corpId}/wallets/{division}/transactions/", auth, ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetCorporationWalletTransactionsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationWalletTransactionsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<WalletTransaction>>(responseModel);
         }

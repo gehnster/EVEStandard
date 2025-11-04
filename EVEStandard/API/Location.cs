@@ -25,13 +25,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing information about the characters current location. Returns the current solar system id, and also the current station or structure ID if applicable.</returns>
-        public async Task<ESIModelDTO<CharacterLocation>> GetCharacterLocationV1Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<CharacterLocation>> GetCharacterLocationAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_LOCATION_READ_LOCATION_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/location/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/location/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetCharacterLocationV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterLocationAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<CharacterLocation>(responseModel);
         }
@@ -43,13 +43,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing the current ship type, name and id.</returns>
-        public async Task<ESIModelDTO<CharacterShip>> GetCurrentShipV1Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<CharacterShip>> GetCurrentShipAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_LOCATION_READ_SHIP_TYPE_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/ship/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/ship/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetCurrentShipV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCurrentShipAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<CharacterShip>(responseModel);
         }
@@ -61,13 +61,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing object describing the character’s online status.</returns>
-        public async Task<ESIModelDTO<CharacterOnline>> GetCharacterOnlineV2Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<CharacterOnline>> GetCharacterOnlineAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_LOCATION_READ_ONLINE_1);
 
-            var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/online/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/online/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetCharacterOnlineV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterOnlineAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<CharacterOnline>(responseModel);
         }

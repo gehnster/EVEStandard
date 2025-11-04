@@ -25,13 +25,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing clone information for the given character.</returns>
-        public async Task<ESIModelDTO<Clones>> GetClonesV3Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Clones>> GetClonesAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CLONES_READ_CLONES_1);
 
-            var responseModel = await GetAsync($"/v3/characters/{auth.CharacterId}/clones/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/clones/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetClonesV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetClonesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Clones>(responseModel);
         }
@@ -43,13 +43,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of implant type ids.</returns>
-        public async Task<ESIModelDTO<List<int>>> GetActiveImplantsV1Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<int>>> GetActiveImplantsAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CLONES_READ_IMPLANTS_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/implants/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/implants/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetActiveImplantsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetActiveImplantsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<int>>(responseModel);
         }

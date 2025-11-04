@@ -29,7 +29,7 @@ namespace EVEStandard.API
         /// <param name="lastMailId">List only mail with an ID lower than the given ID, if present.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing the requested mail.</returns>
-        public async Task<ESIModelDTO<List<Models.Mail>>> ReturnMailHeadersV1Async(AuthDTO auth, List<long> labels, long lastMailId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<Models.Mail>>> ReturnMailHeadersAsync(AuthDTO auth, List<long> labels, long lastMailId, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_MAIL_READ_MAIL_1);
 
@@ -39,9 +39,9 @@ namespace EVEStandard.API
                 { "last_mail_id", lastMailId.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/mail/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/mail/", auth, ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(ReturnMailHeadersV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ReturnMailHeadersAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<Models.Mail>>(responseModel);
         }
@@ -53,13 +53,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="mail">The mail to send.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing the id of the sent mail.</returns>
-        public async Task<ESIModelDTO<int>> SendNewMailV1Async(AuthDTO auth, NewMail mail)
+        public async Task<ESIModelDTO<int>> SendNewMailAsync(AuthDTO auth, NewMail mail)
         {
             CheckAuth(auth, Scopes.ESI_MAIL_SEND_MAIL_1);
 
-            var responseModel = await PostAsync($"/v1/characters/{auth.CharacterId}/mail/", auth, mail);
+            var responseModel = await PostAsync($"/characters/{auth.CharacterId}/mail/", auth, mail);
 
-            CheckResponse(nameof(SendNewMailV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(SendNewMailAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<int>(responseModel);
         }
@@ -71,13 +71,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of mail labels and unread counts.</returns>
-        public async Task<ESIModelDTO<UnreadMail>> GetMailLabelsAndUnreadCountsV3Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<UnreadMail>> GetMailLabelsAndUnreadCountsAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_MAIL_READ_MAIL_1);
 
-            var responseModel = await GetAsync($"/v3/characters/{auth.CharacterId}/mail/labels/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/mail/labels/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetMailLabelsAndUnreadCountsV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetMailLabelsAndUnreadCountsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<UnreadMail>(responseModel);
         }
@@ -90,7 +90,7 @@ namespace EVEStandard.API
         /// <param name="labelName">Label to create.</param>
         /// <param name="labelHexColor">Hexadecimal string representing label color, in RGB format.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing id of the created label.</returns>
-        public async Task<ESIModelDTO<long>> CreateMailLabelV2Async(AuthDTO auth, string labelName, string labelHexColor)
+        public async Task<ESIModelDTO<long>> CreateMailLabelAsync(AuthDTO auth, string labelName, string labelHexColor)
         {
             CheckAuth(auth, Scopes.ESI_MAIL_ORGANIZE_MAIL_1);
 
@@ -100,9 +100,9 @@ namespace EVEStandard.API
                 color = labelHexColor
             };
 
-            var responseModel = await PostAsync($"/v2/characters/{auth.CharacterId}/mail/labels/", auth, body);
+            var responseModel = await PostAsync($"/characters/{auth.CharacterId}/mail/labels/", auth, body);
 
-            CheckResponse(nameof(CreateMailLabelV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(CreateMailLabelAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<long>(responseModel);
         }
@@ -114,13 +114,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="labelId">An EVE label id.</param>
         /// <returns></returns>
-        public async Task DeleteMailLabelV1Async(AuthDTO auth, long labelId)
+        public async Task DeleteMailLabelAsync(AuthDTO auth, long labelId)
         {
             CheckAuth(auth, Scopes.ESI_MAIL_ORGANIZE_MAIL_1);
 
-            var responseModel = await DeleteAsync($"/v1/characters/{auth.CharacterId}/mail/labels/" + labelId + "/", auth);
+            var responseModel = await DeleteAsync($"/characters/{auth.CharacterId}/mail/labels/" + labelId + "/", auth);
 
-            CheckResponse(nameof(DeleteMailLabelV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(DeleteMailLabelAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         /// <summary>
@@ -130,13 +130,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing mailing lists.</returns>
-        public async Task<ESIModelDTO<List<MailList>>> ReturnMailingListSubscriptionsV1Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<MailList>>> ReturnMailingListSubscriptionsAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_MAIL_READ_MAIL_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/mail/lists/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/mail/lists/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(ReturnMailingListSubscriptionsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ReturnMailingListSubscriptionsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<MailList>>(responseModel);
         }
@@ -148,13 +148,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="mailId">An EVE mail ID.</param>
         /// <returns></returns>
-        public async Task DeleteMailV1Async(AuthDTO auth, long mailId)
+        public async Task DeleteMailAsync(AuthDTO auth, long mailId)
         {
             CheckAuth(auth, Scopes.ESI_MAIL_ORGANIZE_MAIL_1);
 
-            var responseModel = await DeleteAsync($"/v1/characters/{auth.CharacterId}/mail/" + mailId + "/", auth);
+            var responseModel = await DeleteAsync($"/characters/{auth.CharacterId}/mail/" + mailId + "/", auth);
 
-            CheckResponse(nameof(DeleteMailV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(DeleteMailAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         /// <summary>
@@ -165,13 +165,13 @@ namespace EVEStandard.API
         /// <param name="mailId">An EVE mail ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing contents of a mail.</returns>
-        public async Task<ESIModelDTO<MailContent>> ReturnMailV1Async(AuthDTO auth, long mailId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<MailContent>> ReturnMailAsync(AuthDTO auth, long mailId, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_MAIL_READ_MAIL_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/mail/{mailId}/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/mail/{mailId}/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(ReturnMailV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ReturnMailAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<MailContent>(responseModel);
         }
@@ -184,13 +184,13 @@ namespace EVEStandard.API
         /// <param name="mailId">An EVE mail ID.</param>
         /// <param name="contents">Data used to update the mail.</param>
         /// <returns></returns>
-        public async Task UpdateMetadataAboutMailV1Async(AuthDTO auth, long mailId, UpdateMailMetadata contents)
+        public async Task UpdateMetadataAboutMailAsync(AuthDTO auth, long mailId, UpdateMailMetadata contents)
         {
             CheckAuth(auth, Scopes.ESI_MAIL_ORGANIZE_MAIL_1);
 
-            var responseModel = await PutAsync($"/v1/characters/{auth.CharacterId}/mail/{mailId}/", auth, contents);
+            var responseModel = await PutAsync($"/characters/{auth.CharacterId}/mail/{mailId}/", auth, contents);
 
-            CheckResponse(nameof(ReturnMailV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ReturnMailAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
     }
 }

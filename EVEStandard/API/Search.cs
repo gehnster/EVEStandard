@@ -31,7 +31,7 @@ namespace EVEStandard.API
         /// <param name="language">Language to use in the response, takes precedence over Accept-Language. Available values : de, en-us, fr, ja, ru, zh. Default value : en-us.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of search results.</returns>
-        public async Task<ESIModelDTO<CharacterSearch>> SearchCharacterV3Async(AuthDTO auth, List<string> categories, string search, bool strict = false, string language = Language.English, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<CharacterSearch>> SearchCharacterAsync(AuthDTO auth, List<string> categories, string search, bool strict = false, string language = Language.English, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_SEARCH_SEARCH_STRUCTURES_1);
 
@@ -48,9 +48,9 @@ namespace EVEStandard.API
                 { "strict", strict.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v3/characters/{auth.CharacterId}/search/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/search/", auth, ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(SearchCharacterV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(SearchCharacterAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<CharacterSearch>(responseModel);
         }
@@ -64,7 +64,7 @@ namespace EVEStandard.API
         /// <param name="language">Language to use in the response, takes precedence over Accept-Language. Available values : de, en-us, fr, ja, ru, zh. Default value : en-us.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of search results.</returns>
-        public async Task<ESIModelDTO<Models.Search>> SearchV2Async(List<string> categories, string search, bool strict = false, string language = Language.English, string ifNoneMatch=null)
+        public async Task<ESIModelDTO<Models.Search>> SearchAsync(List<string> categories, string search, bool strict = false, string language = Language.English, string ifNoneMatch=null)
         {
             if (categories == null || categories.Count == 0 || search == null)
             {
@@ -79,9 +79,9 @@ namespace EVEStandard.API
                 { "strict", strict.ToString() }
             };
 
-            var responseModel = await GetAsync("/v2/search/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/search/", ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(SearchV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(SearchAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Models.Search>(responseModel);
         }

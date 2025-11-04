@@ -30,7 +30,7 @@ namespace EVEStandard.API
         /// <param name="fromEventId">The event ID to retrieve events from.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a collection of event summaries.</returns>
-        public async Task<ESIModelDTO<List<EventSummary>>> ListCalendarEventSummariesV1Async(AuthDTO auth, long? fromEventId = null, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<EventSummary>>> ListCalendarEventSummariesAsync(AuthDTO auth, long? fromEventId = null, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CALENDAR_READ_CALENDAR_EVENTS_1);
 
@@ -43,9 +43,9 @@ namespace EVEStandard.API
                 };
             }
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/calendar/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/calendar/", auth, ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(ListCalendarEventSummariesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListCalendarEventSummariesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<EventSummary>>(responseModel);
         }
@@ -58,13 +58,13 @@ namespace EVEStandard.API
         /// <param name="eventId">The id of the event requested.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing full details of a specific event.</returns>
-        public async Task<ESIModelDTO<Event>> GetAnEventV3Async(AuthDTO auth, long eventId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Event>> GetAnEventAsync(AuthDTO auth, long eventId, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CALENDAR_READ_CALENDAR_EVENTS_1);
 
-            var responseModel = await GetAsync($"/v3/characters/{auth.CharacterId}/calendar/" + eventId + "/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/calendar/" + eventId + "/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetAnEventV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetAnEventAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Event>(responseModel);
         }
@@ -77,7 +77,7 @@ namespace EVEStandard.API
         /// <param name="eventId">The id of the event requested.</param>
         /// <param name="response">The response value to set, overriding current value.</param>
         /// <returns></returns>
-        public async Task RespondToAnEventV3Async(AuthDTO auth, long eventId, EventResponse response)
+        public async Task RespondToAnEventAsync(AuthDTO auth, long eventId, EventResponse response)
         {
             CheckAuth(auth, Scopes.ESI_CALENDAR_RESPOND_CALENDAR_EVENTS_1);
 
@@ -86,9 +86,9 @@ namespace EVEStandard.API
                 ["response"] = response.ToString()
             };
 
-            var responseModel = await this.PutAsync($"/v3/characters/{auth.CharacterId}/calendar/" + eventId + "/", auth, body);
+            var responseModel = await this.PutAsync($"/characters/{auth.CharacterId}/calendar/" + eventId + "/", auth, body);
 
-            CheckResponse(nameof(RespondToAnEventV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(RespondToAnEventAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         /// <summary>
@@ -99,13 +99,13 @@ namespace EVEStandard.API
         /// <param name="eventId">The id of the event requested.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of attendees.</returns>
-        public async Task<ESIModelDTO<List<EventAttendee>>> GetAttendeesV1Async(AuthDTO auth, long eventId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<EventAttendee>>> GetAttendeesAsync(AuthDTO auth, long eventId, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CALENDAR_READ_CALENDAR_EVENTS_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/calendar/" + eventId + "/attendees/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/calendar/" + eventId + "/attendees/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetAttendeesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetAttendeesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<EventAttendee>>(responseModel);
         }

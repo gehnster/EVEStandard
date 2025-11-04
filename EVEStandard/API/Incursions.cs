@@ -24,11 +24,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of incursions.</returns>
-        public async Task<ESIModelDTO<List<Models.Incursion>>> ListIncursionsV1Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<Models.Incursion>>> ListIncursionsAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/incursions/", ifNoneMatch);
+            var responseModel = await GetAsync("/incursions/", ifNoneMatch);
 
-            CheckResponse(nameof(ListIncursionsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListIncursionsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<Models.Incursion>>(responseModel);
         }

@@ -25,11 +25,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of insurance levels for all ship types.</returns>
-        public async Task<ESIModelDTO<List<InsurancePrice>>> ListInsuranceLevelsV1Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<InsurancePrice>>> ListInsuranceLevelsAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/insurance/prices/", ifNoneMatch);
+            var responseModel = await GetAsync("/insurance/prices/", ifNoneMatch);
 
-            CheckResponse(nameof(ListInsuranceLevelsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListInsuranceLevelsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<InsurancePrice>>(responseModel);
         }

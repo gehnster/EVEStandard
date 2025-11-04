@@ -25,11 +25,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of sovereignty structures.</returns>
-        public async Task<ESIModelDTO<List<SovereigntyStructure>>> ListSovereigntyStructuresV1Async(string ifNoneMatch=null)
+        public async Task<ESIModelDTO<List<SovereigntyStructure>>> ListSovereigntyStructuresAsync(string ifNoneMatch=null)
         {
-            var responseModel = await GetAsync("/v1/sovereignty/structures/", ifNoneMatch);
+            var responseModel = await GetAsync("/sovereignty/structures/", ifNoneMatch);
 
-            CheckResponse(nameof(ListSovereigntyStructuresV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListSovereigntyStructuresAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<SovereigntyStructure>>(responseModel);
         }
@@ -40,11 +40,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of sovereignty campaigns.</returns>
-        public async Task<ESIModelDTO<List<SovereigntyCampaign>>> ListSovereigntyCampaignsV1Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<SovereigntyCampaign>>> ListSovereigntyCampaignsAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/sovereignty/campaigns/", ifNoneMatch);
+            var responseModel = await GetAsync("/sovereignty/campaigns/", ifNoneMatch);
 
-            CheckResponse(nameof(ListSovereigntyCampaignsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListSovereigntyCampaignsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<SovereigntyCampaign>>(responseModel);
         }
@@ -55,11 +55,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of sovereignty information for solar systems in New Eden.</returns>
-        public async Task<ESIModelDTO<List<SovereigntyMap>>> ListSovereigntyOfSystemsV1Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<SovereigntyMap>>> ListSovereigntyOfSystemsAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/sovereignty/map/", ifNoneMatch);
+            var responseModel = await GetAsync("/sovereignty/map/", ifNoneMatch);
 
-            CheckResponse(nameof(ListSovereigntyOfSystemsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListSovereigntyOfSystemsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<SovereigntyMap>>(responseModel);
         }

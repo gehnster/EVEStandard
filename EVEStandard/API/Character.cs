@@ -27,13 +27,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing character stats.</returns>
-        public async Task<ESIModelDTO<List<AggregateStats>>> YearlyAggregateStatsV2Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<AggregateStats>>> YearlyAggregateStatsAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CHARACTERSTATS_READ_1);           
 
-            var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/stats/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/stats/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(YearlyAggregateStatsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(YearlyAggregateStatsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<AggregateStats>>(responseModel);
         }
@@ -45,11 +45,11 @@ namespace EVEStandard.API
         /// <param name="characterId">An EVE character ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing public data for the given character.</returns>
-        public async Task<ESIModelDTO<CharacterInfo>> GetCharacterPublicInfoV5Async(int characterId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<CharacterInfo>> GetCharacterPublicInfoAsync(int characterId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync($"/v5/characters/{characterId}/", ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{characterId}/", ifNoneMatch);
 
-            CheckResponse(nameof(GetCharacterPublicInfoV5Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterPublicInfoAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<CharacterInfo>(responseModel);
         }
@@ -60,11 +60,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="characterIds">The character IDs to fetch affiliations for. All characters must exist, or none will be returned.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing character corporation, alliance and faction IDs.</returns>
-        public async Task<ESIModelDTO<List<CharacterAffiliation>>> AffiliationV1Async(List<int> characterIds)
+        public async Task<ESIModelDTO<List<CharacterAffiliation>>> AffiliationAsync(List<int> characterIds)
         {
-            var responseModel = await PostAsync("/v1/characters/affiliation/", null, characterIds);
+            var responseModel = await PostAsync("/characters/affiliation/", null, characterIds);
 
-            CheckResponse(nameof(AffiliationV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(AffiliationAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<CharacterAffiliation>>(responseModel);
         }
@@ -76,13 +76,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="characterIds">The target characters to calculate the charge for.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing aggregate cost of sending a mail from the source character to the target characters, in ISK.</returns>
-        public async Task<ESIModelDTO<float>> CalculateCSPAChargeCostV4Async(AuthDTO auth, List<int> characterIds)
+        public async Task<ESIModelDTO<float>> CalculateCSPAChargeCostAsync(AuthDTO auth, List<int> characterIds)
         {
             CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_CONTACTS_1);
 
-            var responseModel = await PostAsync($"/v4/characters/{auth.CharacterId}/cspa/", auth, characterIds);
+            var responseModel = await PostAsync($"/characters/{auth.CharacterId}/cspa/", auth, characterIds);
 
-            CheckResponse(nameof(CalculateCSPAChargeCostV4Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(CalculateCSPAChargeCostAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<float>(responseModel);
         }
@@ -94,11 +94,11 @@ namespace EVEStandard.API
         /// <param name="characterId">An EVE character ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing public data for the given character.</returns>
-        public async Task<ESIModelDTO<Icons>> GetCharacterPortraitsV2Async(int characterId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Icons>> GetCharacterPortraitsAsync(int characterId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync($"/v2/characters/{characterId}/portrait/", ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{characterId}/portrait/", ifNoneMatch);
 
-            CheckResponse(nameof(GetCharacterPortraitsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterPortraitsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Icons>(responseModel);
         }
@@ -110,11 +110,11 @@ namespace EVEStandard.API
         /// <param name="characterId">An EVE character ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing corporation history for the given character.</returns>
-        public async Task<ESIModelDTO<List<CharacterCorporationHistory>>> GetCorporationHistoryV1Async(int characterId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<CharacterCorporationHistory>>> GetCorporationHistoryAsync(int characterId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync($"/v1/characters/{characterId}/corporationhistory/", ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{characterId}/corporationhistory/", ifNoneMatch);
 
-            CheckResponse(nameof(GetCorporationHistoryV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationHistoryAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<CharacterCorporationHistory>>(responseModel);
         }
@@ -126,13 +126,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of medals.</returns>
-        public async Task<ESIModelDTO<List<CharacterMedals>>> GetMedalsV1Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<CharacterMedals>>> GetMedalsAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_MEDALS_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/medals/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/medals/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetMedalsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetMedalsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<CharacterMedals>>(responseModel);
         }
@@ -144,13 +144,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of standings.</returns>
-        public async Task<ESIModelDTO<List<Standing>>> GetStandingsV1Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<Standing>>> GetStandingsAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_STANDINGS_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/standings/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/standings/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetStandingsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetStandingsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<Standing>>(responseModel);
         }
@@ -164,13 +164,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of agents research information.</returns>
-        public async Task<ESIModelDTO<List<AgentResearch>>> GetAgentsResearchV1Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<AgentResearch>>> GetAgentsResearchAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_AGENTS_RESEARCH_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/agents_research/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/agents_research/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetAgentsResearchV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetAgentsResearchAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<AgentResearch>>(responseModel);
         }
@@ -183,7 +183,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of blueprints.</returns>
-        public async Task<ESIModelDTO<List<Blueprint>>> GetBlueprintsV2Async(AuthDTO auth, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<Blueprint>>> GetBlueprintsAsync(AuthDTO auth, int page = 1, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_BLUEPRINTS_1);
 
@@ -192,9 +192,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/blueprints/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/blueprints/", auth, ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetBlueprintsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetBlueprintsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<Blueprint>>(responseModel);
         }
@@ -206,13 +206,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing jump activation and fatigue information.</returns>
-        public async Task<ESIModelDTO<Fatigue>> GetJumpFatigueV1Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Fatigue>> GetJumpFatigueAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_FATIGUE_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/fatigue/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/fatigue/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetJumpFatigueV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetJumpFatigueAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Fatigue>(responseModel);
         }
@@ -224,13 +224,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of contact notifications.</returns>
-        public async Task<ESIModelDTO<List<CharacterContactNotification>>> GetNewContactNotificationsV2Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<CharacterContactNotification>>> GetNewContactNotificationsAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CHARACTERSTATS_READ_1);
 
-            var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/notifications/contacts/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/notifications/contacts/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetNewContactNotificationsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetNewContactNotificationsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<CharacterContactNotification>>(responseModel);
         }
@@ -242,49 +242,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing your recent notifications.</returns>
-        public async Task<ESIModelDTO<List<Notification>>> GetCharacterNotificationsV4Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<Notification>>> GetCharacterNotificationsAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_NOTIFICATIONS_1);
 
-            var responseModel = await GetAsync($"/v4/characters/{auth.CharacterId}/notifications/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/notifications/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetCharacterNotificationsV4Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
-
-            return ReturnModelDTO<List<Notification>>(responseModel);
-        }
-
-        /// <summary>
-        /// Return character notifications.
-        /// <para>GET /characters/{character_id}/notifications/</para>
-        /// </summary>
-        /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
-        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
-        /// <returns><see cref="ESIModelDTO{T}"/> containing your recent notifications.</returns>
-        public async Task<ESIModelDTO<List<Notification>>> GetCharacterNotificationsV5Async(AuthDTO auth, string ifNoneMatch = null)
-        {
-            CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_NOTIFICATIONS_1);
-
-            var responseModel = await GetAsync($"/v5/characters/{auth.CharacterId}/notifications/", auth, ifNoneMatch);
-
-            CheckResponse(nameof(GetCharacterNotificationsV5Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
-
-            return ReturnModelDTO<List<Notification>>(responseModel);
-        }
-
-        /// <summary>
-        /// Return character notifications.
-        /// <para>GET /characters/{character_id}/notifications/</para>
-        /// </summary>
-        /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
-        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
-        /// <returns><see cref="ESIModelDTO{T}"/> containing your recent notifications.</returns>
-        public async Task<ESIModelDTO<List<Notification>>> GetCharacterNotificationsV6Async(AuthDTO auth, string ifNoneMatch = null)
-        {
-            CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_NOTIFICATIONS_1);
-
-            var responseModel = await GetAsync($"/v6/characters/{auth.CharacterId}/notifications/", auth, ifNoneMatch);
-
-            CheckResponse(nameof(GetCharacterNotificationsV6Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterNotificationsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<Notification>>(responseModel);
         }
@@ -296,13 +260,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing the character’s roles in thier corporation.</returns>
-        public async Task<ESIModelDTO<CharacterCorporationRoles>> GetCharacterCorporationRolesV3Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<CharacterCorporationRoles>> GetCharacterCorporationRolesAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_CORPORATION_ROLES_1);
 
-            var responseModel = await GetAsync($"/v3/characters/{auth.CharacterId}/roles/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/roles/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetCharacterCorporationRolesV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterCorporationRolesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<CharacterCorporationRoles>(responseModel);
         }
@@ -314,13 +278,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of titles.</returns>
-        public async Task<ESIModelDTO<List<CharacterTitle>>> GetCharacterCorporationTitlesV1Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<CharacterTitle>>> GetCharacterCorporationTitlesAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_TITLES_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/titles/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/titles/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetCharacterCorporationTitlesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterCorporationTitlesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<CharacterTitle>>(responseModel);
         }

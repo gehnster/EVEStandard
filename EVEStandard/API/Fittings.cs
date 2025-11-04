@@ -26,13 +26,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="fittingId">ID for a fitting of this character.</param>
         /// <returns></returns>
-        public async Task DeleteFittingV1Async(AuthDTO auth, long fittingId)
+        public async Task DeleteFittingAsync(AuthDTO auth, long fittingId)
         {
             CheckAuth(auth, Scopes.ESI_FITTINGS_WRITE_FITTINGS_1);
 
-            var responseModel = await DeleteAsync($"/v1/characters/{auth.CharacterId}/fittings/{fittingId}/", auth);
+            var responseModel = await DeleteAsync($"/characters/{auth.CharacterId}/fittings/{fittingId}/", auth);
 
-            CheckResponse("DeleteFittingV1Async", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse("DeleteFittingAsync", responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         /// <summary>
@@ -42,13 +42,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of fittings.</returns>
-        public async Task<ESIModelDTO<List<ShipFitting>>> GetFittingsV2Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<ShipFitting>>> GetFittingsAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_FITTINGS_READ_FITTINGS_1);
 
-            var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/fittings/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/fittings/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetFittingsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetFittingsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<ShipFitting>>(responseModel);
         }
@@ -60,13 +60,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="fitting">Details about the new fitting.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of fittings.</returns>
-        public async Task<ESIModelDTO<ShipFittingCreated>> CreateFittingV2Async(AuthDTO auth, ShipFitting fitting)
+        public async Task<ESIModelDTO<ShipFittingCreated>> CreateFittingAsync(AuthDTO auth, ShipFitting fitting)
         {
             CheckAuth(auth, Scopes.ESI_FITTINGS_READ_FITTINGS_1);
 
-            var responseModel = await PostAsync($"/v2/characters/{auth.CharacterId}/fittings/", auth, fitting);
+            var responseModel = await PostAsync($"/characters/{auth.CharacterId}/fittings/", auth, fitting);
 
-            CheckResponse(nameof(CreateFittingV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(CreateFittingAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<ShipFittingCreated>(responseModel);
         }

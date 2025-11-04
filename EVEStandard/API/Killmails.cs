@@ -27,11 +27,11 @@ namespace EVEStandard.API
         /// <param name="killmailHash">The killmail hash for verification.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a killmail.</returns>
-        public async Task<ESIModelDTO<Killmail>> GetKillmailV1Async(int killmailId, string killmailHash, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Killmail>> GetKillmailAsync(int killmailId, string killmailHash, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync($"/v1/killmails/{killmailId}/{killmailHash}/", ifNoneMatch);
+            var responseModel = await GetAsync($"/killmails/{killmailId}/{killmailHash}/", ifNoneMatch);
 
-            CheckResponse(nameof(GetKillmailV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetKillmailAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Killmail>(responseModel);
         }
@@ -44,7 +44,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of killmail IDs and hashes.</returns>
-        public async Task<ESIModelDTO<List<KillmailIndex>>> GetCharacterKillsAndLossesV1Async(AuthDTO auth, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<KillmailIndex>>> GetCharacterKillsAndLossesAsync(AuthDTO auth, int page = 1, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_KILLMAILS_READ_KILLMAILS_1);
 
@@ -53,9 +53,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/killmails/recent/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/killmails/recent/", auth, ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetCharacterKillsAndLossesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterKillsAndLossesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<KillmailIndex>>(responseModel);
         }
@@ -70,7 +70,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of killmail IDs and hashes.</returns>
-        public async Task<ESIModelDTO<List<KillmailIndex>>> GetCorporationKillsAndLossesV1Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<KillmailIndex>>> GetCorporationKillsAndLossesAsync(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_KILLMAILS_READ_CORPORATION_KILLMAILS_1);
 
@@ -79,9 +79,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v1/corporations/{corporationId}/killmails/recent/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/corporations/{corporationId}/killmails/recent/", auth, ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetCorporationKillsAndLossesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCorporationKillsAndLossesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<KillmailIndex>>(responseModel);
         }

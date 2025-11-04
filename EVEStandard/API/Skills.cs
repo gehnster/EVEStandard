@@ -26,13 +26,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing known skills for the character.</returns>
-        public async Task<ESIModelDTO<CharacterSkills>> GetCharacterSkillsV4Async(AuthDTO auth, string ifNoneMatch=null)
+        public async Task<ESIModelDTO<CharacterSkills>> GetCharacterSkillsAsync(AuthDTO auth, string ifNoneMatch=null)
         {
             CheckAuth(auth, Scopes.ESI_SKILLS_READ_SKILLS_1);
 
-            var responseModel = await GetAsync($"/v4/characters/{auth.CharacterId}/skills/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/skills/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetCharacterSkillsV4Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterSkillsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<CharacterSkills>(responseModel);
         }
@@ -44,13 +44,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing attributes of a character.</returns>
-        public async Task<ESIModelDTO<CharacterAttributes>> GetCharacterAttributesV1Async(AuthDTO auth, string ifNoneMatch=null)
+        public async Task<ESIModelDTO<CharacterAttributes>> GetCharacterAttributesAsync(AuthDTO auth, string ifNoneMatch=null)
         {
             CheckAuth(auth, Scopes.ESI_SKILLS_READ_SKILLS_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/attributes/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/attributes/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetCharacterAttributesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterAttributesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<CharacterAttributes>(responseModel);
         }
@@ -62,13 +62,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing the current skill queue, sorted ascending by finishing time.</returns>
-        public async Task<ESIModelDTO<List<SkillQueue>>> GetCharacterSkillQueueV2Async(AuthDTO auth, string ifNoneMatch=null)
+        public async Task<ESIModelDTO<List<SkillQueue>>> GetCharacterSkillQueueAsync(AuthDTO auth, string ifNoneMatch=null)
         {
             CheckAuth(auth, Scopes.ESI_SKILLS_READ_SKILLQUEUE_1);
 
-            var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/skillqueue/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/skillqueue/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetCharacterSkillQueueV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterSkillQueueAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<SkillQueue>>(responseModel);
         }
