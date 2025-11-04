@@ -36,7 +36,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing the compatibility dates.</returns>
         public async Task<ESIModelDTO<Models.CompatibilityDates>> GetCompatibilityDatesAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/meta/compatability-dates/", ifNoneMatch);
+            var responseModel = await GetAsync("/meta/compatibility-dates/", ifNoneMatch);
 
             CheckResponse(nameof(GetCompatibilityDatesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
