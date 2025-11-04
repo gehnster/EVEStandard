@@ -34,11 +34,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing the compatibility dates.</returns>
-        public async Task<ESIModelDTO<Models.CompatibilityDates>> GetCompatabilityDatesAsync(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Models.CompatibilityDates>> GetCompatibilityDatesAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/meta/compatibility-dates/", ifNoneMatch);
+            var responseModel = await GetAsync("/meta/compatability-dates/", ifNoneMatch);
 
-            CheckResponse(nameof(GetCompatabilityDatesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCompatibilityDatesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Models.CompatibilityDates>(responseModel);
         }
