@@ -30,13 +30,13 @@ namespace EVEStandard.API
 
         /// <summary>
         /// Get a list of compatibility dates.
-        /// <para>GET /meta/compatability-dates/</para>
+        /// <para>GET /meta/compatibility-dates/</para>
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing the compatibility dates.</returns>
         public async Task<ESIModelDTO<Models.CompatibilityDates>> GetCompatabilityDatesAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/meta/compatability-dates/", ifNoneMatch);
+            var responseModel = await GetAsync("/meta/compatibility-dates/", ifNoneMatch);
 
             CheckResponse(nameof(GetCompatabilityDatesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
