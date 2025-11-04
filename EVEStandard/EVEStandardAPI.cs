@@ -25,10 +25,10 @@ namespace EVEStandard
         /// </summary>
         /// <param name="userAgent">Please follow the user agent guidelines that CCP has provided. https://developers.eveonline.com/docs/services/esi/best-practices/#user-agents</param>
         /// <param name="dataSource"></param>
-        /// <param name="compatabilityDate">The compatiblity date you want to target.</param>
+        /// <param name="compatibilityDate">The compatiblity date you want to target.</param>
         /// <param name="timeOut"></param>
         /// <param name="clientHandler"></param>
-        public EVEStandardAPI(string userAgent, DataSource dataSource, CompatibilityDate compatabilityDate, TimeSpan timeOut, HttpClientHandler clientHandler = null)
+        public EVEStandardAPI(string userAgent, DataSource dataSource, CompatibilityDate compatibilityDate, TimeSpan timeOut, HttpClientHandler clientHandler = null)
         {
             if (clientHandler == null)
             { 
@@ -52,7 +52,7 @@ namespace EVEStandard
 
             this.userAgent = userAgent;
             this.dataSource = Enum.GetName(typeof(DataSource), dataSource)?.ToLower();
-            this.compatibilityDate = compatabilityDate;
+            this.compatibilityDate = compatibilityDate;
 
             initializeAPI();
         }
