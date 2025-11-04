@@ -15,7 +15,7 @@ namespace EVEStandard.API
     {
         private readonly ILogger logger = LibraryLogging.CreateLogger<FactionWarfare>();
 
-        internal FactionWarfare(string dataSource) : base(dataSource)
+        internal FactionWarfare(string dataSource, CompatibilityDate compatibilityDate) : base(dataSource, compatibilityDate)
         {
         }
 
@@ -25,11 +25,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of NPC factions at war.</returns>
-        public async Task<ESIModelDTO<List<FactionWarData>>> DataAboutFactionWarsV1Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<FactionWarData>>> DataAboutFactionWarsAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/fw/wars/", ifNoneMatch);
+            var responseModel = await GetAsync("/fw/wars/", ifNoneMatch);
 
-            CheckResponse(nameof(DataAboutFactionWarsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(DataAboutFactionWarsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<FactionWarData>>(responseModel);
         }
@@ -40,11 +40,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing per faction breakdown of faction warfare statistics.</returns>
-        public async Task<ESIModelDTO<List<FactionWarStats>>> StatsAboutFactionWarsV1Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<FactionWarStats>>> StatsAboutFactionWarsAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/fw/stats/", ifNoneMatch);
+            var responseModel = await GetAsync("/fw/stats/", ifNoneMatch);
 
-            CheckResponse(nameof(StatsAboutFactionWarsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(StatsAboutFactionWarsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<FactionWarStats>>(responseModel);
         }
@@ -55,11 +55,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing all faction warfare solar systems.</returns>
-        public async Task<ESIModelDTO<List<FactionWarSystem>>> FactionWarSystemOwnershipV2Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<FactionWarSystem>>> FactionWarSystemOwnershipAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v2/fw/systems/", ifNoneMatch);
+            var responseModel = await GetAsync("/fw/systems/", ifNoneMatch);
 
-            CheckResponse(nameof(FactionWarSystemOwnershipV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(FactionWarSystemOwnershipAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<FactionWarSystem>>(responseModel);
         }
@@ -70,11 +70,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing faction leaderboard of kills and victory points within faction warfare.</returns>
-        public async Task<ESIModelDTO<FactionWarFactionLeaderboard>> TopFactionsV1Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<FactionWarFactionLeaderboard>> TopFactionsAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/fw/leaderboards/", ifNoneMatch);
+            var responseModel = await GetAsync("/fw/leaderboards/", ifNoneMatch);
 
-            CheckResponse(nameof(TopFactionsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(TopFactionsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<FactionWarFactionLeaderboard>(responseModel);
         }
@@ -85,11 +85,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing character leaderboard of kills and victory points within faction warfare.</returns>
-        public async Task<ESIModelDTO<FactionWarPilotLeaderboard>> TopPilotsV1Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<FactionWarPilotLeaderboard>> TopPilotsAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/fw/leaderboards/characters/", ifNoneMatch);
+            var responseModel = await GetAsync("/fw/leaderboards/characters/", ifNoneMatch);
 
-            CheckResponse(nameof(TopPilotsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(TopPilotsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<FactionWarPilotLeaderboard>(responseModel);
         }
@@ -100,11 +100,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing corporation leaderboard of kills and victory points within faction warfare.</returns>
-        public async Task<ESIModelDTO<FactionWarCorporationLeaderboard>> TopCorporationsV1Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<FactionWarCorporationLeaderboard>> TopCorporationsAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/fw/leaderboards/corporations/", ifNoneMatch);
+            var responseModel = await GetAsync("/fw/leaderboards/corporations/", ifNoneMatch);
 
-            CheckResponse(nameof(TopCorporationsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(TopCorporationsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<FactionWarCorporationLeaderboard>(responseModel);
         }
@@ -117,13 +117,13 @@ namespace EVEStandard.API
         /// <param name="corporationId">An EVE corporation ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing faction warfare statistics for a given corporation.</returns>
-        public async Task<ESIModelDTO<FactionWarCorporationStats>> CorporationOverviewInFactionWarsV1Async(AuthDTO auth, int corporationId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<FactionWarCorporationStats>> CorporationOverviewInFactionWarsAsync(AuthDTO auth, int corporationId, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_FW_STATS_1);
 
-            var responseModel = await GetAsync($"/v1/corporations/{corporationId}/fw/stats/", ifNoneMatch);
+            var responseModel = await GetAsync($"/corporations/{corporationId}/fw/stats/", ifNoneMatch);
 
-            CheckResponse(nameof(CorporationOverviewInFactionWarsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(CorporationOverviewInFactionWarsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<FactionWarCorporationStats>(responseModel);
         }
@@ -135,13 +135,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing faction warfare statistics for a given character.</returns>
-        public async Task<ESIModelDTO<FactionWarCharacterStats>> CharacterOverviewInFactionWarsV1Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<FactionWarCharacterStats>> CharacterOverviewInFactionWarsAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_FW_STATS_1);
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/fw/stats/", ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/fw/stats/", ifNoneMatch);
 
-            CheckResponse(nameof(CharacterOverviewInFactionWarsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(CharacterOverviewInFactionWarsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<FactionWarCharacterStats>(responseModel);
         }

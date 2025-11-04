@@ -15,7 +15,7 @@ namespace EVEStandard.API
     {
         private readonly ILogger logger = LibraryLogging.CreateLogger<Market>();
 
-        internal Market(string dataSource) : base(dataSource)
+        internal Market(string dataSource, CompatibilityDate compatibilityDate) : base(dataSource, compatibilityDate)
         {
         }
 
@@ -25,11 +25,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of prices.</returns>
-        public async Task<ESIModelDTO<List<MarketPrice>>> ListMarketPricesV1Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<MarketPrice>>> ListMarketPricesAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/markets/prices/", ifNoneMatch);
+            var responseModel = await GetAsync("/markets/prices/", ifNoneMatch);
 
-            CheckResponse(nameof(ListMarketPricesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListMarketPricesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<MarketPrice>>(responseModel);
         }
@@ -44,7 +44,7 @@ namespace EVEStandard.API
         /// <param name="orderType">Filter buy/sell orders, return all orders by default. If you query without type_id, we always return both buy and sell orders. Available values : buy, sell, all. Default value: all.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of orders.</returns>
-        public async Task<ESIModelDTO<List<MarketOrder>>> ListOrdersInRegionV1Async(int regionId, long? typeId = null, int page = 1, string orderType = OrderType.All, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<MarketOrder>>> ListOrdersInRegionAsync(int regionId, long? typeId = null, int page = 1, string orderType = OrderType.All, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -57,9 +57,9 @@ namespace EVEStandard.API
                 queryParameters.Add("type_id", typeId.ToString());
             }
 
-            var responseModel = await GetAsync($"/v1/markets/{regionId}/orders/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/markets/{regionId}/orders/", ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(ListOrdersInRegionV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListOrdersInRegionAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<MarketOrder>>(responseModel);
         }
@@ -72,16 +72,16 @@ namespace EVEStandard.API
         /// <param name="typeId">Return statistics for this type.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of historical market statistics.</returns>
-        public async Task<ESIModelDTO<List<MarketRegionHistory>>> ListHistoricalMarketStatisticsInRegionV1Async(int regionId, int typeId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<MarketRegionHistory>>> ListHistoricalMarketStatisticsInRegionAsync(int regionId, int typeId, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 { "type_id", typeId.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v1/markets/{regionId}/history/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/markets/{regionId}/history/", ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(ListHistoricalMarketStatisticsInRegionV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListHistoricalMarketStatisticsInRegionAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<MarketRegionHistory>>(responseModel);
         }
@@ -95,7 +95,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of orders.</returns>
-        public async Task<ESIModelDTO<List<MarketOrder>>> ListOrdersInStructureV1Async(AuthDTO auth, long structureId, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<MarketOrder>>> ListOrdersInStructureAsync(AuthDTO auth, long structureId, int page = 1, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_MARKETS_STRUCTURE_MARKETS_1);
 
@@ -104,9 +104,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v1/markets/structures/{structureId}/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/markets/structures/{structureId}/", auth, ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(ListOrdersInStructureV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListOrdersInStructureAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<MarketOrder>>(responseModel);
         }
@@ -117,11 +117,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of item group ids.</returns>
-        public async Task<ESIModelDTO<List<int>>> GetItemGroupsV1Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<int>>> GetItemGroupsAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/markets/groups/", ifNoneMatch);
+            var responseModel = await GetAsync("/markets/groups/", ifNoneMatch);
 
-            CheckResponse(nameof(GetItemGroupsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetItemGroupsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<int>>(responseModel);
         }
@@ -133,16 +133,16 @@ namespace EVEStandard.API
         /// <param name="language">Language to use in the response, takes precedence over Accept-Language. Available values : de, en-us, fr, ja, ru, zh. Default value : en-us.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing information about an item group.</returns>
-        public async Task<ESIModelDTO<MarketGroup>> GetItemGroupInfoV1Async(int marketGroupId, string language = Language.English, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<MarketGroup>> GetItemGroupInfoAsync(int marketGroupId, string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 { "language", language ?? Language.English }
             };
 
-            var responseModel = await GetAsync($"/v1/markets/groups/{marketGroupId}/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/markets/groups/{marketGroupId}/", ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetItemGroupInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetItemGroupInfoAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<MarketGroup>(responseModel);
         }
@@ -154,13 +154,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing open market orders placed by a character.</returns>
-        public async Task<ESIModelDTO<List<CharacterMarketOrder>>> ListOpenOrdersFromCharacterV2Async(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<CharacterMarketOrder>>> ListOpenOrdersFromCharacterAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_MARKETS_READ_CHARACTER_ORDERS_1);
 
-            var responseModel = await GetAsync($"/v2/characters/{auth.CharacterId}/orders/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/orders/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(ListOpenOrdersFromCharacterV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListOpenOrdersFromCharacterAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<CharacterMarketOrder>>(responseModel);
         }
@@ -173,7 +173,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing expired and cancelled market orders placed by a character.</returns>
-        public async Task<ESIModelDTO<List<CharacterMarketOrderHistory>>> ListHistoricalOrdersByCharacterV1Async(AuthDTO auth, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<CharacterMarketOrderHistory>>> ListHistoricalOrdersByCharacterAsync(AuthDTO auth, int page = 1, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_MARKETS_READ_CHARACTER_ORDERS_1);
 
@@ -182,9 +182,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v1/characters/{auth.CharacterId}/orders/history/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/orders/history/", auth, ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(ListHistoricalOrdersByCharacterV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListHistoricalOrdersByCharacterAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<CharacterMarketOrderHistory>>(responseModel);
         }
@@ -197,16 +197,16 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of type IDs.</returns>
-        public async Task<ESIModelDTO<List<long>>> ListTypeIdsRelevantToMarketV1Async(int regionId, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<long>>> ListTypeIdsRelevantToMarketAsync(int regionId, int page = 1, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v1/markets/{regionId}/types/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/markets/{regionId}/types/", ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(ListHistoricalOrdersByCharacterV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListHistoricalOrdersByCharacterAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<long>>(responseModel);
         }
@@ -220,7 +220,7 @@ namespace EVEStandard.API
         /// <param name="corporationId">An EVE corporation ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of open market orders.</returns>
-        public async Task<ESIModelDTO<List<CorporationMarketOrder>>> ListOpenOrdersFromCorporationV3Async(AuthDTO auth, int corporationId, int page  = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<CorporationMarketOrder>>> ListOpenOrdersFromCorporationAsync(AuthDTO auth, int corporationId, int page  = 1, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_MARKETS_READ_CORPORATION_ORDERS_1);
 
@@ -229,9 +229,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v3/corporations/{corporationId}/orders/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/corporations/{corporationId}/orders/", auth, ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(ListOpenOrdersFromCorporationV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListOpenOrdersFromCorporationAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<CorporationMarketOrder>>(responseModel);
         }
@@ -246,7 +246,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing expired and cancelled market orders placed on behalf of a corporation.</returns>
-        public async Task<ESIModelDTO<List<CorporationMarketOrderHistory>>> ListHistoricalOrdersByCorporationV2Async(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<CorporationMarketOrderHistory>>> ListHistoricalOrdersByCorporationAsync(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_MARKETS_READ_CHARACTER_ORDERS_1);
 
@@ -255,9 +255,9 @@ namespace EVEStandard.API
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync($"/v2/corporations/{corporationId}/orders/history/", auth, ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/corporations/{corporationId}/orders/history/", auth, ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(ListHistoricalOrdersByCorporationV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListHistoricalOrdersByCorporationAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<CorporationMarketOrderHistory>>(responseModel);
         }

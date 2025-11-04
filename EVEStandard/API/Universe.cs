@@ -16,7 +16,7 @@ namespace EVEStandard.API
     {
         private readonly ILogger logger = LibraryLogging.CreateLogger<Universe>();
 
-        internal Universe(string dataSource) : base(dataSource)
+        internal Universe(string dataSource, CompatibilityDate compatibilityDate) : base(dataSource, compatibilityDate)
         {
         }
 
@@ -27,16 +27,16 @@ namespace EVEStandard.API
         /// <param name="language">Language to use in the response, takes precedence over Accept-Language. Available values : de, en-us, fr, ja, ru, zh. Default value : en-us.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of ancestries.</returns>
-        public async Task<ESIModelDTO<List<Ancestry>>> GetAncestriesV1Async(string language = Language.English, string ifNoneMatch=null)
+        public async Task<ESIModelDTO<List<Ancestry>>> GetAncestriesAsync(string language = Language.English, string ifNoneMatch=null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync("/v1/universe/ancestries/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/universe/ancestries/", ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetAncestriesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetAncestriesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<Ancestry>>(responseModel);
         }
@@ -48,11 +48,11 @@ namespace EVEStandard.API
         /// <param name="asteroidBeltId">The asteroid belt identifier.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing information about an asteroid belt.</returns>
-        public async Task<ESIModelDTO<AsteroidBelt>> GetAsteroidBeltV1Async(int asteroidBeltId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<AsteroidBelt>> GetAsteroidBeltAsync(int asteroidBeltId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync($"/v1/universe/asteroid_belts/{asteroidBeltId}/", ifNoneMatch);
+            var responseModel = await GetAsync($"/universe/asteroid_belts/{asteroidBeltId}/", ifNoneMatch);
 
-            CheckResponse(nameof(GetAsteroidBeltV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetAsteroidBeltAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<AsteroidBelt>(responseModel);
         }
@@ -64,16 +64,16 @@ namespace EVEStandard.API
         /// <param name="language">Language to use in the response, takes precedence over Accept-Language. Available values : de, en-us, fr, ja, ru, zh. Default value : en-us.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of bloodlines.</returns>
-        public async Task<ESIModelDTO<List<Bloodline>>> GetBloodlinesV1Async(string language = Language.English, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<Bloodline>>> GetBloodlinesAsync(string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync("/v1/universe/bloodlines/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/universe/bloodlines/", ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetBloodlinesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetBloodlinesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<Bloodline>>(responseModel);
         }
@@ -84,11 +84,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of item category ids.</returns>
-        public async Task<ESIModelDTO<List<int>>> GetItemCategoriesV1Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<int>>> GetItemCategoriesAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/universe/categories/", ifNoneMatch);
+            var responseModel = await GetAsync("/universe/categories/", ifNoneMatch);
 
-            CheckResponse(nameof(GetItemCategoriesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetItemCategoriesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<int>>(responseModel);
         }
@@ -101,16 +101,16 @@ namespace EVEStandard.API
         /// <param name="language">Language to use in the response, takes precedence over Accept-Language. Available values : de, en-us, fr, ja, ru, zh. Default value : en-us.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing information about an item category.</returns>
-        public async Task<ESIModelDTO<Category>> GetItemCategoryInfoV1Async(int categoryId, string language = Language.English, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Category>> GetItemCategoryInfoAsync(int categoryId, string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync($"/v1/universe/categories/{categoryId}/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/universe/categories/{categoryId}/", ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetItemCategoryInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetItemCategoryInfoAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Category>(responseModel);
         }
@@ -121,11 +121,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of constellation ids.</returns>
-        public async Task<ESIModelDTO<List<int>>> GetConstellationsV1Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<int>>> GetConstellationsAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/universe/constellations/", ifNoneMatch);
+            var responseModel = await GetAsync("/universe/constellations/", ifNoneMatch);
 
-            CheckResponse(nameof(GetConstellationsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetConstellationsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<int>>(responseModel);
         }
@@ -138,16 +138,16 @@ namespace EVEStandard.API
         /// <param name="language">Language to use in the response, takes precedence over Accept-Language. Available values : de, en-us, fr, ja, ru, zh. Default value : en-us.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing information about a constellation.</returns>
-        public async Task<ESIModelDTO<Constellation>> GetConstellationV1Async(int constellationId, string language = Language.English, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Constellation>> GetConstellationAsync(int constellationId, string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync($"/v1/universe/constellations/{constellationId}/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/universe/constellations/{constellationId}/", ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetConstellationV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetConstellationAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Constellation>(responseModel);
         }
@@ -159,16 +159,16 @@ namespace EVEStandard.API
         /// <param name="language">Language to use in the response, takes precedence over Accept-Language. Available values : de, en-us, fr, ja, ru, zh. Default value : en-us.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of factions.</returns>
-        public async Task<ESIModelDTO<List<Faction>>> GetFactionsV2Async(string language = Language.English, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<Faction>>> GetFactionsAsync(string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync(" /v2/universe/factions/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/universe/factions/", ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetFactionsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetFactionsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<Faction>>(responseModel);
         }
@@ -179,11 +179,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of graphic ids.</returns>
-        public async Task<ESIModelDTO<List<int>>> GetGraphicsV1Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<int>>> GetGraphicsAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/universe/graphics/", ifNoneMatch);
+            var responseModel = await GetAsync("/universe/graphics/", ifNoneMatch);
 
-            CheckResponse(nameof(GetGraphicsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetGraphicsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<int>>(responseModel);
         }
@@ -195,11 +195,11 @@ namespace EVEStandard.API
         /// <param name="graphicId">The graphic identifier.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing information about a graphic.</returns>
-        public async Task<ESIModelDTO<Graphic>> GetGraphicV1Async(int graphicId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Graphic>> GetGraphicAsync(int graphicId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync($"/v1/universe/graphics/{graphicId}/", ifNoneMatch);
+            var responseModel = await GetAsync($"/universe/graphics/{graphicId}/", ifNoneMatch);
 
-            CheckResponse(nameof(GetGraphicV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetGraphicAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Graphic>(responseModel);
         }
@@ -211,16 +211,16 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of item group ids.</returns>
-        public async Task<ESIModelDTO<List<int>>> GetItemGroupsV1Async(int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<int>>> GetItemGroupsAsync(int page = 1, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync("/v1/universe/groups/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/universe/groups/", ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetItemGroupsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetItemGroupsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<int>>(responseModel);
         }
@@ -233,16 +233,16 @@ namespace EVEStandard.API
         /// <param name="language">Language to use in the response, takes precedence over Accept-Language. Available values : de, en-us, fr, ja, ru, zh. Default value : en-us.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of factions.</returns>
-        public async Task<ESIModelDTO<Group>> GetItemGroupV1Async(int groupId, string language = Language.English, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Group>> GetItemGroupAsync(int groupId, string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync($"/v1/universe/groups/{groupId}/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/universe/groups/{groupId}/", ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetItemGroupV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetItemGroupAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Group>(responseModel);
         }
@@ -255,16 +255,16 @@ namespace EVEStandard.API
         /// <param name="names">The names to resolve.</param>
         /// <param name="language">Language to use in the response, takes precedence over Accept-Language. Available values : de, en-us, fr, ja, ru, zh. Default value : en-us.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of factions.</returns>
-        public async Task<ESIModelDTO<Models.Universe>> BulkNamesToIdsV1Async(List<string> names, string language = Language.English)
+        public async Task<ESIModelDTO<Models.Universe>> BulkNamesToIdsAsync(List<string> names, string language = Language.English)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await PostAsync("/v1/universe/ids/", null, names, null, queryParameters);
+            var responseModel = await PostAsync("/universe/ids/", null, names, null, queryParameters);
 
-            CheckResponse(nameof(BulkNamesToIdsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(BulkNamesToIdsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Models.Universe>(responseModel);
         }
@@ -276,11 +276,11 @@ namespace EVEStandard.API
         /// <param name="moonId">The moon identifier.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing information about a moon.</returns>
-        public async Task<ESIModelDTO<Moon>> GetMoonInfoV1Async(long moonId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Moon>> GetMoonInfoAsync(long moonId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync($"/v1/universe/moons/{moonId}/", ifNoneMatch);
+            var responseModel = await GetAsync($"/universe/moons/{moonId}/", ifNoneMatch);
 
-            CheckResponse(nameof(GetItemGroupsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetItemGroupsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Moon>(responseModel);
         }
@@ -291,11 +291,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ids">The ids to resolve.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing list of id/name associations for a set of ID’s. All ID’s must resolve to a name, or nothing will be returned.</returns>
-        public async Task<ESIModelDTO<List<UniverseIdsToNames>>> GetNamesAndCategoriesFromIdsV3Async(List<int> ids)
+        public async Task<ESIModelDTO<List<UniverseIdsToNames>>> GetNamesAndCategoriesFromIdsAsync(List<int> ids)
         {
-            var responseModel = await PostAsync("/v3/universe/names/", null, ids);
+            var responseModel = await PostAsync("/universe/names/", null, ids);
 
-            CheckResponse(nameof(GetNamesAndCategoriesFromIdsV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetNamesAndCategoriesFromIdsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<UniverseIdsToNames>>(responseModel);
         }
@@ -307,11 +307,11 @@ namespace EVEStandard.API
         /// <param name="planetId">The planet identifier.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing information about a planet.</returns>
-        public async Task<ESIModelDTO<Planet>> GetPlanetInfoV1Async(long planetId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Planet>> GetPlanetInfoAsync(long planetId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync($"/v1/universe/planets/{planetId}/", ifNoneMatch);
+            var responseModel = await GetAsync($"/universe/planets/{planetId}/", ifNoneMatch);
 
-            CheckResponse(nameof(GetPlanetInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetPlanetInfoAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Planet>(responseModel);
         }
@@ -323,16 +323,16 @@ namespace EVEStandard.API
         /// <param name="language">Language to use in the response, takes precedence over Accept-Language. Available values : de, en-us, fr, ja, ru, zh. Default value : en-us.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of character races.</returns>
-        public async Task<ESIModelDTO<List<Race>>> GetCharacterRacesV1Async(string language = Language.English, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<Race>>> GetCharacterRacesAsync(string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync("/v1/universe/races/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/universe/races/", ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetCharacterRacesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetCharacterRacesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<Race>>(responseModel);
         }
@@ -343,11 +343,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of region ids.</returns>
-        public async Task<ESIModelDTO<List<int>>> GetRegionsV1Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<int>>> GetRegionsAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/universe/regions/", ifNoneMatch);
+            var responseModel = await GetAsync("/universe/regions/", ifNoneMatch);
 
-            CheckResponse(nameof(GetRegionsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetRegionsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<int>>(responseModel);
         }
@@ -360,16 +360,16 @@ namespace EVEStandard.API
         /// <param name="language">Language to use in the response, takes precedence over Accept-Language. Available values : de, en-us, fr, ja, ru, zh. Default value : en-us.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing information about a region.</returns>
-        public async Task<ESIModelDTO<Region>> GetRegionInfoV1Async(int regionId, string language = Language.English, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Region>> GetRegionInfoAsync(int regionId, string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync($"/v1/universe/regions/{regionId}/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/universe/regions/{regionId}/", ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetRegionInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetRegionInfoAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Region>(responseModel);
         }
@@ -381,11 +381,11 @@ namespace EVEStandard.API
         /// <param name="stargateId">The stargate identifier.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing information about a region.</returns>
-        public async Task<ESIModelDTO<Stargate>> GetStargateInfoV1Async(int stargateId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Stargate>> GetStargateInfoAsync(int stargateId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync($"/v1/universe/stargates/{stargateId}/", ifNoneMatch);
+            var responseModel = await GetAsync($"/universe/stargates/{stargateId}/", ifNoneMatch);
 
-            CheckResponse(nameof(GetStargateInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetStargateInfoAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Stargate>(responseModel);
         }
@@ -397,11 +397,11 @@ namespace EVEStandard.API
         /// <param name="starId">The star identifier.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing information about a star.</returns>
-        public async Task<ESIModelDTO<Star>> GetStarInfoV1Async(int starId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Star>> GetStarInfoAsync(int starId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync($"/v1/universe/stars/{starId}/", ifNoneMatch);
+            var responseModel = await GetAsync($"/universe/stars/{starId}/", ifNoneMatch);
 
-            CheckResponse(nameof(GetStarInfoV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetStarInfoAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Star>(responseModel);
         }
@@ -413,11 +413,11 @@ namespace EVEStandard.API
         /// <param name="stationId">The station identifier.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing information about a station.</returns>
-        public async Task<ESIModelDTO<Station>> GetStationInfoV2Async(int stationId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Station>> GetStationInfoAsync(int stationId, string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync($"/v2/universe/stations/{stationId}/", ifNoneMatch);
+            var responseModel = await GetAsync($"/universe/stations/{stationId}/", ifNoneMatch);
 
-            CheckResponse(nameof(GetStationInfoV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetStationInfoAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Station>(responseModel);
         }
@@ -429,12 +429,12 @@ namespace EVEStandard.API
         /// <param name="filter">Optional param to return structures that only have a market or basic manufacturing.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing list of public structure IDs.</returns>
-        public async Task<ESIModelDTO<List<long>>> ListAllPublicStructuresV1Async(StructureHas filter, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<long>>> ListAllPublicStructuresAsync(StructureHas filter, string ifNoneMatch = null)
         {
             APIResponse responseModel;
             if (filter == StructureHas.NoFilter)
             {
-                responseModel = await GetAsync("/v1/universe/structures/", ifNoneMatch);
+                responseModel = await GetAsync("/universe/structures/", ifNoneMatch);
             }
             else
             {
@@ -443,10 +443,10 @@ namespace EVEStandard.API
                     {"filter", filter == StructureHas.Market ? "market" : "manufacturing_basic" }
                 };
 
-                responseModel = await GetAsync("/v1/universe/structures/", ifNoneMatch, queryParameters);
+                responseModel = await GetAsync("/universe/structures/", ifNoneMatch, queryParameters);
             }
 
-            CheckResponse(nameof(ListAllPublicStructuresV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(ListAllPublicStructuresAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<long>>(responseModel);
         }
@@ -459,13 +459,13 @@ namespace EVEStandard.API
         /// <param name="structureId">An Eve structure ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing data about a structure.</returns>
-        public async Task<ESIModelDTO<Structure>> GetStructureInfoV2Async(AuthDTO auth, long structureId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Structure>> GetStructureInfoAsync(AuthDTO auth, long structureId, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_UNIVERSE_READ_STRUCTURES_1);
 
-            var responseModel = await GetAsync($"/v2/universe/structures/{structureId}/", auth, ifNoneMatch);
+            var responseModel = await GetAsync($"/universe/structures/{structureId}/", auth, ifNoneMatch);
 
-            CheckResponse(nameof(GetStructureInfoV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetStructureInfoAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Structure>(responseModel);
         }
@@ -476,11 +476,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of systems and number of jumps.</returns>
-        public async Task<ESIModelDTO<List<SystemJumps>>> GetSystemJumpsV1Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<SystemJumps>>> GetSystemJumpsAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/universe/system_jumps/", ifNoneMatch);
+            var responseModel = await GetAsync("/universe/system_jumps/", ifNoneMatch);
 
-            CheckResponse(nameof(GetSystemJumpsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetSystemJumpsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<SystemJumps>>(responseModel);
         }
@@ -491,11 +491,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of systems and number of ship, pod and NPC kills.</returns>
-        public async Task<ESIModelDTO<List<SystemKills>>> GetSystemKillsV2Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<SystemKills>>> GetSystemKillsAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v2/universe/system_kills/", ifNoneMatch);
+            var responseModel = await GetAsync("/universe/system_kills/", ifNoneMatch);
 
-            CheckResponse(nameof(GetSystemKillsV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetSystemKillsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<SystemKills>>(responseModel);
         }
@@ -506,11 +506,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of solar system ids.</returns>
-        public async Task<ESIModelDTO<List<int>>> GetSolarSystemsV1Async(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<int>>> GetSolarSystemsAsync(string ifNoneMatch = null)
         {
-            var responseModel = await GetAsync("/v1/universe/systems/", ifNoneMatch);
+            var responseModel = await GetAsync("/universe/systems/", ifNoneMatch);
 
-            CheckResponse(nameof(GetSolarSystemsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetSolarSystemsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<int>>(responseModel);
         }
@@ -523,16 +523,16 @@ namespace EVEStandard.API
         /// <param name="language">Language to use in the response, takes precedence over Accept-Language. Available values : de, en-us, fr, ja, ru, zh. Default value : en-us.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing information about a solar system.</returns>
-        public async Task<ESIModelDTO<Models.System>> GetSolarSystemInfoV4Async(int systemId, string language = Language.English, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Models.System>> GetSolarSystemInfoAsync(int systemId, string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync($"/v4/universe/systems/{systemId}/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/universe/systems/{systemId}/", ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetSolarSystemInfoV4Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetSolarSystemInfoAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Models.System>(responseModel);
         }
@@ -544,16 +544,16 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of type ids.</returns>
-        public async Task<ESIModelDTO<List<int>>> GetTypesV1Async(int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<int>>> GetTypesAsync(int page = 1, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 { "page", page.ToString() }
             };
 
-            var responseModel = await GetAsync("/v1/universe/types/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync("/universe/types/", ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetTypesV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetTypesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<List<int>>(responseModel);
         }
@@ -566,16 +566,16 @@ namespace EVEStandard.API
         /// <param name="language">Language to use in the response, takes precedence over Accept-Language. Available values : de, en-us, fr, ja, ru, zh. Default value : en-us.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing information about a type.</returns>
-        public async Task<ESIModelDTO<Type>> GetTypeInfoV3Async(int typeId, string language = Language.English, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Type>> GetTypeInfoAsync(int typeId, string language = Language.English, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
                 {"language", language}
             };
 
-            var responseModel = await GetAsync($"/v3/universe/types/{typeId}/", ifNoneMatch, queryParameters);
+            var responseModel = await GetAsync($"/universe/types/{typeId}/", ifNoneMatch, queryParameters);
 
-            CheckResponse(nameof(GetTypeInfoV3Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetTypeInfoAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Type>(responseModel);
         }

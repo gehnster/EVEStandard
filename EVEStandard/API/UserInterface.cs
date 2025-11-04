@@ -15,7 +15,7 @@ namespace EVEStandard.API
     {
         private readonly ILogger logger = LibraryLogging.CreateLogger<UserInterface>();
 
-        internal UserInterface(string dataSource) : base(dataSource)
+        internal UserInterface(string dataSource, CompatibilityDate compatibilityDate) : base(dataSource, compatibilityDate)
         {
         }
 
@@ -28,7 +28,7 @@ namespace EVEStandard.API
         /// <param name="clearOtherWaypoints">Whether clean other waypoints beforing adding this one. Default value: false.</param>
         /// <param name="destinationId">The destination to travel to, can be solar system, station or structure’s id.</param>
         /// <returns></returns>
-        public async Task SetAutopilotWaypointV2Async(AuthDTO auth, bool addToBeginning, bool clearOtherWaypoints, long destinationId)
+        public async Task SetAutopilotWaypointAsync(AuthDTO auth, bool addToBeginning, bool clearOtherWaypoints, long destinationId)
         {
             CheckAuth(auth, Scopes.ESI_UI_WRITE_WAYPOINT_1);
 
@@ -39,9 +39,9 @@ namespace EVEStandard.API
                 {"destination_id", destinationId.ToString()}
             };
 
-            var responseModel = await PostAsync("/v2/ui/autopilot/waypoint/", auth, null, null, queryParameters);
+            var responseModel = await PostAsync("/ui/autopilot/waypoint/", auth, null, null, queryParameters);
 
-            CheckResponse(nameof(SetAutopilotWaypointV2Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(SetAutopilotWaypointAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="contractId">The contract to open.</param>
         /// <returns></returns>
-        public async Task OpenContractWindowV1Async(AuthDTO auth, int contractId)
+        public async Task OpenContractWindowAsync(AuthDTO auth, int contractId)
         {
             CheckAuth(auth, Scopes.ESI_UI_OPEN_WINDOW_1);
 
@@ -60,9 +60,9 @@ namespace EVEStandard.API
                 {"contract_id", contractId.ToString()}
             };
 
-            var responseModel = await PostAsync("/v1/ui/openwindow/contract/", auth, null, null, queryParameters);
+            var responseModel = await PostAsync("/ui/openwindow/contract/", auth, null, null, queryParameters);
 
-            CheckResponse(nameof(OpenContractWindowV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(OpenContractWindowAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="targetId">The target to open.</param>
         /// <returns></returns>
-        public async Task OpenInformationWindowV1Async(AuthDTO auth, long targetId)
+        public async Task OpenInformationWindowAsync(AuthDTO auth, long targetId)
         {
             CheckAuth(auth, Scopes.ESI_UI_OPEN_WINDOW_1);
 
@@ -81,9 +81,9 @@ namespace EVEStandard.API
                 {"target_id", targetId.ToString()}
             };
 
-            var responseModel = await PostAsync("/v1/ui/openwindow/information/", auth, null, null, queryParameters);
+            var responseModel = await PostAsync("/ui/openwindow/information/", auth, null, null, queryParameters);
 
-            CheckResponse(nameof(OpenInformationWindowV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(OpenInformationWindowAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="typeId">The item type to open in market window.</param>
         /// <returns></returns>
-        public async Task OpenMarketDetailsV1Async(AuthDTO auth, long typeId)
+        public async Task OpenMarketDetailsAsync(AuthDTO auth, long typeId)
         {
             CheckAuth(auth, Scopes.ESI_UI_OPEN_WINDOW_1);
 
@@ -102,9 +102,9 @@ namespace EVEStandard.API
                 {"type_id", typeId.ToString()}
             };
 
-            var responseModel = await PostAsync("/v1/ui/openwindow/marketdetails/", auth, null, null, queryParameters);
+            var responseModel = await PostAsync("/ui/openwindow/marketdetails/", auth, null, null, queryParameters);
 
-            CheckResponse(nameof(OpenMarketDetailsV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(OpenMarketDetailsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
 
         /// <summary>
@@ -114,13 +114,13 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="mail">The details of mail to create.</param>
         /// <returns></returns>
-        public async Task OpenNewMailWindowV1Async(AuthDTO auth, UiNewMail mail)
+        public async Task OpenNewMailWindowAsync(AuthDTO auth, UiNewMail mail)
         {
             CheckAuth(auth, Scopes.ESI_UI_OPEN_WINDOW_1);
 
-            var responseModel = await PostAsync("/v1/ui/openwindow/newmail/", auth, mail);
+            var responseModel = await PostAsync("/ui/openwindow/newmail/", auth, mail);
 
-            CheckResponse(nameof(OpenNewMailWindowV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(OpenNewMailWindowAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
         }
     }
 }

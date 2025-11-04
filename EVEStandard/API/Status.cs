@@ -1,4 +1,5 @@
-﻿using EVEStandard.Models.API;
+﻿using EVEStandard.Enumerations;
+using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace EVEStandard.API
     {
         private readonly ILogger logger = LibraryLogging.CreateLogger<Status>();
 
-        internal Status(string dataSource) : base(dataSource)
+        internal Status(string dataSource, CompatibilityDate compatibilityDate) : base(dataSource, compatibilityDate)
         {
         }
 
@@ -22,11 +23,11 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing server status.</returns>
-        public async Task<ESIModelDTO<Models.Status>> GetStatusV1Async(string ifNoneMatch=null)
+        public async Task<ESIModelDTO<Models.Status>> GetStatusAsync(string ifNoneMatch=null)
         {
-            var responseModel = await GetAsync("/v1/status/", ifNoneMatch);
+            var responseModel = await GetAsync("/status/", ifNoneMatch);
 
-            CheckResponse(nameof(GetStatusV1Async), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+            CheckResponse(nameof(GetStatusAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
             return ReturnModelDTO<Models.Status>(responseModel);
         }
