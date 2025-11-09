@@ -90,11 +90,11 @@ namespace EVEStandard.Models
 
         [JsonIgnore]
 
-        public Enumerations.LocationFlag LocationFlagToEnum 
+        public LocationFlag LocationFlagToEnum 
 
         {
 
-            get => (Enumerations.LocationFlag)Enum.Parse(typeof(Enumerations.LocationFlag), LocationFlag);
+            get => (LocationFlag)Enum.Parse(typeof(LocationFlag), LocationFlag);
 
         }
 

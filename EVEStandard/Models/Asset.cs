@@ -50,9 +50,9 @@ namespace EVEStandard.Models
         [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
 
         [JsonIgnore]
-        public Enumerations.LocationFlag LocationFlagToEnum 
+        public LocationFlag LocationFlagToEnum 
         {
-            get => (Enumerations.LocationFlag)Enum.Parse(typeof(Enumerations.LocationFlag), LocationFlag);
+            get => (LocationFlag)Enum.Parse(typeof(LocationFlag), LocationFlag);
         }
 
         /// <summary>

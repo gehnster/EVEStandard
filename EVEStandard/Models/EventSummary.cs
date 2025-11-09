@@ -47,11 +47,11 @@ namespace EVEStandard.Models
 
         [JsonIgnore]
 
-        public Enumerations.EventResponse EventResponseToEnum 
+        public EventResponse EventResponseToEnum 
 
         {
 
-            get => (Enumerations.EventResponse)Enum.Parse(typeof(Enumerations.EventResponse), EventResponse);
+            get => (EventResponse)Enum.Parse(typeof(EventResponse), EventResponse);
 
         }
 

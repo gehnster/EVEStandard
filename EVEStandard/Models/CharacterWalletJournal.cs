@@ -53,11 +53,11 @@ namespace EVEStandard.Models
 
         [JsonIgnore]
 
-        public Enumerations.ContextType ContextIdTypeToEnum 
+        public ContextType ContextIdTypeToEnum 
 
         {
 
-            get => (Enumerations.ContextType)Enum.Parse(typeof(Enumerations.ContextType), ContextIdType);
+            get => (ContextType)Enum.Parse(typeof(ContextType), ContextIdType);
 
         }
 
@@ -117,11 +117,11 @@ namespace EVEStandard.Models
 
         [JsonIgnore]
 
-        public Enumerations.TransactionType RefTypeToEnum 
+        public TransactionType RefTypeToEnum 
 
         {
 
-            get => (Enumerations.TransactionType)Enum.Parse(typeof(Enumerations.TransactionType), RefType);
+            get => (TransactionType)Enum.Parse(typeof(TransactionType), RefType);
 
         }
 

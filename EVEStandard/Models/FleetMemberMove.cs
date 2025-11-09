@@ -21,9 +21,9 @@ namespace EVEStandard.Models
         [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
 
         [JsonIgnore]
-        public Enumerations.FleetRole RoleToEnum 
+        public FleetRole RoleToEnum 
         {
-            get => (Enumerations.FleetRole)Enum.Parse(typeof(Enumerations.FleetRole), Role);
+            get => (FleetRole)Enum.Parse(typeof(FleetRole), Role);
         }
 
         /// <summary>

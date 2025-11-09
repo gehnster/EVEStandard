@@ -28,9 +28,9 @@ namespace EVEStandard.Models
         [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
 
         [JsonIgnore]
-        public Enumerations.LocationType? LocationTypeToEnum 
+        public LocationType? LocationTypeToEnum 
         {
-            get => LocationType != null ? (Enumerations.LocationType?)Enum.Parse(typeof(Enumerations.LocationType), LocationType) : null;
+            get => LocationType != null ? (LocationType?)Enum.Parse(typeof(LocationType), LocationType) : null;
         }
 
         #endregion Properties

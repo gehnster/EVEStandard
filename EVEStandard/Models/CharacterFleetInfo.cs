@@ -40,11 +40,11 @@ namespace EVEStandard.Models
 
         [JsonIgnore]
 
-        public Enumerations.FleetRole RoleToEnum 
+        public FleetRole RoleToEnum 
 
         {
 
-            get => (Enumerations.FleetRole)Enum.Parse(typeof(Enumerations.FleetRole), Role);
+            get => (FleetRole)Enum.Parse(typeof(FleetRole), Role);
 
         }
 
