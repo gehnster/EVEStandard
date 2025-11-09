@@ -20,38 +20,25 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Type of the location_id</value>
 
-
-
         [JsonPropertyName("location_flag")]
-
 
         public string LocationFlag { get; set; }
 
-
         /// <summary>
-
 
         /// Gets the LocationFlag as enum (may throw exception if unknown value exists).
 
-
         /// </summary>
-
 
         [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
 
-
-
         [JsonIgnore]
-
 
         public Enumerations.LocationFlag LocationFlagToEnum 
 
-
         {
 
-
             get => (Enumerations.LocationFlag)Enum.Parse(typeof(Enumerations.LocationFlag), LocationFlag);
-
 
         }
 

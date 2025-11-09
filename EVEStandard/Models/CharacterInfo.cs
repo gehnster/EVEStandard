@@ -55,38 +55,25 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>gender string</value>
 
-
-
         [JsonPropertyName("gender")]
-
 
         public string Gender { get; set; }
 
-
         /// <summary>
-
 
         /// Gets the Gender as enum (may throw exception if unknown value exists).
 
-
         /// </summary>
-
 
         [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
 
-
-
         [JsonIgnore]
-
 
         public GenderEnum GenderToEnum 
 
-
         {
 
-
             get => (GenderEnum)Enum.Parse(typeof(GenderEnum), Gender);
-
 
         }
 

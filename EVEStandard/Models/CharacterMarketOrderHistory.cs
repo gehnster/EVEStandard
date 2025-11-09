@@ -104,38 +104,25 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Current order state</value>
 
-
-
         [JsonPropertyName("state")]
-
 
         public string State { get; set; }
 
-
         /// <summary>
-
 
         /// Gets the State as enum (may throw exception if unknown value exists).
 
-
         /// </summary>
-
 
         [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
 
-
-
         [JsonIgnore]
-
 
         public StateEnum StateToEnum 
 
-
         {
 
-
             get => (StateEnum)Enum.Parse(typeof(StateEnum), State);
-
 
         }
 

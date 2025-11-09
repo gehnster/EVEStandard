@@ -28,38 +28,25 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>action string</value>
 
-
-
         [JsonPropertyName("action")]
-
 
         public string Action { get; set; }
 
-
         /// <summary>
-
 
         /// Gets the Action as enum (may throw exception if unknown value exists).
 
-
         /// </summary>
-
 
         [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
 
-
-
         [JsonIgnore]
-
 
         public ActionEnum ActionToEnum 
 
-
         {
 
-
             get => (ActionEnum)Enum.Parse(typeof(ActionEnum), Action);
-
 
         }
 
@@ -89,38 +76,25 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>location_flag string</value>
 
-
-
         [JsonPropertyName("location_flag")]
-
 
         public string LocationFlag { get; set; }
 
-
         /// <summary>
-
 
         /// Gets the LocationFlag as enum (may throw exception if unknown value exists).
 
-
         /// </summary>
-
 
         [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
 
-
-
         [JsonIgnore]
-
 
         public Enumerations.LocationFlag LocationFlagToEnum 
 
-
         {
 
-
             get => (Enumerations.LocationFlag)Enum.Parse(typeof(Enumerations.LocationFlag), LocationFlag);
-
 
         }
 
@@ -156,29 +130,19 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Type of password set if action is of type SetPassword or EnterPassword</value>
 
-
-
         [JsonPropertyName("password_type")]
-
 
         public string PasswordType { get; set; }
 
-
         /// <summary>
-
 
         /// Gets the PasswordType as enum (may throw exception if unknown value exists).
 
-
         /// </summary>
-
 
         [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
 
-
-
         [JsonIgnore]
-
 
         public ContainerLogs.PasswordTypeEnum? PasswordTypeToEnum 
         {

@@ -41,38 +41,25 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>planet_type string</value>
 
-
-
         [JsonPropertyName("planet_type")]
-
 
         public string PlanetType { get; set; }
 
-
         /// <summary>
-
 
         /// Gets the PlanetType as enum (may throw exception if unknown value exists).
 
-
         /// </summary>
-
 
         [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
 
-
-
         [JsonIgnore]
-
 
         public PlanetTypeEnum PlanetTypeToEnum 
 
-
         {
 
-
             get => (PlanetTypeEnum)Enum.Parse(typeof(PlanetTypeEnum), PlanetType);
-
 
         }
 

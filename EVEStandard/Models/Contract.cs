@@ -77,38 +77,25 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>To whom the contract is available</value>
 
-
-
         [JsonPropertyName("availability")]
-
 
         public string Availability { get; set; }
 
-
         /// <summary>
-
 
         /// Gets the Availability as enum (may throw exception if unknown value exists).
 
-
         /// </summary>
-
 
         [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
 
-
-
         [JsonIgnore]
-
 
         public Contract.AvailabilityEnum AvailabilityToEnum 
 
-
         {
 
-
             get => (Contract.AvailabilityEnum)Enum.Parse(typeof(Contract.AvailabilityEnum), Availability);
-
 
         }
 
@@ -220,7 +207,6 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Status of the the contract</value>
 
-
         [JsonPropertyName("status")]
 
         public string Status { get; set; }
@@ -232,7 +218,6 @@ namespace EVEStandard.Models
         /// </summary>
 
         [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
-
 
         [JsonIgnore]
 
@@ -256,38 +241,25 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Type of the contract</value>
 
-
-
         [JsonPropertyName("type")]
-
 
         public string Type { get; set; }
 
-
         /// <summary>
-
 
         /// Gets the Type as enum (may throw exception if unknown value exists).
 
-
         /// </summary>
-
 
         [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
 
-
-
         [JsonIgnore]
-
 
         public Contract.TypeEnum TypeToEnum 
 
-
         {
 
-
             get => (Contract.TypeEnum)Enum.Parse(typeof(Contract.TypeEnum), Type);
-
 
         }
         /// <summary>

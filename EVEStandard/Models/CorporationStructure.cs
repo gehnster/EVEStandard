@@ -102,38 +102,25 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>state string</value>
 
-
-
         [JsonPropertyName("state")]
-
 
         public string State { get; set; }
 
-
         /// <summary>
-
 
         /// Gets the State as enum (may throw exception if unknown value exists).
 
-
         /// </summary>
-
 
         [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
 
-
-
         [JsonIgnore]
-
 
         public CorporationStructure.StateEnum StateToEnum 
 
-
         {
 
-
             get => (CorporationStructure.StateEnum)Enum.Parse(typeof(CorporationStructure.StateEnum), State);
-
 
         }
 
@@ -212,7 +199,6 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>state string</value>
 
-
         [JsonPropertyName("state")]
 
         public string State { get; set; }
@@ -224,7 +210,6 @@ namespace EVEStandard.Models
         /// </summary>
 
         [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
-
 
         [JsonIgnore]
 

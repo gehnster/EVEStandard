@@ -33,7 +33,6 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The category of the observing entity</value>
 
-
         [JsonPropertyName("observer_type")]
 
         public string ObserverType { get; set; }
@@ -45,7 +44,6 @@ namespace EVEStandard.Models
         /// </summary>
 
         [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
-
 
         [JsonIgnore]
 

@@ -38,38 +38,25 @@ namespace EVEStandard.Models
         /// The type of the context identifier.
         /// </value>
 
-
-
         [JsonPropertyName("context_id_type")]
-
 
         public string ContextIdType { get; set; }
 
-
         /// <summary>
-
 
         /// Gets the ContextIdType as enum (may throw exception if unknown value exists).
 
-
         /// </summary>
-
 
         [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
 
-
-
         [JsonIgnore]
-
 
         public Enumerations.ContextType ContextIdTypeToEnum 
 
-
         {
 
-
             get => (Enumerations.ContextType)Enum.Parse(typeof(Enumerations.ContextType), ContextIdType);
-
 
         }
 
@@ -115,38 +102,25 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Transaction type, different type of transaction will populate different fields in &#x60;extra_info&#x60; Note: If you have an existing XML API application that is using ref_types, you will need to know which string ESI ref_type maps to which integer. You can use the following gist to see string-&gt;int mappings: https://gist.github.com/ccp-zoetrope/c03db66d90c2148724c06171bc52e0ec</value>
 
-
-
         [JsonPropertyName("ref_type")]
-
 
         public string RefType { get; set; }
 
-
         /// <summary>
-
 
         /// Gets the RefType as enum (may throw exception if unknown value exists).
 
-
         /// </summary>
-
 
         [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
 
-
-
         [JsonIgnore]
-
 
         public Enumerations.TransactionType RefTypeToEnum 
 
-
         {
 
-
             get => (Enumerations.TransactionType)Enum.Parse(typeof(Enumerations.TransactionType), RefType);
-
 
         }
 

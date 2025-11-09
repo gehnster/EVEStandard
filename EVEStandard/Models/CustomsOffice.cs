@@ -107,26 +107,17 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Access is allowed only for entities with this level of standing or better</value>
 
-
-
         [JsonPropertyName("standing_level")]
-
 
         public string StandingLevel { get; set; }
 
-
         /// <summary>
-
 
         /// Gets the StandingLevel as enum (may throw exception if unknown value exists).
 
-
         /// </summary>
 
-
         [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
-
-
 
         [JsonIgnore]
         public CustomsOffice.StandingLevelEnum? StandingLevelToEnum 
