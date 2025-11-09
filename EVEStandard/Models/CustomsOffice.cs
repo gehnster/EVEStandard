@@ -1,3 +1,4 @@
+using System;
 ﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
@@ -105,8 +106,33 @@ namespace EVEStandard.Models
         /// Access is allowed only for entities with this level of standing or better
         /// </summary>
         /// <value>Access is allowed only for entities with this level of standing or better</value>
+
+
+
         [JsonPropertyName("standing_level")]
-        public StandingLevelEnum? StandingLevel { get; set; }
+
+
+        public string StandingLevel { get; set; }
+
+
+        /// <summary>
+
+
+        /// Gets the StandingLevel as enum (may throw exception if unknown value exists).
+
+
+        /// </summary>
+
+
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+
+
+        [JsonIgnore]
+        public CustomsOffice.StandingLevelEnum? StandingLevelToEnum 
+        {
+            get => StandingLevel != null ? (CustomsOffice.StandingLevelEnum?)Enum.Parse(typeof(CustomsOffice.StandingLevelEnum), StandingLevel) : null;
+        }
 
         /// <summary>
         /// ID of the solar system this customs office is located in

@@ -76,8 +76,41 @@ namespace EVEStandard.Models
         /// status string
         /// </summary>
         /// <value>status string</value>
+
+
+
         [JsonPropertyName("status")]
-        public StatusEnum Status { get; set; }
+
+
+        public string Status { get; set; }
+
+
+        /// <summary>
+
+
+        /// Gets the Status as enum (may throw exception if unknown value exists).
+
+
+        /// </summary>
+
+
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+
+
+        [JsonIgnore]
+
+
+        public CharacterMedals.StatusEnum StatusToEnum 
+
+
+        {
+
+
+            get => (CharacterMedals.StatusEnum)Enum.Parse(typeof(CharacterMedals.StatusEnum), Status);
+
+
+        }
 
         /// <summary>
         /// title string

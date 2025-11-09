@@ -1,4 +1,5 @@
-﻿using EVEStandard.Enumerations;
+﻿using System;
+using EVEStandard.Enumerations;
 using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
@@ -12,7 +13,18 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>If a character is moved to the &#x60;fleet_commander&#x60; role, neither &#x60;wing_id&#x60; or &#x60;squad_id&#x60; should be specified. If a character is moved to the &#x60;wing_commander&#x60; role, only &#x60;wing_id&#x60; should be specified. If a character is moved to the &#x60;squad_commander&#x60; role, both &#x60;wing_id&#x60; and &#x60;squad_id&#x60; should be specified. If a character is moved to the &#x60;squad_member&#x60; role, both &#x60;wing_id&#x60; and &#x60;squad_id&#x60; should be specified.</value>
         [JsonPropertyName("role")]
-        public FleetRole Role { get; set; }
+        public string Role { get; set; }
+
+        /// <summary>
+        /// Gets the Role as enum (may throw exception if unknown value exists).
+        /// </summary>
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+        public Enumerations.FleetRole RoleToEnum 
+        {
+            get => (Enumerations.FleetRole)Enum.Parse(typeof(Enumerations.FleetRole), Role);
+        }
 
         /// <summary>
         /// squad_id integer

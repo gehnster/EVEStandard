@@ -1,4 +1,5 @@
-﻿using EVEStandard.Enumerations;
+﻿using System;
+using EVEStandard.Enumerations;
 using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
@@ -41,7 +42,18 @@ namespace EVEStandard.Models
         /// The location flag.
         /// </value>
         [JsonPropertyName("location_flag")]
-        public LocationFlag LocationFlag { get; set; }
+        public string LocationFlag { get; set; }
+
+        /// <summary>
+        /// Gets the LocationFlag as enum (may throw exception if unknown value exists).
+        /// </summary>
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+        public Enumerations.LocationFlag LocationFlagToEnum 
+        {
+            get => (Enumerations.LocationFlag)Enum.Parse(typeof(Enumerations.LocationFlag), LocationFlag);
+        }
 
         /// <summary>
         /// Gets or sets the location identifier.
@@ -58,7 +70,18 @@ namespace EVEStandard.Models
         /// The type of the location.
         /// </value>
         [JsonPropertyName("location_type")]
-        public LocationTypeEnum LocationType { get; set; }
+        public string LocationType { get; set; }
+
+        /// <summary>
+        /// Gets the LocationType as enum (may throw exception if unknown value exists).
+        /// </summary>
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+        public LocationTypeEnum LocationTypeToEnum 
+        {
+            get => (LocationTypeEnum)Enum.Parse(typeof(LocationTypeEnum), LocationType);
+        }
 
         /// <summary>
         /// Gets or sets the quantity.

@@ -1,3 +1,4 @@
+using System;
 ﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
@@ -40,7 +41,18 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>shareholder_type string</value>
         [JsonPropertyName("shareholder_type")]
-        public ShareholderTypeEnum ShareholderType { get; set; }
+        public string ShareholderType { get; set; }
+
+        /// <summary>
+        /// Gets the ShareholderType as enum (may throw exception if unknown value exists).
+        /// </summary>
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+        public ShareholderTypeEnum ShareholderTypeToEnum 
+        {
+            get => (ShareholderTypeEnum)Enum.Parse(typeof(ShareholderTypeEnum), ShareholderType);
+        }
 
         #endregion Properties
     }

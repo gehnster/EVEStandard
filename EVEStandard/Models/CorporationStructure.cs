@@ -101,8 +101,41 @@ namespace EVEStandard.Models
         /// state string
         /// </summary>
         /// <value>state string</value>
+
+
+
         [JsonPropertyName("state")]
-        public StateEnum State { get; set; }
+
+
+        public string State { get; set; }
+
+
+        /// <summary>
+
+
+        /// Gets the State as enum (may throw exception if unknown value exists).
+
+
+        /// </summary>
+
+
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+
+
+        [JsonIgnore]
+
+
+        public CorporationStructure.StateEnum StateToEnum 
+
+
+        {
+
+
+            get => (CorporationStructure.StateEnum)Enum.Parse(typeof(CorporationStructure.StateEnum), State);
+
+
+        }
 
         /// <summary>
         /// Date at which the structure will move to it&#39;s next state
@@ -178,8 +211,30 @@ namespace EVEStandard.Models
         /// state string
         /// </summary>
         /// <value>state string</value>
+
+
         [JsonPropertyName("state")]
-        public StateEnum State { get; set; }
+
+        public string State { get; set; }
+
+        /// <summary>
+
+        /// Gets the State as enum (may throw exception if unknown value exists).
+
+        /// </summary>
+
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+
+        [JsonIgnore]
+
+        public CorporationStructure.StateEnum StateToEnum 
+
+        {
+
+            get => (CorporationStructure.StateEnum)Enum.Parse(typeof(CorporationStructure.StateEnum), State);
+
+        }
 
         #endregion Properties
     }

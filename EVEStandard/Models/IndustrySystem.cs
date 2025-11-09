@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
@@ -46,7 +47,18 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>activity string</value>
         [JsonPropertyName("activity")]
-        public ActivityEnum Activity { get; set; }
+        public string Activity { get; set; }
+
+        /// <summary>
+        /// Gets the Activity as enum (may throw exception if unknown value exists).
+        /// </summary>
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+        public ActivityEnum ActivityToEnum 
+        {
+            get => (ActivityEnum)Enum.Parse(typeof(ActivityEnum), Activity);
+        }
 
         /// <summary>
         /// cost_index number

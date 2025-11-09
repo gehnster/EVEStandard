@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
@@ -70,7 +71,18 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The state of this incursion</value>
         [JsonPropertyName("state")]
-        public StateEnum State { get; set; }
+        public string State { get; set; }
+
+        /// <summary>
+        /// Gets the State as enum (may throw exception if unknown value exists).
+        /// </summary>
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+        public StateEnum StateToEnum 
+        {
+            get => (StateEnum)Enum.Parse(typeof(StateEnum), State);
+        }
 
         /// <summary>
         /// The type of this incursion

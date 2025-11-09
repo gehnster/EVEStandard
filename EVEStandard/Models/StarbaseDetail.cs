@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
@@ -43,7 +44,18 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Who can anchor starbase (POS) and its structures</value>
         [JsonPropertyName("anchor")]
-        public PermissionEnum Anchor { get; set; }
+        public string Anchor { get; set; }
+
+        /// <summary>
+        /// Gets the Anchor as enum (may throw exception if unknown value exists).
+        /// </summary>
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+        public PermissionEnum AnchorToEnum 
+        {
+            get => (PermissionEnum)Enum.Parse(typeof(PermissionEnum), Anchor);
+        }
 
         /// <summary>
         /// attack_if_at_war boolean
@@ -78,14 +90,36 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Who can take fuel blocks out of the starbase (POS)&#39;s fuel bay</value>
         [JsonPropertyName("fuel_bay_take")]
-        public PermissionEnum FuelBayTake { get; set; }
+        public string FuelBayTake { get; set; }
+
+        /// <summary>
+        /// Gets the FuelBayTake as enum (may throw exception if unknown value exists).
+        /// </summary>
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+        public PermissionEnum FuelBayTakeToEnum 
+        {
+            get => (PermissionEnum)Enum.Parse(typeof(PermissionEnum), FuelBayTake);
+        }
 
         /// <summary>
         /// Who can view the starbase (POS)&#39;s fule bay. Characters either need to have required role or belong to the starbase (POS) owner&#39;s corporation or alliance, as described by the enum, all other access settings follows the same scheme
         /// </summary>
         /// <value>Who can view the starbase (POS)&#39;s fule bay. Characters either need to have required role or belong to the starbase (POS) owner&#39;s corporation or alliance, as described by the enum, all other access settings follows the same scheme</value>
         [JsonPropertyName("fuel_bay_view")]
-        public PermissionEnum FuelBayView { get; set; }
+        public string FuelBayView { get; set; }
+
+        /// <summary>
+        /// Gets the FuelBayView as enum (may throw exception if unknown value exists).
+        /// </summary>
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+        public PermissionEnum FuelBayViewToEnum 
+        {
+            get => (PermissionEnum)Enum.Parse(typeof(PermissionEnum), FuelBayView);
+        }
         /// <summary>
         /// Fuel blocks and other things that will be consumed when operating a starbase (POS)
         /// </summary>
@@ -98,21 +132,54 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Who can offline starbase (POS) and its structures</value>
         [JsonPropertyName("offline")]
-        public PermissionEnum Offline { get; set; }
+        public string Offline { get; set; }
+
+        /// <summary>
+        /// Gets the Offline as enum (may throw exception if unknown value exists).
+        /// </summary>
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+        public PermissionEnum OfflineToEnum 
+        {
+            get => (PermissionEnum)Enum.Parse(typeof(PermissionEnum), Offline);
+        }
 
         /// <summary>
         /// Who can online starbase (POS) and its structures
         /// </summary>
         /// <value>Who can online starbase (POS) and its structures</value>
         [JsonPropertyName("online")]
-        public PermissionEnum Online { get; set; }
+        public string Online { get; set; }
+
+        /// <summary>
+        /// Gets the Online as enum (may throw exception if unknown value exists).
+        /// </summary>
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+        public PermissionEnum OnlineToEnum 
+        {
+            get => (PermissionEnum)Enum.Parse(typeof(PermissionEnum), Online);
+        }
 
         /// <summary>
         /// Who can unanchor starbase (POS) and its structures
         /// </summary>
         /// <value>Who can unanchor starbase (POS) and its structures</value>
         [JsonPropertyName("unanchor")]
-        public PermissionEnum Unanchor { get; set; }
+        public string Unanchor { get; set; }
+
+        /// <summary>
+        /// Gets the Unanchor as enum (may throw exception if unknown value exists).
+        /// </summary>
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+        public PermissionEnum UnanchorToEnum 
+        {
+            get => (PermissionEnum)Enum.Parse(typeof(PermissionEnum), Unanchor);
+        }
         /// <summary>
         /// True if the starbase (POS) is using alliance standings, otherwise using corporation&#39;s
         /// </summary>

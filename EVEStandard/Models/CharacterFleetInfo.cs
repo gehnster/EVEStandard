@@ -1,5 +1,6 @@
 ﻿using EVEStandard.Enumerations;
 using System.Text.Json.Serialization;
+using System;
 
 namespace EVEStandard.Models
 {
@@ -24,8 +25,41 @@ namespace EVEStandard.Models
         /// Member’s role in fleet
         /// </summary>
         /// <value>Member’s role in fleet</value>
+
+
+
         [JsonPropertyName("role")]
-        public FleetRole Role { get; set; }
+
+
+        public string Role { get; set; }
+
+
+        /// <summary>
+
+
+        /// Gets the Role as enum (may throw exception if unknown value exists).
+
+
+        /// </summary>
+
+
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+
+
+        [JsonIgnore]
+
+
+        public Enumerations.FleetRole RoleToEnum 
+
+
+        {
+
+
+            get => (Enumerations.FleetRole)Enum.Parse(typeof(Enumerations.FleetRole), Role);
+
+
+        }
 
         /// <summary>
         /// ID of the squad the member is in. If not applicable, will be set to -1
