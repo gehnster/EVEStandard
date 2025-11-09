@@ -181,8 +181,8 @@ namespace EVEStandard.API
                 case HttpStatusCode.RequestTimeout:
                     model.Error = true;
                     model.Message = await response.Content.ReadAsStringAsync();
-                    model.RemainingErrors = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
-                    model.ErrorsTimeRemainingInWindowInSeconds = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Reset").FirstOrDefault() ?? "0");
+                    model.RemainingErrors = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Remain");
+                    model.ErrorsTimeRemainingInWindowInSeconds = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Reset");
 
                     return model;
                 case HttpStatusCode.Unauthorized:
@@ -190,15 +190,15 @@ namespace EVEStandard.API
                 case (HttpStatusCode)429:
                     model.Error = true;
                     model.Message = "Too many requests made to ESI in a short period of time";
-                    model.RemainingErrors = int.Parse(response.Headers.GetValues("Retry-After").FirstOrDefault() ?? "0");
-                    model.ErrorsTimeRemainingInWindowInSeconds = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Reset").FirstOrDefault() ?? "0");
+                    model.RemainingErrors = GetHeaderValueAsInt(response, "Retry-After");
+                    model.ErrorsTimeRemainingInWindowInSeconds = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Reset");
 
                     return model;
                 case (HttpStatusCode)520:
                     model.Error = true;
                     model.Message = "Internal error thrown by EVE server. Most of the time this means you have hit an EVE server rate limit.";
-                    model.RemainingErrors = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
-                    model.ErrorsTimeRemainingInWindowInSeconds = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Reset").FirstOrDefault() ?? "0");
+                    model.RemainingErrors = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Remain");
+                    model.ErrorsTimeRemainingInWindowInSeconds = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Reset");
 
                     return model;
                 case HttpStatusCode.Forbidden:
@@ -211,16 +211,16 @@ namespace EVEStandard.API
                 case (HttpStatusCode)422:
                     model.Error = true;
                     model.Message = $"Your request was invalid. Returned message: {await response.Content.ReadAsStringAsync()}";
-                    model.RemainingErrors = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
-                    model.ErrorsTimeRemainingInWindowInSeconds = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Reset").FirstOrDefault() ?? "0");
+                    model.RemainingErrors = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Remain");
+                    model.ErrorsTimeRemainingInWindowInSeconds = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Reset");
 
                     return model;
                 default:
                     logger.LogWarning($"API Response Issue. Status Code: {response.StatusCode}");
                     model.Error = true;
                     model.Message = $"An error code we didn't handle was returned. Status Code: {response.StatusCode}";
-                    model.RemainingErrors = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Remain").FirstOrDefault() ?? "0");
-                    model.ErrorsTimeRemainingInWindowInSeconds = int.Parse(response.Headers.GetValues("X-ESI-Error-Limit-Reset").FirstOrDefault() ?? "0");
+                    model.RemainingErrors = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Remain");
+                    model.ErrorsTimeRemainingInWindowInSeconds = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Reset");
 
                     return model;
             }
@@ -228,10 +228,10 @@ namespace EVEStandard.API
 
         private static async Task<APIResponse> ProcessSuccess(HttpResponseMessage response, APIResponse model)
         {
-            if (response.Headers.Contains("warning"))
+            if (response.Headers.TryGetValues("warning", out var warningValues))
             {
                 model.LegacyWarning = true;
-                model.Message = String.Join(", ", response.Headers.GetValues("warning"));
+                model.Message = String.Join(", ", warningValues);
             }
             try
             {
@@ -289,6 +289,19 @@ namespace EVEStandard.API
             model.LastModified = response.Content.Headers.LastModified;
 
             return model;
+        }
+
+        private static int GetHeaderValueAsInt(HttpResponseMessage response, string headerName, int defaultValue = 0)
+        {
+            if (response.Headers.TryGetValues(headerName, out var values))
+            {
+                var firstValue = values.FirstOrDefault();
+                if (int.TryParse(firstValue, out var result))
+                {
+                    return result;
+                }
+            }
+            return defaultValue;
         }
 
         internal static void CheckResponse(string functionName, bool error, string errorMessage, bool legacyWarning, ILogger _logger)
