@@ -1,3 +1,4 @@
+using System;
 ﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
@@ -34,7 +35,18 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>from_type string</value>
         [JsonPropertyName("from_type")]
-        public FromTypeEnum FromType { get; set; }
+        public string FromType { get; set; }
+
+        /// <summary>
+        /// Gets the FromType as enum (may throw exception if unknown value exists).
+        /// </summary>
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+        public FromTypeEnum FromTypeToEnum 
+        {
+            get => (FromTypeEnum)Enum.Parse(typeof(FromTypeEnum), FromType);
+        }
 
         /// <summary>
         /// standing number

@@ -76,8 +76,28 @@ namespace EVEStandard.Models
         /// To whom the contract is available
         /// </summary>
         /// <value>To whom the contract is available</value>
+
         [JsonPropertyName("availability")]
-        public AvailabilityEnum Availability { get; set; }
+
+        public string Availability { get; set; }
+
+        /// <summary>
+
+        /// Gets the Availability as enum (may throw exception if unknown value exists).
+
+        /// </summary>
+
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+
+        public Contract.AvailabilityEnum AvailabilityToEnum 
+
+        {
+
+            get => (Contract.AvailabilityEnum)Enum.Parse(typeof(Contract.AvailabilityEnum), Availability);
+
+        }
 
         /// <summary>
         /// Buyout price (for Auctions only)
@@ -186,8 +206,28 @@ namespace EVEStandard.Models
         /// Status of the the contract
         /// </summary>
         /// <value>Status of the the contract</value>
+
         [JsonPropertyName("status")]
-        public StatusEnum Status { get; set; }
+
+        public string Status { get; set; }
+
+        /// <summary>
+
+        /// Gets the Status as enum (may throw exception if unknown value exists).
+
+        /// </summary>
+
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+
+        public Contract.StatusEnum StatusToEnum 
+
+        {
+
+            get => (Contract.StatusEnum)Enum.Parse(typeof(Contract.StatusEnum), Status);
+
+        }
 
         /// <summary>
         /// Title of the contract
@@ -200,8 +240,28 @@ namespace EVEStandard.Models
         /// Type of the contract
         /// </summary>
         /// <value>Type of the contract</value>
+
         [JsonPropertyName("type")]
-        public TypeEnum Type { get; set; }
+
+        public string Type { get; set; }
+
+        /// <summary>
+
+        /// Gets the Type as enum (may throw exception if unknown value exists).
+
+        /// </summary>
+
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+
+        public Contract.TypeEnum TypeToEnum 
+
+        {
+
+            get => (Contract.TypeEnum)Enum.Parse(typeof(Contract.TypeEnum), Type);
+
+        }
         /// <summary>
         /// Volume of items in the contract
         /// </summary>

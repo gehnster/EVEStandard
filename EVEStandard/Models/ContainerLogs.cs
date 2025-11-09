@@ -27,8 +27,28 @@ namespace EVEStandard.Models
         /// action string
         /// </summary>
         /// <value>action string</value>
+
         [JsonPropertyName("action")]
-        public ActionEnum Action { get; set; }
+
+        public string Action { get; set; }
+
+        /// <summary>
+
+        /// Gets the Action as enum (may throw exception if unknown value exists).
+
+        /// </summary>
+
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+
+        public ActionEnum ActionToEnum 
+
+        {
+
+            get => (ActionEnum)Enum.Parse(typeof(ActionEnum), Action);
+
+        }
 
         /// <summary>
         /// ID of the character who performed the action.
@@ -55,8 +75,28 @@ namespace EVEStandard.Models
         /// location_flag string
         /// </summary>
         /// <value>location_flag string</value>
+
         [JsonPropertyName("location_flag")]
-        public LocationFlag LocationFlag { get; set; }
+
+        public string LocationFlag { get; set; }
+
+        /// <summary>
+
+        /// Gets the LocationFlag as enum (may throw exception if unknown value exists).
+
+        /// </summary>
+
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+
+        public LocationFlag LocationFlagToEnum 
+
+        {
+
+            get => (LocationFlag)Enum.Parse(typeof(LocationFlag), LocationFlag);
+
+        }
 
         /// <summary>
         /// location_id integer
@@ -89,8 +129,25 @@ namespace EVEStandard.Models
         /// Type of password set if action is of type SetPassword or EnterPassword
         /// </summary>
         /// <value>Type of password set if action is of type SetPassword or EnterPassword</value>
+
         [JsonPropertyName("password_type")]
-        public PasswordTypeEnum? PasswordType { get; set; }
+
+        public string PasswordType { get; set; }
+
+        /// <summary>
+
+        /// Gets the PasswordType as enum (may throw exception if unknown value exists).
+
+        /// </summary>
+
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+
+        public ContainerLogs.PasswordTypeEnum? PasswordTypeToEnum 
+        {
+            get => PasswordType != null ? (ContainerLogs.PasswordTypeEnum?)Enum.Parse(typeof(ContainerLogs.PasswordTypeEnum), PasswordType) : null;
+        }
 
         /// <summary>
         /// Quantity of the item being acted upon

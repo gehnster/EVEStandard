@@ -58,7 +58,18 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>state string</value>
         [JsonPropertyName("state")]
-        public StateEnum? State { get; set; }
+        public string State { get; set; }
+
+        /// <summary>
+        /// Gets the State as enum (may throw exception if unknown value exists).
+        /// </summary>
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+        public StateEnum? StateToEnum 
+        {
+            get => State != null ? (StateEnum?)Enum.Parse(typeof(StateEnum), State) : null;
+        }
 
         /// <summary>
         /// The solar system this starbase (POS) is in, unanchored POSes have this information

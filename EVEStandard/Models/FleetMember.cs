@@ -27,7 +27,18 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Member’s role in fleet</value>
         [JsonPropertyName("role")]
-        public FleetRole Role { get; set; }
+        public string Role { get; set; }
+
+        /// <summary>
+        /// Gets the Role as enum (may throw exception if unknown value exists).
+        /// </summary>
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+        public FleetRole RoleToEnum 
+        {
+            get => (FleetRole)Enum.Parse(typeof(FleetRole), Role);
+        }
 
         /// <summary>
         /// Localized role names

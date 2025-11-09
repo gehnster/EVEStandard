@@ -1,3 +1,4 @@
+using System;
 ﻿using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
@@ -35,7 +36,18 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>recipient_type string</value>
         [JsonPropertyName("recipient_type")]
-        public RecipientTypeEnum RecipientType { get; set; }
+        public string RecipientType { get; set; }
+
+        /// <summary>
+        /// Gets the RecipientType as enum (may throw exception if unknown value exists).
+        /// </summary>
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+        public RecipientTypeEnum RecipientTypeToEnum 
+        {
+            get => (RecipientTypeEnum)Enum.Parse(typeof(RecipientTypeEnum), RecipientType);
+        }
 
         #endregion Properties
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EVEStandard.Enumerations;
 using System.Text.Json.Serialization;
+using System.Linq;
 
 namespace EVEStandard.Models
 {
@@ -47,8 +48,28 @@ namespace EVEStandard.Models
         /// role_type string
         /// </summary>
         /// <value>role_type string</value>
+
         [JsonPropertyName("role_type")]
-        public RoleTypeEnum RoleType { get; set; }
+
+        public string RoleType { get; set; }
+
+        /// <summary>
+
+        /// Gets the RoleType as enum (may throw exception if unknown value exists).
+
+        /// </summary>
+
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+
+        public RoleTypeEnum RoleTypeToEnum 
+
+        {
+
+            get => (RoleTypeEnum)Enum.Parse(typeof(RoleTypeEnum), RoleType);
+
+        }
 
         #endregion Properties
     }

@@ -65,7 +65,18 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Type of event this campaign is for. tcu_defense, ihub_defense and station_defense are referred to as \&quot;Defense Events\&quot;, station_freeport as \&quot;Freeport Events\&quot;. </value>
         [JsonPropertyName("event_type")]
-        public EventTypeEnum EventType { get; set; }
+        public string EventType { get; set; }
+
+        /// <summary>
+        /// Gets the EventType as enum (may throw exception if unknown value exists).
+        /// </summary>
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+        public EventTypeEnum EventTypeToEnum 
+        {
+            get => (EventTypeEnum)Enum.Parse(typeof(EventTypeEnum), EventType);
+        }
 
         /// <summary>
         /// Alliance participating and their respective scores, only present in Freeport Events. 

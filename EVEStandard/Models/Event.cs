@@ -81,8 +81,28 @@ namespace EVEStandard.Models
         /// <value>
         /// The type of the owner.
         /// </value>
+
         [JsonPropertyName("owner_type")]
-        public OwnerTypeEnum OwnerType { get; set; }
+
+        public string OwnerType { get; set; }
+
+        /// <summary>
+
+        /// Gets the OwnerType as enum (may throw exception if unknown value exists).
+
+        /// </summary>
+
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+
+        public Event.OwnerTypeEnum OwnerTypeToEnum 
+
+        {
+
+            get => (Event.OwnerTypeEnum)Enum.Parse(typeof(Event.OwnerTypeEnum), OwnerType);
+
+        }
 
         /// <summary>
         /// Gets or sets the response.

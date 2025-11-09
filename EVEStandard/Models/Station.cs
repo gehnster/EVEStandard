@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using EVEStandard.Enumerations;
 using System.Text.Json.Serialization;
+using System;
+using System.Linq;
 
 namespace EVEStandard.Models
 {
@@ -68,7 +70,18 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>services array</value>
         [JsonPropertyName("services")]
-        public List<ServicesEnum> Services { get; set; }
+        public List<string> Services { get; set; }
+
+        /// <summary>
+        /// Gets the Services as enum (may throw exception if unknown value exists).
+        /// </summary>
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+        public List<ServicesEnum> ServicesToEnum 
+        {
+            get => Services?.Select(s => (ServicesEnum)Enum.Parse(typeof(ServicesEnum), s)).ToList();
+        }
 
         /// <summary>
         /// station_id integer

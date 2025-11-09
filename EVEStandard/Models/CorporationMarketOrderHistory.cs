@@ -103,8 +103,28 @@ namespace EVEStandard.Models
         /// Current order state
         /// </summary>
         /// <value>Current order state</value>
+
         [JsonPropertyName("state")]
-        public StateEnum State { get; set; }
+
+        public string State { get; set; }
+
+        /// <summary>
+
+        /// Gets the State as enum (may throw exception if unknown value exists).
+
+        /// </summary>
+
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+
+        public CorporationMarketOrderHistory.StateEnum StateToEnum 
+
+        {
+
+            get => (CorporationMarketOrderHistory.StateEnum)Enum.Parse(typeof(CorporationMarketOrderHistory.StateEnum), State);
+
+        }
 
         /// <summary>
         /// The type ID of the item transacted in this order

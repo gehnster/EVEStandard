@@ -32,8 +32,28 @@ namespace EVEStandard.Models
         /// <value>
         /// The event response.
         /// </value>
+
         [JsonPropertyName("event_response")]
-        public EventResponse EventResponse { get; set; }
+
+        public string EventResponse { get; set; }
+
+        /// <summary>
+
+        /// Gets the EventResponse as enum (may throw exception if unknown value exists).
+
+        /// </summary>
+
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+
+        public EventResponse EventResponseToEnum 
+
+        {
+
+            get => (EventResponse)Enum.Parse(typeof(EventResponse), EventResponse);
+
+        }
 
         /// <summary>
         /// Gets or sets the importance.

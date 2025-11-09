@@ -32,7 +32,27 @@ namespace EVEStandard.Models
         /// The category of the observing entity
         /// </summary>
         /// <value>The category of the observing entity</value>
+
         [JsonPropertyName("observer_type")]
-        public ObserverTypeEnum ObserverType { get; set; }
+
+        public string ObserverType { get; set; }
+
+        /// <summary>
+
+        /// Gets the ObserverType as enum (may throw exception if unknown value exists).
+
+        /// </summary>
+
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+
+        public CorporationMiningObserver.ObserverTypeEnum ObserverTypeToEnum 
+
+        {
+
+            get => (CorporationMiningObserver.ObserverTypeEnum)Enum.Parse(typeof(CorporationMiningObserver.ObserverTypeEnum), ObserverType);
+
+        }
     }
 }

@@ -295,7 +295,18 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>sender_type string</value>
         [JsonPropertyName("sender_type")]
-        public SenderTypeEnum SenderType { get; set; }
+        public string SenderType { get; set; }
+
+        /// <summary>
+        /// Gets the SenderType as enum (may throw exception if unknown value exists).
+        /// </summary>
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+        public SenderTypeEnum SenderTypeToEnum 
+        {
+            get => (SenderTypeEnum)Enum.Parse(typeof(SenderTypeEnum), SenderType);
+        }
 
         /// <summary>
         /// text string

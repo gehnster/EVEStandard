@@ -1,5 +1,6 @@
 ﻿using EVEStandard.Enumerations;
 using System.Text.Json.Serialization;
+using System;
 
 namespace EVEStandard.Models
 {
@@ -18,8 +19,28 @@ namespace EVEStandard.Models
         /// Type of the location_id
         /// </summary>
         /// <value>Type of the location_id</value>
+
         [JsonPropertyName("location_flag")]
-        public LocationFlag LocationFlag { get; set; }
+
+        public string LocationFlag { get; set; }
+
+        /// <summary>
+
+        /// Gets the LocationFlag as enum (may throw exception if unknown value exists).
+
+        /// </summary>
+
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+
+        [JsonIgnore]
+
+        public LocationFlag LocationFlagToEnum 
+
+        {
+
+            get => (LocationFlag)Enum.Parse(typeof(LocationFlag), LocationFlag);
+
+        }
 
         /// <summary>
         /// References a solar system, station or item_id if this blueprint is located within a container. If the return value is an item_id, then the Character AssetList API must be queried to find the container using the given item_id to determine the correct location of the Blueprint.
