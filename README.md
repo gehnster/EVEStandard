@@ -1,5 +1,5 @@
 # EVE Standard - A C# Library to access the EVE Online ESI API
-![.NET Core](https://github.com/gehnster/EVEStandard/workflows/.NET%20Core/badge.svg?branch=master)
+[![Master Branch](https://github.com/gehnster/EVEStandard/actions/workflows/publish.yml/badge.svg)](https://github.com/gehnster/EVEStandard/actions/workflows/publish.yml)
 
 This library is meant to access the EVE Online ESI API through a C# library. This library was built using .NET Standard so as to be compatible with as many recent .NET frameworks as possible.
 
