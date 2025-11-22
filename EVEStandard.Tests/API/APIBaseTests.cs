@@ -83,7 +83,8 @@ namespace EVEStandard.API.Tests
             // Assert
             Assert.True(result.Error);
             Assert.Contains("Too many requests", result.Message);
-            Assert.Equal(60, result.RemainingErrors);
+            // Retry-After is not stored in RemainingErrors anymore as it's not related to error rate limiting
+            Assert.Equal(0, result.RemainingErrors);
         }
 
         [Fact]
@@ -175,6 +176,98 @@ namespace EVEStandard.API.Tests
             Assert.False(result.Error);
             Assert.True(result.LegacyWarning);
             Assert.Contains("299", result.Message);
+        }
+
+        [Fact]
+        public async Task ProcessResponse_420ErrorLimited_ShouldParseCorrectly()
+        {
+            // Arrange - Create a 420 response with error limit headers
+            var response = new HttpResponseMessage((HttpStatusCode)420)
+            {
+                Content = new StringContent("")
+            };
+            response.Headers.Add("X-ESI-Error-Limit-Remain", "0");
+            response.Headers.Add("X-ESI-Error-Limit-Reset", "60");
+            
+            // Act
+            var result = await InvokeProcessResponse(response);
+            
+            // Assert
+            Assert.True(result.Error);
+            Assert.Contains("Error limit exceeded", result.Message);
+            Assert.Equal(0, result.RemainingErrors);
+            Assert.Equal(60, result.ErrorsTimeRemainingInWindowInSeconds);
+        }
+
+        [Fact]
+        public async Task ProcessResponse_WithRateLimitingHeaders_ShouldParseAllHeaders()
+        {
+            // Arrange - Create a successful response with all rate limiting headers
+            var response = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{}")
+            };
+            response.Headers.Add("X-ESI-Error-Limit-Remain", "95");
+            response.Headers.Add("X-ESI-Error-Limit-Reset", "30");
+            response.Headers.Add("X-Ratelimit-Limit", "150/15m");
+            response.Headers.Add("X-Ratelimit-Remaining", "142");
+            response.Headers.Add("X-Ratelimit-Reset", "900");
+            
+            // Act
+            var result = await InvokeProcessResponse(response);
+            
+            // Assert
+            Assert.False(result.Error);
+            Assert.Equal(95, result.RemainingErrors);
+            Assert.Equal(30, result.ErrorsTimeRemainingInWindowInSeconds);
+            Assert.Equal("150/15m", result.RateLimitLimit);
+            Assert.Equal(142, result.RateLimitRemaining);
+            Assert.Equal(900, result.RateLimitReset);
+        }
+
+        [Fact]
+        public async Task ProcessResponse_429WithRateLimitHeaders_ShouldParseCorrectly()
+        {
+            // Arrange - Create a 429 response with rate limit headers
+            var response = new HttpResponseMessage((HttpStatusCode)429)
+            {
+                Content = new StringContent("")
+            };
+            response.Headers.Add("X-Ratelimit-Limit", "150/15m");
+            response.Headers.Add("X-Ratelimit-Remaining", "0");
+            response.Headers.Add("X-Ratelimit-Reset", "120");
+            response.Headers.Add("Retry-After", "120");
+            
+            // Act
+            var result = await InvokeProcessResponse(response);
+            
+            // Assert
+            Assert.True(result.Error);
+            Assert.Contains("Too many requests", result.Message);
+            Assert.Equal("150/15m", result.RateLimitLimit);
+            Assert.Equal(0, result.RateLimitRemaining);
+            Assert.Equal(120, result.RateLimitReset);
+        }
+
+        [Fact]
+        public async Task ProcessResponse_NotModifiedWithRateLimitHeaders_ShouldParseCorrectly()
+        {
+            // Arrange - Create a 304 Not Modified response with rate limit headers
+            var response = new HttpResponseMessage(HttpStatusCode.NotModified)
+            {
+                Content = new StringContent("")
+            };
+            response.Headers.Add("X-ESI-Error-Limit-Remain", "98");
+            response.Headers.Add("X-Ratelimit-Remaining", "145");
+            
+            // Act
+            var result = await InvokeProcessResponse(response);
+            
+            // Assert
+            Assert.False(result.Error);
+            Assert.True(result.NotModified);
+            Assert.Equal(98, result.RemainingErrors);
+            Assert.Equal(145, result.RateLimitRemaining);
         }
 
         // Helper method to invoke the private ProcessResponse method using reflection
