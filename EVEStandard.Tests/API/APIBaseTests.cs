@@ -24,8 +24,8 @@ namespace EVEStandard.API.Tests
             
             Assert.True(result.Error);
             Assert.Equal("Test error message", result.Message);
-            Assert.Equal(0, result.RemainingErrors);
-            Assert.Equal(0, result.ErrorsTimeRemainingInWindowInSeconds);
+            Assert.Null(result.RateLimitGroup);
+            Assert.Equal(0, result.RateLimitRemaining);
         }
 
         [Fact]
@@ -36,8 +36,10 @@ namespace EVEStandard.API.Tests
             {
                 Content = new StringContent("Test error message")
             };
-            response.Headers.Add("X-ESI-Error-Limit-Remain", "50");
-            response.Headers.Add("X-ESI-Error-Limit-Reset", "120");
+            response.Headers.Add("X-Ratelimit-Group", "char-location");
+            response.Headers.Add("X-Ratelimit-Limit", "150/15m");
+            response.Headers.Add("X-Ratelimit-Remaining", "50");
+            response.Headers.Add("X-Ratelimit-Reset", "120");
             
             // Act
             var result = await InvokeProcessResponse(response);
@@ -45,14 +47,16 @@ namespace EVEStandard.API.Tests
             // Assert
             Assert.True(result.Error);
             Assert.Equal("Test error message", result.Message);
-            Assert.Equal(50, result.RemainingErrors);
-            Assert.Equal(120, result.ErrorsTimeRemainingInWindowInSeconds);
+            Assert.Equal("char-location", result.RateLimitGroup);
+            Assert.Equal("150/15m", result.RateLimitLimit);
+            Assert.Equal(50, result.RateLimitRemaining);
+            Assert.Equal(120, result.RateLimitReset);
         }
 
         [Fact]
         public async Task ProcessResponse_429WithMissingHeaders_ShouldNotThrowException()
         {
-            // Arrange - Create a 429 response without the X-ESI-Error-Limit-Reset header
+            // Arrange - Create a 429 response without rate limit headers
             var response = new HttpResponseMessage((HttpStatusCode)429)
             {
                 Content = new StringContent("")
@@ -63,19 +67,23 @@ namespace EVEStandard.API.Tests
             
             Assert.True(result.Error);
             Assert.Contains("Too many requests", result.Message);
-            Assert.Equal(0, result.RemainingErrors);
-            Assert.Equal(0, result.ErrorsTimeRemainingInWindowInSeconds);
+            Assert.Null(result.RateLimitGroup);
+            Assert.Equal(0, result.RateLimitRemaining);
         }
 
         [Fact]
-        public async Task ProcessResponse_429WithRetryAfterHeader_ShouldParseCorrectly()
+        public async Task ProcessResponse_429WithRateLimitHeaders_ShouldParseCorrectly()
         {
-            // Arrange - Create a 429 response with Retry-After header
+            // Arrange - Create a 429 response with rate limit headers
             var response = new HttpResponseMessage((HttpStatusCode)429)
             {
                 Content = new StringContent("")
             };
-            response.Headers.Add("Retry-After", "60");
+            response.Headers.Add("X-Ratelimit-Group", "global");
+            response.Headers.Add("X-Ratelimit-Limit", "150/15m");
+            response.Headers.Add("X-Ratelimit-Remaining", "0");
+            response.Headers.Add("X-Ratelimit-Reset", "120");
+            response.Headers.Add("Retry-After", "120");
             
             // Act
             var result = await InvokeProcessResponse(response);
@@ -83,8 +91,10 @@ namespace EVEStandard.API.Tests
             // Assert
             Assert.True(result.Error);
             Assert.Contains("Too many requests", result.Message);
-            // Retry-After is not stored in RemainingErrors anymore as it's not related to error rate limiting
-            Assert.Equal(0, result.RemainingErrors);
+            Assert.Equal("global", result.RateLimitGroup);
+            Assert.Equal("150/15m", result.RateLimitLimit);
+            Assert.Equal(0, result.RateLimitRemaining);
+            Assert.Equal(120, result.RateLimitReset);
         }
 
         [Fact]
@@ -101,8 +111,8 @@ namespace EVEStandard.API.Tests
             
             Assert.True(result.Error);
             Assert.Contains("Internal error thrown by EVE server", result.Message);
-            Assert.Equal(0, result.RemainingErrors);
-            Assert.Equal(0, result.ErrorsTimeRemainingInWindowInSeconds);
+            Assert.Null(result.RateLimitGroup);
+            Assert.Equal(0, result.RateLimitRemaining);
         }
 
         [Fact]
@@ -119,8 +129,8 @@ namespace EVEStandard.API.Tests
             
             Assert.True(result.Error);
             Assert.Contains("Your request was invalid", result.Message);
-            Assert.Equal(0, result.RemainingErrors);
-            Assert.Equal(0, result.ErrorsTimeRemainingInWindowInSeconds);
+            Assert.Null(result.RateLimitGroup);
+            Assert.Equal(0, result.RateLimitRemaining);
         }
 
         [Fact]
@@ -137,8 +147,8 @@ namespace EVEStandard.API.Tests
             
             Assert.True(result.Error);
             Assert.Contains("An error code we didn't handle was returned", result.Message);
-            Assert.Equal(0, result.RemainingErrors);
-            Assert.Equal(0, result.ErrorsTimeRemainingInWindowInSeconds);
+            Assert.Null(result.RateLimitGroup);
+            Assert.Equal(0, result.RateLimitRemaining);
         }
 
         [Fact]
@@ -179,27 +189,6 @@ namespace EVEStandard.API.Tests
         }
 
         [Fact]
-        public async Task ProcessResponse_420ErrorLimited_ShouldParseCorrectly()
-        {
-            // Arrange - Create a 420 response with error limit headers
-            var response = new HttpResponseMessage((HttpStatusCode)420)
-            {
-                Content = new StringContent("")
-            };
-            response.Headers.Add("X-ESI-Error-Limit-Remain", "0");
-            response.Headers.Add("X-ESI-Error-Limit-Reset", "60");
-            
-            // Act
-            var result = await InvokeProcessResponse(response);
-            
-            // Assert
-            Assert.True(result.Error);
-            Assert.Contains("Error limit exceeded", result.Message);
-            Assert.Equal(0, result.RemainingErrors);
-            Assert.Equal(60, result.ErrorsTimeRemainingInWindowInSeconds);
-        }
-
-        [Fact]
         public async Task ProcessResponse_WithRateLimitingHeaders_ShouldParseAllHeaders()
         {
             // Arrange - Create a successful response with all rate limiting headers
@@ -207,8 +196,7 @@ namespace EVEStandard.API.Tests
             {
                 Content = new StringContent("{}")
             };
-            response.Headers.Add("X-ESI-Error-Limit-Remain", "95");
-            response.Headers.Add("X-ESI-Error-Limit-Reset", "30");
+            response.Headers.Add("X-Ratelimit-Group", "universe-types");
             response.Headers.Add("X-Ratelimit-Limit", "150/15m");
             response.Headers.Add("X-Ratelimit-Remaining", "142");
             response.Headers.Add("X-Ratelimit-Reset", "900");
@@ -218,35 +206,10 @@ namespace EVEStandard.API.Tests
             
             // Assert
             Assert.False(result.Error);
-            Assert.Equal(95, result.RemainingErrors);
-            Assert.Equal(30, result.ErrorsTimeRemainingInWindowInSeconds);
+            Assert.Equal("universe-types", result.RateLimitGroup);
             Assert.Equal("150/15m", result.RateLimitLimit);
             Assert.Equal(142, result.RateLimitRemaining);
             Assert.Equal(900, result.RateLimitReset);
-        }
-
-        [Fact]
-        public async Task ProcessResponse_429WithRateLimitHeaders_ShouldParseCorrectly()
-        {
-            // Arrange - Create a 429 response with rate limit headers
-            var response = new HttpResponseMessage((HttpStatusCode)429)
-            {
-                Content = new StringContent("")
-            };
-            response.Headers.Add("X-Ratelimit-Limit", "150/15m");
-            response.Headers.Add("X-Ratelimit-Remaining", "0");
-            response.Headers.Add("X-Ratelimit-Reset", "120");
-            response.Headers.Add("Retry-After", "120");
-            
-            // Act
-            var result = await InvokeProcessResponse(response);
-            
-            // Assert
-            Assert.True(result.Error);
-            Assert.Contains("Too many requests", result.Message);
-            Assert.Equal("150/15m", result.RateLimitLimit);
-            Assert.Equal(0, result.RateLimitRemaining);
-            Assert.Equal(120, result.RateLimitReset);
         }
 
         [Fact]
@@ -257,7 +220,7 @@ namespace EVEStandard.API.Tests
             {
                 Content = new StringContent("")
             };
-            response.Headers.Add("X-ESI-Error-Limit-Remain", "98");
+            response.Headers.Add("X-Ratelimit-Group", "market-history");
             response.Headers.Add("X-Ratelimit-Remaining", "145");
             
             // Act
@@ -266,7 +229,7 @@ namespace EVEStandard.API.Tests
             // Assert
             Assert.False(result.Error);
             Assert.True(result.NotModified);
-            Assert.Equal(98, result.RemainingErrors);
+            Assert.Equal("market-history", result.RateLimitGroup);
             Assert.Equal(145, result.RateLimitRemaining);
         }
 

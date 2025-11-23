@@ -14,11 +14,8 @@ namespace EVEStandard.Models.API
         public DateTimeOffset? LastModified { get; set; }
         public int MaxPages { get; set; }
         
-        // Error rate limiting (tracks 4xx/5xx errors)
-        public int RemainingErrors { get; set; }
-        public int ErrorsTimeRemainingInWindowInSeconds { get; set; }
-        
-        // Request rate limiting (tracks overall request volume)
+        // Rate limiting (floating window token bucket system)
+        public string RateLimitGroup { get; set; }
         public string RateLimitLimit { get; set; }
         public int RateLimitRemaining { get; set; }
         public int RateLimitReset { get; set; }

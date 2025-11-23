@@ -13,22 +13,25 @@ The package is now on NuGet! You can find it here: [EVEStandard NuGet Page](http
 
 ## ESI Rate Limiting
 
-EVEStandard fully supports ESI's rate limiting model, which includes two types of limits:
+EVEStandard fully supports ESI's rate limiting model using a floating window token bucket system.
 
-### Error Rate Limiting
-ESI tracks the number of failed requests (4xx/5xx errors) you make within a time window. If you exceed this limit, you will receive HTTP 420 responses until the error window resets.
+### Rate Limit Groups
+
+ESI organizes endpoints into rate limit groups, where related routes share the same rate limit bucket. Each group tracks token consumption independently, allowing you to make requests to different groups without affecting each other's limits.
+
+**Token Costs:**
+- 2XX responses: 2 tokens (successful)
+- 3XX responses: 1 token (redirection/not modified)
+- 4XX responses: 5 tokens (client error)
+- 5XX responses: 0 tokens (server error - not penalized)
 
 **Response Headers:**
-- `X-ESI-Error-Limit-Remain`: Number of errors remaining before being blocked
-- `X-ESI-Error-Limit-Reset`: Seconds until the error counter resets
+- `X-Ratelimit-Group`: Identifies which rate limit group the endpoint belongs to (e.g., "char-location", "universe-types")
+- `X-Ratelimit-Limit`: Rate limit configuration (e.g., "150/15m" = 150 tokens per 15 minutes)
+- `X-Ratelimit-Remaining`: Number of request tokens remaining in this group's bucket
+- `X-Ratelimit-Reset`: Seconds until the rate limit window resets for this group
 
-### Request Rate Limiting  
-ESI limits the overall number of requests you can make within a time window using a token bucket algorithm. If you exceed this limit, you will receive HTTP 429 responses.
-
-**Response Headers:**
-- `X-Ratelimit-Limit`: Rate limit configuration (e.g., "150/15m")
-- `X-Ratelimit-Remaining`: Number of request tokens remaining
-- `X-Ratelimit-Reset`: Seconds until the rate limit window resets
+When you exceed a group's rate limit, you will receive HTTP 429 responses with a `Retry-After` header indicating how long to wait.
 
 ### Accessing Rate Limit Information
 
@@ -37,22 +40,21 @@ All rate limiting information is automatically captured and made available throu
 ```csharp
 var result = await eveClient.Universe.GetUniverseTypes();
 
-// Error rate limiting
-int errorsRemaining = result.RemainingErrors;
-int errorResetSeconds = result.ErrorsTimeRemainingInWindowInSeconds;
-
-// Request rate limiting
-string rateLimitConfig = result.RateLimitLimit; // e.g., "150/15m"
-int requestsRemaining = result.RateLimitRemaining;
-int rateLimitResetSeconds = result.RateLimitReset;
+// Rate limiting information
+string rateLimitGroup = result.RateLimitGroup;      // e.g., "universe-types"
+string rateLimitConfig = result.RateLimitLimit;     // e.g., "150/15m"
+int requestsRemaining = result.RateLimitRemaining;  // tokens left in bucket
+int rateLimitResetSeconds = result.RateLimitReset;  // seconds until reset
 ```
 
 ### Best Practices
 
-1. **Monitor rate limits**: Check the rate limiting fields in responses to avoid hitting limits
-2. **Handle 420/429 errors**: If you receive these errors, wait for the appropriate reset period before retrying
-3. **Implement exponential backoff**: When retrying failed requests, use exponential backoff to avoid making the situation worse
-4. **Cache responses**: Use ETags and the `If-None-Match` header to avoid unnecessary requests
+1. **Monitor rate limits by group**: Track the `RateLimitGroup` to understand which endpoint groups you're using heavily
+2. **Check remaining tokens**: Monitor `RateLimitRemaining` to avoid hitting limits
+3. **Handle 429 errors**: If you receive a 429 error, respect the `Retry-After` header before retrying
+4. **Implement exponential backoff**: When retrying failed requests, use exponential backoff to avoid making the situation worse
+5. **Cache responses**: Use ETags and the `If-None-Match` header to minimize token consumption (304 responses only cost 1 token)
+6. **Be aware of error costs**: 4XX errors cost 5 tokens, so validate inputs before making requests
 
 For more information about ESI rate limiting, see the [ESI documentation](https://developers.eveonline.com/docs/services/esi/rate-limiting/).
 

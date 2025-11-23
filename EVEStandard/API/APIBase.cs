@@ -186,12 +186,6 @@ namespace EVEStandard.API
                     return model;
                 case HttpStatusCode.Unauthorized:
                     throw new EVEStandardUnauthorizedException();
-                case (HttpStatusCode)420:
-                    model.Error = true;
-                    model.Message = "Error limit exceeded. You have made too many requests that resulted in errors (4xx/5xx). Wait for the error limit window to reset.";
-                    model = PopulateRateLimitHeaders(response, model);
-
-                    return model;
                 case (HttpStatusCode)429:
                     model.Error = true;
                     model.Message = "Too many requests made to ESI in a short period of time. Please respect the rate limit and wait before retrying.";
@@ -309,11 +303,11 @@ namespace EVEStandard.API
 
         private static APIResponse PopulateRateLimitHeaders(HttpResponseMessage response, APIResponse model)
         {
-            // Error rate limiting headers (tracks 4xx/5xx errors)
-            model.RemainingErrors = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Remain");
-            model.ErrorsTimeRemainingInWindowInSeconds = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Reset");
-            
-            // Request rate limiting headers (tracks overall request volume)
+            // Rate limiting headers (floating window token bucket system)
+            if (response.Headers.TryGetValues("X-Ratelimit-Group", out var groupValues))
+            {
+                model.RateLimitGroup = groupValues.FirstOrDefault();
+            }
             if (response.Headers.TryGetValues("X-Ratelimit-Limit", out var limitValues))
             {
                 model.RateLimitLimit = limitValues.FirstOrDefault();
@@ -375,10 +369,8 @@ namespace EVEStandard.API
                 LastModified = response.LastModified,
                 MaxPages = response.MaxPages,
                 Model = modelInstance,
-                // Error rate limiting
-                RemainingErrors = response.RemainingErrors,
-                ErrorsTimeRemainingInWindowInSeconds = response.ErrorsTimeRemainingInWindowInSeconds,
-                // Request rate limiting
+                // Rate limiting
+                RateLimitGroup = response.RateLimitGroup,
                 RateLimitLimit = response.RateLimitLimit,
                 RateLimitRemaining = response.RateLimitRemaining,
                 RateLimitReset = response.RateLimitReset
