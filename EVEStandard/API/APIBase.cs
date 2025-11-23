@@ -188,7 +188,7 @@ namespace EVEStandard.API
                     throw new EVEStandardUnauthorizedException();
                 case (HttpStatusCode)429:
                     model.Error = true;
-                    model.Message = "Too many requests made to ESI in a short period of time. Please respect the rate limit and wait before retrying.";
+                    model.Message = "Rate limit exceeded for this endpoint group. Too many tokens consumed from the rate limit bucket. Check RateLimitGroup and respect the Retry-After period before retrying.";
                     model = PopulateRateLimitHeaders(response, model);
 
                     return model;

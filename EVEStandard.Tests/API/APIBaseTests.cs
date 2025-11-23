@@ -66,7 +66,7 @@ namespace EVEStandard.API.Tests
             var result = await InvokeProcessResponse(response);
             
             Assert.True(result.Error);
-            Assert.Contains("Too many requests", result.Message);
+            Assert.Contains("Rate limit exceeded", result.Message);
             Assert.Null(result.RateLimitGroup);
             Assert.Equal(0, result.RateLimitRemaining);
         }
@@ -90,7 +90,7 @@ namespace EVEStandard.API.Tests
             
             // Assert
             Assert.True(result.Error);
-            Assert.Contains("Too many requests", result.Message);
+            Assert.Contains("Rate limit exceeded", result.Message);
             Assert.Equal("global", result.RateLimitGroup);
             Assert.Equal("150/15m", result.RateLimitLimit);
             Assert.Equal(0, result.RateLimitRemaining);
