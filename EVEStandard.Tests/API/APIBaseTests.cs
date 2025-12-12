@@ -192,45 +192,49 @@ namespace EVEStandard.API.Tests
         public async Task ProcessResponse_WithRateLimitingHeaders_ShouldParseAllHeaders()
         {
             // Arrange - Create a successful response with all rate limiting headers
-            var response = new HttpResponseMessage(HttpStatusCode.OK)
+            using (var response = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent("{}")
-            };
-            response.Headers.Add("X-Ratelimit-Group", "universe-types");
-            response.Headers.Add("X-Ratelimit-Limit", "150/15m");
-            response.Headers.Add("X-Ratelimit-Remaining", "142");
-            response.Headers.Add("X-Ratelimit-Reset", "900");
-            
-            // Act
-            var result = await InvokeProcessResponse(response);
-            
-            // Assert
-            Assert.False(result.Error);
-            Assert.Equal("universe-types", result.RateLimitGroup);
-            Assert.Equal("150/15m", result.RateLimitLimit);
-            Assert.Equal(142, result.RateLimitRemaining);
-            Assert.Equal(900, result.RateLimitReset);
+            })
+            {
+                response.Headers.Add("X-Ratelimit-Group", "universe-types");
+                response.Headers.Add("X-Ratelimit-Limit", "150/15m");
+                response.Headers.Add("X-Ratelimit-Remaining", "142");
+                response.Headers.Add("X-Ratelimit-Reset", "900");
+                
+                // Act
+                var result = await InvokeProcessResponse(response);
+                
+                // Assert
+                Assert.False(result.Error);
+                Assert.Equal("universe-types", result.RateLimitGroup);
+                Assert.Equal("150/15m", result.RateLimitLimit);
+                Assert.Equal(142, result.RateLimitRemaining);
+                Assert.Equal(900, result.RateLimitReset);
+            }
         }
 
         [Fact]
         public async Task ProcessResponse_NotModifiedWithRateLimitHeaders_ShouldParseCorrectly()
         {
             // Arrange - Create a 304 Not Modified response with rate limit headers
-            var response = new HttpResponseMessage(HttpStatusCode.NotModified)
+            using (var response = new HttpResponseMessage(HttpStatusCode.NotModified)
             {
                 Content = new StringContent("")
-            };
-            response.Headers.Add("X-Ratelimit-Group", "market-history");
-            response.Headers.Add("X-Ratelimit-Remaining", "145");
-            
-            // Act
-            var result = await InvokeProcessResponse(response);
-            
-            // Assert
-            Assert.False(result.Error);
-            Assert.True(result.NotModified);
-            Assert.Equal("market-history", result.RateLimitGroup);
-            Assert.Equal(145, result.RateLimitRemaining);
+            })
+            {
+                response.Headers.Add("X-Ratelimit-Group", "market-history");
+                response.Headers.Add("X-Ratelimit-Remaining", "145");
+                
+                // Act
+                var result = await InvokeProcessResponse(response);
+                
+                // Assert
+                Assert.False(result.Error);
+                Assert.True(result.NotModified);
+                Assert.Equal("market-history", result.RateLimitGroup);
+                Assert.Equal(145, result.RateLimitRemaining);
+            }
         }
 
         // Helper method to invoke the private ProcessResponse method using reflection
