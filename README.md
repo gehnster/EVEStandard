@@ -29,9 +29,9 @@ ESI organizes endpoints into rate limit groups, where related routes share the s
 - `X-Ratelimit-Group`: Identifies which rate limit group the endpoint belongs to (e.g., "char-location", "universe-types")
 - `X-Ratelimit-Limit`: Rate limit configuration (e.g., "150/15m" = 150 tokens per 15 minutes)
 - `X-Ratelimit-Remaining`: Number of request tokens remaining in this group's bucket
-- `X-Ratelimit-Reset`: Seconds until the rate limit window resets for this group
+- `X-Ratelimit-Used`: Number of tokens consumed by the current request
 
-When you exceed a group's rate limit, you will receive HTTP 429 responses with a `Retry-After` header indicating how long to wait.
+When you exceed a group's rate limit, you will receive HTTP 429 responses with a `Retry-After` header indicating how many seconds to wait before retrying.
 
 ### Accessing Rate Limit Information
 
@@ -44,7 +44,8 @@ var result = await eveClient.Universe.GetUniverseTypes();
 string rateLimitGroup = result.RateLimitGroup;      // e.g., "universe-types"
 string rateLimitConfig = result.RateLimitLimit;     // e.g., "150/15m"
 int requestsRemaining = result.RateLimitRemaining;  // tokens left in bucket
-int rateLimitResetSeconds = result.RateLimitReset;  // seconds until reset
+int tokensUsed = result.RateLimitUsed;              // tokens consumed by this request
+int retryAfter = result.RetryAfter;                 // seconds to wait (only set in 429 responses)
 ```
 
 ### Best Practices

@@ -39,7 +39,7 @@ namespace EVEStandard.API.Tests
             response.Headers.Add("X-Ratelimit-Group", "char-location");
             response.Headers.Add("X-Ratelimit-Limit", "150/15m");
             response.Headers.Add("X-Ratelimit-Remaining", "50");
-            response.Headers.Add("X-Ratelimit-Reset", "120");
+            response.Headers.Add("X-Ratelimit-Used", "5");
             
             // Act
             var result = await InvokeProcessResponse(response);
@@ -50,7 +50,8 @@ namespace EVEStandard.API.Tests
             Assert.Equal("char-location", result.RateLimitGroup);
             Assert.Equal("150/15m", result.RateLimitLimit);
             Assert.Equal(50, result.RateLimitRemaining);
-            Assert.Equal(120, result.RateLimitReset);
+            Assert.Equal(5, result.RateLimitUsed);
+            Assert.Equal(0, result.RetryAfter); // No Retry-After header in non-429 responses
         }
 
         [Fact]
@@ -82,7 +83,7 @@ namespace EVEStandard.API.Tests
             response.Headers.Add("X-Ratelimit-Group", "global");
             response.Headers.Add("X-Ratelimit-Limit", "150/15m");
             response.Headers.Add("X-Ratelimit-Remaining", "0");
-            response.Headers.Add("X-Ratelimit-Reset", "120");
+            response.Headers.Add("X-Ratelimit-Used", "5");
             response.Headers.Add("Retry-After", "120");
             
             // Act
@@ -94,7 +95,8 @@ namespace EVEStandard.API.Tests
             Assert.Equal("global", result.RateLimitGroup);
             Assert.Equal("150/15m", result.RateLimitLimit);
             Assert.Equal(0, result.RateLimitRemaining);
-            Assert.Equal(120, result.RateLimitReset);
+            Assert.Equal(5, result.RateLimitUsed);
+            Assert.Equal(120, result.RetryAfter); // Retry-After is present in 429 responses
         }
 
         [Fact]
@@ -200,7 +202,7 @@ namespace EVEStandard.API.Tests
                 response.Headers.Add("X-Ratelimit-Group", "universe-types");
                 response.Headers.Add("X-Ratelimit-Limit", "150/15m");
                 response.Headers.Add("X-Ratelimit-Remaining", "142");
-                response.Headers.Add("X-Ratelimit-Reset", "900");
+                response.Headers.Add("X-Ratelimit-Used", "2");
                 
                 // Act
                 var result = await InvokeProcessResponse(response);
@@ -210,7 +212,8 @@ namespace EVEStandard.API.Tests
                 Assert.Equal("universe-types", result.RateLimitGroup);
                 Assert.Equal("150/15m", result.RateLimitLimit);
                 Assert.Equal(142, result.RateLimitRemaining);
-                Assert.Equal(900, result.RateLimitReset);
+                Assert.Equal(2, result.RateLimitUsed);
+                Assert.Equal(0, result.RetryAfter); // No Retry-After in success responses
             }
         }
 

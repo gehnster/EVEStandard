@@ -18,6 +18,7 @@ namespace EVEStandard.Models.API
         public string RateLimitGroup { get; set; }
         public string RateLimitLimit { get; set; }
         public int RateLimitRemaining { get; set; }
-        public int RateLimitReset { get; set; }
+        public int RateLimitUsed { get; set; }
+        public int RetryAfter { get; set; }
     }
 }

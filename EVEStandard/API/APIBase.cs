@@ -313,7 +313,10 @@ namespace EVEStandard.API
                 model.RateLimitLimit = limitValues.FirstOrDefault();
             }
             model.RateLimitRemaining = GetHeaderValueAsInt(response, "X-Ratelimit-Remaining");
-            model.RateLimitReset = GetHeaderValueAsInt(response, "X-Ratelimit-Reset");
+            model.RateLimitUsed = GetHeaderValueAsInt(response, "X-Ratelimit-Used");
+            
+            // Retry-After is only present in 429 responses
+            model.RetryAfter = GetHeaderValueAsInt(response, "Retry-After");
             
             return model;
         }
@@ -373,7 +376,8 @@ namespace EVEStandard.API
                 RateLimitGroup = response.RateLimitGroup,
                 RateLimitLimit = response.RateLimitLimit,
                 RateLimitRemaining = response.RateLimitRemaining,
-                RateLimitReset = response.RateLimitReset
+                RateLimitUsed = response.RateLimitUsed,
+                RetryAfter = response.RetryAfter
             };
         }
     }
