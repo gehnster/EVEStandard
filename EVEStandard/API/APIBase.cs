@@ -194,7 +194,7 @@ namespace EVEStandard.API
                     return model;
                 case (HttpStatusCode)520:
                     model.Error = true;
-                    model.Message = "Internal error thrown by EVE server. Most of the time this means you have hit an EVE server rate limit.";
+                    model.Message = "Internal error thrown by EVE server (status 520).";
                     model = PopulateRateLimitHeaders(response, model);
 
                     return model;
