@@ -181,24 +181,21 @@ namespace EVEStandard.API
                 case HttpStatusCode.RequestTimeout:
                     model.Error = true;
                     model.Message = await response.Content.ReadAsStringAsync();
-                    model.RemainingErrors = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Remain");
-                    model.ErrorsTimeRemainingInWindowInSeconds = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Reset");
+                    model = PopulateRateLimitHeaders(response, model);
 
                     return model;
                 case HttpStatusCode.Unauthorized:
                     throw new EVEStandardUnauthorizedException();
                 case (HttpStatusCode)429:
                     model.Error = true;
-                    model.Message = "Too many requests made to ESI in a short period of time";
-                    model.RemainingErrors = GetHeaderValueAsInt(response, "Retry-After");
-                    model.ErrorsTimeRemainingInWindowInSeconds = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Reset");
+                    model.Message = "Rate limit exceeded for this endpoint group. Too many tokens consumed from the rate limit bucket. Check RateLimitGroup and respect the Retry-After period before retrying.";
+                    model = PopulateRateLimitHeaders(response, model);
 
                     return model;
                 case (HttpStatusCode)520:
                     model.Error = true;
-                    model.Message = "Internal error thrown by EVE server. Most of the time this means you have hit an EVE server rate limit.";
-                    model.RemainingErrors = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Remain");
-                    model.ErrorsTimeRemainingInWindowInSeconds = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Reset");
+                    model.Message = "Internal error thrown by EVE server (status 520).";
+                    model = PopulateRateLimitHeaders(response, model);
 
                     return model;
                 case HttpStatusCode.Forbidden:
@@ -206,21 +203,20 @@ namespace EVEStandard.API
                 case HttpStatusCode.NotModified:
                     model.NotModified = true;
                     model = GetExpiresAndLastModified(response, model);
+                    model = PopulateRateLimitHeaders(response, model);
 
                     return model;
                 case (HttpStatusCode)422:
                     model.Error = true;
                     model.Message = $"Your request was invalid. Returned message: {await response.Content.ReadAsStringAsync()}";
-                    model.RemainingErrors = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Remain");
-                    model.ErrorsTimeRemainingInWindowInSeconds = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Reset");
+                    model = PopulateRateLimitHeaders(response, model);
 
                     return model;
                 default:
                     logger.LogWarning($"API Response Issue. Status Code: {response.StatusCode}");
                     model.Error = true;
                     model.Message = $"An error code we didn't handle was returned. Status Code: {response.StatusCode}";
-                    model.RemainingErrors = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Remain");
-                    model.ErrorsTimeRemainingInWindowInSeconds = GetHeaderValueAsInt(response, "X-ESI-Error-Limit-Reset");
+                    model = PopulateRateLimitHeaders(response, model);
 
                     return model;
             }
@@ -236,6 +232,7 @@ namespace EVEStandard.API
             try
             {
                 model = GetExpiresAndLastModified(response, model);
+                model = PopulateRateLimitHeaders(response, model);
 
                 if (response.Headers.TryGetValues("X-Pages", out var xPagesEnumerable))
                 {
@@ -304,6 +301,26 @@ namespace EVEStandard.API
             return defaultValue;
         }
 
+        private static APIResponse PopulateRateLimitHeaders(HttpResponseMessage response, APIResponse model)
+        {
+            // Rate limiting headers (floating window token bucket system)
+            if (response.Headers.TryGetValues("X-Ratelimit-Group", out var groupValues))
+            {
+                model.RateLimitGroup = groupValues.FirstOrDefault();
+            }
+            if (response.Headers.TryGetValues("X-Ratelimit-Limit", out var limitValues))
+            {
+                model.RateLimitLimit = limitValues.FirstOrDefault();
+            }
+            model.RateLimitRemaining = GetHeaderValueAsInt(response, "X-Ratelimit-Remaining");
+            model.RateLimitUsed = GetHeaderValueAsInt(response, "X-Ratelimit-Used");
+            
+            // Retry-After is only present in 429 responses
+            model.RetryAfter = GetHeaderValueAsInt(response, "Retry-After");
+            
+            return model;
+        }
+
         internal static void CheckResponse(string functionName, bool error, string errorMessage, bool legacyWarning, ILogger _logger)
         {
             if (error)
@@ -354,7 +371,13 @@ namespace EVEStandard.API
                 Expires = response.Expires,
                 LastModified = response.LastModified,
                 MaxPages = response.MaxPages,
-                Model = modelInstance
+                Model = modelInstance,
+                // Rate limiting
+                RateLimitGroup = response.RateLimitGroup,
+                RateLimitLimit = response.RateLimitLimit,
+                RateLimitRemaining = response.RateLimitRemaining,
+                RateLimitUsed = response.RateLimitUsed,
+                RetryAfter = response.RetryAfter
             };
         }
     }

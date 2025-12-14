@@ -13,7 +13,12 @@ namespace EVEStandard.Models.API
         public DateTimeOffset? Expires { get; set; }
         public DateTimeOffset? LastModified { get; set; }
         public int MaxPages { get; set; }
-        public int RemainingErrors { get; set; }
-        public int ErrorsTimeRemainingInWindowInSeconds { get; set; }
+        
+        // Rate limiting (floating window token bucket system)
+        public string RateLimitGroup { get; set; }
+        public string RateLimitLimit { get; set; }
+        public int RateLimitRemaining { get; set; }
+        public int RateLimitUsed { get; set; }
+        public int RetryAfter { get; set; }
     }
 }
