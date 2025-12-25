@@ -32,6 +32,7 @@
         public const string ESI_CORPORATIONS_READ_FACILITIES_1 = "esi-corporations.read_facilities.v1";
         public const string ESI_CORPORATIONS_READ_FW_STATS_1 = "esi-corporations.read_fw_stats.v1";
         public const string ESI_CORPORATIONS_READ_MEDALS_1 = "esi-corporations.read_medals.v1";
+        public const string ESI_CORPORATIONS_READ_PROJECTS_1 = "esi-corporations.read_projects.v1";
         public const string ESI_CORPORATIONS_READ_STANDINGS_1 = "esi-corporations.read_standings.v1";
         public const string ESI_CORPORATIONS_READ_STARBASES_1 = "esi-corporations.read_starbases.v1";
         public const string ESI_CORPORATIONS_READ_STRUCTURES_1 = "esi-corporations.read_structures.v1";

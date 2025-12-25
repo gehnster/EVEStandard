@@ -240,6 +240,81 @@ namespace EVEStandard.API.Tests
             }
         }
 
+        [Fact]
+        public async Task ProcessResponse_WithCursorPagination_ShouldParseCursorInfo()
+        {
+            // Arrange - Create a successful response with cursor-based pagination
+            var jsonResponse = @"{
+                ""cursor"": {
+                    ""before"": ""token_before_123"",
+                    ""after"": ""token_after_456""
+                }
+            }";
+            
+            using (var response = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(jsonResponse)
+            })
+            {
+                // Act
+                var result = await InvokeProcessResponse(response);
+                
+                // Assert
+                Assert.False(result.Error);
+                Assert.NotNull(result.Cursor);
+                Assert.Equal("token_before_123", result.Cursor.Before);
+                Assert.Equal("token_after_456", result.Cursor.After);
+            }
+        }
+
+        [Fact]
+        public async Task ProcessResponse_WithoutCursorPagination_ShouldHaveNullCursor()
+        {
+            // Arrange - Create a successful response without cursor information
+            var jsonResponse = @"{
+                ""data"": [1, 2, 3]
+            }";
+            
+            using (var response = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(jsonResponse)
+            })
+            {
+                // Act
+                var result = await InvokeProcessResponse(response);
+                
+                // Assert
+                Assert.False(result.Error);
+                Assert.Null(result.Cursor);
+            }
+        }
+
+        [Fact]
+        public async Task ProcessResponse_WithPartialCursorInfo_ShouldParseAvailableTokens()
+        {
+            // Arrange - Create a response with only "after" cursor token
+            var jsonResponse = @"{
+                ""cursor"": {
+                    ""after"": ""token_after_only""
+                }
+            }";
+            
+            using (var response = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(jsonResponse)
+            })
+            {
+                // Act
+                var result = await InvokeProcessResponse(response);
+                
+                // Assert
+                Assert.False(result.Error);
+                Assert.NotNull(result.Cursor);
+                Assert.Null(result.Cursor.Before);
+                Assert.Equal("token_after_only", result.Cursor.After);
+            }
+        }
+
         // Helper method to invoke the private ProcessResponse method using reflection
         private async Task<APIResponse> InvokeProcessResponse(HttpResponseMessage response)
         {

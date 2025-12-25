@@ -59,5 +59,55 @@ int retryAfter = result.RetryAfter;                 // seconds to wait (only set
 
 For more information about ESI rate limiting, see the [ESI documentation](https://developers.eveonline.com/docs/services/esi/rate-limiting/).
 
+## Pagination
+
+EVEStandard supports both traditional page-based pagination and the newer cursor-based pagination.
+
+### Page-Based Pagination
+
+Traditional ESI endpoints use page-based pagination with a `page` parameter. The total number of pages is available in the `MaxPages` property:
+
+```csharp
+var result = await eveClient.Corporation.GetCorporationShareholdersAsync(auth, corporationId, page: 1);
+
+int totalPages = result.MaxPages;
+var shareholders = result.Model;
+```
+
+### Cursor-Based Pagination
+
+Some newer ESI endpoints (such as corporation projects) use cursor-based pagination. Instead of page numbers, these endpoints use opaque tokens to navigate through results:
+
+```csharp
+// First request - no cursor parameters
+var result = await eveClient.Corporation.GetCorporationProjectsAsync(auth, corporationId);
+
+var projects = result.Model;
+var cursor = result.Cursor;
+
+// Next page - use the "after" token
+if (cursor?.After != null)
+{
+    var nextPage = await eveClient.Corporation.GetCorporationProjectsAsync(
+        auth, corporationId, after: cursor.After);
+}
+
+// Previous page - use the "before" token
+if (cursor?.Before != null)
+{
+    var prevPage = await eveClient.Corporation.GetCorporationProjectsAsync(
+        auth, corporationId, before: cursor.Before);
+}
+```
+
+**Important notes about cursor-based pagination:**
+- Cursor tokens are opaque strings - do not parse or modify them
+- Use the `after` token to get newer/next results
+- Use the `before` token to get older/previous results
+- Tokens are returned in the `Cursor` property of the `ESIModelDTO<T>` result
+- Results are ordered by modification date, with most recently modified items last
+
+For more information about cursor-based pagination, see the [ESI Cursor-Based Pagination documentation](https://developers.eveonline.com/docs/services/esi/pagination/cursor-based/).
+
 ## Donate
 Feel like donating to show appreciation for the time and effort I've put into creating and maintaining this library? Consider either becoming a GitHub Sponsor or donating ISK to ```Gehnster```
