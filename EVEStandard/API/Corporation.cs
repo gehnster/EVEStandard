@@ -529,7 +529,7 @@ namespace EVEStandard.API
                 queryParameters.Add("after", after);
             }
             
-            if (limit > 0 && limit != 100)
+            if (limit > 0)
             {
                 queryParameters.Add("limit", limit.ToString());
             }

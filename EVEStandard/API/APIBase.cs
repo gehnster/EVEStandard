@@ -340,9 +340,10 @@ namespace EVEStandard.API
                         }
                     }
                 }
-                catch
+                catch (JsonException)
                 {
-                    // If parsing fails, cursor stays null - this is fine for non-cursor paginated endpoints
+                    // If JSON parsing fails, cursor stays null - this is fine for non-cursor paginated endpoints
+                    // Silently ignore JSON parsing errors as cursor pagination is optional
                 }
             }
             
