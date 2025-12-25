@@ -272,6 +272,9 @@ namespace EVEStandard.API
                     model.JSONString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
 
+                // Parse cursor-based pagination info if present
+                model = ParseCursorInfo(model);
+
                 return model;
             }
             catch (Exception)
@@ -317,6 +320,31 @@ namespace EVEStandard.API
             
             // Retry-After is only present in 429 responses
             model.RetryAfter = GetHeaderValueAsInt(response, "Retry-After");
+            
+            return model;
+        }
+
+        private static APIResponse ParseCursorInfo(APIResponse model)
+        {
+            // Try to parse cursor information from the JSON response
+            // Cursor-based pagination responses include a "cursor" field with "before" and "after" tokens
+            if (!string.IsNullOrEmpty(model.JSONString))
+            {
+                try
+                {
+                    using (var document = JsonDocument.Parse(model.JSONString))
+                    {
+                        if (document.RootElement.TryGetProperty("cursor", out var cursorElement))
+                        {
+                            model.Cursor = JsonSerializer.Deserialize<CursorInfo>(cursorElement.GetRawText());
+                        }
+                    }
+                }
+                catch
+                {
+                    // If parsing fails, cursor stays null - this is fine for non-cursor paginated endpoints
+                }
+            }
             
             return model;
         }
@@ -377,7 +405,9 @@ namespace EVEStandard.API
                 RateLimitLimit = response.RateLimitLimit,
                 RateLimitRemaining = response.RateLimitRemaining,
                 RateLimitUsed = response.RateLimitUsed,
-                RetryAfter = response.RetryAfter
+                RetryAfter = response.RetryAfter,
+                // Cursor-based pagination
+                Cursor = response.Cursor
             };
         }
     }

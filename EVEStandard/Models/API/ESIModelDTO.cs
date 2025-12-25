@@ -20,5 +20,8 @@ namespace EVEStandard.Models.API
         public int RateLimitRemaining { get; set; }
         public int RateLimitUsed { get; set; }
         public int RetryAfter { get; set; }
+        
+        // Cursor-based pagination
+        public CursorInfo Cursor { get; set; }
     }
 }

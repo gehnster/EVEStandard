@@ -499,5 +499,46 @@ namespace EVEStandard.API
 
             return ReturnModelDTO<List<CorporationMedalIssued>>(responseModel);
         }
+
+        /// <summary>
+        /// Returns a list of corporation projects.
+        /// <para>GET /corporations/{corporation_id}/projects/</para>
+        /// <para>Requires one of the following EVE corporation role(s): Director</para>
+        /// <para>This endpoint uses cursor-based pagination.</para>
+        /// </summary>
+        /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
+        /// <param name="corporationId">An EVE corporation ID.</param>
+        /// <param name="before">Cursor for pagination (previous page). Use the cursor value from a previous response.</param>
+        /// <param name="after">Cursor for pagination (next page). Use the cursor value from a previous response.</param>
+        /// <param name="limit">Maximum number of results to return. Default is 100.</param>
+        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing a list of corporation projects.</returns>
+        public async Task<ESIModelDTO<List<CorporationProject>>> GetCorporationProjectsAsync(AuthDTO auth, int corporationId, string before = null, string after = null, int limit = 100, string ifNoneMatch = null)
+        {
+            CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_PROJECTS_1);
+
+            var queryParameters = new Dictionary<string, string>();
+
+            if (!string.IsNullOrEmpty(before))
+            {
+                queryParameters.Add("before", before);
+            }
+            
+            if (!string.IsNullOrEmpty(after))
+            {
+                queryParameters.Add("after", after);
+            }
+            
+            if (limit > 0 && limit != 100)
+            {
+                queryParameters.Add("limit", limit.ToString());
+            }
+
+            var responseModel = await GetAsync($"/corporations/{corporationId}/projects/", auth, ifNoneMatch, queryParameters);
+
+            CheckResponse(nameof(GetCorporationProjectsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+
+            return ReturnModelDTO<List<CorporationProject>>(responseModel);
+        }
     }
 }
