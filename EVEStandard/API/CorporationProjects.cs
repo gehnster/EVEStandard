@@ -92,5 +92,27 @@ namespace EVEStandard.API
 
             return ReturnModelDTO<CorporationProjectDetail>(responseModel);
         }
+
+        /// <summary>
+        /// Show your contribution to a corporation project.
+        /// <para>GET /corporations/{corporation_id}/projects/{project_id}/contribution/{character_id}/</para>
+        /// <para>Requires one of the following EVE corporation role(s): Director</para>
+        /// </summary>
+        /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
+        /// <param name="corporationId">An EVE corporation ID.</param>
+        /// <param name="projectId">A corporation project ID.</param>
+        /// <param name="characterId">A character ID.</param>
+        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing the character's contribution to the project.</returns>
+        public async Task<ESIModelDTO<CorporationProjectContribution>> GetCorporationProjectContributionAsync(AuthDTO auth, long corporationId, string projectId, long characterId, string ifNoneMatch = null)
+        {
+            CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_PROJECTS_1);
+
+            var responseModel = await GetAsync($"/corporations/{corporationId}/projects/{projectId}/contribution/{characterId}/", auth, ifNoneMatch);
+
+            CheckResponse(nameof(GetCorporationProjectContributionAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+
+            return ReturnModelDTO<CorporationProjectContribution>(responseModel);
+        }
     }
 }
