@@ -21,24 +21,6 @@ namespace EVEStandard.API
         }
 
         /// <summary>
-        /// Returns aggregate yearly stats for a character.
-        /// <para>GET /characters/{character_id}/stats/</para>
-        /// </summary>
-        /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
-        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
-        /// <returns><see cref="ESIModelDTO{T}"/> containing character stats.</returns>
-        public async Task<ESIModelDTO<List<AggregateStats>>> YearlyAggregateStatsAsync(AuthDTO auth, string ifNoneMatch = null)
-        {
-            CheckAuth(auth, Scopes.ESI_CHARACTERSTATS_READ_1);           
-
-            var responseModel = await GetAsync($"/characters/{auth.CharacterId}/stats/", auth, ifNoneMatch);
-
-            CheckResponse(nameof(YearlyAggregateStatsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
-
-            return ReturnModelDTO<List<AggregateStats>>(responseModel);
-        }
-
-        /// <summary>
         /// Public information about a character.
         /// <para>GET /characters/{character_id}/</para>
         /// </summary>
@@ -226,7 +208,7 @@ namespace EVEStandard.API
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of contact notifications.</returns>
         public async Task<ESIModelDTO<List<CharacterContactNotification>>> GetNewContactNotificationsAsync(AuthDTO auth, string ifNoneMatch = null)
         {
-            CheckAuth(auth, Scopes.ESI_CHARACTERSTATS_READ_1);
+            CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_NOTIFICATIONS_1);
 
             var responseModel = await GetAsync($"/characters/{auth.CharacterId}/notifications/contacts/", auth, ifNoneMatch);
 
