@@ -20,7 +20,6 @@
         public const string ESI_CHARACTERS_READ_STANDINGS_1 = "esi-characters.read_standings.v1";
         public const string ESI_CHARACTERS_READ_TITLES_1 = "esi-characters.read_titles.v1";
         public const string ESI_CHARACTERS_WRITE_CONTACTS_1 = "esi-characters.write_contacts.v1";
-        public const string ESI_CHARACTERSTATS_READ_1 = "esi-characterstats.read.v1";
         public const string ESI_CLONES_READ_CLONES_1 = "esi-clones.read_clones.v1";
         public const string ESI_CLONES_READ_IMPLANTS_1 = "esi-clones.read_implants.v1";
         public const string ESI_CONTRACTS_READ_CHARACTER_CONTRACTS_1 = "esi-contracts.read_character_contracts.v1";
@@ -32,6 +31,7 @@
         public const string ESI_CORPORATIONS_READ_FACILITIES_1 = "esi-corporations.read_facilities.v1";
         public const string ESI_CORPORATIONS_READ_FW_STATS_1 = "esi-corporations.read_fw_stats.v1";
         public const string ESI_CORPORATIONS_READ_MEDALS_1 = "esi-corporations.read_medals.v1";
+        public const string ESI_CORPORATIONS_READ_PROJECTS_1 = "esi-corporations.read_projects.v1";
         public const string ESI_CORPORATIONS_READ_STANDINGS_1 = "esi-corporations.read_standings.v1";
         public const string ESI_CORPORATIONS_READ_STARBASES_1 = "esi-corporations.read_starbases.v1";
         public const string ESI_CORPORATIONS_READ_STRUCTURES_1 = "esi-corporations.read_structures.v1";

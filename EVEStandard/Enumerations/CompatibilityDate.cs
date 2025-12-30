@@ -2,6 +2,6 @@
 {
     public enum CompatibilityDate
     {
-        v2025_09_30
+        v2025_12_16
     }
 }
