@@ -71,6 +71,7 @@ namespace EVEStandard
         public Contacts Contacts { get; private set; }
         public Contracts Contracts { get; private set; }
         public Corporation Corporation { get; private set; }
+        public CorporationProjects CorporationProjects { get; private set; }
         public Dogma Dogma { get; private set; }
         public FactionWarfare FactionWarfare { get; private set; }
         public Fittings Fittings { get; private set; }
@@ -127,6 +128,10 @@ namespace EVEStandard
                 HTTP = http
             };
             Corporation = new Corporation(dataSource, compatibilityDate)
+            {
+                HTTP = http
+            };
+            CorporationProjects = new CorporationProjects(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
