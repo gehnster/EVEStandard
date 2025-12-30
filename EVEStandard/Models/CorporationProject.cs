@@ -14,7 +14,7 @@ namespace EVEStandard.Models
         /// Unique identifier for this project
         /// </summary>
         [JsonPropertyName("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// The type/category of the project
@@ -62,7 +62,7 @@ namespace EVEStandard.Models
         /// The character ID of the project creator
         /// </summary>
         [JsonPropertyName("creator_id")]
-        public int? CreatorId { get; set; }
+        public long? CreatorId { get; set; }
 
         #endregion Properties
     }
