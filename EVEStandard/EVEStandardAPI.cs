@@ -76,6 +76,7 @@ namespace EVEStandard
         public FactionWarfare FactionWarfare { get; private set; }
         public Fittings Fittings { get; private set; }
         public Fleets Fleets { get; private set; }
+        public FreelanceJobs FreelanceJobs { get; private set; }
         public Incursions Incursion { get; private set; }
         public Industry Industry { get; private set; }
         public Insurance Insurance { get; private set; }
@@ -148,6 +149,10 @@ namespace EVEStandard
                 HTTP = http
             };
             Fleets = new Fleets(dataSource, compatibilityDate)
+            {
+                HTTP = http
+            };
+            FreelanceJobs = new FreelanceJobs(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
