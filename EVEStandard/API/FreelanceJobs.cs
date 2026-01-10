@@ -132,8 +132,8 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="corporationId">The ID of the corporation.</param>
-        /// <param name="after">Cursor for pagination (next page). Use '0' to start from the beginning.</param>
-        /// <param name="before">Cursor for pagination (previous page). Use '0' to start from the end.</param>
+        /// <param name="after">Cursor for pagination (next page). Use the cursor value returned in a previous response.</param>
+        /// <param name="before">Cursor for pagination (previous page). Use the cursor value returned in a previous response.</param>
         /// <param name="limit">Maximum number of results to return. Default is 10, max is 100.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of corporation freelance jobs.</returns>
