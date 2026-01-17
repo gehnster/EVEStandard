@@ -10,7 +10,7 @@ namespace EVEStandard.Models
         public long ItemId { get; set; }
 
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
 
         #endregion Properties
     }

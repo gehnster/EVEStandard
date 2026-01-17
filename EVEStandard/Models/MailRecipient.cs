@@ -29,7 +29,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>recipient_id integer</value>
         [JsonPropertyName("recipient_id")]
-        public int RecipientId { get; set; }
+        public long RecipientId { get; set; }
 
         /// <summary>
         /// recipient_type string

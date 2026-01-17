@@ -20,21 +20,21 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>num_pins integer</value>
         [JsonPropertyName("num_pins")]
-        public int NumPins { get; set; }
+        public long NumPins { get; set; }
 
         /// <summary>
         /// owner_id integer
         /// </summary>
         /// <value>owner_id integer</value>
         [JsonPropertyName("owner_id")]
-        public int OwnerId { get; set; }
+        public long OwnerId { get; set; }
 
         /// <summary>
         /// planet_id integer
         /// </summary>
         /// <value>planet_id integer</value>
         [JsonPropertyName("planet_id")]
-        public int PlanetId { get; set; }
+        public long PlanetId { get; set; }
 
         /// <summary>
         /// planet_type string
@@ -68,14 +68,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>solar_system_id integer</value>
         [JsonPropertyName("solar_system_id")]
-        public int SolarSystemId { get; set; }
+        public long SolarSystemId { get; set; }
 
         /// <summary>
         /// upgrade_level integer
         /// </summary>
         /// <value>upgrade_level integer</value>
         [JsonPropertyName("upgrade_level")]
-        public int UpgradeLevel { get; set; }
+        public long UpgradeLevel { get; set; }
 
         #endregion Properties
     }

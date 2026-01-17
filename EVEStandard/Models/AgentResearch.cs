@@ -12,7 +12,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>agent_id integer</value>
         [JsonPropertyName("agent_id")]
-        public int AgentId { get; set; }
+        public long AgentId { get; set; }
 
         /// <summary>
         /// points_per_day number
@@ -33,7 +33,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>skill_type_id integer</value>
         [JsonPropertyName("skill_type_id")]
-        public int SkillTypeId { get; set; }
+        public long SkillTypeId { get; set; }
 
         /// <summary>
         /// started_at string

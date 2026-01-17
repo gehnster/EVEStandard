@@ -113,13 +113,13 @@ namespace EVEStandard.Models
         /// Character ID of the project creator
         /// </summary>
         [JsonPropertyName("character_id")]
-        public int CharacterId { get; set; }
+        public long CharacterId { get; set; }
 
         /// <summary>
         /// Corporation ID of the project creator
         /// </summary>
         [JsonPropertyName("corporation_id")]
-        public int? CorporationId { get; set; }
+        public long? CorporationId { get; set; }
 
         #endregion Properties
     }
@@ -309,7 +309,7 @@ namespace EVEStandard.Models
         /// Reward type ID
         /// </summary>
         [JsonPropertyName("type_id")]
-        public int? TypeId { get; set; }
+        public long? TypeId { get; set; }
 
         /// <summary>
         /// Reward description
@@ -333,7 +333,7 @@ namespace EVEStandard.Models
         /// Target number of captures
         /// </summary>
         [JsonPropertyName("target")]
-        public int? Target { get; set; }
+        public long? Target { get; set; }
 
         #endregion Properties
     }
@@ -365,7 +365,7 @@ namespace EVEStandard.Models
         /// Target number of defenses
         /// </summary>
         [JsonPropertyName("target")]
-        public int? Target { get; set; }
+        public long? Target { get; set; }
 
         #endregion Properties
     }
@@ -381,7 +381,7 @@ namespace EVEStandard.Models
         /// Item type ID to deliver
         /// </summary>
         [JsonPropertyName("type_id")]
-        public int? TypeId { get; set; }
+        public long? TypeId { get; set; }
 
         /// <summary>
         /// Target quantity to deliver
@@ -403,7 +403,7 @@ namespace EVEStandard.Models
         /// Target number of NPCs to destroy
         /// </summary>
         [JsonPropertyName("target")]
-        public int? Target { get; set; }
+        public long? Target { get; set; }
 
         #endregion Properties
     }
@@ -419,7 +419,7 @@ namespace EVEStandard.Models
         /// Target number of ships to destroy
         /// </summary>
         [JsonPropertyName("target")]
-        public int? Target { get; set; }
+        public long? Target { get; set; }
 
         #endregion Properties
     }
@@ -435,7 +435,7 @@ namespace EVEStandard.Models
         /// Corporation ID for loyalty points
         /// </summary>
         [JsonPropertyName("corporation_id")]
-        public int? CorporationId { get; set; }
+        public long? CorporationId { get; set; }
 
         /// <summary>
         /// Target loyalty points to earn
@@ -457,7 +457,7 @@ namespace EVEStandard.Models
         /// Target number of ships lost
         /// </summary>
         [JsonPropertyName("target")]
-        public int? Target { get; set; }
+        public long? Target { get; set; }
 
         #endregion Properties
     }
@@ -489,7 +489,7 @@ namespace EVEStandard.Models
         /// Item type ID to manufacture
         /// </summary>
         [JsonPropertyName("type_id")]
-        public int? TypeId { get; set; }
+        public long? TypeId { get; set; }
 
         /// <summary>
         /// Target quantity to manufacture
@@ -511,7 +511,7 @@ namespace EVEStandard.Models
         /// Material type ID to mine
         /// </summary>
         [JsonPropertyName("type_id")]
-        public int? TypeId { get; set; }
+        public long? TypeId { get; set; }
 
         /// <summary>
         /// Target quantity to mine
@@ -565,7 +565,7 @@ namespace EVEStandard.Models
         /// Target number of wrecks to salvage
         /// </summary>
         [JsonPropertyName("target")]
-        public int? Target { get; set; }
+        public long? Target { get; set; }
 
         #endregion Properties
     }
@@ -581,7 +581,7 @@ namespace EVEStandard.Models
         /// Target number of signatures to scan
         /// </summary>
         [JsonPropertyName("target")]
-        public int? Target { get; set; }
+        public long? Target { get; set; }
 
         #endregion Properties
     }

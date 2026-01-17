@@ -14,7 +14,7 @@ namespace EVEStandard.Models
         /// The created by.
         /// </value>
         [JsonPropertyName("created_by")]
-        public int CreatedBy { get; set; }
+        public long CreatedBy { get; set; }
 
         /// <summary>
         /// Gets or sets the dogma attributes.
@@ -41,7 +41,7 @@ namespace EVEStandard.Models
         /// The mutator type identifier.
         /// </value>
         [JsonPropertyName("mutator_type_id")]
-        public int MutatorTypeId { get; set; }
+        public long MutatorTypeId { get; set; }
 
         /// <summary>
         /// Gets or sets the source type identifier.
@@ -50,7 +50,7 @@ namespace EVEStandard.Models
         /// The source type identifier.
         /// </value>
         [JsonPropertyName("source_type_id")]
-        public int SourceTypeId { get; set; }
+        public long SourceTypeId { get; set; }
 
         #endregion
     }
@@ -64,7 +64,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>attribute_id integer</value>
         [JsonPropertyName("attribute_id")]
-        public int AttributeId { get; set; }
+        public long AttributeId { get; set; }
 
         /// <summary>
         /// value number
@@ -85,7 +85,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>effect_id integer</value>
         [JsonPropertyName("effect_id")]
-        public int EffectId { get; set; }
+        public long EffectId { get; set; }
 
         /// <summary>
         /// is_default boolean

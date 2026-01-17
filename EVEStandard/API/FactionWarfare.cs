@@ -117,7 +117,7 @@ namespace EVEStandard.API
         /// <param name="corporationId">An EVE corporation ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing faction warfare statistics for a given corporation.</returns>
-        public async Task<ESIModelDTO<FactionWarCorporationStats>> CorporationOverviewInFactionWarsAsync(AuthDTO auth, int corporationId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<FactionWarCorporationStats>> CorporationOverviewInFactionWarsAsync(AuthDTO auth, long corporationId, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_FW_STATS_1);
 

@@ -11,7 +11,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>moon_id integer</value>
         [JsonPropertyName("moon_id")]
-        public int MoonId { get; set; }
+        public long MoonId { get; set; }
 
         /// <summary>
         /// name string
@@ -31,7 +31,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The solar system this moon is in</value>
         [JsonPropertyName("system_id")]
-        public int SystemId { get; set; }
+        public long SystemId { get; set; }
 
         #endregion Properties
     }

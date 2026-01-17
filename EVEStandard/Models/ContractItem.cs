@@ -25,14 +25,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Number of items in the stack</value>
         [JsonPropertyName("quantity")]
-        public int Quantity { get; set; }
+        public long Quantity { get; set; }
 
         /// <summary>
         /// -1 indicates that the item is a singleton (non-stackable). If the item happens to be a Blueprint, -1 is an Original and -2 is a Blueprint Copy
         /// </summary>
         /// <value>-1 indicates that the item is a singleton (non-stackable). If the item happens to be a Blueprint, -1 is an Original and -2 is a Blueprint Copy</value>
         [JsonPropertyName("raw_quantity")]
-        public int? RawQuantity { get; set; }
+        public long? RawQuantity { get; set; }
 
         /// <summary>
         /// Unique ID for the item
@@ -46,7 +46,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Type ID for item</value>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
 
         #endregion Properties
     }

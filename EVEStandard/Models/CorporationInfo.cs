@@ -12,21 +12,21 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>ID of the alliance that corporation is a member of, if any</value>
         [JsonPropertyName("alliance_id")]
-        public int? AllianceId { get; set; }
+        public long? AllianceId { get; set; }
 
         /// <summary>
         /// ceo_id integer
         /// </summary>
         /// <value>ceo_id integer</value>
         [JsonPropertyName("ceo_id")]
-        public int CeoId { get; set; }
+        public long CeoId { get; set; }
 
         /// <summary>
         /// creator_id integer
         /// </summary>
         /// <value>creator_id integer</value>
         [JsonPropertyName("creator_id")]
-        public int CreatorId { get; set; }
+        public long CreatorId { get; set; }
 
         /// <summary>
         /// date_founded string
@@ -47,21 +47,21 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>faction_id integer</value>
         [JsonPropertyName("faction_id")]
-        public int? FactionId { get; set; }
+        public long? FactionId { get; set; }
 
         /// <summary>
         /// home_station_id integer
         /// </summary>
         /// <value>home_station_id integer</value>
         [JsonPropertyName("home_station_id")]
-        public int? HomeStationId { get; set; }
+        public long? HomeStationId { get; set; }
 
         /// <summary>
         /// member_count integer
         /// </summary>
         /// <value>member_count integer</value>
         [JsonPropertyName("member_count")]
-        public int MemberCount { get; set; }
+        public long MemberCount { get; set; }
 
         /// <summary>
         /// the full name of the corporation

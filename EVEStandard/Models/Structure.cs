@@ -18,7 +18,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The ID of the corporation who owns this particular structure</value>
         [JsonPropertyName("owner_id")]
-        public int OwnerId { get; set; }
+        public long OwnerId { get; set; }
 
         /// <summary>
         /// Gets or Sets Position
@@ -31,14 +31,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>solar_system_id integer</value>
         [JsonPropertyName("solar_system_id")]
-        public int SolarSystemId { get; set; }
+        public long SolarSystemId { get; set; }
 
         /// <summary>
         /// type_id integer
         /// </summary>
         /// <value>type_id integer</value>
         [JsonPropertyName("type_id")]
-        public int? TypeId { get; set; }
+        public long? TypeId { get; set; }
 
         #endregion Properties
     }

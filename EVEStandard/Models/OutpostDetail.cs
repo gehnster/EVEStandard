@@ -32,7 +32,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The entity that owns the station (e.g. the entity whose logo is on the station services bar)</value>
         [JsonPropertyName("owner_id")]
-        public int OwnerId { get; set; }
+        public long OwnerId { get; set; }
 
         /// <summary>
         /// reprocessing_efficiency number
@@ -60,20 +60,20 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The owner ID that sets the ability for someone to dock based on standings.</value>
         [JsonPropertyName("standing_owner_id")]
-        public int StandingOwnerId { get; set; }
+        public long StandingOwnerId { get; set; }
 
         /// <summary>
         /// The ID of the solar system the outpost rests in
         /// </summary>
         /// <value>The ID of the solar system the outpost rests in</value>
         [JsonPropertyName("system_id")]
-        public int SystemId { get; set; }
+        public long SystemId { get; set; }
         /// <summary>
         /// The type ID of the given outpost
         /// </summary>
         /// <value>The type ID of the given outpost</value>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
 
         #endregion Properties
     }

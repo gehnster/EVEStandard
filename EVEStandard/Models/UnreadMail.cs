@@ -19,7 +19,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>label_id integer</value>
         [JsonPropertyName("label_id")]
-        public int? LabelId { get; set; }
+        public long? LabelId { get; set; }
 
         /// <summary>
         /// name string
@@ -33,7 +33,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>unread_count integer</value>
         [JsonPropertyName("unread_count")]
-        public int? UnreadCount { get; set; }
+        public long? UnreadCount { get; set; }
 
         #endregion Properties
     }
@@ -54,7 +54,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>total_unread_count integer</value>
         [JsonPropertyName("total_unread_count")]
-        public int? TotalUnreadCount { get; set; }
+        public long? TotalUnreadCount { get; set; }
 
         #endregion Properties
     }

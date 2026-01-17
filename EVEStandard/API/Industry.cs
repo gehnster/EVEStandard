@@ -107,7 +107,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing observer list of a corporation.</returns>
-        public async Task<ESIModelDTO<List<CorporationMiningObserver>>> CorporationMiningObserversAsync(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<CorporationMiningObserver>>> CorporationMiningObserversAsync(AuthDTO auth, long corporationId, int page = 1, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_INDUSTRY_READ_CORPORATION_MINING_1);
 
@@ -134,7 +134,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing mining ledger of an observer.</returns>
-        public async Task<ESIModelDTO<List<CorporationObservedMining>>> ObservedCorporationMiningAsync(AuthDTO auth, int corporationId, long observerId, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<CorporationObservedMining>>> ObservedCorporationMiningAsync(AuthDTO auth, long corporationId, long observerId, int page = 1, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_INDUSTRY_READ_CORPORATION_MINING_1);
 
@@ -161,7 +161,7 @@ namespace EVEStandard.API
         /// <param name="includeCompleted">Whether retrieve completed industry jobs as well. Default value: false.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of corporation industry jobs.</returns>
-        public async Task<ESIModelDTO<List<IndustryJob>>> ListCorporationIndustryJobsAsync(AuthDTO auth, int corporationId, int page = 1, bool includeCompleted = false, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<IndustryJob>>> ListCorporationIndustryJobsAsync(AuthDTO auth, long corporationId, int page = 1, bool includeCompleted = false, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_INDUSTRY_READ_CORPORATION_JOBS_1);
 
@@ -188,7 +188,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of chunk timers.</returns>
-        public async Task<ESIModelDTO<List<MiningExtraction>>> MoonExtractionTimersAsync(AuthDTO auth, int corporationId, int page = 1, bool includeCompleted = false, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<MiningExtraction>>> MoonExtractionTimersAsync(AuthDTO auth, long corporationId, int page = 1, bool includeCompleted = false, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_INDUSTRY_READ_CORPORATION_MINING_1);
 

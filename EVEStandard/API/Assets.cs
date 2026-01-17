@@ -53,7 +53,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of assets.</returns>
-        public async Task<ESIModelDTO<List<Asset>>> GetCorporationAssetsAsync(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<Asset>>> GetCorporationAssetsAsync(AuthDTO auth, long corporationId, int page = 1, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
 
@@ -117,7 +117,7 @@ namespace EVEStandard.API
         /// <param name="itemIds">A list of item ids.</param>
         /// <param name="corpId">An EVE corporation ID.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of asset names.</returns>
-        public async Task<ESIModelDTO<List<AssetName>>> GetCorporationAssetNamesAsync(AuthDTO auth, int corpId, List<long> itemIds)
+        public async Task<ESIModelDTO<List<AssetName>>> GetCorporationAssetNamesAsync(AuthDTO auth, long corpId, List<long> itemIds)
         {
             CheckAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
 
@@ -138,7 +138,7 @@ namespace EVEStandard.API
         /// <param name="itemIds">A list of item ids.</param>
         /// <param name="corpId">An EVE corporation ID.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of asset locations.</returns>
-        public async Task<ESIModelDTO<List<AssetLocation>>> GetCorporationAssetLocationsAsync(AuthDTO auth, int corpId, List<long> itemIds)
+        public async Task<ESIModelDTO<List<AssetLocation>>> GetCorporationAssetLocationsAsync(AuthDTO auth, long corpId, List<long> itemIds)
         {
             CheckAuth(auth, Scopes.ESI_ASSETS_READ_CORP_ASSETS_1);
 

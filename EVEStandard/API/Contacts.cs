@@ -27,7 +27,7 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="contactIds">A list of contacts to delete.</param>
         /// <returns></returns>
-        public async Task DeleteContactsAsync(AuthDTO auth, List<int> contactIds)
+        public async Task DeleteContactsAsync(AuthDTO auth, List<long> contactIds)
         {
             CheckAuth(auth, Scopes.ESI_CHARACTERS_WRITE_CONTACTS_1);
 
@@ -75,7 +75,7 @@ namespace EVEStandard.API
         /// <param name="standing">Standing for the contact.</param>
         /// <param name="isWatched">Whether the contact should be watched, note this is only effective on characters Default value: false.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of contact ids that successfully created.</returns>
-        public async Task<ESIModelDTO<List<int>>> AddContactsAsync(AuthDTO auth, List<int> contactIds, List<long> labelIds, float standing, bool isWatched=false)
+        public async Task<ESIModelDTO<List<long>>> AddContactsAsync(AuthDTO auth, List<long> contactIds, List<long> labelIds, float standing, bool isWatched=false)
         {
             CheckAuth(auth, Scopes.ESI_CHARACTERS_WRITE_CONTACTS_1);
 
@@ -90,7 +90,7 @@ namespace EVEStandard.API
 
             CheckResponse(nameof(AddContactsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return ReturnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<long>>(responseModel);
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace EVEStandard.API
         /// <param name="standing">Standing for the contact.</param>
         /// <param name="isWatched">Whether the contact should be watched, note this is only effective on characters Default value: false.</param>
         /// <returns></returns>
-        public async Task EditContactsAsync(AuthDTO auth, List<int> contactIds, List<long> labelIds, float standing, bool isWatched=false)
+        public async Task EditContactsAsync(AuthDTO auth, List<long> contactIds, List<long> labelIds, float standing, bool isWatched=false)
         {
             CheckAuth(auth, Scopes.ESI_CHARACTERS_WRITE_CONTACTS_1);
 
@@ -128,7 +128,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of contacts.</returns>
-        public async Task<ESIModelDTO<List<CorporationContact>>> GetCorporationContactsAsync(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<CorporationContact>>> GetCorporationContactsAsync(AuthDTO auth, long corporationId, int page = 1, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_CONTACTS_1);
 
@@ -153,7 +153,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of contacts.</returns>
-        public async Task<ESIModelDTO<List<AllianceContact>>> GetAllianceContactsAsync(AuthDTO auth, int allianceId, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<AllianceContact>>> GetAllianceContactsAsync(AuthDTO auth, long allianceId, int page = 1, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_ALLIANCE_READ_CONTACTS_1);
 
@@ -194,7 +194,7 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of alliance contact labels.</returns>
-        public async Task<ESIModelDTO<List<ContactLabel>>> GetAllianceContactLabelsAsync(AuthDTO auth, int allianceId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<ContactLabel>>> GetAllianceContactLabelsAsync(AuthDTO auth, long allianceId, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_ALLIANCE_READ_CONTACTS_1);
 
@@ -212,7 +212,7 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="corporationId">An EVE corporation ID.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of corporation contact labels.</returns>
-        public async Task<ESIModelDTO<List<ContactLabel>>> GetCorporationContactLabelsAsync(AuthDTO auth, int corporationId)
+        public async Task<ESIModelDTO<List<ContactLabel>>> GetCorporationContactLabelsAsync(AuthDTO auth, long corporationId)
         {
             CheckAuth(auth, Scopes.ESI_CORPORATIONS_READ_CONTACTS_1);
 

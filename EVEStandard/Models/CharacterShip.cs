@@ -25,7 +25,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>ship_type_id integer</value>
         [JsonPropertyName("ship_type_id")]
-        public int ShipTypeId { get; set; }
+        public long ShipTypeId { get; set; }
 
         #endregion Properties
     }

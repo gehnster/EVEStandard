@@ -26,7 +26,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>moon_id integer</value>
         [JsonPropertyName("moon_id")]
-        public int MoonId { get; set; }
+        public long MoonId { get; set; }
 
         /// <summary>
         /// The time at which the chunk being extracted will naturally fracture if it is not first fractured by the moon mining drill. 

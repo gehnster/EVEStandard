@@ -19,7 +19,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>ID of the character who created this medal</value>
         [JsonPropertyName("creator_id")]
-        public int CreatorId { get; set; }
+        public long CreatorId { get; set; }
 
         /// <summary>
         /// description string
@@ -33,7 +33,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>medal_id integer</value>
         [JsonPropertyName("medal_id")]
-        public int MedalId { get; set; }
+        public long MedalId { get; set; }
 
         /// <summary>
         /// title string

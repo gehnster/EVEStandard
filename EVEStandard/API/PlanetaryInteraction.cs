@@ -46,7 +46,7 @@ namespace EVEStandard.API
         /// <param name="planetId">Planet id of the target planet.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a colony layout.</returns>
-        public async Task<ESIModelDTO<ColonyLayout>> GetColonyLayoutAsync(AuthDTO auth, int planetId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<ColonyLayout>> GetColonyLayoutAsync(AuthDTO auth, long planetId, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_PLANETS_MANAGE_PLANETS_1);
 
@@ -64,7 +64,7 @@ namespace EVEStandard.API
         /// <param name="schematicId">A PI schematic ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing public data about a schematic.</returns>
-        public async Task<ESIModelDTO<FactorySchematic>> GetSchematicInfoAsync(int schematicId, string ifNoneMatch=null)
+        public async Task<ESIModelDTO<FactorySchematic>> GetSchematicInfoAsync(long schematicId, string ifNoneMatch=null)
         {
             var responseModel = await GetAsync($"/universe/schematics/{schematicId}/", ifNoneMatch);
 
@@ -83,7 +83,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of customs offices and their settings.</returns>
-        public async Task<ESIModelDTO<List<CustomsOffice>>> ListCorporationCustomsOfficesAsync(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch=null)
+        public async Task<ESIModelDTO<List<CustomsOffice>>> ListCorporationCustomsOfficesAsync(AuthDTO auth, long corporationId, int page = 1, string ifNoneMatch=null)
         {
             CheckAuth(auth, Scopes.ESI_PLANETS_READ_CUSTOMS_OFFICES_1);
 

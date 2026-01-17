@@ -4,26 +4,18 @@ namespace EVEStandard.Models
 {
     public class AllianceName : ModelBase<AllianceName>
     {
-        #region Properties
-
         /// <summary>
-        /// Gets or sets the identifier.
+        /// alliance_id integer
         /// </summary>
-        /// <value>
-        /// The identifier.
-        /// </value>
+        /// <value>alliance_id integer</value>
         [JsonPropertyName("alliance_id")]
-        public int Id { get; set; }
+        public long AllianceId { get; set; }
 
         /// <summary>
-        /// Gets or sets the name.
+        /// alliance_name string
         /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
+        /// <value>alliance_name string</value>
         [JsonPropertyName("alliance_name")]
         public string Name { get; set; }
-
-        #endregion Properties
     }
 }

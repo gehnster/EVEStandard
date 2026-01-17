@@ -11,7 +11,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>solar_system_id integer</value>
         [JsonPropertyName("solar_system_id")]
-        public int SolarSystemId { get; set; }
+        public long SolarSystemId { get; set; }
 
         /// <summary>
         /// cost_indices array

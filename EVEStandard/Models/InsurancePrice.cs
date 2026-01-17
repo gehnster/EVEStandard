@@ -10,7 +10,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>type_id integer</value>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
 
         /// <summary>
         /// A list of a available insurance levels for this ship type

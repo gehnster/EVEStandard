@@ -26,7 +26,7 @@ namespace EVEStandard.API
         /// <param name="maxWarId">Only return wars with ID smaller than this.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of war IDs, in decending order by war_id.</returns>
-        public async Task<ESIModelDTO<List<int>>> ListWarsAsync(int? maxWarId, string ifNoneMatch=null)
+        public async Task<ESIModelDTO<List<long>>> ListWarsAsync(long? maxWarId, string ifNoneMatch=null)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -37,7 +37,7 @@ namespace EVEStandard.API
 
             CheckResponse(nameof(ListWarsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return ReturnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<long>>(responseModel);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace EVEStandard.API
         /// <param name="warId">ID for a war.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing details about a war.</returns>
-        public async Task<ESIModelDTO<War>> GetWarInformationAsync(int warId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<War>> GetWarInformationAsync(long warId, string ifNoneMatch = null)
         {
             var responseModel = await GetAsync($"/wars/{warId}/", ifNoneMatch);
 
@@ -64,7 +64,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of killmail IDs and hashes.</returns>
-        public async Task<ESIModelDTO<List<KillmailIndex>>> ListKillsForWarAsync(int warId, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<KillmailIndex>>> ListKillsForWarAsync(long warId, int page = 1, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {

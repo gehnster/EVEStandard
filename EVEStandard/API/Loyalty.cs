@@ -26,7 +26,7 @@ namespace EVEStandard.API
         /// <param name="corporationId">An EVE corporation ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of offers.</returns>
-        public async Task<ESIModelDTO<List<LoyaltyStoreOffer>>> ListLoyaltyStoreOffersAsync(int corporationId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<LoyaltyStoreOffer>>> ListLoyaltyStoreOffersAsync(long corporationId, string ifNoneMatch = null)
         {
             var responseModel = await GetAsync($"/loyalty/stores/{corporationId}/offers/", ifNoneMatch);
 

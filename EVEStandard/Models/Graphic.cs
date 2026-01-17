@@ -25,7 +25,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>graphic_id integer</value>
         [JsonPropertyName("graphic_id")]
-        public int GraphicId { get; set; }
+        public long GraphicId { get; set; }
         /// <summary>
         /// icon_folder string
         /// </summary>

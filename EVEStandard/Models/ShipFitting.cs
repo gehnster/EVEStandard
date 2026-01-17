@@ -68,14 +68,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>quantity integer</value>
         [JsonPropertyName("quantity")]
-        public int Quantity { get; set; }
+        public long Quantity { get; set; }
 
         /// <summary>
         /// type_id integer
         /// </summary>
         /// <value>type_id integer</value>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
 
         #endregion Properties
     }
@@ -109,7 +109,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>ship_type_id integer</value>
         [JsonPropertyName("ship_type_id")]
-        public int ShipTypeId { get; set; }
+        public long ShipTypeId { get; set; }
 
         #endregion Properties
     }
@@ -117,6 +117,6 @@ namespace EVEStandard.Models
     public class ShipFittingCreated
     {
         [JsonPropertyName("fitting_id")]
-        public int FittingId { get; set; }
+        public long FittingId { get; set; }
     }
 }

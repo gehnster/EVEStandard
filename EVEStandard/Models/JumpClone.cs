@@ -14,14 +14,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>implants array</value>
         [JsonPropertyName("implants")]
-        public List<int> Implants { get; set; }
+        public List<long> Implants { get; set; }
 
         /// <summary>
         /// jump_clone_id integer
         /// </summary>
         /// <value>jump_clone_id integer</value>
         [JsonPropertyName("jump_clone_id")]
-        public int JumpCloneId { get; set; }
+        public long JumpCloneId { get; set; }
 
         /// <summary>
         /// location_id integer

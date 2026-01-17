@@ -12,7 +12,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>corporation_id integer</value>
         [JsonPropertyName("corporation_id")]
-        public int CorporationId { get; set; }
+        public long CorporationId { get; set; }
 
         /// <summary>
         ///     True if the corporation has been deleted
@@ -29,7 +29,7 @@ namespace EVEStandard.Models
         ///     ambiguous
         /// </value>
         [JsonPropertyName("record_id")]
-        public int RecordId { get; set; }
+        public long RecordId { get; set; }
 
         /// <summary>
         ///     start_date string

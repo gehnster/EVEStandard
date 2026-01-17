@@ -12,7 +12,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The given character&#39;s current faction rank</value>
         [JsonPropertyName("current_rank")]
-        public int? CurrentRank { get; set; }
+        public long? CurrentRank { get; set; }
 
         /// <summary>
         /// The enlistment date of the given character into faction warfare. Will not be included if character is not enlisted in faction warfare
@@ -26,13 +26,13 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The faction the given character is enlisted to fight for. Will not be included if character is not enlisted in faction warfare</value>
         [JsonPropertyName("faction_id")]
-        public int? FactionId { get; set; }
+        public long? FactionId { get; set; }
         /// <summary>
         /// The given character&#39;s highest faction rank achieved
         /// </summary>
         /// <value>The given character&#39;s highest faction rank achieved</value>
         [JsonPropertyName("highest_rank")]
-        public int? HighestRank { get; set; }
+        public long? HighestRank { get; set; }
 
         /// <summary>
         /// Gets or Sets Kills
@@ -57,19 +57,19 @@ namespace EVEStandard.Models
         /// Last week&#39;s victory points gained by the given character
         /// </summary>
         /// <value>Last week&#39;s victory points gained by the given character</value>
-        [JsonPropertyName("last_week")] public int LastWeek { get; set; }
+        [JsonPropertyName("last_week")] public long LastWeek { get; set; }
 
         /// <summary>
         /// Total victory points gained since the given character enlisted
         /// </summary>
         /// <value>Total victory points gained since the given character enlisted</value>
-        [JsonPropertyName("total")] public int Total { get; set; }
+        [JsonPropertyName("total")] public long Total { get; set; }
 
         /// <summary>
         /// Yesterday&#39;s victory points gained by the given character
         /// </summary>
         /// <value>Yesterday&#39;s victory points gained by the given character</value>
-        [JsonPropertyName("yesterday")] public int Yesterday { get; set; }
+        [JsonPropertyName("yesterday")] public long Yesterday { get; set; }
 
         #endregion Properties
     }

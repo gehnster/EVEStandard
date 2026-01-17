@@ -19,14 +19,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Character ID of the bidder</value>
         [JsonPropertyName("bidder_id")]
-        public int BidderId { get; set; }
+        public long BidderId { get; set; }
 
         /// <summary>
         /// Unique ID for the bid
         /// </summary>
         /// <value>Unique ID for the bid</value>
         [JsonPropertyName("bid_id")]
-        public int BidId { get; set; }
+        public long BidId { get; set; }
         /// <summary>
         /// Datetime when the bid was placed
         /// </summary>

@@ -26,7 +26,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Total number of times the character has logged in</value>
         [JsonPropertyName("logins")]
-        public int? Logins { get; set; }
+        public long? Logins { get; set; }
 
         /// <summary>
         /// If the character is online

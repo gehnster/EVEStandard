@@ -20,7 +20,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>From whom the mail was sent</value>
         [JsonPropertyName("from")]
-        public int? From { get; set; }
+        public long? From { get; set; }
 
         /// <summary>
         /// Labels attached to the mail

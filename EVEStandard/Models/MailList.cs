@@ -9,7 +9,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Mailing list ID</value>
         [JsonPropertyName("mailing_list_id")]
-        public int MailingListId { get; set; }
+        public long MailingListId { get; set; }
 
         /// <summary>
         /// name string

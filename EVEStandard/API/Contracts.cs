@@ -52,7 +52,7 @@ namespace EVEStandard.API
         /// <param name="contractId">ID of a contract.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of items in this contract.</returns>
-        public async Task<ESIModelDTO<List<ContractItem>>> GetContractItemsAsync(AuthDTO auth, int contractId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<ContractItem>>> GetContractItemsAsync(AuthDTO auth, long contractId, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CONTRACTS_READ_CHARACTER_CONTRACTS_1);
 
@@ -71,7 +71,7 @@ namespace EVEStandard.API
         /// <param name="contractId">ID of a contract.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of bids.</returns>
-        public async Task<ESIModelDTO<List<ContractBid>>> GetContractBidsAsync(AuthDTO auth, int contractId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<ContractBid>>> GetContractBidsAsync(AuthDTO auth, long contractId, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CONTRACTS_READ_CHARACTER_CONTRACTS_1);
 
@@ -90,7 +90,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of contracts.</returns>
-        public async Task<ESIModelDTO<List<Contract>>> GetPublicContractsAsync(int regionId, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<Contract>>> GetPublicContractsAsync(long regionId, int page = 1, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -112,7 +112,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of bids.</returns>
-        public async Task<ESIModelDTO<List<ContractBid>>> GetPublicContractBidsAsync(int contractId, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<ContractBid>>> GetPublicContractBidsAsync(long contractId, int page = 1, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -133,7 +133,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of items in this contract.</returns>
-        public async Task<ESIModelDTO<List<PublicContractItem>>> GetPublicContractItemsAsync(int contractId, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<PublicContractItem>>> GetPublicContractItemsAsync(long contractId, int page = 1, string ifNoneMatch = null)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -157,7 +157,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of contracts.</returns>
-        public async Task<ESIModelDTO<List<Contract>>> GetCorporationContractsAsync(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<Contract>>> GetCorporationContractsAsync(AuthDTO auth, long corporationId, int page = 1, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CONTRACTS_READ_CORPORATION_CONTRACTS_1);
 
@@ -182,7 +182,7 @@ namespace EVEStandard.API
         /// <param name="corporationId">An EVE corporation ID</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of items in this contract.</returns>
-        public async Task<ESIModelDTO<List<ContractItem>>> GetCorporationContractItemsAsync(AuthDTO auth, int contractId, int corporationId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<ContractItem>>> GetCorporationContractItemsAsync(AuthDTO auth, long contractId, long corporationId, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CONTRACTS_READ_CORPORATION_CONTRACTS_1);
 
@@ -203,7 +203,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of bids.</returns>
-        public async Task<ESIModelDTO<List<ContractBid>>> GetCorporationContractBidsAsync(AuthDTO auth, int contractId, int corporationId, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<ContractBid>>> GetCorporationContractBidsAsync(AuthDTO auth, long contractId, long corporationId, int page = 1, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CONTRACTS_READ_CORPORATION_CONTRACTS_1);
 

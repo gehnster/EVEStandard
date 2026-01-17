@@ -11,7 +11,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>attribute_id integer</value>
         [JsonPropertyName("attribute_id")]
-        public int AttributeId { get; set; }
+        public long AttributeId { get; set; }
 
         /// <summary>
         /// default_value number
@@ -46,7 +46,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>icon_id integer</value>
         [JsonPropertyName("icon_id")]
-        public int? IconId { get; set; }
+        public long? IconId { get; set; }
 
         /// <summary>
         /// name string
@@ -72,7 +72,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>unit_id integer</value>
         [JsonPropertyName("unit_id")]
-        public int? UnitId { get; set; }
+        public long? UnitId { get; set; }
 
         #endregion Properties
     }

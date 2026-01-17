@@ -18,7 +18,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>ID of this killmail</value>
         [JsonPropertyName("killmail_id")]
-        public int KillmailId { get; set; }
+        public long KillmailId { get; set; }
 
         #endregion Properties
     }

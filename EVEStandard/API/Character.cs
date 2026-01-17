@@ -27,7 +27,7 @@ namespace EVEStandard.API
         /// <param name="characterId">An EVE character ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing public data for the given character.</returns>
-        public async Task<ESIModelDTO<CharacterInfo>> GetCharacterPublicInfoAsync(int characterId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<CharacterInfo>> GetCharacterPublicInfoAsync(long characterId, string ifNoneMatch = null)
         {
             var responseModel = await GetAsync($"/characters/{characterId}/", ifNoneMatch);
 
@@ -42,7 +42,7 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="characterIds">The character IDs to fetch affiliations for. All characters must exist, or none will be returned.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing character corporation, alliance and faction IDs.</returns>
-        public async Task<ESIModelDTO<List<CharacterAffiliation>>> AffiliationAsync(List<int> characterIds)
+        public async Task<ESIModelDTO<List<CharacterAffiliation>>> AffiliationAsync(List<long> characterIds)
         {
             var responseModel = await PostAsync("/characters/affiliation/", null, characterIds);
 
@@ -52,13 +52,13 @@ namespace EVEStandard.API
         }
 
         /// <summary>
-        /// Takes a source character ID in the url and a set of target character ID’s in the body, returns a CSPA charge cost.
+        /// Takes a source character ID in the url and a set of target character ID's in the body, returns a CSPA charge cost.
         /// <para>POST /characters/{character_id}/cspa/</para>
         /// </summary>
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="characterIds">The target characters to calculate the charge for.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing aggregate cost of sending a mail from the source character to the target characters, in ISK.</returns>
-        public async Task<ESIModelDTO<float>> CalculateCSPAChargeCostAsync(AuthDTO auth, List<int> characterIds)
+        public async Task<ESIModelDTO<float>> CalculateCSPAChargeCostAsync(AuthDTO auth, List<long> characterIds)
         {
             CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_CONTACTS_1);
 
@@ -76,7 +76,7 @@ namespace EVEStandard.API
         /// <param name="characterId">An EVE character ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing public data for the given character.</returns>
-        public async Task<ESIModelDTO<Icons>> GetCharacterPortraitsAsync(int characterId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Icons>> GetCharacterPortraitsAsync(long characterId, string ifNoneMatch = null)
         {
             var responseModel = await GetAsync($"/characters/{characterId}/portrait/", ifNoneMatch);
 
@@ -92,7 +92,7 @@ namespace EVEStandard.API
         /// <param name="characterId">An EVE character ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing corporation history for the given character.</returns>
-        public async Task<ESIModelDTO<List<CharacterCorporationHistory>>> GetCorporationHistoryAsync(int characterId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<CharacterCorporationHistory>>> GetCorporationHistoryAsync(long characterId, string ifNoneMatch = null)
         {
             var responseModel = await GetAsync($"/characters/{characterId}/corporationhistory/", ifNoneMatch);
 
@@ -182,7 +182,7 @@ namespace EVEStandard.API
         }
 
         /// <summary>
-        /// Return a character’s jump activation and fatigue information.
+        /// Return a character's jump activation and fatigue information.
         /// <para>GET /characters/{character_id}/fatigue/</para>
         /// </summary>
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
@@ -200,7 +200,7 @@ namespace EVEStandard.API
         }
 
         /// <summary>
-        /// Return notifications about having been added to someone’s contact list.
+        /// Return notifications about having been added to someone's contact list.
         /// <para>GET /characters/{character_id}/notifications/contacts/</para>
         /// </summary>
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
@@ -236,12 +236,12 @@ namespace EVEStandard.API
         }
 
         /// <summary>
-        /// Returns a character’s corporation roles.
+        /// Returns a character's corporation roles.
         /// <para>GET /characters/{character_id}/roles/</para>
         /// </summary>
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
-        /// <returns><see cref="ESIModelDTO{T}"/> containing the character’s roles in thier corporation.</returns>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing the character's roles in thier corporation.</returns>
         public async Task<ESIModelDTO<CharacterCorporationRoles>> GetCharacterCorporationRolesAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CHARACTERS_READ_CORPORATION_ROLES_1);
@@ -254,7 +254,7 @@ namespace EVEStandard.API
         }
 
         /// <summary>
-        /// Returns a character’s titles.
+        /// Returns a character's titles.
         /// <para>GET /characters/{character_id}/titles/</para>
         /// </summary>
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>

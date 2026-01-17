@@ -40,28 +40,28 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>graphic_id integer</value>
         [JsonPropertyName("graphic_id")]
-        public int? GraphicId { get; set; }
+        public long? GraphicId { get; set; }
 
         /// <summary>
         /// group_id integer
         /// </summary>
         /// <value>group_id integer</value>
         [JsonPropertyName("group_id")]
-        public int GroupId { get; set; }
+        public long GroupId { get; set; }
 
         /// <summary>
         /// icon_id integer
         /// </summary>
         /// <value>icon_id integer</value>
         [JsonPropertyName("icon_id")]
-        public int? IconId { get; set; }
+        public long? IconId { get; set; }
 
         /// <summary>
         /// This only exists for types that can be put on the market
         /// </summary>
         /// <value>This only exists for types that can be put on the market</value>
         [JsonPropertyName("market_group_id")]
-        public int? MarketGroupId { get; set; }
+        public long? MarketGroupId { get; set; }
 
         /// <summary>
         /// mass number
@@ -89,7 +89,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>portion_size integer</value>
         [JsonPropertyName("portion_size")]
-        public int? PortionSize { get; set; }
+        public long? PortionSize { get; set; }
 
         /// <summary>
         /// published boolean
@@ -110,7 +110,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>type_id integer</value>
         [JsonPropertyName("type_id")]
-        public int? TypeId { get; set; }
+        public long? TypeId { get; set; }
         /// <summary>
         /// volume number
         /// </summary>
@@ -130,7 +130,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>attribute_id integer</value>
         [JsonPropertyName("attribute_id")]
-        public int AttributeId { get; set; }
+        public long AttributeId { get; set; }
 
         /// <summary>
         /// value number
@@ -151,7 +151,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>effect_id integer</value>
         [JsonPropertyName("effect_id")]
-        public int EffectId { get; set; }
+        public long EffectId { get; set; }
 
         /// <summary>
         /// is_default boolean

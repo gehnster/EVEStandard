@@ -14,7 +14,7 @@ namespace EVEStandard.Models
         /// The creator corporation identifier.
         /// </value>
         [JsonPropertyName("creator_corporation_id")]
-        public int CreatorCorporationId { get; set; }
+        public long CreatorCorporationId { get; set; }
 
         /// <summary>
         /// Gets or sets the creator identifier.
@@ -23,7 +23,7 @@ namespace EVEStandard.Models
         /// The creator identifier.
         /// </value>
         [JsonPropertyName("creator_id")]
-        public int CreatorId { get; set; }
+        public long CreatorId { get; set; }
 
         /// <summary>
         /// Gets or sets the date founded.
@@ -41,7 +41,7 @@ namespace EVEStandard.Models
         /// The executor corporation identifier.
         /// </value>
         [JsonPropertyName("executor_corporation_id")]
-        public int? ExecutorCorporationId { get; set; }
+        public long? ExecutorCorporationId { get; set; }
 
         /// <summary>
         /// Gets or sets the faction identifier.
@@ -50,7 +50,7 @@ namespace EVEStandard.Models
         /// The faction identifier.
         /// </value>
         [JsonPropertyName("faction_id")]
-        public int? FactionId { get; set; }
+        public long? FactionId { get; set; }
 
         /// <summary>
         /// Gets or sets the name.

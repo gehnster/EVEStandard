@@ -39,7 +39,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>ID of the corporation that owns the structure</value>
         [JsonPropertyName("corporation_id")]
-        public int CorporationId { get; set; }
+        public long CorporationId { get; set; }
 
         /// <summary>
         /// Date on which the structure will run out of fuel
@@ -60,35 +60,35 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The requested change to reinforce_hour that will take effect at the time shown by next_reinforce_apply.</value>
         [JsonPropertyName("next_reinforce_hour")]
-        public int? NextReinforceHour { get; set; }
+        public long? NextReinforceHour { get; set; }
 
         /// <summary>
         /// The requested change to reinforce_weekday that will take effect at the time shown by next_reinforce_apply.
         /// </summary>
         /// <value>The requested change to reinforce_weekday that will take effect at the time shown by next_reinforce_apply.</value>
         [JsonPropertyName("next_reinforce_weekday")]
-        public int? NextReinforceWeekday { get; set; }
+        public long? NextReinforceWeekday { get; set; }
 
         /// <summary>
         /// The id of the ACL profile for this citadel
         /// </summary>
         /// <value>The id of the ACL profile for this citadel</value>
         [JsonPropertyName("profile_id")]
-        public int ProfileId { get; set; }
+        public long ProfileId { get; set; }
 
         /// <summary>
         /// The hour of day that determines the four hour window when the structure will randomly exit its reinforcement periods and become vulnerable to attack against its armor and/or hull. The structure will become vulnerable at a random time that is +/- 2 hours centered on the value of this property.
         /// </summary>
         /// <value>The hour of day that determines the four hour window when the structure will randomly exit its reinforcement periods and become vulnerable to attack against its armor and/or hull. The structure will become vulnerable at a random time that is +/- 2 hours centered on the value of this property.</value>
         [JsonPropertyName("reinforce_hour")]
-        public int ReinforceHour { get; set; }
+        public long ReinforceHour { get; set; }
 
         /// <summary>
         /// The day of the week when the structure exits its final reinforcement period and becomes vulnerable to attack against its hull. Monday is 0 and Sunday is 6.
         /// </summary>
         /// <value>The day of the week when the structure exits its final reinforcement period and becomes vulnerable to attack against its hull. Monday is 0 and Sunday is 6.</value>
         [JsonPropertyName("reinforce_weekday")]
-        public int? ReinforceWeekday { get; set; }
+        public long? ReinforceWeekday { get; set; }
 
         /// <summary>
         /// Contains a list of service upgrades, and their state
@@ -150,14 +150,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The solar system the structure is in</value>
         [JsonPropertyName("system_id")]
-        public int SystemId { get; set; }
+        public long SystemId { get; set; }
 
         /// <summary>
         /// The type id of the structure
         /// </summary>
         /// <value>The type id of the structure</value>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
         /// <summary>
         /// Date at which the structure will unanchor
         /// </summary>

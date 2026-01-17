@@ -37,7 +37,7 @@ namespace EVEStandard.Models
         /// The duration.
         /// </value>
         [JsonPropertyName("duration")]
-        public int Duration { get; set; }
+        public long Duration { get; set; }
 
         /// <summary>
         /// Gets or sets the event identifier.
@@ -55,7 +55,7 @@ namespace EVEStandard.Models
         /// The importance.
         /// </value>
         [JsonPropertyName("importance")]
-        public int Importance { get; set; }
+        public long Importance { get; set; }
 
         /// <summary>
         /// Gets or sets the owner identifier.

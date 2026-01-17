@@ -46,7 +46,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>ID of the specified war</value>
         [JsonPropertyName("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
         /// <summary>
         /// Was the war declared mutual by both parties
         /// </summary>
@@ -87,14 +87,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Alliance ID if and only if the aggressor is an alliance</value>
         [JsonPropertyName("alliance_id")]
-        public int? AllianceId { get; set; }
+        public long? AllianceId { get; set; }
 
         /// <summary>
         /// Corporation ID if and only if the aggressor is a corporation
         /// </summary>
         /// <value>Corporation ID if and only if the aggressor is a corporation</value>
         [JsonPropertyName("corporation_id")]
-        public int? CorporationId { get; set; }
+        public long? CorporationId { get; set; }
         /// <summary>
         /// ISK value of ships the aggressor has destroyed
         /// </summary>
@@ -107,7 +107,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The number of ships the aggressor has killed</value>
         [JsonPropertyName("ships_killed")]
-        public int ShipsKilled { get; set; }
+        public long ShipsKilled { get; set; }
 
         #endregion Properties
     }
@@ -121,14 +121,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Alliance ID if and only if this ally is an alliance</value>
         [JsonPropertyName("alliance_id")]
-        public int? AllianceId { get; set; }
+        public long? AllianceId { get; set; }
 
         /// <summary>
         /// Corporation ID if and only if this ally is a corporation
         /// </summary>
         /// <value>Corporation ID if and only if this ally is a corporation</value>
         [JsonPropertyName("corporation_id")]
-        public int? CorporationId { get; set; }
+        public long? CorporationId { get; set; }
 
         #endregion Properties
     }
@@ -142,14 +142,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Alliance ID if and only if the defender is an alliance</value>
         [JsonPropertyName("alliance_id")]
-        public int? AllianceId { get; set; }
+        public long? AllianceId { get; set; }
 
         /// <summary>
         /// Corporation ID if and only if the defender is a corporation
         /// </summary>
         /// <value>Corporation ID if and only if the defender is a corporation</value>
         [JsonPropertyName("corporation_id")]
-        public int? CorporationId { get; set; }
+        public long? CorporationId { get; set; }
         /// <summary>
         /// ISK value of ships the defender has killed
         /// </summary>
@@ -162,7 +162,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The number of ships the defender has killed</value>
         [JsonPropertyName("ships_killed")]
-        public int ShipsKilled { get; set; }
+        public long ShipsKilled { get; set; }
 
         #endregion Properties
     }

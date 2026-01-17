@@ -19,7 +19,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>market_group_id integer</value>
         [JsonPropertyName("market_group_id")]
-        public int MarketGroupId { get; set; }
+        public long MarketGroupId { get; set; }
 
         /// <summary>
         /// name string
@@ -32,14 +32,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>parent_group_id integer</value>
         [JsonPropertyName("parent_group_id")]
-        public int? ParentGroupId { get; set; }
+        public long? ParentGroupId { get; set; }
 
         /// <summary>
         /// types array
         /// </summary>
         /// <value>types array</value>
         [JsonPropertyName("types")]
-        public List<int> Types { get; set; }
+        public List<long> Types { get; set; }
 
         #endregion Properties
     }

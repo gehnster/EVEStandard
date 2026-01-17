@@ -11,7 +11,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>corporation_id integer</value>
         [JsonPropertyName("corporation_id")]
-        public int? CorporationId { get; set; }
+        public long? CorporationId { get; set; }
 
         /// <summary>
         /// description string
@@ -25,7 +25,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>faction_id integer</value>
         [JsonPropertyName("faction_id")]
-        public int FactionId { get; set; }
+        public long FactionId { get; set; }
 
         /// <summary>
         /// is_unique boolean
@@ -39,7 +39,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>militia_corporation_id integer</value>
         [JsonPropertyName("militia_corporation_id")]
-        public int? MilitiaCorporationId { get; set; }
+        public long? MilitiaCorporationId { get; set; }
 
         /// <summary>
         /// name string
@@ -59,20 +59,20 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>solar_system_id integer</value>
         [JsonPropertyName("solar_system_id")]
-        public int? SolarSystemId { get; set; }
+        public long? SolarSystemId { get; set; }
         /// <summary>
         /// station_count integer
         /// </summary>
         /// <value>station_count integer</value>
         [JsonPropertyName("station_count")]
-        public int StationCount { get; set; }
+        public long StationCount { get; set; }
 
         /// <summary>
         /// station_system_count integer
         /// </summary>
         /// <value>station_system_count integer</value>
         [JsonPropertyName("station_system_count")]
-        public int StationSystemCount { get; set; }
+        public long StationSystemCount { get; set; }
 
         #endregion Properties
     }

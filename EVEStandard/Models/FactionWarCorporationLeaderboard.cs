@@ -45,17 +45,17 @@ namespace EVEStandard.Models
     public class FactionWarTopCorporation : ModelBase<FactionWarTopCorporation>
     {
         /// <summary>
-        /// faction_id integer
+        /// corporation_id integer
         /// </summary>
-        /// <value>faction_id integer</value>
+        /// <value>corporation_id integer</value>
         [JsonPropertyName("corporation_id")]
-        public int? CorporationId { get; set; }
+        public long? CorporationId { get; set; }
 
         /// <summary>
         /// Amount of kills
         /// </summary>
         /// <value>Amount of kills</value>
         [JsonPropertyName("amount")]
-        public int? Amount { get; set; }
+        public long? Amount { get; set; }
     }
 }

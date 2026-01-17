@@ -12,14 +12,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>category_id integer</value>
         [JsonPropertyName("category_id")]
-        public int CategoryId { get; set; }
+        public long CategoryId { get; set; }
 
         /// <summary>
         /// group_id integer
         /// </summary>
         /// <value>group_id integer</value>
         [JsonPropertyName("group_id")]
-        public int GroupId { get; set; }
+        public long GroupId { get; set; }
 
         /// <summary>
         /// name string
@@ -39,7 +39,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>types array</value>
         [JsonPropertyName("types")]
-        public List<int> Types { get; set; }
+        public List<long> Types { get; set; }
 
         #endregion Properties
 

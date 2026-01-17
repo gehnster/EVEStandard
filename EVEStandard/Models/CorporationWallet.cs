@@ -9,7 +9,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>division integer</value>
         [JsonPropertyName("division")]
-        public int Division { get; set; }
+        public long Division { get; set; }
 
         /// <summary>
         /// balance number

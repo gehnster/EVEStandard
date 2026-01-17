@@ -53,7 +53,7 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="mail">The mail to send.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing the id of the sent mail.</returns>
-        public async Task<ESIModelDTO<int>> SendNewMailAsync(AuthDTO auth, NewMail mail)
+        public async Task<ESIModelDTO<long>> SendNewMailAsync(AuthDTO auth, NewMail mail)
         {
             CheckAuth(auth, Scopes.ESI_MAIL_SEND_MAIL_1);
 
@@ -61,7 +61,7 @@ namespace EVEStandard.API
 
             CheckResponse(nameof(SendNewMailAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return ReturnModelDTO<int>(responseModel);
+            return ReturnModelDTO<long>(responseModel);
         }
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Number of days for which order is valid (starting from the issued date). An order expires at time issued + duration</value>
         [JsonPropertyName("duration")]
-        public int Duration { get; set; }
+        public long Duration { get; set; }
 
         /// <summary>
         /// For buy orders, the amount of ISK in escrow
@@ -40,7 +40,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The character who issued this order </value>
         [JsonPropertyName("issued_by")]
-        public int IssuedBy { get; set; }
+        public long IssuedBy { get; set; }
 
         /// <summary>
         /// ID of the location where order was placed
@@ -54,7 +54,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>For buy orders, the minimum quantity that will be accepted in a matching sell order</value>
         [JsonPropertyName("min_volume")]
-        public int? MinVolume { get; set; }
+        public long? MinVolume { get; set; }
 
         /// <summary>
         /// Unique order ID
@@ -82,33 +82,33 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>ID of the region where order was placed</value>
         [JsonPropertyName("region_id")]
-        public int RegionId { get; set; }
+        public long RegionId { get; set; }
 
         /// <summary>
         /// The type ID of the item transacted in this order
         /// </summary>
         /// <value>The type ID of the item transacted in this order</value>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
         /// <summary>
         /// Quantity of items still required or offered
         /// </summary>
         /// <value>Quantity of items still required or offered</value>
         [JsonPropertyName("volume_remain")]
-        public int VolumeRemain { get; set; }
+        public long VolumeRemain { get; set; }
 
         /// <summary>
         /// Quantity of items required or offered at time order was placed
         /// </summary>
         /// <value>Quantity of items required or offered at time order was placed</value>
         [JsonPropertyName("volume_total")]
-        public int VolumeTotal { get; set; }
+        public long VolumeTotal { get; set; }
         /// <summary>
         /// The corporation wallet division used for this order.
         /// </summary>
         /// <value>The corporation wallet division used for this order.</value>
         [JsonPropertyName("wallet_division")]
-        public int WalletDivision { get; set; }
+        public long WalletDivision { get; set; }
 
         #endregion Properties
     }

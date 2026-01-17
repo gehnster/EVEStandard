@@ -31,7 +31,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Job activity ID</value>
         [JsonPropertyName("activity_id")]
-        public int ActivityId { get; set; }
+        public long ActivityId { get; set; }
 
         /// <summary>
         /// blueprint_id integer
@@ -52,14 +52,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>blueprint_type_id integer</value>
         [JsonPropertyName("blueprint_type_id")]
-        public int BlueprintTypeId { get; set; }
+        public long BlueprintTypeId { get; set; }
 
         /// <summary>
         /// ID of the character which completed this job
         /// </summary>
         /// <value>ID of the character which completed this job</value>
         [JsonPropertyName("completed_character_id")]
-        public int? CompletedCharacterId { get; set; }
+        public long? CompletedCharacterId { get; set; }
 
         /// <summary>
         /// Date and time when this job was completed
@@ -80,7 +80,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Job duration in seconds</value>
         [JsonPropertyName("duration")]
-        public int Duration { get; set; }
+        public long Duration { get; set; }
 
         /// <summary>
         /// Date and time when this job finished
@@ -101,20 +101,20 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>ID of the character which installed this job</value>
         [JsonPropertyName("installer_id")]
-        public int InstallerId { get; set; }
+        public long InstallerId { get; set; }
 
         /// <summary>
         /// Unique job ID
         /// </summary>
         /// <value>Unique job ID</value>
         [JsonPropertyName("job_id")]
-        public int JobId { get; set; }
+        public long JobId { get; set; }
         /// <summary>
         /// Number of runs blueprint is licensed for
         /// </summary>
         /// <value>Number of runs blueprint is licensed for</value>
         [JsonPropertyName("licensed_runs")]
-        public int? LicensedRuns { get; set; }
+        public long? LicensedRuns { get; set; }
 
         /// <summary>
         /// Location ID of the location to which the output of the job will be delivered. Normally a station ID, but can also be a corporation facility
@@ -142,14 +142,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Type ID of product (manufactured, copied or invented)</value>
         [JsonPropertyName("product_type_id")]
-        public int? ProductTypeId { get; set; }
+        public long? ProductTypeId { get; set; }
 
         /// <summary>
         /// Number of runs for a manufacturing job, or number of copies to make for a blueprint copy
         /// </summary>
         /// <value>Number of runs for a manufacturing job, or number of copies to make for a blueprint copy</value>
         [JsonPropertyName("runs")]
-        public int Runs { get; set; }
+        public long Runs { get; set; }
 
         /// <summary>
         /// Date and time when this job started
@@ -174,9 +174,7 @@ namespace EVEStandard.Models
         /// <summary>
         /// Gets the Status as enum (may throw exception if unknown value exists).
         /// </summary>
-        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
-
-        [JsonIgnore]
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed."), JsonIgnore]
         public StatusEnum StatusToEnum 
         {
             get => (StatusEnum)Enum.Parse(typeof(StatusEnum), Status);
@@ -186,7 +184,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Number of successful runs for this job. Equal to runs unless this is an invention job</value>
         [JsonPropertyName("successful_runs")]
-        public int? SuccessfulRuns { get; set; }
+        public long? SuccessfulRuns { get; set; }
 
         #endregion Properties
     }

@@ -34,7 +34,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>shareholder_id integer</value>
         [JsonPropertyName("shareholder_id")]
-        public int ShareholderId { get; set; }
+        public long ShareholderId { get; set; }
 
         /// <summary>
         /// shareholder_type string

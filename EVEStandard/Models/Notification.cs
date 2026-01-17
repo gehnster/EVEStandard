@@ -288,7 +288,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>sender_id integer</value>
         [JsonPropertyName("sender_id")]
-        public int SenderId { get; set; }
+        public long SenderId { get; set; }
 
         /// <summary>
         /// sender_type string
