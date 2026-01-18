@@ -114,7 +114,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing journal entries.</returns>
-        public async Task<ESIModelDTO<List<CorporationWalletJournal>>> GetCorporationWalletJournalAsync(AuthDTO auth, long corpId, int division, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<CorporationWalletJournal>>> GetCorporationWalletJournalAsync(AuthDTO auth, long corpId, long division, int page = 1, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_WALLET_READ_CORPORATION_WALLETS_1);
 
@@ -140,7 +140,7 @@ namespace EVEStandard.API
         /// <param name="fromId">Only show transactions happened before the one referenced by this id.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing wallet transactions.</returns>
-        public async Task<ESIModelDTO<List<WalletTransaction>>> GetCorporationWalletTransactionsAsync(AuthDTO auth, long corpId, int division, long fromId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<WalletTransaction>>> GetCorporationWalletTransactionsAsync(AuthDTO auth, long corpId, long division, long fromId, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_WALLET_READ_CORPORATION_WALLETS_1);
 
