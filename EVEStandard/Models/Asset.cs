@@ -99,7 +99,7 @@ namespace EVEStandard.Models
         /// The type identifier.
         /// </value>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
 
         #endregion Properties
     }

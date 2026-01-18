@@ -12,7 +12,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>constellation_id integer</value>
         [JsonPropertyName("constellation_id")]
-        public int ConstellationId { get; set; }
+        public long ConstellationId { get; set; }
 
         /// <summary>
         /// name string
@@ -32,14 +32,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The region this constellation is in</value>
         [JsonPropertyName("region_id")]
-        public int RegionId { get; set; }
+        public long RegionId { get; set; }
 
         /// <summary>
         /// systems array
         /// </summary>
         /// <value>systems array</value>
         [JsonPropertyName("systems")]
-        public List<int> Systems { get; set; }
+        public List<long> Systems { get; set; }
 
         #endregion Properties
     }

@@ -26,7 +26,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>discharge_attribute_id integer</value>
         [JsonPropertyName("discharge_attribute_id")]
-        public int? DischargeAttributeId { get; set; }
+        public long? DischargeAttributeId { get; set; }
 
         /// <summary>
         /// display_name string
@@ -40,21 +40,21 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>duration_attribute_id integer</value>
         [JsonPropertyName("duration_attribute_id")]
-        public int? DurationAttributeId { get; set; }
+        public long? DurationAttributeId { get; set; }
 
         /// <summary>
         /// effect_category integer
         /// </summary>
         /// <value>effect_category integer</value>
         [JsonPropertyName("effect_category")]
-        public int? EffectCategory { get; set; }
+        public long? EffectCategory { get; set; }
 
         /// <summary>
         /// effect_id integer
         /// </summary>
         /// <value>effect_id integer</value>
         [JsonPropertyName("effect_id")]
-        public int EffectId { get; set; }
+        public long EffectId { get; set; }
 
         /// <summary>
         /// electronic_chance boolean
@@ -68,14 +68,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>falloff_attribute_id integer</value>
         [JsonPropertyName("falloff_attribute_id")]
-        public int? FalloffAttributeId { get; set; }
+        public long? FalloffAttributeId { get; set; }
 
         /// <summary>
         /// icon_id integer
         /// </summary>
         /// <value>icon_id integer</value>
         [JsonPropertyName("icon_id")]
-        public int? IconId { get; set; }
+        public long? IconId { get; set; }
 
         /// <summary>
         /// is_assistance boolean
@@ -116,14 +116,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>post_expression integer</value>
         [JsonPropertyName("post_expression")]
-        public int? PostExpression { get; set; }
+        public long? PostExpression { get; set; }
 
         /// <summary>
         /// pre_expression integer
         /// </summary>
         /// <value>pre_expression integer</value>
         [JsonPropertyName("pre_expression")]
-        public int? PreExpression { get; set; }
+        public long? PreExpression { get; set; }
         /// <summary>
         /// published boolean
         /// </summary>
@@ -135,7 +135,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>range_attribute_id integer</value>
         [JsonPropertyName("range_attribute_id")]
-        public int? RangeAttributeId { get; set; }
+        public long? RangeAttributeId { get; set; }
 
         /// <summary>
         /// range_chance boolean
@@ -148,7 +148,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>tracking_speed_attribute_id integer</value>
         [JsonPropertyName("tracking_speed_attribute_id")]
-        public int? TrackingSpeedAttributeId { get; set; }
+        public long? TrackingSpeedAttributeId { get; set; }
 
         #endregion Properties
     }
@@ -169,7 +169,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>effect_id integer</value>
         [JsonPropertyName("effect_id")]
-        public int? EffectId { get; set; }
+        public long? EffectId { get; set; }
 
         /// <summary>
         /// func string
@@ -182,20 +182,20 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>modified_attribute_id integer</value>
         [JsonPropertyName("modified_attribute_id")]
-        public int? ModifiedAttributeId { get; set; }
+        public long? ModifiedAttributeId { get; set; }
 
         /// <summary>
         /// modifying_attribute_id integer
         /// </summary>
         /// <value>modifying_attribute_id integer</value>
         [JsonPropertyName("modifying_attribute_id")]
-        public int? ModifyingAttributeId { get; set; }
+        public long? ModifyingAttributeId { get; set; }
         /// <summary>
         /// operator integer
         /// </summary>
         /// <value>operator integer</value>
         [JsonPropertyName("operator")]
-        public int? Operator { get; set; }
+        public long? Operator { get; set; }
 
         #endregion Properties
     }

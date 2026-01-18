@@ -49,13 +49,13 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>faction_id integer</value>
         [JsonPropertyName("character_id")]
-        public int? CharacterId { get; set; }
+        public long? CharacterId { get; set; }
 
         /// <summary>
         /// Amount of kills
         /// </summary>
         /// <value>Amount of kills</value>
         [JsonPropertyName("amount")]
-        public int? Amount { get; set; }
+        public long? Amount { get; set; }
     }
 }

@@ -27,7 +27,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>ID of the character who was rewarded this medal</value>
         [JsonPropertyName("character_id")]
-        public int CharacterId { get; set; }
+        public long CharacterId { get; set; }
 
         /// <summary>
         /// issued_at string
@@ -41,14 +41,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>ID of the character who issued the medal</value>
         [JsonPropertyName("issuer_id")]
-        public int IssuerId { get; set; }
+        public long IssuerId { get; set; }
 
         /// <summary>
         /// medal_id integer
         /// </summary>
         /// <value>medal_id integer</value>
         [JsonPropertyName("medal_id")]
-        public int MedalId { get; set; }
+        public long MedalId { get; set; }
         /// <summary>
         /// reason string
         /// </summary>

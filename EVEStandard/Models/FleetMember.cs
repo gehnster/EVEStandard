@@ -13,7 +13,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>character_id integer</value>
         [JsonPropertyName("character_id")]
-        public int CharacterId { get; set; }
+        public long CharacterId { get; set; }
 
         /// <summary>
         /// join_time string
@@ -23,9 +23,9 @@ namespace EVEStandard.Models
         public DateTime JoinTime { get; set; }
 
         /// <summary>
-        /// Member’s role in fleet
+        /// Member's role in fleet
         /// </summary>
-        /// <value>Member’s role in fleet</value>
+        /// <value>Member's role in fleet</value>
         [JsonPropertyName("role")]
         public string Role { get; set; }
 
@@ -52,14 +52,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>ship_type_id integer</value>
         [JsonPropertyName("ship_type_id")]
-        public int ShipTypeId { get; set; }
+        public long ShipTypeId { get; set; }
 
         /// <summary>
         /// Solar system the member is located in
         /// </summary>
         /// <value>Solar system the member is located in</value>
         [JsonPropertyName("solar_system_id")]
-        public int SolarSystemId { get; set; }
+        public long SolarSystemId { get; set; }
 
         /// <summary>
         /// ID of the squad the member is in. If not applicable, will be set to -1

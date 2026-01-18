@@ -93,14 +93,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>reinforce_exit_end integer</value>
         [JsonPropertyName("reinforce_exit_end")]
-        public int ReinforceExitEnd { get; set; }
+        public long ReinforceExitEnd { get; set; }
 
         /// <summary>
         /// Together with reinforce_exit_end, marks a 2-hour period where this customs office could exit reinforcement mode during the day after initial attack
         /// </summary>
         /// <value>Together with reinforce_exit_end, marks a 2-hour period where this customs office could exit reinforcement mode during the day after initial attack</value>
         [JsonPropertyName("reinforce_exit_start")]
-        public int ReinforceExitStart { get; set; }
+        public long ReinforceExitStart { get; set; }
 
         /// <summary>
         /// Access is allowed only for entities with this level of standing or better
@@ -130,7 +130,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>ID of the solar system this customs office is located in</value>
         [JsonPropertyName("system_id")]
-        public int SystemId { get; set; }
+        public long SystemId { get; set; }
         /// <summary>
         /// terrible_standing_tax_rate number
         /// </summary>

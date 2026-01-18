@@ -29,7 +29,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>corporation_id integer</value>
         [JsonPropertyName("corporation_id")]
-        public int CorporationId { get; set; }
+        public long CorporationId { get; set; }
 
         /// <summary>
         /// date string
@@ -56,14 +56,15 @@ namespace EVEStandard.Models
         /// issuer_id integer
         /// </summary>
         /// <value>issuer_id integer</value>
-        [JsonPropertyName("issuer_id")] public int IssuerId { get; set; }
+        [JsonPropertyName("issuer_id")] 
+        public long IssuerId { get; set; }
 
         /// <summary>
         /// medal_id integer
         /// </summary>
         /// <value>medal_id integer</value>
         [JsonPropertyName("medal_id")]
-        public int MedalId { get; set; }
+        public long MedalId { get; set; }
 
         /// <summary>
         /// reason string
@@ -118,7 +119,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>color integer</value>
         [JsonPropertyName("color")]
-        public int? Color { get; set; }
+        public long? Color { get; set; }
 
         /// <summary>
         /// graphic string
@@ -132,14 +133,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>layer integer</value>
         [JsonPropertyName("layer")]
-        public int Layer { get; set; }
+        public long Layer { get; set; }
 
         /// <summary>
         /// part integer
         /// </summary>
         /// <value>part integer</value>
         [JsonPropertyName("part")]
-        public int Part { get; set; }
+        public long Part { get; set; }
 
         #endregion Properties
     }

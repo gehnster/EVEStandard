@@ -33,7 +33,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>sender_character_id integer</value>
         [JsonPropertyName("sender_character_id")]
-        public int SenderCharacterId { get; set; }
+        public long SenderCharacterId { get; set; }
 
         /// <summary>
         /// A number representing the standing level the receiver has been added at by the sender. The standing levels are as follows: -10 -&gt; Terrible | -5 -&gt; Bad |  0 -&gt; Neutral |  5 -&gt; Good |  10 -&gt; Excellent

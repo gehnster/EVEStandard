@@ -11,7 +11,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The alliance generally associated with this race</value>
         [JsonPropertyName("alliance_id")]
-        public int AllianceId { get; set; }
+        public long AllianceId { get; set; }
 
         /// <summary>
         /// description string
@@ -32,7 +32,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>race_id integer</value>
         [JsonPropertyName("race_id")]
-        public int RaceId { get; set; }
+        public long RaceId { get; set; }
 
         #endregion Properties
     }

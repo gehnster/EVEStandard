@@ -81,7 +81,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>first_party_id integer</value>
         [JsonPropertyName("first_party_id")]
-        public int? FirstPartyId { get; set; }
+        public long? FirstPartyId { get; set; }
 
         /// <summary>
         /// Unique journal reference ID
@@ -129,7 +129,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>second_party_id integer</value>
         [JsonPropertyName("second_party_id")]
-        public int? SecondPartyId { get; set; }
+        public long? SecondPartyId { get; set; }
 
         /// <summary>
         /// Tax amount received for tax related transactions
@@ -143,7 +143,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>the corporation ID receiving any tax paid</value>
         [JsonPropertyName("tax_receiver_id")]
-        public int? TaxReceiverId { get; set; }
+        public long? TaxReceiverId { get; set; }
 
         #endregion Properties
     }

@@ -12,7 +12,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>client_id integer</value>
         [JsonPropertyName("client_id")]
-        public int ClientId { get; set; }
+        public long ClientId { get; set; }
 
         /// <summary>
         /// Date and time of transaction
@@ -54,7 +54,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>quantity integer</value>
         [JsonPropertyName("quantity")]
-        public int Quantity { get; set; }
+        public long Quantity { get; set; }
 
         /// <summary>
         /// Unique transaction ID
@@ -67,7 +67,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>type_id integer</value>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
         /// <summary>
         /// Amount paid per unit
         /// </summary>

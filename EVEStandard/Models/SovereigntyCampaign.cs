@@ -37,21 +37,21 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Unique ID for this campaign.</value>
         [JsonPropertyName("campaign_id")]
-        public int CampaignId { get; set; }
+        public long CampaignId { get; set; }
 
         /// <summary>
         /// The constellation in which the campaign will take place. 
         /// </summary>
         /// <value>The constellation in which the campaign will take place. </value>
         [JsonPropertyName("constellation_id")]
-        public int ConstellationId { get; set; }
+        public long ConstellationId { get; set; }
 
         /// <summary>
         /// Defending alliance, only present in Defense Events 
         /// </summary>
         /// <value>Defending alliance, only present in Defense Events </value>
         [JsonPropertyName("defender_id")]
-        public int? DefenderId { get; set; }
+        public long? DefenderId { get; set; }
 
         /// <summary>
         /// Score for the defending alliance, only present in Defense Events. 
@@ -90,7 +90,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The solar system the structure is located in. </value>
         [JsonPropertyName("solar_system_id")]
-        public int SolarSystemId { get; set; }
+        public long SolarSystemId { get; set; }
 
         /// <summary>
         /// Time the event is scheduled to start. 
@@ -118,7 +118,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>alliance_id integer</value>
         [JsonPropertyName("alliance_id")]
-        public int? AllianceId { get; set; }
+        public long? AllianceId { get; set; }
 
         /// <summary>
         /// score number

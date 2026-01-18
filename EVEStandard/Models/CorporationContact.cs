@@ -12,7 +12,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>contact_id integer</value>
         [JsonPropertyName("contact_id")]
-        public int ContactId { get; set; }
+        public long ContactId { get; set; }
 
         /// <summary>
         /// contact_type string

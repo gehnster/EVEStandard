@@ -27,12 +27,12 @@ namespace EVEStandard.Models
         /// Material Efficiency Level of the blueprint
         /// </summary>
         [JsonPropertyName("material_efficiency")]
-        public int? MaterialEfficiency { get; set; }
+        public long? MaterialEfficiency { get; set; }
         /// <summary>
         /// Number of items in the stack
         /// </summary>
         [JsonPropertyName("quantity")]
-        public int Quantity { get; set; }
+        public long Quantity { get; set; }
         /// <summary>
         /// Unique ID for the item, used by the contract system
         /// </summary>
@@ -42,17 +42,17 @@ namespace EVEStandard.Models
         /// Number of runs remaining if the blueprint is a copy, -1 if it is an original
         /// </summary>
         [JsonPropertyName("runs")]
-        public int? Runs { get; set; }
+        public long? Runs { get; set; }
         /// <summary>
         /// Time Efficiency Level of the blueprint
         /// </summary>
         [JsonPropertyName("time_efficiency")]
-        public int? TimeEfficiency { get; set; }
+        public long? TimeEfficiency { get; set; }
         /// <summary>
         /// Type ID for item
         /// </summary>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
         #endregion
     }
 }

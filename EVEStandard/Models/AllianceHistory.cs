@@ -12,7 +12,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>alliance_id integer</value>
         [JsonPropertyName("alliance_id")]
-        public int? AllianceId { get; set; }
+        public long? AllianceId { get; set; }
 
         /// <summary>
         /// True if the alliance has been closed
@@ -26,7 +26,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>An incrementing ID that can be used to canonically establish order of records in cases where dates may be ambiguous</value>
         [JsonPropertyName("record_id")]
-        public int RecordId { get; set; }
+        public long RecordId { get; set; }
 
         /// <summary>
         /// start_date string

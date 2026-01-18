@@ -11,14 +11,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>ship_jumps integer</value>
         [JsonPropertyName("ship_jumps")]
-        public int ShipJumps { get; set; }
+        public long ShipJumps { get; set; }
 
         /// <summary>
         /// system_id integer
         /// </summary>
         /// <value>system_id integer</value>
         [JsonPropertyName("system_id")]
-        public int SystemId { get; set; }
+        public long SystemId { get; set; }
 
         #endregion Properties
     }

@@ -13,7 +13,7 @@ namespace EVEStandard.Models
         /// The players.
         /// </value>
         [JsonPropertyName("players")]
-        public int Players { get; set; }
+        public long Players { get; set; }
 
         /// <summary>
         /// Gets or sets the server version.

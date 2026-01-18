@@ -27,7 +27,7 @@ namespace EVEStandard.API
         /// <param name="killmailHash">The killmail hash for verification.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a killmail.</returns>
-        public async Task<ESIModelDTO<Killmail>> GetKillmailAsync(int killmailId, string killmailHash, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Killmail>> GetKillmailAsync(long killmailId, string killmailHash, string ifNoneMatch = null)
         {
             var responseModel = await GetAsync($"/killmails/{killmailId}/{killmailHash}/", ifNoneMatch);
 
@@ -70,7 +70,7 @@ namespace EVEStandard.API
         /// <param name="page">Which page of results to return. Default value: 1.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of killmail IDs and hashes.</returns>
-        public async Task<ESIModelDTO<List<KillmailIndex>>> GetCorporationKillsAndLossesAsync(AuthDTO auth, int corporationId, int page = 1, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<KillmailIndex>>> GetCorporationKillsAndLossesAsync(AuthDTO auth, long corporationId, int page = 1, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_KILLMAILS_READ_CORPORATION_KILLMAILS_1);
 

@@ -19,21 +19,21 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Number of available bonus character neural remaps</value>
         [JsonPropertyName("bonus_remaps")]
-        public int? BonusRemaps { get; set; }
+        public long? BonusRemaps { get; set; }
 
         /// <summary>
         /// charisma integer
         /// </summary>
         /// <value>charisma integer</value>
         [JsonPropertyName("charisma")]
-        public int Charisma { get; set; }
+        public long Charisma { get; set; }
 
         /// <summary>
         /// intelligence integer
         /// </summary>
         /// <value>intelligence integer</value>
         [JsonPropertyName("intelligence")]
-        public int Intelligence { get; set; }
+        public long Intelligence { get; set; }
 
         /// <summary>
         /// Datetime of last neural remap, including usage of bonus remaps
@@ -47,21 +47,21 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>memory integer</value>
         [JsonPropertyName("memory")]
-        public int Memory { get; set; }
+        public long Memory { get; set; }
 
         /// <summary>
         /// perception integer
         /// </summary>
         /// <value>perception integer</value>
         [JsonPropertyName("perception")]
-        public int Perception { get; set; }
+        public long Perception { get; set; }
 
         /// <summary>
         /// willpower integer
         /// </summary>
         /// <value>willpower integer</value>
         [JsonPropertyName("willpower")]
-        public int Willpower { get; set; }
+        public long Willpower { get; set; }
 
         #endregion Properties
     }

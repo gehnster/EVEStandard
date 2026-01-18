@@ -11,14 +11,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>solar_system_id integer</value>
         [JsonPropertyName("solar_system_id")]
-        public int SolarSystemId { get; set; }
+        public long SolarSystemId { get; set; }
 
         /// <summary>
         /// station_id integer
         /// </summary>
         /// <value>station_id integer</value>
         [JsonPropertyName("station_id")]
-        public int? StationId { get; set; }
+        public long? StationId { get; set; }
 
         /// <summary>
         /// structure_id integer

@@ -12,7 +12,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The character that did the mining </value>
         [JsonPropertyName("character_id")]
-        public int CharacterId { get; set; }
+        public long CharacterId { get; set; }
 
         /// <summary>
         /// last_updated string
@@ -32,14 +32,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The corporation id of the character at the time data was recorded. </value>
         [JsonPropertyName("recorded_corporation_id")]
-        public int RecordedCorporationId { get; set; }
+        public long RecordedCorporationId { get; set; }
 
         /// <summary>
         /// type_id integer
         /// </summary>
         /// <value>type_id integer</value>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
 
         #endregion Properties
     }

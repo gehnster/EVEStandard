@@ -1,5 +1,5 @@
 using System;
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace EVEStandard.Models
 {
@@ -28,7 +28,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>from_id integer</value>
         [JsonPropertyName("from_id")]
-        public int FromId { get; set; }
+        public long FromId { get; set; }
 
         /// <summary>
         /// from_type string
@@ -40,9 +40,7 @@ namespace EVEStandard.Models
         /// <summary>
         /// Gets the FromType as enum (may throw exception if unknown value exists).
         /// </summary>
-        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
-
-        [JsonIgnore]
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed."), JsonIgnore]
         public FromTypeEnum FromTypeToEnum 
         {
             get => (FromTypeEnum)Enum.Parse(typeof(FromTypeEnum), FromType);

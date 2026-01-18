@@ -26,7 +26,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Skill points available to be assigned</value>
         [JsonPropertyName("unallocated_sp")]
-        public int? UnallocatedSp { get; set; }
+        public long? UnallocatedSp { get; set; }
 
         #endregion Properties
     }
@@ -40,14 +40,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>active_skill_level integer</value>
         [JsonPropertyName("active_skill_level")]
-        public int ActiveSkillLevel { get; set; }
+        public long ActiveSkillLevel { get; set; }
 
         /// <summary>
         /// skill_id integer
         /// </summary>
         /// <value>skill_id integer</value>
         [JsonPropertyName("skill_id")]
-        public int SkillId { get; set; }
+        public long SkillId { get; set; }
 
         /// <summary>
         /// skillpoints_in_skill integer
@@ -61,7 +61,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>trained_skill_level integer</value>
         [JsonPropertyName("trained_skill_level")]
-        public int TrainedSkillLevel { get; set; }
+        public long TrainedSkillLevel { get; set; }
 
         #endregion Properties
     }

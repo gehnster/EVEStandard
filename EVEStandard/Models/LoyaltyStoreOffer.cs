@@ -12,7 +12,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Analysis kredit cost</value>
         [JsonPropertyName("ak_cost")]
-        public int? AkCost { get; set; }
+        public long? AkCost { get; set; }
 
         /// <summary>
         /// isk_cost integer
@@ -26,21 +26,21 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>lp_cost integer</value>
         [JsonPropertyName("lp_cost")]
-        public int LpCost { get; set; }
+        public long LpCost { get; set; }
 
         /// <summary>
         /// offer_id integer
         /// </summary>
         /// <value>offer_id integer</value>
         [JsonPropertyName("offer_id")]
-        public int OfferId { get; set; }
+        public long OfferId { get; set; }
 
         /// <summary>
         /// quantity integer
         /// </summary>
         /// <value>quantity integer</value>
         [JsonPropertyName("quantity")]
-        public int Quantity { get; set; }
+        public long Quantity { get; set; }
 
         /// <summary>
         /// required_items array
@@ -54,7 +54,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>type_id integer</value>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
 
         #endregion Properties
     }
@@ -68,14 +68,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>quantity integer</value>
         [JsonPropertyName("quantity")]
-        public int Quantity { get; set; }
+        public long Quantity { get; set; }
 
         /// <summary>
         /// type_id integer
         /// </summary>
         /// <value>type_id integer</value>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
 
         #endregion Properties
     }

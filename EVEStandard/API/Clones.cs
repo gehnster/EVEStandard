@@ -43,7 +43,7 @@ namespace EVEStandard.API
         /// <param name="auth">The <see cref="AuthDTO"/> object.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of implant type ids.</returns>
-        public async Task<ESIModelDTO<List<int>>> GetActiveImplantsAsync(AuthDTO auth, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<long>>> GetActiveImplantsAsync(AuthDTO auth, string ifNoneMatch = null)
         {
             CheckAuth(auth, Scopes.ESI_CLONES_READ_IMPLANTS_1);
 
@@ -51,7 +51,7 @@ namespace EVEStandard.API
 
             CheckResponse(nameof(GetActiveImplantsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return ReturnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<long>>(responseModel);
         }
     }
 }

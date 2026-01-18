@@ -18,7 +18,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>planet_id integer</value>
         [JsonPropertyName("planet_id")]
-        public int PlanetId { get; set; }
+        public long PlanetId { get; set; }
 
         /// <summary>
         /// Gets or Sets Position
@@ -31,14 +31,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The solar system this planet is in</value>
         [JsonPropertyName("system_id")]
-        public int SystemId { get; set; }
+        public long SystemId { get; set; }
 
         /// <summary>
         /// type_id integer
         /// </summary>
         /// <value>type_id integer</value>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
 
         #endregion Properties
     }

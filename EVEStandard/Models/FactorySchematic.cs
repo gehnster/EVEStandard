@@ -11,7 +11,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Time in seconds to process a run</value>
         [JsonPropertyName("cycle_time")]
-        public int CycleTime { get; set; }
+        public long CycleTime { get; set; }
 
         /// <summary>
         /// schematic_name string

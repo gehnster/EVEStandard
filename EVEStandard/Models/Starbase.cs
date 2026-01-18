@@ -30,7 +30,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The moon this starbase (POS) is anchored on, unanchored POSes do not have this information</value>
         [JsonPropertyName("moon_id")]
-        public int? MoonId { get; set; }
+        public long? MoonId { get; set; }
 
         /// <summary>
         /// When the POS onlined, for starbases (POSes) in online state
@@ -76,14 +76,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The solar system this starbase (POS) is in, unanchored POSes have this information</value>
         [JsonPropertyName("system_id")]
-        public int SystemId { get; set; }
+        public long SystemId { get; set; }
 
         /// <summary>
         /// Starbase (POS) type
         /// </summary>
         /// <value>Starbase (POS) type</value>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
         /// <summary>
         /// When the POS started unanchoring, for starbases (POSes) in unanchoring state
         /// </summary>

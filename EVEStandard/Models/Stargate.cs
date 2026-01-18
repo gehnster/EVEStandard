@@ -30,20 +30,20 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>stargate_id integer</value>
         [JsonPropertyName("stargate_id")]
-        public int StargateId { get; set; }
+        public long StargateId { get; set; }
         /// <summary>
         /// The solar system this stargate is in
         /// </summary>
         /// <value>The solar system this stargate is in</value>
         [JsonPropertyName("system_id")]
-        public int SystemId { get; set; }
+        public long SystemId { get; set; }
 
         /// <summary>
         /// type_id integer
         /// </summary>
         /// <value>type_id integer</value>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
 
         #endregion Properties
     }
@@ -57,14 +57,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The stargate this stargate connects to</value>
         [JsonPropertyName("stargate_id")]
-        public int StargateId { get; set; }
+        public long StargateId { get; set; }
 
         /// <summary>
         /// The solar system this stargate connects to
         /// </summary>
         /// <value>The solar system this stargate connects to</value>
         [JsonPropertyName("system_id")]
-        public int SystemId { get; set; }
+        public long SystemId { get; set; }
 
         #endregion Properties
     }

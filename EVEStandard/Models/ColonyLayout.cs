@@ -49,7 +49,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>link_level integer</value>
         [JsonPropertyName("link_level")]
-        public int LinkLevel { get; set; }
+        public long LinkLevel { get; set; }
     }
 
     public class ColonyPin : ModelBase<ColonyPin>
@@ -80,14 +80,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>type_id integer</value>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
 
         /// <summary>
         /// schematic_id integer
         /// </summary>
         /// <value>schematic_id integer</value>
         [JsonPropertyName("schematic_id")]
-        public int? SchematicId { get; set; }
+        public long? SchematicId { get; set; }
 
         /// <summary>
         /// Gets or Sets ExtractorDetails
@@ -158,7 +158,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>content_type_id integer</value>
         [JsonPropertyName("content_type_id")]
-        public int ContentTypeId { get; set; }
+        public long ContentTypeId { get; set; }
 
         /// <summary>
         /// quantity number
@@ -189,14 +189,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>product_type_id integer</value>
         [JsonPropertyName("product_type_id")]
-        public int? ProductTypeId { get; set; }
+        public long? ProductTypeId { get; set; }
 
         /// <summary>
         /// in seconds
         /// </summary>
         /// <value>in seconds</value>
         [JsonPropertyName("cycle_time")]
-        public int? CycleTime { get; set; }
+        public long? CycleTime { get; set; }
 
         /// <summary>
         /// head_radius number
@@ -210,7 +210,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>qty_per_cycle integer</value>
         [JsonPropertyName("qty_per_cycle")]
-        public int? QtyPerCycle { get; set; }
+        public long? QtyPerCycle { get; set; }
     }
 
     public class ColonyFactoryDetails : ModelBase<ColonyFactoryDetails>
@@ -220,7 +220,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>schematic_id integer</value>
         [JsonPropertyName("schematic_id")]
-        public int SchematicId { get; set; }
+        public long SchematicId { get; set; }
     }
 
     public class ColonyContent : ModelBase<ColonyContent>
@@ -230,7 +230,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>type_id integer</value>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
 
         /// <summary>
         /// amount integer
@@ -247,7 +247,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>head_id integer</value>
         [JsonPropertyName("head_id")]
-        public int HeadId { get; set; }
+        public long HeadId { get; set; }
 
         /// <summary>
         /// latitude number

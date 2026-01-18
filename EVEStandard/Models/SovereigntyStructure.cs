@@ -12,14 +12,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The alliance that owns the structure. </value>
         [JsonPropertyName("alliance_id")]
-        public int AllianceId { get; set; }
+        public long AllianceId { get; set; }
 
         /// <summary>
         /// Solar system in which the structure is located. 
         /// </summary>
         /// <value>Solar system in which the structure is located. </value>
         [JsonPropertyName("solar_system_id")]
-        public int SolarSystemId { get; set; }
+        public long SolarSystemId { get; set; }
 
         /// <summary>
         /// Unique item ID for this structure.
@@ -33,7 +33,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>A reference to the type of structure this is. </value>
         [JsonPropertyName("structure_type_id")]
-        public int StructureTypeId { get; set; }
+        public long StructureTypeId { get; set; }
 
         /// <summary>
         /// The occupancy level for the next or current vulnerability window. This takes into account all development indexes and capital system bonuses. Also known as Activity Defense Multiplier from in the client. It increases the time that attackers must spend using their entosis links on the structure. 

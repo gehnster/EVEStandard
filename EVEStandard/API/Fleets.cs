@@ -130,7 +130,7 @@ namespace EVEStandard.API
         /// <param name="fleetId">ID for a fleet.</param>
         /// <param name="memberId">The character ID of a member in this fleet.</param>
         /// <returns></returns>
-        public async Task KickFleetMemberAsync(AuthDTO auth, long fleetId, int memberId)
+        public async Task KickFleetMemberAsync(AuthDTO auth, long fleetId, long memberId)
         {
             CheckAuth(auth, Scopes.ESI_FLEETS_WRITE_FLEET_1);
 
@@ -148,7 +148,7 @@ namespace EVEStandard.API
         /// <param name="memberId">The character ID of a member in this fleet.</param>
         /// <param name="movement">Details of the invitation.</param>
         /// <returns></returns>
-        public async Task MoveFleetMemberAsync(AuthDTO auth, long fleetId, int memberId, FleetMemberMove movement)
+        public async Task MoveFleetMemberAsync(AuthDTO auth, long fleetId, long memberId, FleetMemberMove movement)
         {
             CheckAuth(auth, Scopes.ESI_FLEETS_WRITE_FLEET_1);
 

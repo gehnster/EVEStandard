@@ -11,7 +11,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The bloodline associated with this ancestry</value>
         [JsonPropertyName("bloodline_id")]
-        public int BloodlineId { get; set; }
+        public long BloodlineId { get; set; }
 
         /// <summary>
         /// description string
@@ -25,14 +25,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>icon_id integer</value>
         [JsonPropertyName("icon_id")]
-        public int? IconId { get; set; }
+        public long? IconId { get; set; }
 
         /// <summary>
         /// id integer
         /// </summary>
         /// <value>id integer</value>
         [JsonPropertyName("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// name string

@@ -13,7 +13,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The character&#39;s alliance ID</value>
         [JsonPropertyName("alliance_id")]
-        public int? AllianceId { get; set; }
+        public long? AllianceId { get; set; }
 
         /// <summary>
         ///     Creation date of the character
@@ -27,14 +27,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>bloodline_id integer</value>
         [JsonPropertyName("bloodline_id")]
-        public int BloodlineId { get; set; }
+        public long BloodlineId { get; set; }
 
         /// <summary>
         ///     The character&#39;s corporation ID
         /// </summary>
         /// <value>The character&#39;s corporation ID</value>
         [JsonPropertyName("corporation_id")]
-        public int CorporationId { get; set; }
+        public long CorporationId { get; set; }
 
         /// <summary>
         ///     description string
@@ -48,7 +48,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>ID of the faction the character is fighting for, if the character is enlisted in Factional Warfare</value>
         [JsonPropertyName("faction_id")]
-        public int? FactionId { get; set; }
+        public long? FactionId { get; set; }
 
         /// <summary>
         ///     gender string
@@ -88,7 +88,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>race_id integer</value>
         [JsonPropertyName("race_id")]
-        public int RaceId { get; set; }
+        public long RaceId { get; set; }
         /// <summary>
         ///     security_status number
         /// </summary>

@@ -33,7 +33,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>division integer</value>
         [JsonPropertyName("division")]
-        public int? Division { get; set; }
+        public long? Division { get; set; }
 
         /// <summary>
         /// name string
@@ -54,7 +54,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>division integer</value>
         [JsonPropertyName("division")]
-        public int? Division { get; set; }
+        public long? Division { get; set; }
 
         /// <summary>
         /// name string

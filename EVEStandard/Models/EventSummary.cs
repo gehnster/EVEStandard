@@ -62,7 +62,7 @@ namespace EVEStandard.Models
         /// The importance.
         /// </value>
         [JsonPropertyName("importance")]
-        public int Importance { get; set; }
+        public long Importance { get; set; }
 
         /// <summary>
         /// Gets or sets the title.

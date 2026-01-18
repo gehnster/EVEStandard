@@ -20,7 +20,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>ID of the killmail</value>
         [JsonPropertyName("killmail_id")]
-        public int KillmailId { get; set; }
+        public long KillmailId { get; set; }
 
         /// <summary>
         /// Time that the victim was killed and the killmail generated 
@@ -34,14 +34,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Moon if the kill took place at one</value>
         [JsonPropertyName("moon_id")]
-        public int? MoonId { get; set; }
+        public long? MoonId { get; set; }
 
         /// <summary>
         /// Solar system that the kill took place in 
         /// </summary>
         /// <value>Solar system that the kill took place in </value>
         [JsonPropertyName("solar_system_id")]
-        public int SolarSystemId { get; set; }
+        public long SolarSystemId { get; set; }
 
         /// <summary>
         /// Gets or Sets Victim
@@ -53,7 +53,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>War if the killmail is generated in relation to an official war </value>
         [JsonPropertyName("war_id")]
-        public int? WarId { get; set; }
+        public long? WarId { get; set; }
 
         #endregion Properties
     }
@@ -67,34 +67,34 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>alliance_id integer</value>
         [JsonPropertyName("alliance_id")]
-        public int? AllianceId { get; set; }
+        public long? AllianceId { get; set; }
 
         /// <summary>
         /// character_id integer
         /// </summary>
         /// <value>character_id integer</value>
         [JsonPropertyName("character_id")]
-        public int? CharacterId { get; set; }
+        public long? CharacterId { get; set; }
 
         /// <summary>
         /// corporation_id integer
         /// </summary>
         /// <value>corporation_id integer</value>
         [JsonPropertyName("corporation_id")]
-        public int? CorporationId { get; set; }
+        public long? CorporationId { get; set; }
         /// <summary>
         /// damage_done integer
         /// </summary>
         /// <value>damage_done integer</value>
         [JsonPropertyName("damage_done")]
-        public int DamageDone { get; set; }
+        public long DamageDone { get; set; }
 
         /// <summary>
         /// faction_id integer
         /// </summary>
         /// <value>faction_id integer</value>
         [JsonPropertyName("faction_id")]
-        public int? FactionId { get; set; }
+        public long? FactionId { get; set; }
 
         /// <summary>
         /// Was the attacker the one to achieve the final blow 
@@ -114,14 +114,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>What ship was the attacker flying </value>
         [JsonPropertyName("ship_type_id")]
-        public int? ShipTypeId { get; set; }
+        public long? ShipTypeId { get; set; }
 
         /// <summary>
         /// What weapon was used by the attacker for the kill 
         /// </summary>
         /// <value>What weapon was used by the attacker for the kill </value>
         [JsonPropertyName("weapon_type_id")]
-        public int? WeaponTypeId { get; set; }
+        public long? WeaponTypeId { get; set; }
 
         #endregion Properties
     }
@@ -135,7 +135,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Flag for the location of the item </value>
         [JsonPropertyName("flag")]
-        public int Flag { get; set; }
+        public long Flag { get; set; }
 
         /// <summary>
         /// items array
@@ -149,7 +149,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>item_type_id integer</value>
         [JsonPropertyName("item_type_id")]
-        public int ItemTypeId { get; set; }
+        public long ItemTypeId { get; set; }
 
         /// <summary>
         /// How many of the item were destroyed if any 
@@ -170,7 +170,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>singleton integer</value>
         [JsonPropertyName("singleton")]
-        public int Singleton { get; set; }
+        public long Singleton { get; set; }
 
         #endregion Properties
     }
@@ -184,34 +184,34 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>alliance_id integer</value>
         [JsonPropertyName("alliance_id")]
-        public int? AllianceId { get; set; }
+        public long? AllianceId { get; set; }
 
         /// <summary>
         /// character_id integer
         /// </summary>
         /// <value>character_id integer</value>
         [JsonPropertyName("character_id")]
-        public int? CharacterId { get; set; }
+        public long? CharacterId { get; set; }
 
         /// <summary>
         /// corporation_id integer
         /// </summary>
         /// <value>corporation_id integer</value>
         [JsonPropertyName("corporation_id")]
-        public int? CorporationId { get; set; }
+        public long? CorporationId { get; set; }
         /// <summary>
         /// How much total damage was taken by the victim 
         /// </summary>
         /// <value>How much total damage was taken by the victim </value>
         [JsonPropertyName("damage_taken")]
-        public int DamageTaken { get; set; }
+        public long DamageTaken { get; set; }
 
         /// <summary>
         /// faction_id integer
         /// </summary>
         /// <value>faction_id integer</value>
         [JsonPropertyName("faction_id")]
-        public int? FactionId { get; set; }
+        public long? FactionId { get; set; }
         /// <summary>
         /// items array
         /// </summary>
@@ -230,7 +230,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The ship that the victim was piloting and was destroyed </value>
         [JsonPropertyName("ship_type_id")]
-        public int ShipTypeId { get; set; }
+        public long ShipTypeId { get; set; }
 
         #endregion Properties
     }

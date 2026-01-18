@@ -18,21 +18,21 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Owner of the facility</value>
         [JsonPropertyName("owner_id")]
-        public int OwnerId { get; set; }
+        public long OwnerId { get; set; }
 
         /// <summary>
         /// Region ID where the facility is
         /// </summary>
         /// <value>Region ID where the facility is</value>
         [JsonPropertyName("region_id")]
-        public int RegionId { get; set; }
+        public long RegionId { get; set; }
 
         /// <summary>
         /// Solar system ID where the facility is
         /// </summary>
         /// <value>Solar system ID where the facility is</value>
         [JsonPropertyName("solar_system_id")]
-        public int SolarSystemId { get; set; }
+        public long SolarSystemId { get; set; }
 
         /// <summary>
         /// Tax imposed by the facility
@@ -45,7 +45,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Type ID of the facility</value>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
 
         #endregion Properties
     }

@@ -31,7 +31,7 @@ namespace EVEStandard.Models
         /// The system identifier.
         /// </value>
         [JsonPropertyName("system_id")]
-        public int SystemId { get; set; }
+        public long SystemId { get; set; }
 
         #endregion Properties
     }

@@ -9,7 +9,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>corporation_id integer</value>
         [JsonPropertyName("corporation_id")]
-        public int CorporationId { get; set; }
+        public long CorporationId { get; set; }
 
         /// <summary>
         /// corporation_name string

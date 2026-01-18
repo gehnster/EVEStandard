@@ -38,7 +38,7 @@ namespace EVEStandard.Models
 
         /// </summary>
 
-        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed.")]
+        [Obsolete("This property will be removed in a future version. Use the string property instead and parse manually if needed." )]
 
         [JsonIgnore]
 
@@ -55,7 +55,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>ID of the character who performed the action.</value>
         [JsonPropertyName("character_id")]
-        public int CharacterId { get; set; }
+        public long CharacterId { get; set; }
 
         /// <summary>
         /// ID of the container
@@ -69,7 +69,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Type ID of the container</value>
         [JsonPropertyName("container_type_id")]
-        public int ContainerTypeId { get; set; }
+        public long ContainerTypeId { get; set; }
 
         /// <summary>
         /// location_flag string
@@ -116,14 +116,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>new_config_bitmask integer</value>
         [JsonPropertyName("new_config_bitmask")]
-        public int? NewConfigBitmask { get; set; }
+        public long? NewConfigBitmask { get; set; }
 
         /// <summary>
         /// old_config_bitmask integer
         /// </summary>
         /// <value>old_config_bitmask integer</value>
         [JsonPropertyName("old_config_bitmask")]
-        public int? OldConfigBitmask { get; set; }
+        public long? OldConfigBitmask { get; set; }
 
         /// <summary>
         /// Type of password set if action is of type SetPassword or EnterPassword
@@ -154,14 +154,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Quantity of the item being acted upon</value>
         [JsonPropertyName("quantity")]
-        public int? Quantity { get; set; }
+        public long? Quantity { get; set; }
 
         /// <summary>
         /// Type ID of the item being acted upon
         /// </summary>
         /// <value>Type ID of the item being acted upon</value>
         [JsonPropertyName("type_id")]
-        public int? TypeId { get; set; }
+        public long? TypeId { get; set; }
 
         #endregion Properties
     }

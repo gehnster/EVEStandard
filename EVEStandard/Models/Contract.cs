@@ -63,14 +63,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Who will accept the contract</value>
         [JsonPropertyName("acceptor_id")]
-        public int AcceptorId { get; set; }
+        public long AcceptorId { get; set; }
 
         /// <summary>
         /// ID to whom the contract is assigned, can be corporation or character ID
         /// </summary>
         /// <value>ID to whom the contract is assigned, can be corporation or character ID</value>
         [JsonPropertyName("assignee_id")]
-        public int AssigneeId { get; set; }
+        public long AssigneeId { get; set; }
 
         /// <summary>
         /// To whom the contract is available
@@ -118,7 +118,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>contract_id integer</value>
         [JsonPropertyName("contract_id")]
-        public int ContractId { get; set; }
+        public long ContractId { get; set; }
 
         /// <summary>
         /// Date of confirmation of contract
@@ -153,7 +153,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Number of days to perform the contract</value>
         [JsonPropertyName("days_to_complete")]
-        public int? DaysToComplete { get; set; }
+        public long? DaysToComplete { get; set; }
 
         /// <summary>
         /// End location ID (for Couriers contract)
@@ -174,14 +174,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Character&#39;s corporation ID for the issuer</value>
         [JsonPropertyName("issuer_corporation_id")]
-        public int IssuerCorporationId { get; set; }
+        public long IssuerCorporationId { get; set; }
 
         /// <summary>
         /// Character ID for the issuer
         /// </summary>
         /// <value>Character ID for the issuer</value>
         [JsonPropertyName("issuer_id")]
-        public int IssuerId { get; set; }
+        public long IssuerId { get; set; }
         /// <summary>
         /// Price of contract (for ItemsExchange and Auctions)
         /// </summary>

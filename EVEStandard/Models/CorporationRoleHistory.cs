@@ -22,13 +22,13 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The character whose roles are changed</value>
         [JsonPropertyName("character_id")]
-        public int CharacterId { get; set; }
+        public long CharacterId { get; set; }
         /// <summary>
         /// ID of the character who issued this change
         /// </summary>
         /// <value>ID of the character who issued this change</value>
         [JsonPropertyName("issuer_id")]
-        public int IssuerId { get; set; }
+        public long IssuerId { get; set; }
 
         /// <summary>
         /// new_roles array

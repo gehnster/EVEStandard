@@ -31,7 +31,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>id integer</value>
         [JsonPropertyName("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// name string

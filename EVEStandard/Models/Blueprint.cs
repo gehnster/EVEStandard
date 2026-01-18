@@ -54,35 +54,35 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>Material Efficiency Level of the blueprint.</value>
         [JsonPropertyName("material_efficiency")]
-        public int MaterialEfficiency { get; set; }
+        public long MaterialEfficiency { get; set; }
 
         /// <summary>
         /// A range of numbers with a minimum of -2 and no maximum value where -1 is an original and -2 is a copy. It can be a positive integer if it is a stack of blueprint originals fresh from the market (e.g. no activities performed on them yet).
         /// </summary>
         /// <value>A range of numbers with a minimum of -2 and no maximum value where -1 is an original and -2 is a copy. It can be a positive integer if it is a stack of blueprint originals fresh from the market (e.g. no activities performed on them yet).</value>
         [JsonPropertyName("quantity")]
-        public int Quantity { get; set; }
+        public long Quantity { get; set; }
 
         /// <summary>
         /// Number of runs remaining if the blueprint is a copy, -1 if it is an original.
         /// </summary>
         /// <value>Number of runs remaining if the blueprint is a copy, -1 if it is an original.</value>
         [JsonPropertyName("runs")]
-        public int Runs { get; set; }
+        public long Runs { get; set; }
 
         /// <summary>
         /// Time Efficiency Level of the blueprint.
         /// </summary>
         /// <value>Time Efficiency Level of the blueprint.</value>
         [JsonPropertyName("time_efficiency")]
-        public int TimeEfficiency { get; set; }
+        public long TimeEfficiency { get; set; }
 
         /// <summary>
         /// type_id integer
         /// </summary>
         /// <value>type_id integer</value>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
 
         #endregion Properties
     }

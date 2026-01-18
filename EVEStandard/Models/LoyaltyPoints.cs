@@ -11,14 +11,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>corporation_id integer</value>
         [JsonPropertyName("corporation_id")]
-        public int CorporationId { get; set; }
+        public long CorporationId { get; set; }
 
         /// <summary>
         /// loyalty_points integer
         /// </summary>
         /// <value>loyalty_points integer</value>
         [JsonPropertyName("loyalty_points")]
-        public int Points { get; set; }
+        public long Points { get; set; }
 
         #endregion Properties
     }

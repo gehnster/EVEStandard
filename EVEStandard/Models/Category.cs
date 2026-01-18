@@ -12,14 +12,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>category_id integer</value>
         [JsonPropertyName("category_id")]
-        public int CategoryId { get; set; }
+        public long CategoryId { get; set; }
 
         /// <summary>
         /// groups array
         /// </summary>
         /// <value>groups array</value>
         [JsonPropertyName("groups")]
-        public List<int> Groups { get; set; }
+        public List<long> Groups { get; set; }
 
         /// <summary>
         /// name string

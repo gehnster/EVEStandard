@@ -18,7 +18,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>title_id integer</value>
         [JsonPropertyName("title_id")]
-        public int? TitleId { get; set; }
+        public long? TitleId { get; set; }
 
         #endregion Properties
     }

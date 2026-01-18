@@ -12,14 +12,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>base_id integer</value>
         [JsonPropertyName("base_id")]
-        public int? BaseId { get; set; }
+        public long? BaseId { get; set; }
 
         /// <summary>
         /// character_id integer
         /// </summary>
         /// <value>character_id integer</value>
         [JsonPropertyName("character_id")]
-        public int CharacterId { get; set; }
+        public long CharacterId { get; set; }
 
         /// <summary>
         /// location_id integer
@@ -47,7 +47,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>ship_type_id integer</value>
         [JsonPropertyName("ship_type_id")]
-        public int? ShipTypeId { get; set; }
+        public long? ShipTypeId { get; set; }
 
         /// <summary>
         /// start_date string

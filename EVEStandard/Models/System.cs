@@ -46,7 +46,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>The constellation this solar system is in</value>
         [JsonPropertyName("constellation_id")]
-        public int ConstellationId { get; set; }
+        public long ConstellationId { get; set; }
 
         /// <summary>
         /// name string
@@ -87,28 +87,28 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>stargates array</value>
         [JsonPropertyName("stargates")]
-        public List<int> Stargates { get; set; }
+        public List<long> Stargates { get; set; }
 
         /// <summary>
         /// star_id integer
         /// </summary>
         /// <value>star_id integer</value>
         [JsonPropertyName("star_id")]
-        public int StarId { get; set; }
+        public long StarId { get; set; }
 
         /// <summary>
         /// stations array
         /// </summary>
         /// <value>stations array</value>
         [JsonPropertyName("stations")]
-        public List<int> Stations { get; set; }
+        public List<long> Stations { get; set; }
 
         /// <summary>
         /// system_id integer
         /// </summary>
         /// <value>system_id integer</value>
         [JsonPropertyName("system_id")]
-        public int SystemId { get; set; }
+        public long SystemId { get; set; }
 
         #endregion Properties
     }

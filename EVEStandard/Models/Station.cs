@@ -36,7 +36,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>ID of the corporation that controls this station</value>
         [JsonPropertyName("owner")]
-        public int? Owner { get; set; }
+        public long? Owner { get; set; }
 
         /// <summary>
         /// Gets or Sets Position
@@ -49,7 +49,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>race_id integer</value>
         [JsonPropertyName("race_id")]
-        public int? RaceId { get; set; }
+        public long? RaceId { get; set; }
 
         /// <summary>
         /// reprocessing_efficiency number
@@ -88,20 +88,20 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>station_id integer</value>
         [JsonPropertyName("station_id")]
-        public int StationId { get; set; }
+        public long StationId { get; set; }
         /// <summary>
         /// The solar system this station is in
         /// </summary>
         /// <value>The solar system this station is in</value>
         [JsonPropertyName("system_id")]
-        public int SystemId { get; set; }
+        public long SystemId { get; set; }
 
         /// <summary>
         /// type_id integer
         /// </summary>
         /// <value>type_id integer</value>
         [JsonPropertyName("type_id")]
-        public int TypeId { get; set; }
+        public long TypeId { get; set; }
 
         #endregion Properties
     }

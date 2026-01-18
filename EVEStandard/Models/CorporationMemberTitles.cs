@@ -10,13 +10,13 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>character_id integer</value>
         [JsonPropertyName("character_id")]
-        public int CharacterId { get; set; }
+        public long CharacterId { get; set; }
 
         /// <summary>
         /// A list of title_id
         /// </summary>
         /// <value>A list of title_id</value>
         [JsonPropertyName("titles")]
-        public List<int> Titles { get; set; }
+        public List<long> Titles { get; set; }
     }
 }

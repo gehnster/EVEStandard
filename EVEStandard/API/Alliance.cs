@@ -26,7 +26,7 @@ namespace EVEStandard.API
         /// <param name="allianceId">An EVE alliance ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing public data about an alliance.</returns>
-        public async Task<ESIModelDTO<Models.Alliance>> GetAllianceInfoAsync(int allianceId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<Models.Alliance>> GetAllianceInfoAsync(long allianceId, string ifNoneMatch = null)
         {
             var responseModel = await GetAsync($"/alliances/{allianceId}/", ifNoneMatch);
 
@@ -42,13 +42,13 @@ namespace EVEStandard.API
         /// <param name="allianceId">An EVE alliance ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing list of corporation IDs</returns>
-        public async Task<ESIModelDTO<List<int>>> ListAllianceCorporationsAsync(int allianceId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<long>>> ListAllianceCorporationsAsync(long allianceId, string ifNoneMatch = null)
         {
             var responseModel = await GetAsync($"/alliances/{allianceId}/corporations/", ifNoneMatch);
 
             CheckResponse(nameof(ListAllianceCorporationsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return ReturnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<long>>(responseModel);
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace EVEStandard.API
         /// <param name="allianceId">An EVE alliance ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing icon URLs for the given alliance id.</returns>
-        public async Task<ESIModelDTO<AllianceIcons>> GetAllianceIconAsync(int allianceId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<AllianceIcons>> GetAllianceIconAsync(long allianceId, string ifNoneMatch = null)
         {
             var responseModel = await GetAsync($"/alliances/{allianceId}/icons/", ifNoneMatch);
 
@@ -73,13 +73,13 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of alliance IDs.</returns>
-        public async Task<ESIModelDTO<List<int>>> ListAllAlliancesAsync(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<long>>> ListAllAlliancesAsync(string ifNoneMatch = null)
         {
             var responseModel = await GetAsync("/alliances/", ifNoneMatch);
 
             CheckResponse(nameof(ListAllAlliancesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return ReturnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<long>>(responseModel);
         }
     }
 }

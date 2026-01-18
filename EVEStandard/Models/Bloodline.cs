@@ -11,21 +11,21 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>bloodline_id integer</value>
         [JsonPropertyName("bloodline_id")]
-        public int BloodlineId { get; set; }
+        public long BloodlineId { get; set; }
 
         /// <summary>
         /// charisma integer
         /// </summary>
         /// <value>charisma integer</value>
         [JsonPropertyName("charisma")]
-        public int Charisma { get; set; }
+        public long Charisma { get; set; }
 
         /// <summary>
         /// corporation_id integer
         /// </summary>
         /// <value>corporation_id integer</value>
         [JsonPropertyName("corporation_id")]
-        public int CorporationId { get; set; }
+        public long CorporationId { get; set; }
 
         /// <summary>
         /// description string
@@ -39,14 +39,14 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>intelligence integer</value>
         [JsonPropertyName("intelligence")]
-        public int Intelligence { get; set; }
+        public long Intelligence { get; set; }
 
         /// <summary>
         /// memory integer
         /// </summary>
         /// <value>memory integer</value>
         [JsonPropertyName("memory")]
-        public int Memory { get; set; }
+        public long Memory { get; set; }
 
         /// <summary>
         /// name string
@@ -59,27 +59,27 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>perception integer</value>
         [JsonPropertyName("perception")]
-        public int Perception { get; set; }
+        public long Perception { get; set; }
 
         /// <summary>
         /// race_id integer
         /// </summary>
         /// <value>race_id integer</value>
         [JsonPropertyName("race_id")]
-        public int RaceId { get; set; }
+        public long RaceId { get; set; }
 
         /// <summary>
         /// ship_type_id integer
         /// </summary>
         /// <value>ship_type_id integer</value>
         [JsonPropertyName("ship_type_id")]
-        public int ShipTypeId { get; set; }
+        public long ShipTypeId { get; set; }
         /// <summary>
         /// willpower integer
         /// </summary>
         /// <value>willpower integer</value>
         [JsonPropertyName("willpower")]
-        public int Willpower { get; set; }
+        public long Willpower { get; set; }
 
         #endregion Properties
     }

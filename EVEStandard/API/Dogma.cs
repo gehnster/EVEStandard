@@ -25,13 +25,13 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of dogma attribute ids.</returns>
-        public async Task<ESIModelDTO<List<int>>> GetAttributesAsync(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<long>>> GetAttributesAsync(string ifNoneMatch = null)
         {
             var responseModel = await GetAsync("/dogma/attributes/", ifNoneMatch);
 
             CheckResponse(nameof(GetAttributesAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return ReturnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<long>>(responseModel);
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace EVEStandard.API
         /// <param name="attributeId">A dogma attribute ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing information about a dogma attribute.</returns>
-        public async Task<ESIModelDTO<DogmaAttribute>> GetAttributeInfoAsync(int attributeId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<DogmaAttribute>> GetAttributeInfoAsync(long attributeId, string ifNoneMatch = null)
         {
             var responseModel = await GetAsync($"/dogma/attributes/{attributeId}/", ifNoneMatch);
 
@@ -58,7 +58,7 @@ namespace EVEStandard.API
         /// <param name="itemId">The item identifier.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing details about a dynamic item.</returns>
-        public async Task<ESIModelDTO<DogmaDynamicItem>> GetDynamicItemInfoAsync(int typeId, long itemId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<DogmaDynamicItem>> GetDynamicItemInfoAsync(long typeId, long itemId, string ifNoneMatch = null)
         {
             var responseModel = await GetAsync($"/dogma/dynamic/items/{typeId}/{itemId}/", ifNoneMatch);
 
@@ -73,13 +73,13 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of dogma effect ids.</returns>
-        public async Task<ESIModelDTO<List<int>>> GetEffectsAsync(string ifNoneMatch = null)
+        public async Task<ESIModelDTO<List<long>>> GetEffectsAsync(string ifNoneMatch = null)
         {
             var responseModel = await GetAsync("/dogma/effects/", ifNoneMatch);
 
             CheckResponse(nameof(GetEffectsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
 
-            return ReturnModelDTO<List<int>>(responseModel);
+            return ReturnModelDTO<List<long>>(responseModel);
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace EVEStandard.API
         /// <param name="effectId">A dogma effect ID.</param>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing information about a dogma effect.</returns>
-        public async Task<ESIModelDTO<DogmaEffect>> GetEffectInfoAsync(int effectId, string ifNoneMatch = null)
+        public async Task<ESIModelDTO<DogmaEffect>> GetEffectInfoAsync(long effectId, string ifNoneMatch = null)
         {
             var responseModel = await GetAsync($"/dogma/effects/{effectId}/", ifNoneMatch);
 

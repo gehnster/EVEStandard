@@ -18,7 +18,7 @@ namespace EVEStandard.Models
         /// </summary>
         /// <value>task_id integer</value>
         [JsonPropertyName("task_id")]
-        public int TaskId { get; set; }
+        public long TaskId { get; set; }
 
         #endregion Properties
     }
