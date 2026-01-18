@@ -8,6 +8,6 @@ namespace EVEStandard.Models.API
     {
         public long CharacterId { get; set; }
         public AccessTokenDetails AccessToken { get; set; }
-        public List<string> Scopes { get; set; }
+        public string Scopes { get; set; }
     }
 }
