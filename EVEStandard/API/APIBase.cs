@@ -334,7 +334,7 @@ namespace EVEStandard.API
                 {
                     using (var document = JsonDocument.Parse(model.JSONString))
                     {
-                        if (document.RootElement.TryGetProperty("cursor", out var cursorElement))
+                        if (document.RootElement.ValueKind == JsonValueKind.Object && document.RootElement.TryGetProperty("cursor", out var cursorElement))
                         {
                             model.Cursor = JsonSerializer.Deserialize<CursorInfo>(cursorElement.GetRawText());
                         }
