@@ -1,9 +1,9 @@
 ﻿using EVEStandard.Enumerations;
 using EVEStandard.Models.SSO;
+using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -322,24 +322,26 @@ namespace EVEStandard
                     ValidAudience = JWK_AUDIENCE, // Your API Audience, can be disabled via ValidateAudience = false
                     ValidIssuers = JWK_ISSUERS  // Your token issuer, can be disabled via ValidateIssuer = false
                 };
-                var tokenHandler = new JwtSecurityTokenHandler();
-                tokenHandler.ValidateToken(accessToken, validationParameters, out var validatedToken);
-                if(validatedToken == null)
+                var tokenHandler = new JsonWebTokenHandler();
+                var token = await tokenHandler.ValidateTokenAsync(accessToken, validationParameters);
+                if(!token.IsValid)
                 {
                     throw new EVEStandardException("Token given was invalid");
                 }
-                var token = tokenHandler.ReadJwtToken(accessToken);
 
                 return new CharacterDetails
                 {
-                    CharacterId = int.Parse(token.Subject.Split(':')[2]),
-                    CharacterName = token.Claims.ToList().Single(x => x.Type == "name").Value,
-                    ExpiresOn = token.ValidTo,
-                    Scopes = token.Claims.ToList().Where(x => x.Type == "scp").Select(x => x.Value).ToList(),
+                    CharacterId = int.Parse(token.ClaimsIdentity.FindFirst("sub").Value.Split(':')[2]),
+                    CharacterName = token.ClaimsIdentity.FindFirst("name").Value,
+                    ExpiresOn = token.SecurityToken.ValidTo,
+                    Scopes = token.ClaimsIdentity.FindAll("scp").Select(x => x.Value).ToList(),
                     TokenType = "JWT",
-                    CharacterOwnerHash = token.Claims.ToList().Single(x => x.Type == "owner").Value,
-                    ClientId = token.Claims.ToList().Single(x => x.Type == "azp").Value
+                    CharacterOwnerHash = token.ClaimsIdentity.FindFirst("owner").Value,
+                    ClientId = token.ClaimsIdentity.FindFirst("azp").Value
                 };
+            }
+            catch (ArgumentException e) {
+                throw new EVEStandardException("Token given was invalid", e);
             }
             catch (HttpRequestException e)
             {
