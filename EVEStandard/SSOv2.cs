@@ -27,7 +27,7 @@ namespace EVEStandard
     /// </remarks>
     public class SSOv2
     {
-        private static HttpClient _httpClient;
+        private HttpClient _httpClient;
         private readonly string _callbackUri;
         private readonly string _clientId;
         private readonly string _clientSecret;
@@ -68,10 +68,7 @@ namespace EVEStandard
             _clientSecret = clientSecret;
             _dataSource = dataSource;
 
-            if(httpClient == null)
-            {
-                _httpClient = new HttpClient();
-            }
+            _httpClient = httpClient ?? new HttpClient();
         }
 
         /// <summary>

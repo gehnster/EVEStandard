@@ -22,8 +22,8 @@ namespace EVEStandard.API
     {
         private static HttpClient http;
         private static readonly ILogger logger = LibraryLogging.CreateLogger<APIBase>();
-        private static string TRANQUILITY_ESI_BASE = "https://esi.evetech.net";
-        private static string SERENITY_ESI_BASE = "https://esi.evepc.163.com";
+        private const string TRANQUILITY_ESI_BASE = "https://esi.evetech.net";
+        private const string SERENITY_ESI_BASE = "https://esi.evepc.163.com";
 
         public readonly string ESI_BASE;
         private readonly string dataSource;
@@ -97,58 +97,51 @@ namespace EVEStandard.API
                 }
             }
             
-            try
+            var builder = new UriBuilder(ESI_BASE)
             {
-                var builder = new UriBuilder(ESI_BASE)
-                {
-                    Path = uri,
-                    Query = queryParams.ToString()
-                };
+                Path = uri,
+                Query = queryParams.ToString()
+            };
 
-                var request = new HttpRequestMessage
-                {
-                    RequestUri = builder.Uri,
-                    Method = method
-                };
-                if ((method == HttpMethod.Post || method == HttpMethod.Put) && body != null)
-                {
-                    request.Content = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
-                }
-                if (auth?.AccessToken != null)
-                {
-                    if (auth.AccessToken.ExpiresUtc > DateTime.UtcNow)
-                    {
-                        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", auth.AccessToken.AccessToken);
-                    }
-                    else
-                    {
-                        throw new EVEStandardAuthExpiredException();
-                    }
-                }
-
-                if (ifNoneMatch != null)
-                {
-                    request.Headers.Add("If-None-Match", ifNoneMatch);
-                }
-
-                request.Headers.Add("X-Tenant", dataSource);
-                request.Headers.Add("X-Compatibility-Date", compatibilityDate);
-
-                var authResponse = await HTTP.SendAsync(request).ConfigureAwait(false);
-
-                return await ProcessResponse(authResponse);
-            }
-            catch (Exception)
+            var request = new HttpRequestMessage
             {
-                throw;
+                RequestUri = builder.Uri,
+                Method = method
+            };
+            if ((method == HttpMethod.Post || method == HttpMethod.Put) && body != null)
+            {
+                request.Content = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
             }
+            if (auth?.AccessToken != null)
+            {
+                if (auth.AccessToken.ExpiresUtc > DateTime.UtcNow)
+                {
+                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", auth.AccessToken.AccessToken);
+                }
+                else
+                {
+                    throw new EVEStandardAuthExpiredException();
+                }
+            }
+
+            if (ifNoneMatch != null)
+            {
+                request.Headers.Add("If-None-Match", ifNoneMatch);
+            }
+
+            request.Headers.Add("X-Tenant", dataSource);
+            request.Headers.Add("X-Compatibility-Date", compatibilityDate);
+
+            var authResponse = await HTTP.SendAsync(request).ConfigureAwait(false);
+
+            return await ProcessResponse(authResponse);
         }
 
         protected static void CheckAuth(AuthDTO auth, string scope)
         {
             if (auth?.AccessToken?.AccessToken == null || auth.CharacterId == 0 || scope == null || auth.Scopes == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentException("auth (with a valid AccessToken, CharacterId, and Scopes) and scope are all required.");
             }
 
             if (!auth.Scopes.Contains(scope))
@@ -229,58 +222,51 @@ namespace EVEStandard.API
                 model.LegacyWarning = true;
                 model.Message = String.Join(", ", warningValues);
             }
-            try
+            model = GetExpiresAndLastModified(response, model);
+            model = PopulateRateLimitHeaders(response, model);
+
+            if (response.Headers.TryGetValues("X-Pages", out var xPagesEnumerable))
             {
-                model = GetExpiresAndLastModified(response, model);
-                model = PopulateRateLimitHeaders(response, model);
+                model.MaxPages = int.TryParse(xPagesEnumerable.FirstOrDefault(), out var xPages) ? xPages : 1;
+            }
+            if (response.Headers.TryGetValues("Content-Language", out var language))
+            {
+                model.Language = language.FirstOrDefault();
+            }
+            if (response.Headers.TryGetValues("ETag", out var eTag))
+            {
+                model.ETag = eTag.FirstOrDefault();
+            }
 
-                if (response.Headers.TryGetValues("X-Pages", out var xPagesEnumerable))
-                {
-                    model.MaxPages = int.TryParse(xPagesEnumerable.FirstOrDefault(), out var xPages) ? xPages : 1;
-                }
-                if (response.Headers.TryGetValues("Content-Language", out var language))
-                {
-                    model.Language = language.FirstOrDefault();
-                }
-                if (response.Headers.TryGetValues("ETag", out var eTag))
-                {
-                    model.ETag = eTag.FirstOrDefault();
-                }
+            // Check whether response is compressed
+            if (response.StatusCode == HttpStatusCode.NoContent)
+            {
+                return model;
+            }
 
-                // Check whether response is compressed
-                if (response.StatusCode == HttpStatusCode.NoContent)
+            if (response.Content.Headers.ContentEncoding.Any(x => x == "gzip"))
+            {
+                // Decompress manually
+                using (var s = await response.Content.ReadAsStreamAsync())
                 {
-                    return model;
-                }
-
-                if (response.Content.Headers.ContentEncoding.Any(x => x == "gzip"))
-                {
-                    // Decompress manually
-                    using (var s = await response.Content.ReadAsStreamAsync())
+                    using (var decompressed = new GZipStream(s, CompressionMode.Decompress))
                     {
-                        using (var decompressed = new GZipStream(s, CompressionMode.Decompress))
+                        using (var rdr = new StreamReader(decompressed))
                         {
-                            using (var rdr = new StreamReader(decompressed))
-                            {
-                                model.JSONString = await rdr.ReadToEndAsync();
-                            }
+                            model.JSONString = await rdr.ReadToEndAsync();
                         }
                     }
                 }
-                else
-                {
-                    model.JSONString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-
-                // Parse cursor-based pagination info if present
-                model = ParseCursorInfo(model);
-
-                return model;
             }
-            catch (Exception)
+            else
             {
-                throw;
+                model.JSONString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             }
+
+            // Parse cursor-based pagination info if present
+            model = ParseCursorInfo(model);
+
+            return model;
         }
 
         private static APIResponse GetExpiresAndLastModified(HttpResponseMessage response, APIResponse model)
