@@ -8,7 +8,6 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageId>PointyHatGames.EVEStandard</PackageId>
     <Authors>gehnster</Authors>
-    <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/gehnster/EVEStandard</PackageProjectUrl>
     <RepositoryUrl>https://github.com/gehnster/EVEStandard</RepositoryUrl>
     <Description>A C# Library to access the EVE Online ESI API</Description>
