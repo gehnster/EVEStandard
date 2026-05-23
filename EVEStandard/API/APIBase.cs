@@ -204,6 +204,7 @@ namespace EVEStandard.API
                     model.NotModified = true;
                     model = GetExpiresAndLastModified(response, model);
                     model = PopulateRateLimitHeaders(response, model);
+                    model = GetPages(response, model);
 
                     return model;
                 case (HttpStatusCode)422:
@@ -233,11 +234,8 @@ namespace EVEStandard.API
             {
                 model = GetExpiresAndLastModified(response, model);
                 model = PopulateRateLimitHeaders(response, model);
+                model = GetPages(response, model);
 
-                if (response.Headers.TryGetValues("X-Pages", out var xPagesEnumerable))
-                {
-                    model.MaxPages = int.TryParse(xPagesEnumerable.FirstOrDefault(), out var xPages) ? xPages : 1;
-                }
                 if (response.Headers.TryGetValues("Content-Language", out var language))
                 {
                     model.Language = language.FirstOrDefault();
@@ -281,6 +279,15 @@ namespace EVEStandard.API
             {
                 throw;
             }
+        }
+
+        private static APIResponse GetPages(HttpResponseMessage response, APIResponse model)
+        {
+            if (response.Headers.TryGetValues("X-Pages", out var xPagesEnumerable))
+            {
+                model.MaxPages = int.TryParse(xPagesEnumerable.FirstOrDefault(), out var xPages) ? xPages : 1;
+            }
+            return model;
         }
 
         private static APIResponse GetExpiresAndLastModified(HttpResponseMessage response, APIResponse model)

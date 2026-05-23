@@ -14,7 +14,7 @@ namespace EVEStandard.Models
         /// Unique identifier for this project
         /// </summary>
         [JsonPropertyName("id")]
-        public long Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// The type/category of the project
