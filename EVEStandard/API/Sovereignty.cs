@@ -2,6 +2,7 @@
 using EVEStandard.Models;
 using EVEStandard.Models.API;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -20,11 +21,28 @@ namespace EVEStandard.API
         }
 
         /// <summary>
+        /// Combined sovereignty occupancy and structure information for solar systems, including the
+        /// Activity Defense Multiplier and the military, industry and strategic development indexes.
+        /// <para>GET /sovereignty/systems</para>
+        /// </summary>
+        /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
+        /// <returns><see cref="ESIModelDTO{T}"/> containing sovereignty information for solar systems in New Eden.</returns>
+        public async Task<ESIModelDTO<SovereigntySystems>> GetSovereigntySystemsAsync(string ifNoneMatch = null)
+        {
+            var responseModel = await GetAsync("/sovereignty/systems", ifNoneMatch);
+
+            CheckResponse(nameof(GetSovereigntySystemsAsync), responseModel.Error, responseModel.Message, responseModel.LegacyWarning, logger);
+
+            return ReturnModelDTO<SovereigntySystems>(responseModel);
+        }
+
+        /// <summary>
         /// Shows sovereignty data for structures.
         /// <para>GET /sovereignty/structures/</para>
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of sovereignty structures.</returns>
+        [Obsolete("Removed by ESI at compatibility date 2026-05-19. Use GetSovereigntySystemsAsync (/sovereignty/systems) instead. See https://developers.eveonline.com/blog/equinox-on-esi-structures-sovereignty-and-access-lists")]
         public async Task<ESIModelDTO<List<SovereigntyStructure>>> ListSovereigntyStructuresAsync(string ifNoneMatch=null)
         {
             var responseModel = await GetAsync("/sovereignty/structures/", ifNoneMatch);
@@ -55,6 +73,7 @@ namespace EVEStandard.API
         /// </summary>
         /// <param name="ifNoneMatch">ETag from a previous request. A 304 will be returned if this matches the current ETag.</param>
         /// <returns><see cref="ESIModelDTO{T}"/> containing a list of sovereignty information for solar systems in New Eden.</returns>
+        [Obsolete("Removed by ESI at compatibility date 2026-05-19. Use GetSovereigntySystemsAsync (/sovereignty/systems) instead. See https://developers.eveonline.com/blog/equinox-on-esi-structures-sovereignty-and-access-lists")]
         public async Task<ESIModelDTO<List<SovereigntyMap>>> ListSovereigntyOfSystemsAsync(string ifNoneMatch = null)
         {
             var responseModel = await GetAsync("/sovereignty/map/", ifNoneMatch);

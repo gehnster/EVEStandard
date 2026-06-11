@@ -59,6 +59,28 @@ int retryAfter = result.RetryAfter;                 // seconds to wait (only set
 
 For more information about ESI rate limiting, see the [ESI documentation](https://developers.eveonline.com/docs/services/esi/rate-limiting/).
 
+## Caching
+
+ESI is moving from time-based cache expiration to event-driven cache invalidation: responses are refreshed when Tranquility reports that the underlying data has actually changed, rather than after a fixed duration. As a result the `Expires` header is no longer meaningful and the `Cache-Control` header is now the source of truth for how long a response may be considered fresh.
+
+EVEStandard reflects this on the `ESIModelDTO<T>` returned by every call:
+
+```csharp
+var result = await eveClient.Skills.GetCharacterSkillsAsync(auth, ifNoneMatch: cachedETag);
+
+TimeSpan? freshFor = result.CacheControlMaxAge; // Cache-Control max-age, e.g. 00:02:00
+string etag = result.ETag;                      // store this and pass it back as ifNoneMatch
+bool unchanged = result.NotModified;            // true on a 304 (only costs 1 rate-limit token)
+```
+
+### Best Practices
+
+1. **Revalidate with ETags**: store the `ETag` from a response and pass it as the `ifNoneMatch` argument on the next request. A `304 Not Modified` (`NotModified == true`) costs only 1 rate-limit token and tells you your cached copy is still current.
+2. **Use `CacheControlMaxAge`, not `Expires`**: decide when to revalidate based on `CacheControlMaxAge`. The `Expires` property is deprecated (and marked `[Obsolete]`) because event-driven invalidation makes it unreliable.
+3. **Don't poll faster than the data changes**: with event-driven invalidation, revalidating with an ETag after `CacheControlMaxAge` elapses is enough — tighter polling just consumes rate-limit tokens for `304`s.
+
+For more information, see [Smarter Caching: When Events Drive Invalidation](https://developers.eveonline.com/blog/smarter-caching-when-events-drive-invalidation).
+
 ## Pagination
 
 EVEStandard supports both traditional page-based pagination and the newer cursor-based pagination.
@@ -108,6 +130,44 @@ if (cursor?.Before != null)
 - Results are ordered by modification date, with most recently modified items last
 
 For more information about cursor-based pagination, see the [ESI Cursor-Based Pagination documentation](https://developers.eveonline.com/docs/services/esi/pagination/cursor-based/).
+
+## Equinox: Sovereignty, Structures & Access Lists
+
+The Equinox additions to ESI are available starting at compatibility date **2026-05-19**. Construct `EVEStandardAPI` with `CompatibilityDate.v2026_05_19` (or later) to reach these routes:
+
+```csharp
+var eve = new EVEStandardAPI("MyApp/1.0 (contact@example.com)", DataSource.Tranquility, CompatibilityDate.v2026_05_19, TimeSpan.FromSeconds(30));
+```
+
+New endpoints:
+
+| Accessor | Endpoint | Scope |
+|---|---|---|
+| `eve.Sovereignty.GetSovereigntySystemsAsync()` | `/sovereignty/systems` | public |
+| `eve.Activities.ListRaidableSkyhooksAsync()` | `/skyhooks/raidable` | public |
+| `eve.Activities.ListMercenaryTacticalOperationsAsync(auth)` / `GetMercenaryTacticalOperationAsync(auth, operationId)` | `/characters/{id}/mercenary-tactical-operations` | `esi-activities.read_character.v1` |
+| `eve.AccessList.ListAccessListsAsync(auth)` / `GetAccessListAsync(auth, accessListId)` | `/characters/{id}/access-lists` | `esi-access.read_lists.v1` |
+| `eve.Structures.ListCharacterMercenaryDensAsync(auth)` / `GetCharacterMercenaryDenAsync(auth, denId)` | `/characters/{id}/structures/mercenary-dens` | `esi-structures.read_character.v1` |
+| `eve.Structures.ListCorporationSkyhooksAsync(auth, corporationId)` / `GetCorporationSkyhookAsync(...)` | `/corporations/{id}/structures/skyhooks` | `esi-structures.read_corporation.v1` |
+| `eve.Structures.ListCorporationSovereigntyHubsAsync(auth, corporationId)` / `GetCorporationSovereigntyHubAsync(...)` | `/corporations/{id}/structures/sovereignty-hubs` | `esi-structures.read_corporation.v1` |
+
+`GetSovereigntySystemsAsync` combines occupancy and structure information in a single response, including the Activity Defense Multiplier and the military, industry and strategic development indexes (`SovereigntyDevelopment`).
+
+### Removed at compatibility date 2026-05-19
+
+`/sovereignty/map` and `/sovereignty/structures` were removed and replaced by `/sovereignty/systems`. The corresponding methods `Sovereignty.ListSovereigntyOfSystemsAsync` and `Sovereignty.ListSovereigntyStructuresAsync` are marked `[Obsolete]`; they still function at older compatibility dates but will return errors at 2026-05-19 and later. Migrate to `GetSovereigntySystemsAsync`.
+
+For details, see [Equinox on ESI: Structures, Sovereignty and Access Lists](https://developers.eveonline.com/blog/equinox-on-esi-structures-sovereignty-and-access-lists).
+
+## Cradle of War: Character Titles & Achievements
+
+At compatibility date **2026-06-09**, `GET /characters/{character_id}` (`Character.GetCharacterInfoAsync`) changed:
+
+- `title` was renamed to `corporation_title` → use `CharacterInfo.CorporationTitle` (the old `CharacterInfo.Title` is marked `[Obsolete]` and only populated at earlier compatibility dates).
+- New `CharacterInfo.CharacterTitleId` (the UUID of the title the character currently displays).
+- New `CharacterInfo.AchievementScore` (the character's total achievement score).
+
+Only the fields applicable to your chosen compatibility date are populated; the others stay null. For details, see [Cradle of War on ESI: Character Titles and Achievements](https://developers.eveonline.com/blog/cradle-of-war-on-esi-character-titles-and-achievements).
 
 ## Donate
 Feel like donating to show appreciation for the time and effort I've put into creating and maintaining this library? Consider either becoming a GitHub Sponsor or donating ISK to ```Gehnster```

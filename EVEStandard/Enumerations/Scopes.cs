@@ -2,6 +2,8 @@
 {
     public static class Scopes
     {
+        public const string ESI_ACCESS_READ_LISTS_1 = "esi-access.read_lists.v1";
+        public const string ESI_ACTIVITIES_READ_CHARACTER_1 = "esi-activities.read_character.v1";
         public const string ESI_ALLIANCE_READ_CONTACTS_1 = "esi-alliances.read_contacts.v1";
         public const string ESI_ASSETS_READ_ASSETS_1 = "esi-assets.read_assets.v1";
         public const string ESI_ASSETS_READ_CORP_ASSETS_1 = "esi-assets.read_corporation_assets.v1";
@@ -63,6 +65,8 @@
         public const string ESI_SEARCH_SEARCH_STRUCTURES_1 = "esi-search.search_structures.v1";
         public const string ESI_SKILLS_READ_SKILLQUEUE_1 = "esi-skills.read_skillqueue.v1";
         public const string ESI_SKILLS_READ_SKILLS_1 = "esi-skills.read_skills.v1";
+        public const string ESI_STRUCTURES_READ_CHARACTER_1 = "esi-structures.read_character.v1";
+        public const string ESI_STRUCTURES_READ_CORPORATION_1 = "esi-structures.read_corporation.v1";
         public const string ESI_UI_OPEN_WINDOW_1 = "esi-ui.open_window.v1";
         public const string ESI_UI_WRITE_WAYPOINT_1 = "esi-ui.write_waypoint.v1";
         public const string ESI_UNIVERSE_READ_STRUCTURES_1 = "esi-universe.read_structures.v1";

@@ -97,10 +97,39 @@ namespace EVEStandard.Models
         public float? SecurityStatus { get; set; }
 
         /// <summary>
-        /// The individual title of the character
+        /// The individual title of the character.
         /// </summary>
+        /// <remarks>
+        /// Renamed to <c>corporation_title</c> by ESI at compatibility date 2026-06-09; populated only at
+        /// earlier compatibility dates. Use <see cref="CorporationTitle"/> at 2026-06-09 and later.
+        /// See https://developers.eveonline.com/blog/cradle-of-war-on-esi-character-titles-and-achievements
+        /// </remarks>
+        [Obsolete("Renamed to corporation_title by ESI at compatibility date 2026-06-09. Use CorporationTitle at 2026-06-09 and later.")]
         [JsonPropertyName("title")]
         public string Title { get; set; }
+
+        /// <summary>
+        /// The character's corporation title. Available at compatibility date 2026-06-09 and later
+        /// (the renamed replacement for <see cref="Title"/>).
+        /// </summary>
+        /// <value>The character's corporation title.</value>
+        [JsonPropertyName("corporation_title")]
+        public string CorporationTitle { get; set; }
+
+        /// <summary>
+        /// The ID (UUID) of the title currently displayed by the character. Available at compatibility
+        /// date 2026-06-09 and later.
+        /// </summary>
+        /// <value>The ID of the title currently displayed by the character.</value>
+        [JsonPropertyName("character_title_id")]
+        public string CharacterTitleId { get; set; }
+
+        /// <summary>
+        /// The character's total achievement score. Available at compatibility date 2026-06-09 and later.
+        /// </summary>
+        /// <value>The character's total achievement score.</value>
+        [JsonPropertyName("achievement_score")]
+        public long? AchievementScore { get; set; }
 
         #endregion Properties
     }

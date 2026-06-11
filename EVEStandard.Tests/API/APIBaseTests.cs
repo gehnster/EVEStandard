@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Threading.Tasks;
 using EVEStandard.Models.API;
@@ -312,6 +313,72 @@ namespace EVEStandard.API.Tests
                 Assert.NotNull(result.Cursor);
                 Assert.Null(result.Cursor.Before);
                 Assert.Equal("token_after_only", result.Cursor.After);
+            }
+        }
+
+        [Fact]
+        public async Task ProcessResponse_SuccessWithCacheControlMaxAge_ShouldParseCorrectly()
+        {
+            // Arrange - Create a successful response with a Cache-Control max-age header.
+            // ESI deprecated Expires in favor of Cache-Control for event-driven cache invalidation.
+            using (var response = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{}")
+            })
+            {
+                response.Headers.CacheControl = new CacheControlHeaderValue
+                {
+                    MaxAge = TimeSpan.FromSeconds(120)
+                };
+
+                // Act
+                var result = await InvokeProcessResponse(response);
+
+                // Assert
+                Assert.False(result.Error);
+                Assert.Equal(TimeSpan.FromSeconds(120), result.CacheControlMaxAge);
+            }
+        }
+
+        [Fact]
+        public async Task ProcessResponse_SuccessWithoutCacheControl_ShouldHaveNullMaxAge()
+        {
+            // Arrange - Create a successful response without a Cache-Control header
+            using (var response = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{}")
+            })
+            {
+                // Act
+                var result = await InvokeProcessResponse(response);
+
+                // Assert
+                Assert.False(result.Error);
+                Assert.Null(result.CacheControlMaxAge);
+            }
+        }
+
+        [Fact]
+        public async Task ProcessResponse_NotModifiedWithCacheControlMaxAge_ShouldParseCorrectly()
+        {
+            // Arrange - Cache-Control should also be captured on 304 Not Modified responses
+            using (var response = new HttpResponseMessage(HttpStatusCode.NotModified)
+            {
+                Content = new StringContent("")
+            })
+            {
+                response.Headers.CacheControl = new CacheControlHeaderValue
+                {
+                    MaxAge = TimeSpan.FromSeconds(300)
+                };
+
+                // Act
+                var result = await InvokeProcessResponse(response);
+
+                // Assert
+                Assert.False(result.Error);
+                Assert.True(result.NotModified);
+                Assert.Equal(TimeSpan.FromSeconds(300), result.CacheControlMaxAge);
             }
         }
 
