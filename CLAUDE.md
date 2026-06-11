@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-EVEStandard is a C# client library for the EVE Online ESI API, published to NuGet as `PointyHatGames.EVEStandard`. The library project (`EVEStandard/`) targets `netstandard2.1` and `netstandard2.0`; the test project (`EVEStandard.Tests/`) targets `net8.0`.
+EVEStandard is a C# client library for the EVE Online ESI API, published to NuGet as `PointyHatGames.EVEStandard`. The library project (`EVEStandard/`) targets `netstandard2.1` and `netstandard2.0`; the test project (`EVEStandard.Tests/`) targets `net10.0`.
 
 ## Commands
 

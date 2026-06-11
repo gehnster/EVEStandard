@@ -159,5 +159,15 @@ New endpoints:
 
 For details, see [Equinox on ESI: Structures, Sovereignty and Access Lists](https://developers.eveonline.com/blog/equinox-on-esi-structures-sovereignty-and-access-lists).
 
+## Cradle of War: Character Titles & Achievements
+
+At compatibility date **2026-06-09**, `GET /characters/{character_id}` (`Character.GetCharacterInfoAsync`) changed:
+
+- `title` was renamed to `corporation_title` → use `CharacterInfo.CorporationTitle` (the old `CharacterInfo.Title` is marked `[Obsolete]` and only populated at earlier compatibility dates).
+- New `CharacterInfo.CharacterTitleId` (the UUID of the title the character currently displays).
+- New `CharacterInfo.AchievementScore` (the character's total achievement score).
+
+Only the fields applicable to your chosen compatibility date are populated; the others stay null. For details, see [Cradle of War on ESI: Character Titles and Achievements](https://developers.eveonline.com/blog/cradle-of-war-on-esi-character-titles-and-achievements).
+
 ## Donate
 Feel like donating to show appreciation for the time and effort I've put into creating and maintaining this library? Consider either becoming a GitHub Sponsor or donating ISK to ```Gehnster```
