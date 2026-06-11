@@ -131,5 +131,33 @@ if (cursor?.Before != null)
 
 For more information about cursor-based pagination, see the [ESI Cursor-Based Pagination documentation](https://developers.eveonline.com/docs/services/esi/pagination/cursor-based/).
 
+## Equinox: Sovereignty, Structures & Access Lists
+
+The Equinox additions to ESI are available starting at compatibility date **2026-05-19**. Construct `EVEStandardAPI` with `CompatibilityDate.v2026_05_19` (or later) to reach these routes:
+
+```csharp
+var eve = new EVEStandardAPI("MyApp/1.0 (contact@example.com)", DataSource.Tranquility, CompatibilityDate.v2026_05_19, TimeSpan.FromSeconds(30));
+```
+
+New endpoints:
+
+| Accessor | Endpoint | Scope |
+|---|---|---|
+| `eve.Sovereignty.GetSovereigntySystemsAsync()` | `/sovereignty/systems` | public |
+| `eve.Activities.ListRaidableSkyhooksAsync()` | `/skyhooks/raidable` | public |
+| `eve.Activities.ListMercenaryTacticalOperationsAsync(auth)` / `GetMercenaryTacticalOperationAsync(auth, operationId)` | `/characters/{id}/mercenary-tactical-operations` | `esi-activities.read_character.v1` |
+| `eve.AccessList.ListAccessListsAsync(auth)` / `GetAccessListAsync(auth, accessListId)` | `/characters/{id}/access-lists` | `esi-access.read_lists.v1` |
+| `eve.Structures.ListCharacterMercenaryDensAsync(auth)` / `GetCharacterMercenaryDenAsync(auth, denId)` | `/characters/{id}/structures/mercenary-dens` | `esi-structures.read_character.v1` |
+| `eve.Structures.ListCorporationSkyhooksAsync(auth, corporationId)` / `GetCorporationSkyhookAsync(...)` | `/corporations/{id}/structures/skyhooks` | `esi-structures.read_corporation.v1` |
+| `eve.Structures.ListCorporationSovereigntyHubsAsync(auth, corporationId)` / `GetCorporationSovereigntyHubAsync(...)` | `/corporations/{id}/structures/sovereignty-hubs` | `esi-structures.read_corporation.v1` |
+
+`GetSovereigntySystemsAsync` combines occupancy and structure information in a single response, including the Activity Defense Multiplier and the military, industry and strategic development indexes (`SovereigntyDevelopment`).
+
+### Removed at compatibility date 2026-05-19
+
+`/sovereignty/map` and `/sovereignty/structures` were removed and replaced by `/sovereignty/systems`. The corresponding methods `Sovereignty.ListSovereigntyOfSystemsAsync` and `Sovereignty.ListSovereigntyStructuresAsync` are marked `[Obsolete]`; they still function at older compatibility dates but will return errors at 2026-05-19 and later. Migrate to `GetSovereigntySystemsAsync`.
+
+For details, see [Equinox on ESI: Structures, Sovereignty and Access Lists](https://developers.eveonline.com/blog/equinox-on-esi-structures-sovereignty-and-access-lists).
+
 ## Donate
 Feel like donating to show appreciation for the time and effort I've put into creating and maintaining this library? Consider either becoming a GitHub Sponsor or donating ISK to ```Gehnster```

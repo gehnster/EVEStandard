@@ -63,6 +63,8 @@ namespace EVEStandard
             initializeAPI();
         }
 
+        public AccessList AccessList { get; private set; }
+        public Activities Activities { get; private set; }
         public Alliance Alliance { get; private set; }
         public Assets Assets { get; private set; }
         public Calendar Calendar { get; private set; }
@@ -92,6 +94,7 @@ namespace EVEStandard
         public Skills Skills { get; private set; }
         public Sovereignty Sovereignty { get; private set; }
         public Status Status { get; private set; }
+        public Structures Structures { get; private set; }
         public Universe Universe { get; private set; }
         public UserInterface UserInterface { get; private set; }
         public Wallet Wallet { get; private set; }
@@ -100,6 +103,14 @@ namespace EVEStandard
         // ReSharper disable once InconsistentNaming
         private void initializeAPI()
         {
+            AccessList = new AccessList(dataSource, compatibilityDate)
+            {
+                HTTP = http
+            };
+            Activities = new Activities(dataSource, compatibilityDate)
+            {
+                HTTP = http
+            };
             Alliance = new Alliance(dataSource, compatibilityDate)
             {
                 HTTP = http
@@ -213,6 +224,10 @@ namespace EVEStandard
                 HTTP = http
             };
             Status = new Status(dataSource, compatibilityDate)
+            {
+                HTTP = http
+            };
+            Structures = new Structures(dataSource, compatibilityDate)
             {
                 HTTP = http
             };
