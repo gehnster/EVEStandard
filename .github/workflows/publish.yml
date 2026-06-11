@@ -8,6 +8,12 @@ on:
   push:
     branches:
       - master # Default release branch
+
+# Required for NuGet Trusted Publishing (OIDC) and for the action to push git tags
+permissions:
+  contents: write
+  id-token: write
+
 jobs:
   publish:
     name: build, pack & publish
@@ -20,6 +26,15 @@ jobs:
       #   uses: actions/setup-dotnet@v1
       #   with:
       #     dotnet-version: 3.1.200
+
+      # Exchange the GitHub Actions OIDC token for a short-lived NuGet API key.
+      # No stored secret to expire — the Trusted Publishing policy on NuGet.org
+      # authorizes this repo/workflow/environment to mint a temporary key.
+      - name: NuGet login (Trusted Publishing)
+        id: nuget_login
+        uses: NuGet/login@v1
+        with:
+          user: gehnster
 
       # Publish
       - name: publish on version change
@@ -47,8 +62,8 @@ jobs:
           # Format of the git tag, [*] gets replaced with actual version
           # TAG_FORMAT: v*
 
-          # API key to authenticate with NuGet server
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          # Short-lived API key minted by the NuGet/login step above (Trusted Publishing)
+          NUGET_KEY: ${{ steps.nuget_login.outputs.NUGET_API_KEY }}
 
           # NuGet server uri hosting the packages, defaults to https://api.nuget.org
           # NUGET_SOURCE: https://api.nuget.org
