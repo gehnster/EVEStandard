@@ -59,6 +59,28 @@ int retryAfter = result.RetryAfter;                 // seconds to wait (only set
 
 For more information about ESI rate limiting, see the [ESI documentation](https://developers.eveonline.com/docs/services/esi/rate-limiting/).
 
+## Caching
+
+ESI is moving from time-based cache expiration to event-driven cache invalidation: responses are refreshed when Tranquility reports that the underlying data has actually changed, rather than after a fixed duration. As a result the `Expires` header is no longer meaningful and the `Cache-Control` header is now the source of truth for how long a response may be considered fresh.
+
+EVEStandard reflects this on the `ESIModelDTO<T>` returned by every call:
+
+```csharp
+var result = await eveClient.Skills.GetCharacterSkillsAsync(auth, ifNoneMatch: cachedETag);
+
+TimeSpan? freshFor = result.CacheControlMaxAge; // Cache-Control max-age, e.g. 00:02:00
+string etag = result.ETag;                      // store this and pass it back as ifNoneMatch
+bool unchanged = result.NotModified;            // true on a 304 (only costs 1 rate-limit token)
+```
+
+### Best Practices
+
+1. **Revalidate with ETags**: store the `ETag` from a response and pass it as the `ifNoneMatch` argument on the next request. A `304 Not Modified` (`NotModified == true`) costs only 1 rate-limit token and tells you your cached copy is still current.
+2. **Use `CacheControlMaxAge`, not `Expires`**: decide when to revalidate based on `CacheControlMaxAge`. The `Expires` property is deprecated (and marked `[Obsolete]`) because event-driven invalidation makes it unreliable.
+3. **Don't poll faster than the data changes**: with event-driven invalidation, revalidating with an ETag after `CacheControlMaxAge` elapses is enough — tighter polling just consumes rate-limit tokens for `304`s.
+
+For more information, see [Smarter Caching: When Events Drive Invalidation](https://developers.eveonline.com/blog/smarter-caching-when-events-drive-invalidation).
+
 ## Pagination
 
 EVEStandard supports both traditional page-based pagination and the newer cursor-based pagination.

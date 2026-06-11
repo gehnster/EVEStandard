@@ -17,13 +17,12 @@ using System.Web;
 
 namespace EVEStandard.API
 {
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class APIBase
     {
         private static HttpClient http;
         private static readonly ILogger logger = LibraryLogging.CreateLogger<APIBase>();
-        private static string TRANQUILITY_ESI_BASE = "https://esi.evetech.net";
-        private static string SERENITY_ESI_BASE = "https://esi.evepc.163.com";
+        private static readonly string TRANQUILITY_ESI_BASE = "https://esi.evetech.net";
+        private static readonly string SERENITY_ESI_BASE = "https://esi.evepc.163.com";
 
         public readonly string ESI_BASE;
         private readonly string dataSource;
@@ -285,8 +284,14 @@ namespace EVEStandard.API
 
         private static APIResponse GetExpiresAndLastModified(HttpResponseMessage response, APIResponse model)
         {
+            // Expires is deprecated by ESI (event-driven cache invalidation) but is still captured
+            // for backwards compatibility. Cache-Control max-age is the meaningful cache lifetime.
+            // See https://developers.eveonline.com/blog/smarter-caching-when-events-drive-invalidation
+#pragma warning disable CS0618 // Type or member is obsolete
             model.Expires = response.Content.Headers.Expires;
+#pragma warning restore CS0618
             model.LastModified = response.Content.Headers.LastModified;
+            model.CacheControlMaxAge = response.Headers.CacheControl?.MaxAge;
 
             return model;
         }
@@ -383,7 +388,7 @@ namespace EVEStandard.API
                     }
                     catch
                     {
-                        modelInstance = default(T);
+                        modelInstance = default;
                     }
                 }
             }
@@ -397,8 +402,11 @@ namespace EVEStandard.API
                 NotModified = response.NotModified,
                 ETag = response.ETag,
                 Language = response.Language,
+#pragma warning disable CS0618 // Type or member is obsolete
                 Expires = response.Expires,
+#pragma warning restore CS0618
                 LastModified = response.LastModified,
+                CacheControlMaxAge = response.CacheControlMaxAge,
                 MaxPages = response.MaxPages,
                 Model = modelInstance,
                 // Rate limiting
